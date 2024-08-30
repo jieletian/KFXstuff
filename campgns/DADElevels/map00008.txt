@@ -1,0 +1,215 @@
+REM Level 8/Crazy town
+
+set_generate_speed(100)
+
+computer_player(player1,9)
+computer_player(player2,9)
+computer_player(player3,9)
+
+max_creatures(player0,20)
+max_creatures(player1,50)
+max_creatures(player2,50)
+max_creatures(player3,50)
+
+start_money(player0,10000)
+start_money(player1,7777777)
+start_money(player2,7777777)
+start_money(player3,7777777)
+
+add_creature_to_pool(vampire,10)
+add_creature_to_pool(troll,15)
+add_creature_to_pool(tentacle,15)
+add_creature_to_pool(dragon,15)
+add_creature_to_pool(hell_hound,15)
+add_creature_to_pool(orc,15)
+add_creature_to_pool(thief,3)
+add_creature_to_pool(barbarian,15)
+add_creature_to_pool(giant,15)
+add_creature_to_pool(dwarfa,15)
+add_creature_to_pool(archer,15)
+add_creature_to_pool(tunneller,50)
+add_creature_to_pool(sorceror,20)
+add_creature_to_pool(wizard,20)
+add_creature_to_pool(avatar,2)
+add_creature_to_pool(knight,3)
+add_creature_to_pool(dark_mistress,20)
+add_creature_to_pool(fairy,15)
+add_creature_to_pool(druid,15)
+add_creature_to_pool(time_mage,15)
+
+creature_available(player0,troll,1,1)
+creature_available(player0,tentacle,1,1)
+creature_available(player0,dragon,1,1)
+creature_available(player0,hell_hound,1,1)
+creature_available(player0,orc,1,1)
+creature_available(player0,vampire,1,1)
+
+creature_available(player1,wizard,1,1)
+creature_available(player1,giant,1,1)
+creature_available(player1,archer,1,1)
+creature_available(player1,tunneller,1,1)
+creature_available(player1,knight,1,1)
+creature_available(player1,dark_mistress,1,1)
+creature_available(player1,witch,1,1)
+
+creature_available(player2,thief,1,1)
+creature_available(player2,barbarian,1,1)
+creature_available(player2,giant,1,1)
+creature_available(player2,witch,1,1)
+creature_available(player2,tunneller,1,1)
+creature_available(player2,dark_mistress,1,1)
+creature_available(player2,fairy,1,1)
+
+creature_available(player3,time_mage,1,1)
+creature_available(player3,druid,1,1)
+creature_available(player3,sorceror,1,1)
+creature_available(player3,tunneller,1,1)
+creature_available(player3,avatar,1,1)
+creature_available(player3,dwarfa,1,1)
+
+set_creature_max_level(player1,tunneller,1)
+set_creature_max_level(player2,tunneller,1)
+set_creature_max_level(player3,tunneller,1)
+set_creature_max_level(player3,avatar,5)
+set_creature_health(tunneller,444)
+set_creature_armour(tunneller,66)
+
+set_creature_max_level(player2,thief,10)
+set_creature_armour(thief,119)
+set_creature_strength(thief,166)
+set_creature_health(thief,2222)
+
+room_available(all_players,treasure,1,1)
+room_available(all_players,lair,1,1)
+room_available(all_players,garden,1,1)
+room_available(all_players,training,1,1)
+room_available(all_players,research,1,1)
+room_available(player0,bridge,1,1)
+room_available(player0,graveyard,1,1)
+room_available(all_players,workshop,1,1)
+room_available(all_players,barracks,1,1)
+room_available(all_players,temple,1,1)
+room_available(all_players,torture,1,1)
+room_available(all_players,guard_post,1,1)
+room_available(all_players,scavenger,1,1)
+
+magic_available(player0,power_imp,1,1)
+
+magic_available(all_players,power_sight,1,0)
+magic_available(all_players,power_obey,1,0)
+magic_available(all_players,power_speed,1,0)
+magic_available(all_players,power_cave_in,1,0)
+magic_available(all_players,power_heal_creature,1,0)
+magic_available(all_players,power_protect,1,0)
+magic_available(all_players,power_conceal,1,0)
+magic_available(all_players,power_chicken,1,0)
+magic_available(all_players,power_lightning,1,0)
+magic_available(all_players,power_disease,1,0)
+magic_available(all_players,power_destroy_walls,1,0)
+
+trap_available(all_players,word_of_power,1,0)
+trap_available(all_players,lightning,1,0)
+trap_available(all_players,boulder,1,0)
+door_available(all_players,steel,1,0)
+door_available(all_players,magic,1,0)
+
+if(player0,game_turn >= 10)
+ quick_objective(1,"这座疯狂城市的人们仍然无法决定谁应该统治这片土地。当然应该是你！但首先我们需要向当地人展示谁才是这里的主人。小心，除了城市里的疯子，还有灰衣主教在等待合适的时机。",player0)
+ magic_available(player0,power_sight,0,0)
+ magic_available(player0,power_obey,0,0)
+ magic_available(player0,power_speed,0,0)
+ magic_available(player0,power_cave_in,0,0)
+ magic_available(player0,power_heal_creature,0,0)
+ magic_available(player0,power_protect,0,0)
+ magic_available(player0,power_conceal,0,0)
+ magic_available(player0,power_chicken,0,0)
+ magic_available(player0,power_lightning,0,0)
+ magic_available(player0,power_disease,0,0)
+ magic_available(player0,power_destroy_walls,0,0)
+endif
+
+if(player0,game_turn >= 30)
+ quick_information(2,"由于魔法结界太过强大，任何强大的魔法都很难施展。若要获得魔法，可以在巫师们战斗时偷走城里的书籍。")
+endif
+
+if(player0,entrance >= 1)
+ add_creature_to_level(player0,vampire,player0,1,1,0)
+endif
+
+create_party(tempo)
+ add_to_party(tempo,monk,10,25000,attack_enemies,0)
+ add_to_party(tempo,witch,10,15000,attack_enemies,0)
+ add_to_party(tempo,witch,10,15000,attack_enemies,0)
+ add_to_party(tempo,witch,10,15000,attack_enemies,0)
+ add_to_party(tempo,witch,10,15000,attack_enemies,0)
+ add_to_party(tempo,witch,10,15000,attack_enemies,0)
+
+create_party(prisa)
+ add_to_party(prisa,samurai,10,25000,attack_enemies,0)
+ add_to_party(prisa,archer,10,15000,attack_enemies,0)
+ add_to_party(prisa,archer,10,15000,attack_enemies,0)
+ add_to_party(prisa,archer,10,15000,attack_enemies,0)
+ add_to_party(prisa,archer,10,15000,attack_enemies,0)
+ add_to_party(prisa,archer,10,15000,attack_enemies,0)
+
+if(player_good,total_creatures == 0)
+ set_creature_armour(samurai,238)
+ set_creature_strength(samurai,239)
+ set_creature_health(samurai,2399)
+ set_creature_armour(monk,238)
+ set_creature_health(monk,1666)
+ set_creature_strength(monk,177)
+ set_timer(player_good,timer0)
+endif
+
+if(player_good,timer0 >= 500)
+ quick_objective(4,"出于道德的考虑，人们决定介入这场杀戮。小心，他们的领主非常强大，似乎他们想先毁灭你。",2)
+ add_party_to_level(player_good,prisa,1,1)
+ add_party_to_level(player_good,tempo,2,1)
+endif
+
+if(player1,dungeon_destroyed == 1)
+ if(player2,dungeon_destroyed == 1)
+  if(player3,dungeon_destroyed == 1)
+   win_game
+  endif
+ endif
+endif
+
+if(player0,dungeon_destroyed == 1)
+ lose_game
+endif
+
+ 
+ if(player2,dungeon_destroyed == 1)
+  if(player3,dungeon_destroyed == 1)
+   quick_objective(3,"灰衣主教们选择了他们决定在这场战斗中支持的人。他们怀疑那个人不是你。值得向他们指出这个错误。",player1)
+   add_creature_to_level(player1,tunneller,player1,10,10,0)
+   add_creature_to_level(player1,dwarfa,player1,10,10,0)
+   add_creature_to_level(player1,dark_mistress,player1,10,10,0)
+   add_creature_to_level(player1,archer,player1,10,10,0)
+   room_available(player1,prison,1,1)
+  endif
+ endif
+
+ if(player1,dungeon_destroyed == 1)
+  if(player3,dungeon_destroyed == 1)
+   quick_objective(3,"灰衣主教们选择了他们决定在这场战斗中支持的人。他们怀疑那个人不是你。值得向他们指出这个错误。",player2)
+   add_creature_to_level(player2,tunneller,player2,10,10,0)
+   add_creature_to_level(player2,giant,player2,10,10,0)
+   add_creature_to_level(player2,barbarian,player2,10,10,0)
+   add_creature_to_level(player2,witch,player2,10,10,0)
+   room_available(player2,prison,1,1)
+  endif
+ endif
+ 
+ if(player1,dungeon_destroyed == 1)
+  if(player2,dungeon_destroyed == 1)
+   quick_objective(3,"灰衣主教们选择了他们决定在这场战斗中支持的人。他们怀疑那个人不是你。值得向他们指出这个错误。",player3)
+   add_creature_to_level(player3,tunneller,player3,10,10,0)
+   add_creature_to_level(player3,druid,player3,10,10,0)
+   add_creature_to_level(player3,time_mage,player3,10,10,0)
+   add_creature_to_level(player3,sorceror,player3,10,10,0)
+   room_available(player3,prison,1,1)
+  endif
+ endif

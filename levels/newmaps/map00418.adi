@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00418
+REM Automatically generated on 13 Dec 2009, 13:39:25
+
+LEVEL_VERSION(1,0,0)
+LEVEL_TIMESTAMP(1256556920,1260707965)
+USER_COMMANDS_COUNT(4,1,0,0)
+LEVEL_DESCRIPTION("You have some magic creatures and you must destroy invading heroes, a powerful Dungeon Keeper, and two allied weaker Dungeon Keeper. There's no creature pool for you, you have no Prison, Graveyard, Scavenger Room, or decent ingredients for the Temple. Just a few Resurrect Creatures. I passed it and all I lost was the Ghost.")
+LEVEL_AUTHORS("Metal Gear Rex","")

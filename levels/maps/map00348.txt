@@ -1,0 +1,143 @@
+REM ***********************************************************************
+REM   Script for Level 348(048).The Ero abbr.侵蚀
+REM ***********************************************************************
+REM 
+REM 
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+START_MONEY(ALL_PLAYERS,10000)
+MAX_CREATURES(ALL_PLAYERS,10)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+ADD_CREATURE_TO_POOL(WIZARD,5)
+ADD_CREATURE_TO_POOL(BARBARIAN,5)
+ADD_CREATURE_TO_POOL(ARCHER,5)
+ADD_CREATURE_TO_POOL(MONK,5)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+
+CREATURE_AVAILABLE(ALL_PLAYERS,WIZARD,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,BARBARIAN,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,ARCHER,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,MONK,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(PLAYER0,POWER_HAND,1,1)
+MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+MAGIC_AVAILABLE(PLAYER0,POWER_SLAP,1,1)
+MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_OBEY,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_SIGHT,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+DOOR_AVAILABLE(ALL_PLAYERS,BRACED,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,STEEL,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,MAGIC,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定陷阱*********************************
+REM  (玩家,陷阱名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+TRAP_AVAILABLE(ALL_PLAYERS,POISON_GAS,1,0)
+TRAP_AVAILABLE(ALL_PLAYERS,LIGHTNING,1,0)
+
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+SET_CREATURE_HEALTH(DARK_MISTRESS,1000)
+SET_CREATURE_HEALTH(WITCH,800)
+SET_CREATURE_ARMOUR(DARK_MISTRESS,255)
+SET_CREATURE_ARMOUR(WITCH,206)
+
+REM 挖开入口附近的第一块金矿
+IF_ACTION_POINT(1,PLAYER0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,DARK_MISTRESS,-1,1,10,2000)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,DARK_MISTRESS,-1,1,10,2000)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,WITCH,-2,2,10,2000)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,WITCH,-3,1,10,2000)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,DARK_MISTRESS,-3,1,10,2000)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,WITCH,-4,2,10,2000)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,DARK_MISTRESS,-5,1,10,2000)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,WITCH,-5,1,10,2000)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,DARK_MISTRESS,-6,1,10,2000)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,WITCH,-6,1,10,2000)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,DARK_MISTRESS,-7,2,10,2000)
+   QUICK_INFORMATION(5,"你打开了战争之门，敌兵已经被派到各个战场上了，要前进，就要准备好战斗！！",PLAYER0) 
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER_GOOD,TOTAL_CREATURES == 0)
+
+    REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+    LEVEL_VERSION(1)
+    REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+    ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+    ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+    ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+    ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+    ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+    ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+    ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+    ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+    ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+    ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+    ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+    ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+    ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+    ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+    ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+    
+    MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+    MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+    DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+    TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+    TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+    QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0) 
+
+    WIN_GAME
+ENDIF
+
+REM ****************************提示信息**********************************
+QUICK_OBJECTIVE(1,"参考提示：1、你的资源不多，幸好这里有个遗留下来的工厂，好好利用它；2、在这里，敌我双方可用的人都不多，如果要PK，注意用综合部队；3、在这里，你可用的魔法很有限，经济条件也很有限，你有两个比较可选的方案，A是挖出一条长长的通道，在上面高满机关，B是训练一支综合队伍跟敌人PK。",PLAYER0)  
+IF(PLAYER0,GAME_TURN > 400)
+    QUICK_INFORMATION(2,"战争可以有很多种形式，可以是人对人的PK，可以是利用天然环境来获胜，可以是利用机关陷阱来获胜，可以用魔法来获胜，也可以打经济战,根据自己的实际情况选择个最佳方案！",PLAYER0) 
+ENDIF
+IF(PLAYER0,GAME_TURN > 800)
+    QUICK_INFORMATION(3,"这里可找招的人不多，在地图上看见几个特别的位置，也许那里有些资源可以利用！。",PLAYER0)   
+ENDIF
+IF(PLAYER0,GAME_TURN > 1200)
+    QUICK_INFORMATION(4,"男巫有个魔法，对敌人施放后，他们会短时间内失去战斗力，野蛮人擅长近战，弓箭手擅长远射而且有减速魔法！",PLAYER0) 
+ENDIF
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

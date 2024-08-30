@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00408
+REM Automatically generated on 21 Aug 2008, 04:33:36
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(977585874,1219286016)
+USER_COMMANDS_COUNT(20,2,0,0)
+LEVEL_DESCRIPTION("Kill this Keeper in order to get this decent spell. An Avatar castle has to be destroyd. Sometimes it's hard, sometimes easy, I can't predict. It will depend on what the Artificial Intelligence will decide to perform.")
+LEVEL_AUTHORS("Oetelaer","")

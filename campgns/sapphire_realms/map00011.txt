@@ -1,0 +1,707 @@
+REM Basics
+
+    LEVEL_VERSION(1)
+    RUN_AFTER_VICTORY(1)
+    SET_GENERATE_SPEED(400)
+
+    START_MONEY(PLAYER0,12500)
+    START_MONEY(PLAYER3,10000)
+
+    START_MONEY(PLAYER_GOOD,100000)
+    START_MONEY(PLAYER5,100000)
+
+    REM Player rules
+
+    SET_PLAYER_COLOR(PLAYER0, BLUE)
+    SET_PLAYER_COLOR(PLAYER6, WHITE)
+
+    COMPUTER_PLAYER(PLAYER3,15)
+    COMPUTER_PLAYER(PLAYER5,15)
+    COMPUTER_PLAYER(PLAYER_GOOD,15)
+    COMPUTER_PLAYER(PLAYER2,ROAMING)
+    REM Set this to ROAMING because otherwise these creatures can't be targeted!
+    COMPUTER_PLAYER(PLAYER6, ROAMING)
+
+    MAX_CREATURES(PLAYER0,25)
+    MAX_CREATURES(PLAYER5,25)
+    MAX_CREATURES(PLAYER_GOOD,25)
+
+    REM Yellow gets less to be easier
+    MAX_CREATURES(PLAYER3,15)
+
+REM Creature pool
+
+    ADD_CREATURE_TO_POOL(FLY,20)
+    ADD_CREATURE_TO_POOL(BUG,20)
+    ADD_CREATURE_TO_POOL(DEMONSPAWN,20)
+    ADD_CREATURE_TO_POOL(TROLL,20)
+    ADD_CREATURE_TO_POOL(SPIDER,20)
+    ADD_CREATURE_TO_POOL(HELL_HOUND,20)
+    ADD_CREATURE_TO_POOL(TENTACLE,20)
+    ADD_CREATURE_TO_POOL(SORCEROR,20)
+    ADD_CREATURE_TO_POOL(ORC,20)
+    ADD_CREATURE_TO_POOL(BILE_DEMON,20)
+    ADD_CREATURE_TO_POOL(DRAGON,20)
+    ADD_CREATURE_TO_POOL(DARK_MISTRESS,20)
+    ADD_CREATURE_TO_POOL(MAIDEN,20)
+
+    REM Heroes in the pool
+
+    ADD_CREATURE_TO_POOL(SAMURAI,20)
+    ADD_CREATURE_TO_POOL(FAIRY,20)
+    ADD_CREATURE_TO_POOL(GIANT,20)
+
+REM Player availability
+
+    CREATURE_AVAILABLE(ALL_PLAYERS,TROLL,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,SPIDER,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,TENTACLE,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,SORCEROR,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,ORC,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,BILE_DEMON,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,DRAGON,1,0)
+    
+    REM Creatures only available to yellow
+    CREATURE_AVAILABLE(PLAYER3,FAIRY,1,6)
+    CREATURE_AVAILABLE(PLAYER3,BUG,1,0)
+    CREATURE_AVAILABLE(PLAYER3,FLY,1,0)
+    CREATURE_AVAILABLE(PLAYER3,DEMONSPAWN,1,0)
+    REM Creatures only available to black
+    CREATURE_AVAILABLE(PLAYER5,SAMURAI,1,6)
+    CREATURE_AVAILABLE(PLAYER5,DEMONSPAWN,1,0)
+    REM Creatures only available to white
+    CREATURE_AVAILABLE(PLAYER_GOOD,GIANT,1,6)
+    CREATURE_AVAILABLE(PLAYER_GOOD,DEMONSPAWN,1,0)
+    REM Creatures only available to blue
+    CREATURE_AVAILABLE(PLAYER0,MAIDEN,1,0)
+    CREATURE_AVAILABLE(PLAYER0,HELL_HOUND,1,0)
+
+    REM The player can get these once the respective player is destroyed 
+    IF (PLAYER3, DUNGEON_DESTROYED == 1)
+        CREATURE_AVAILABLE(PLAYER0,FAIRY,1,0)
+    ENDIF
+    IF (PLAYER5, DUNGEON_DESTROYED == 1)
+        CREATURE_AVAILABLE(PLAYER0,SAMURAI,1,0)
+    ENDIF
+    IF (PLAYER_GOOD, DUNGEON_DESTROYED == 1)
+        CREATURE_AVAILABLE(PLAYER0,GIANT,1,0)
+    ENDIF
+
+    REM Player gets increased odds of getting these creatures once the enemies are destroyed
+    IF (PLAYER3, DUNGEON_DESTROYED == 1)
+        IF (PLAYER5, DUNGEON_DESTROYED == 1)
+            IF (PLAYER_GOOD, DUNGEON_DESTROYED == 1)
+                SET_CREATURE_CONFIGURATION(FAIRY, BaseEntranceScore, 70, 0, 0)
+                SET_CREATURE_CONFIGURATION(SAMURAI, BaseEntranceScore, 70, 0, 0)
+                SET_CREATURE_CONFIGURATION(GIANT, BaseEntranceScore, 70, 0, 0)
+            ENDIF
+        ENDIF
+    ENDIF
+
+REM Room availability
+
+    ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,BRIDGE,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,PRISON,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,BARRACKS,1,0)
+
+    REM Rooms for yellow
+
+    ROOM_AVAILABLE(PLAYER3,RESEARCH,1,1)
+
+    REM Rooms for black
+
+    ROOM_AVAILABLE(PLAYER5,RESEARCH,1,1)
+    ROOM_AVAILABLE(PLAYER5,TORTURE,1,0)
+    ROOM_AVAILABLE(PLAYER5,TEMPLE,2,0)
+    ROOM_AVAILABLE(PLAYER5,GRAVEYARD,1,0)
+    ROOM_AVAILABLE(PLAYER5,SCAVENGER,1,0)
+
+    REM Rooms for white
+
+    ROOM_AVAILABLE(PLAYER_GOOD,WORKSHOP,1,0)
+    ROOM_AVAILABLE(PLAYER_GOOD,RESEARCH,1,1)
+    ROOM_AVAILABLE(PLAYER_GOOD,TEMPLE,2,0)
+    ROOM_AVAILABLE(PLAYER_GOOD,GRAVEYARD,1,0)
+    ROOM_AVAILABLE(PLAYER_GOOD,SCAVENGER,1,0)
+
+    REM Player room availabilty 
+
+    ROOM_AVAILABLE(PLAYER0,TEMPLE,3,0)
+    REM Remove graveyard from player to make it harder
+    REM ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,0)
+    ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,0)
+
+    IF (PLAYER0, TORTURE > 0)
+        ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+        TUTORIAL_FLASH_BUTTON(17, 100)
+    ENDIF
+
+    IF (PLAYER0, RESEARCH > 0)
+        ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+        TUTORIAL_FLASH_BUTTON(9, 100)
+    ENDIF
+
+    IF (PLAYER0, WORKSHOP > 0)
+        ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+        TUTORIAL_FLASH_BUTTON(13, 100)
+    ENDIF
+
+REM Magic availability
+
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_POSSESS,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SIGHT,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SPEED,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_OBEY,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CALL_TO_ARMS,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CONCEAL,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HOLD_AUDIENCE,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CAVE_IN,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HEAL_CREATURE,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_LIGHTNING,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_PROTECT,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CHICKEN,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_DISEASE,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_DESTROY_WALLS,1,0)
+
+REM Workshop
+
+    TRAP_AVAILABLE(ALL_PLAYERS,POISON_GAS,1,0)
+    TRAP_AVAILABLE(ALL_PLAYERS,LIGHTNING,1,0)
+    TRAP_AVAILABLE(ALL_PLAYERS,LAVA,1,0)
+    TRAP_AVAILABLE(ALL_PLAYERS,BOULDER,1,0)
+    TRAP_AVAILABLE(ALL_PLAYERS,WORD_OF_POWER,1,0)
+
+    DOOR_AVAILABLE(PLAYER0,WOOD,1,3)
+    DOOR_AVAILABLE(ALL_PLAYERS,BRACED,1,0)
+    DOOR_AVAILABLE(ALL_PLAYERS,STEEL,1,0)
+    DOOR_AVAILABLE(ALL_PLAYERS,MAGIC,1,0)
+
+REM Level setup
+
+REM SET_MUSIC("campaign_music/smt5_temple_of_eternity.mp3")
+SET_MUSIC("campaign_music/order_yet_undeciphered.mp3")
+
+QUICK_OBJECTIVE(5, "就是这里。原始宝石矿脉是这座岛屿的心脏，也是其财富的来源。您所有绝望的竞争对手也都在这里，他们只为自己而战，背弃了过去的所有盟约。粉碎他们所有人，偷走他们的房间，夺取属于您的宝藏。然而，这个王国的保护者在您的路上设置了一道宝石屏障。想办法进去。", 3)
+
+IF_ACTION_POINT(1, PLAYER0)
+
+    QUICK_OBJECTIVE(3, "您已获得取之不尽的宝石，现在整个王国都归您所有了。恭喜！但是，除了这里之外，还有最后一个秘密等着您……", 1)
+    
+    REM Make player the owner of the middle slab with the special on it and make claim sound/effect
+    CHANGE_SLAB_OWNER(49, 6, PLAYER0, NONE)
+    PLAY_MESSAGE(PLAYER0, SOUND, "116")
+    CREATE_EFFECT_AT_POS(57, 148, 19)
+
+    WIN_GAME
+
+    REM Count campaign flag up by one
+    IF(PLAYER0, CAMPAIGN_FLAG6 == 10)
+        SET_FLAG(PLAYER0, CAMPAIGN_FLAG6, 11)
+    ENDIF
+    
+    REM If player is in NG+, advance the state of that too
+    IF (PLAYER0, CAMPAIGN_FLAG5 == 1)
+        IF(PLAYER0, CAMPAIGN_FLAG7 == 10)
+            SET_FLAG(PLAYER0, CAMPAIGN_FLAG7, 11)
+        ENDIF
+    ENDIF
+
+ENDIF
+
+IF (PLAYER0, TEMPLE > 0)
+    QUICK_OBJECTIVE(4, "主房间前的宝石屏障只对心地善良的人开放，但我相信心地善良的英雄的鲜血是一个很好的替代品。但这需要通过寺庙献祭。一旦你击败了敌人并献祭了 3 个仙女、3 个巨人和 3 个忍者，你肯定会引起这个王国的守护者的愤怒。但打败他，我们征服的战利品就是我们的了！", 3)
+ENDIF
+
+REM Logic for the sacrifices
+
+    REM Fairies
+    SET_FLAG(PLAYER0, FLAG1, 0)
+    REM Samurai
+    SET_FLAG(PLAYER0, FLAG2, 0)
+    REM Stuff
+    SET_FLAG(PLAYER0, FLAG3, 0)
+
+    REM Fairy logic block
+
+        IF (ALL_PLAYERS, SACRIFICED[FAIRY] > 0)
+
+            IF (ALL_PLAYERS, SACRIFICED[FAIRY] < 3)
+
+                IF (ALL_PLAYERS, SACRIFICED[FAIRY] > PLAYER0, FLAG1)
+                    IF (PLAYER0, FLAG1 < 3)
+                        NEXT_COMMAND_REUSABLE
+                        DISPLAY_VARIABLE(PLAYER0, FLAG1)
+
+                        NEXT_COMMAND_REUSABLE
+                        SET_TIMER(PLAYER0, TIMER1)
+
+                        NEXT_COMMAND_REUSABLE
+                        ADD_TO_FLAG(PLAYER0, FLAG1, 1)
+                    ENDIF
+                ENDIF
+
+                IF (PLAYER0, TIMER1 > 60)
+                    IF (PLAYER0, FLAG1 == ALL_PLAYERS, SACRIFICED[FAIRY])
+                        NEXT_COMMAND_REUSABLE
+                        HIDE_VARIABLE
+                    ENDIF
+                ENDIF
+
+            ENDIF
+
+        ENDIF
+
+        IF (ALL_PLAYERS, SACRIFICED[FAIRY] > 2)
+
+            QUICK_INFORMATION(1, "干得好，守护者。你现在已经献祭了足够数量的仙女。", -1)
+
+            REM Play heart death sound
+            PLAY_MESSAGE(PLAYER0, SOUND, "152")
+            CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_YELLOW, 145, 97)
+            ADD_OBJECT_TO_LEVEL(HEARTFLAME_YELLOW, 5, 1, PLAYER_NEUTRAL)
+            SET_FLAG(PLAYER0, FLAG1, 3)
+            HIDE_VARIABLE
+        ENDIF
+
+        IF (ALL_PLAYERS, SACRIFICED[FAIRY] > 3)
+            QUICK_MESSAGE(6, "你已经献祭了足够多的仙女。", SPELL_FLIGHT)
+        ENDIF
+
+    REM samurai logic block
+
+        IF (ALL_PLAYERS, SACRIFICED[SAMURAI] > 0)
+
+            IF (ALL_PLAYERS, SACRIFICED[SAMURAI] < 3)
+
+                IF (ALL_PLAYERS, SACRIFICED[SAMURAI] > PLAYER0, FLAG2)
+
+                    IF (PLAYER0, FLAG2 < 3)
+
+                        NEXT_COMMAND_REUSABLE
+                        DISPLAY_VARIABLE(PLAYER0, FLAG2)
+
+                        NEXT_COMMAND_REUSABLE
+                        SET_TIMER(PLAYER0, TIMER1)
+
+                        NEXT_COMMAND_REUSABLE
+                        ADD_TO_FLAG(PLAYER0, FLAG2, 1)
+
+                    ENDIF
+
+                ENDIF
+
+                IF (PLAYER0, TIMER1 > 60)
+
+                    IF (PLAYER0, FLAG2 == ALL_PLAYERS, SACRIFICED[SAMURAI])
+
+                        NEXT_COMMAND_REUSABLE
+                        HIDE_VARIABLE
+
+                    ENDIF
+
+                ENDIF
+
+            ENDIF
+
+        ENDIF
+
+        IF (ALL_PLAYERS, SACRIFICED[SAMURAI] > 2)
+            QUICK_INFORMATION(52, "干得好。这样一来，你已经献祭了足够数量的忍者。", -1)
+            REM Play heart death sound
+            PLAY_MESSAGE(PLAYER0, SOUND, "152")
+            CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_BLACK, 148, 96)
+            ADD_OBJECT_TO_LEVEL(HEARTFLAME_BLACK, 6, 1, PLAYER_NEUTRAL)
+            SET_FLAG(PLAYER0, FLAG2, 3)
+            HIDE_VARIABLE
+        ENDIF
+
+        IF (ALL_PLAYERS, SACRIFICED[SAMURAI] > 3)
+            QUICK_MESSAGE(63, "你已经献祭了足够多的忍者。", SPELL_FLIGHT)
+        ENDIF
+
+    REM Giant logic block
+
+        IF (ALL_PLAYERS, SACRIFICED[GIANT] > 0)
+
+            IF (ALL_PLAYERS, SACRIFICED[GIANT] < 3)
+
+                IF (ALL_PLAYERS, SACRIFICED[GIANT] > PLAYER0, FLAG3)
+
+                    IF (PLAYER0, FLAG3 < 3)
+
+                        NEXT_COMMAND_REUSABLE
+                        DISPLAY_VARIABLE(PLAYER0, FLAG3)
+
+                        NEXT_COMMAND_REUSABLE
+                        SET_TIMER(PLAYER0, TIMER1)
+
+                        NEXT_COMMAND_REUSABLE
+                        ADD_TO_FLAG(PLAYER0, FLAG3, 1)
+
+                    ENDIF
+
+                ENDIF
+
+                IF (PLAYER0, TIMER1 > 60)
+
+                    IF (PLAYER0, FLAG3 == ALL_PLAYERS, SACRIFICED[GIANT])
+
+                        NEXT_COMMAND_REUSABLE
+                        HIDE_VARIABLE
+
+                    ENDIF
+
+                ENDIF
+
+            ENDIF
+
+        ENDIF
+
+        IF (ALL_PLAYERS, SACRIFICED[GIANT] > 2)
+            QUICK_INFORMATION(53, "干得好。这样一来，你已经献祭了足够数量的巨人。做的不错。", -1)
+            REM Play heart death sound
+            PLAY_MESSAGE(PLAYER0, SOUND, "152")
+            CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_WHITE, 151, 97)
+            ADD_OBJECT_TO_LEVEL(HEARTFLAME_WHITE, 7, 1, PLAYER_NEUTRAL)
+            SET_FLAG(PLAYER0, FLAG3, 3)
+            HIDE_VARIABLE
+        ENDIF
+
+        IF (ALL_PLAYERS, SACRIFICED[GIANT] > 3)
+            QUICK_MESSAGE(54, "你已经献祭了足够多的巨人。", SPELL_FLIGHT)
+        ENDIF
+
+REM Final avatar wave conditions and logic for the final wave
+
+    REM Flag4 determines the state of the player killing the remaining enemies. Give the player a message that he needs to destroy them if he wants to continue
+    SET_FLAG(PLAYER0, FLAG4, 0)
+
+    IF (ALL_PLAYERS, SACRIFICED[FAIRY] > 2)
+        IF (ALL_PLAYERS, SACRIFICED[GIANT] > 2)
+            IF (ALL_PLAYERS, SACRIFICED[SAMURAI] > 2)
+
+                REM Timer starten
+                REM Avatar spawnen
+                rem aber erst wenn alle gegner zerst枚rt sind
+
+                IF (PLAYER0, FLAG4 == 0)
+                    QUICK_INFORMATION(8, "你已经做出了足够的献祭，但你的对手仍然活着。消灭他们，继续进行仪式并打开屏障吧。")
+                ENDIF
+
+                IF (PLAYER0, FLAG4 == 1)
+                    QUICK_OBJECTIVE(2, "所有的献祭都已完成，你的敌人已被击溃。最后的守护者和他的随从正在赶来；圣者也在赶来阻止你突破屏障。干掉他，收获奖励吧！", -1)
+                    SET_TIMER(PLAYER0, TIMER4)
+                    QUICK_MESSAGE(21, "你的邪恶行径就此结束了！", AVATAR)
+                    
+                    REM TODO Display countdown?
+
+                    DISPLAY_COUNTDOWN(PLAYER0, TIMER4, 3600, 1)
+
+                ENDIF
+
+            ENDIF
+        ENDIF
+    ENDIF
+
+    rem pr眉fen ob alle gegner auch tot sind und flag setzen die oben benutzt wird
+    IF (PLAYER3, DUNGEON_DESTROYED == 1)
+        IF (PLAYER5, DUNGEON_DESTROYED == 1)
+            IF (PLAYER_GOOD, DUNGEON_DESTROYED == 1)
+                QUICK_OBJECTIVE(7, "您的所有守护者对手均已被消灭。准备好进行最后一场战斗，并进行剩余的献祭，以继续仪式并打开屏障。您现在也可以从您的入口吸引敌人的生物。利用这一点来集齐剩余的献祭材料吧。")
+                SET_FLAG(PLAYER0, FLAG4, 1)
+            ENDIF
+        ENDIF
+    ENDIF
+
+    CREATE_PARTY(party_avatar)
+        ADD_TO_PARTY(party_avatar, AVATAR, 10, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar, ARCHER, 10, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar, ARCHER, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar, ARCHER, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar, WIZARD, 10, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar, WIZARD, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar, WIZARD, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar, MAIDEN, 10, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar, MAIDEN, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar, MAIDEN, 8, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party_avatar_yellow)
+        ADD_TO_PARTY(party_avatar_yellow, FAIRY, 10, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar_yellow, FAIRY, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar_yellow, FAIRY, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar_yellow, FAIRY, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar_yellow, THIEF, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar_yellow, THIEF, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar_yellow, THIEF, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar_yellow, THIEF, 6, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party_avatar_black)
+        ADD_TO_PARTY(party_avatar_black, SAMURAI, 10, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar_black, SAMURAI, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar_black, SAMURAI, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar_black, SAMURAI, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar_black, THIEF, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar_black, THIEF, 6, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party_avatar_white)
+        ADD_TO_PARTY(party_avatar_white, GIANT, 10, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar_white, GIANT, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar_white, GIANT, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar_white, GIANT, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar_white, ARCHER, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar_white, ARCHER, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar_white, DWARFA, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_avatar_white, DWARFA, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        
+
+    REM TODO: in mehreren Waves spawnen
+
+    IF (PLAYER0, TIMER4 > 3600)
+        ADD_PARTY_TO_LEVEL(PLAYER6, party_avatar_yellow, -4, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER6, party_avatar_black, -3, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER6, party_avatar_white, -2, 1)
+    ENDIF
+
+    IF (PLAYER0, TIMER4 > 4000)
+        ADD_PARTY_TO_LEVEL(PLAYER6, party_avatar, -1, 1)
+        QUICK_MESSAGE(22, "到此为止了！", AVATAR)
+    ENDIF
+
+    REM Set this to be slightly after the above value
+    IF (PLAYER0, TIMER4 > 3650)
+        IF_CONTROLS(PLAYER6, TOTAL_CREATURES == 0)
+
+            QUICK_OBJECTIVE(17, "通往宝石矿脉中心的道路已打开，圣者已被击败！领取您的奖励吧！", 3)
+
+            PLAY_MESSAGE(PLAYER0, SOUND, 74)
+
+            CREATE_EFFECT_AT_POS(68, 146, 71)
+            CREATE_EFFECT_AT_POS(68, 150, 73)
+            CREATE_EFFECT_AT_POS(68, 145, 76)
+
+            CHANGE_SLAB_TYPE(48,23,WATER,NONE)
+            CHANGE_SLAB_TYPE(50,23,WATER,NONE)
+
+            CHANGE_SLAB_TYPE(48,24,WATER,NONE)
+            CHANGE_SLAB_TYPE(49,24,WATER,NONE)
+            CHANGE_SLAB_TYPE(50,24,WATER,NONE)
+
+            CHANGE_SLAB_TYPE(48,25,WATER,NONE)
+            CHANGE_SLAB_TYPE(50,25,WATER,NONE)
+        ENDIF
+    ENDIF
+
+REM Punish the player with parties for taking too long / not engaging with the enemy
+REM Disable when player has actually moved out of their dungeon towards yellow
+
+    CREATE_PARTY(punish_party1)
+        ADD_TO_PARTY(punish_party1, WIZARD, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(punish_party1, WIZARD, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(punish_party1, DWARFA, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(punish_party1, DWARFA, 7, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(punish_party2)
+        ADD_TO_PARTY(punish_party2, THIEF, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(punish_party2, THIEF, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(punish_party2, THIEF, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(punish_party2, WITCH, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(punish_party2, HELL_HOUND, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(punish_party2, HELL_HOUND, 7, 0, ATTACK_DUNGEON_HEART, 0)
+
+    SET_FLAG(PLAYER0, FLAG5, 0)
+
+    REM Start timer when player has properly started
+    IF (PLAYER0, TOTAL_CREATURES > 5)
+        SET_TIMER(PLAYER0, TIMER6)
+    ENDIF
+
+    REM If the player hasn't fought at all before this timer, force him to dig down to action point 11 to stop the heroes
+    IF (PLAYER0, TIMER6 > 25000)
+
+        IF(PLAYER0, FLAG5 == 0)
+            QUICK_INFORMATION(9, "守护者，你现在应该知道躲在地下城里是不对的……开始工作吧，你应该放纵你贪婪的欲望，而不是消极怠工。如果你不这样做，可能会有严重的后果……", -1)
+        ENDIF
+
+        IF(PLAYER0, FLAG5 == 0)
+            IF (PLAYER0, TIMER6 > 30000)
+                ADD_PARTY_TO_LEVEL(PLAYER6, punish_party1, -1, 1)
+            ENDIF
+        ENDIF
+
+        IF(PLAYER0, FLAG5 == 0)
+            IF (PLAYER0, TIMER6 > 35000)
+                ADD_PARTY_TO_LEVEL(PLAYER6, punish_party2, -1, 1)
+            ENDIF
+        ENDIF
+
+        REM If black is still alive, give a punishment
+        IF(PLAYER0, FLAG5 == 0)
+            IF (PLAYER0, TIMER6 > 40000)
+                IF(PLAYER5, DUNGEON_DESTROYED == 0)
+                    QUICK_INFORMATION(12, "这是对你的最后通牒。离开这里，否则将因懒惰而受到惩罚。")
+                ENDIF
+            ENDIF
+        ENDIF
+
+        REM And otherwise punish the player
+        IF(PLAYER0, FLAG5 == 0)
+            IF (PLAYER0, TIMER6 > 41000)
+                IF(PLAYER5, DUNGEON_DESTROYED == 0)
+                
+                    QUICK_OBJECTIVE(13, "你给了对手太多准备时间……现在击败他们的难度已经大大增加。自求多福吧，击败他们和剩下的英雄。")
+
+                    ADD_PARTY_TO_LEVEL(PLAYER6, punish_party1, -1, 1)
+                    ADD_PARTY_TO_LEVEL(PLAYER6, punish_party2, -1, 1)
+
+                    USE_POWER_AT_LOCATION(PLAYER6, 4, POWER_DESTROY_WALLS, 1, 1)
+                    USE_POWER_AT_LOCATION(PLAYER6, 4, POWER_DESTROY_WALLS, 1, 1)
+
+                    ADD_CREATURE_TO_LEVEL(PLAYER3, FAIRY, PLAYER3, 5, 10, 0)
+                    ADD_CREATURE_TO_LEVEL(PLAYER5, SAMURAI, PLAYER5, 5, 10, 0)
+                    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD, GIANT, PLAYER_GOOD, 5, 10, 0)
+
+                ENDIF
+            ENDIF
+        ENDIF
+
+    ENDIF
+
+    REM If the player fought before the timer hits the threshold, then it's fine and there is no punishment
+    IF (PLAYER0, TIMER6 < 25000)
+        IF (PLAYER0, ACTIVE_BATTLES > 0)
+            SET_FLAG(PLAYER0, FLAG5, 1)
+        ENDIF
+    ENDIF
+
+    REM If the player at any point hits the action point, then toggle the flag so fighting stops
+    IF_ACTION_POINT(11, PLAYER0)
+        SET_FLAG(PLAYER0, FLAG5, 2)
+    ENDIF
+
+    IF_ACTION_POINT(12, PLAYER0)
+        SET_FLAG(PLAYER0, FLAG5, 2)
+    ENDIF
+
+REM Timer to make sure that if the enemy hasn't moved ahead towards yellow, they do when the timer rolls around
+REM Note: below is another timer to destroy a dungeon wall if the enemy is stuck
+
+    SET_TIMER(PLAYER0, TIMER7)
+
+    REM See if this balancing at 45000 is good
+
+    IF (PLAYER0, TIMER7 > 45000)
+
+        REM Left side
+
+        IF_SLAB_OWNER(16,55,PLAYER_NEUTRAL)
+            CHANGE_SLAB_TYPE(16, 55, PRETTY_PATH)
+            CREATE_EFFECT_AT_POS(68, 49, 166)
+        ENDIF
+
+        IF_SLAB_OWNER(16,71,PLAYER_NEUTRAL)
+            CHANGE_SLAB_TYPE(16, 71, PRETTY_PATH)
+            CREATE_EFFECT_AT_POS(68, 49, 214)
+        ENDIF
+
+        REM right side
+
+        IF_SLAB_OWNER(82,48,PLAYER_NEUTRAL)
+            CHANGE_SLAB_TYPE(82, 48, PRETTY_PATH)
+            CREATE_EFFECT_AT_POS(68, 247, 145)
+        ENDIF
+
+        IF_SLAB_OWNER(82,64,PLAYER_NEUTRAL)
+            CHANGE_SLAB_TYPE(82, 64, PRETTY_PATH)
+            CREATE_EFFECT_AT_POS(68, 247, 193)
+        ENDIF
+
+    ENDIF
+
+REM Prevent the player from just focusing entirely on skeletons
+
+    IF (PLAYER0, SKELETON > 10)
+        NEXT_COMMAND_REUSABLE
+        SET_GAME_RULE(PrisonSkeletonChance, 0)
+    ENDIF
+
+    IF (PLAYER0, SKELETON < 10)
+        NEXT_COMMAND_REUSABLE
+        SET_GAME_RULE(PrisonSkeletonChance, 100)
+    ENDIF
+
+REM Failsafe for white - if white is stuck in his dungeon, breach some walls
+
+    IF(PLAYER0, TIMER7 > 46000)
+        IF_SLAB_TYPE(81,37, PATH)
+            USE_POWER_AT_LOCATION(PLAYER2, 9, POWER_DESTROY_WALLS, 1, 1)
+            USE_POWER_AT_LOCATION(PLAYER2, 9, POWER_DESTROY_WALLS, 1, 1)
+        ENDIF
+    ENDIF
+
+    IF(PLAYER0, TIMER7 > 46000)
+        IF_SLAB_TYPE(73,35, PATH)
+            USE_POWER_AT_LOCATION(PLAYER2, 10, POWER_DESTROY_WALLS, 1, 1)
+            USE_POWER_AT_LOCATION(PLAYER2, 10, POWER_DESTROY_WALLS, 1, 1)
+        ENDIF
+    ENDIF
+
+REM Failsafe for white - if he owns the bridge but not the space below it, claim there
+
+    IF(PLAYER0, TIMER7 > 46000)
+        IF_SLAB_OWNER(82,60, PLAYER_GOOD)
+            IF_SLAB_OWNER(82,61, PLAYER_NEUTRAL)
+                ADD_CREATURE_TO_LEVEL(PLAYER_GOOD, IMP, 8, 1, 1, 0)
+            ENDIF
+        ENDIF
+    ENDIF
+
+REM Logic for the enemies getting low on health
+
+    CREATE_PARTY(party_black_desperation)
+        ADD_TO_PARTY(party_black_desperation, MAIDEN, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_black_desperation, BLACK_KNIGHT, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_black_desperation, SKELETON, 8, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party_white_desperation)
+        ADD_TO_PARTY(party_white_desperation, WIZARD, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_white_desperation, ARCHER, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party_white_desperation, DWARFA, 8, 0, ATTACK_DUNGEON_HEART, 0)
+
+
+    IF (PLAYER5, HEART_HEALTH < 10000)
+        QUICK_MESSAGE(18, "不能……不能就这样结束！呼叫游击队！", PLAYER5)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party_black_desperation, -3, 1)
+    ENDIF
+
+    IF (PLAYER_GOOD, HEART_HEALTH < 10000)
+        QUICK_MESSAGE(19, "我们不能就这样被干掉！快派增援部队！", PLAYER_GOOD)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, party_white_desperation, -2, 1)
+    ENDIF
+
+    IF (PLAYER3, HEART_HEALTH < 5000)
+        QUICK_MESSAGE(20, "你会后悔的！愿玛瑙盗贼和钻石英雄碾碎你！", PLAYER3)
+    ENDIF
+
+REM Horny from the hub, yo
+
+IF (PLAYER0, CAMPAIGN_FLAG4 == 1)
+    ADD_CREATURE_TO_LEVEL(PLAYER0, HORNY, PLAYER0, 1, 1, 0)
+    QUICK_MESSAGE(24, "让我们用他们的鲜血把地板染成红色吧。", HORNY)
+    QUICK_MESSAGE(23, "时机已到，守护者。", HORNY)
+    SET_FLAG(PLAYER0, CAMPAIGN_FLAG4, 0)
+ENDIF
+
+
+
+
+
+
+

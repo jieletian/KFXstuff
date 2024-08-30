@@ -1,0 +1,148 @@
+REM ***********************************************************************
+REM   Script for Level 324(024).I'm Horny 我是收割者
+REM ***********************************************************************
+REM Clare Wykes  克莱尔·威克斯
+REM 
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+REM SPEED OF ENTRANCES 入口速度
+SET_GENERATE_SPEED(500)
+REM STARTING GOLD 初始金钱
+START_MONEY(PLAYER0,20000)
+REM MAX NUMBER OF CREATURES 玩家怪物最大数目
+MAX_CREATURES(PLAYER0,60)
+
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+ADD_CREATURE_TO_POOL(DARK_MISTRESS,40)
+ADD_CREATURE_TO_POOL(WITCH,40)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+
+CREATURE_AVAILABLE(PLAYER0,DARK_MISTRESS,1,1)
+CREATURE_AVAILABLE(PLAYER0,WITCH,1,1)
+CREATURE_AVAILABLE(PLAYER0,SKELETON,1,0)
+CREATURE_AVAILABLE(PLAYER0,GHOST,1,0)
+CREATURE_AVAILABLE(PLAYER0,HORNY,1,0)
+CREATURE_AVAILABLE(PLAYER0,VAMPIRE,1,0)
+
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+ROOM_AVAILABLE(PLAYER0,PRISON,1,0)
+ROOM_AVAILABLE(PLAYER0,TORTURE,1,0)
+ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+ROOM_AVAILABLE(PLAYER0,TEMPLE,1,0)
+ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+ROOM_AVAILABLE(PLAYER0,BRIDGE,1,0)
+ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,0)
+ROOM_AVAILABLE(PLAYER0,ENTRANCE,0,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+MAGIC_AVAILABLE(PLAYER0,POWER_OBEY,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_CAVE_IN,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_HOLD_AUDIENCE,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_LIGHTNING,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_PROTECT,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_CONCEAL,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+DOOR_AVAILABLE(PLAYER0,WOOD,1,0)
+DOOR_AVAILABLE(PLAYER0,BRACED,1,0)
+DOOR_AVAILABLE(PLAYER0,STEEL,1,0)
+DOOR_AVAILABLE(PLAYER0,MAGIC,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定陷阱*********************************
+REM  (玩家,陷阱名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+TRAP_AVAILABLE(PLAYER0,ALARM,1,0)
+TRAP_AVAILABLE(PLAYER0,POISON_GAS,1,0)
+TRAP_AVAILABLE(PLAYER0,WORD_OF_POWER,1,0)
+TRAP_AVAILABLE(PLAYER0,LAVA,1,0)
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER_GOOD,DUNGEON_DESTROYED == 1)
+    
+        REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+        LEVEL_VERSION(1)
+        REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+        ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+        ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+        ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+        ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+        ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+        ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+        ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+        ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+        ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+        ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+        
+        MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+        MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+        DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+        TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+        TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+        QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+        WIN_GAME
+ENDIF
+
+REM ****************************提示信息**********************************
+
+IF(PLAYER0,GAME_TURN < 200)
+   REM  QUICK_INFORMATION(1,"A good wizard has gained control of one of your portals, he has also discovered the science of cloning")
+   QUICK_INFORMATION(1,"一个优秀的巫师已经控制了你的一个入口，他也发现了克隆技术")
+ENDIF
+IF(PLAYER0,GAME_TURN > 350)
+    REM  QUICK_INFORMATION(2," He has cloned all types of creatures and set them to work forming an immense dungeon, you have to find him and kill him and his minions")
+    QUICK_INFORMATION(2," 他克隆了所有种类的生物，让它们建造一个巨大的地下城，你要找并干掉他和他的爪牙们。")
+ENDIF
+IF(PLAYER0,GAME_TURN > 500)
+    REM  QUICK_INFORMATION(3,"At some stage his cloning went wrong and their are rougue creatures for you to find. His favourite creature was the horned reaper. GOOD LUCK!")
+    QUICK_INFORMATION(3,"在某些阶段他的克隆技术出了问题，你找到的是他克隆出来的无赖生物，他最喜欢的动物是有角的收割者，好运!")
+ENDIF
+IF(PLAYER0,GAME_TURN > 650)
+    REM  QUICK_INFORMATION(4," Oh one other thing Keeper!!! He has managed to clone himself, so watch out!!! HA HA HA HA HA!！")
+    QUICK_INFORMATION(4," 另外，守护者！他设法克隆了自己，所以小心了！！！哈哈哈哈！")
+ENDIF
+IF(PLAYER0,GAME_TURN > 750)
+    QUICK_OBJECTIVE(5,"提示：敌人不会主动进攻；左下角有N个大兵和1个圣者守心脏，打爆敌人心脏过关，有部分敌人可不打；重点是怪太多，要练很多10级小鬼才够钱用；可招N个吸血鬼；先攻下敌人心脏附近的图书馆拿到破墙术才可打心脏！",PLAYER0)   
+ENDIF
+
+
+
+
+
+
+
+

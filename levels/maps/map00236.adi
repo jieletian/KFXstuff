@@ -1,0 +1,9 @@
+REM ADiKtEd script file for map00236
+REM Automatically generated on 29 Sep 2008, 00:43:27
+
+LEVEL_VERSION(1,2,6)
+LEVEL_TIMESTAMP(898129040,1222641807)
+USER_COMMANDS_COUNT(3576,97,411,27)
+LEVEL_DESCRIPTION("This is a hard level. It is intended for first person play. You start off with your dungeon entirely built, but unable to build much futher. In addition, you have only a select few minons. A horned reaper (level 10), 2 vapires and 2 mistresses, also level 10. Beware, Horny gets angry fast, and will go on a rampage. Don't let him get to your imps, as you cannot create more. You must go through the dungeon, destroying all you see. All enemies must be destroyed to win. As it stands, it is possible.")
+LEVEL_AUTHORS("BlackDawn","")
+GRAFFITI(37,16,0,ORIENT_WE,FONT_ADICLSSC,0x184,evil)

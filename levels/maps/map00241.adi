@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00241
+REM Automatically generated on 19 Aug 2008, 08:11:51
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(888525890,1219126311)
+USER_COMMANDS_COUNT(433,16,0,4)
+LEVEL_DESCRIPTION("1-player level for Dungeon Keeper (to be played as a 1-player multiplayer level) made using UnDed. In this land there are lost Orcs waiting to be recruited by both you and your adversary. You'd better beat him to it!")
+LEVEL_AUTHORS("Dayo Kay","")

@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00253
+REM Automatically generated on 21 Aug 2008, 06:01:25
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(1006552972,1219291285)
+USER_COMMANDS_COUNT(25,2,0,0)
+LEVEL_DESCRIPTION("This land is ruled by the 7 mad monks. They have to be destroyed! The entrance to their realm lies to the north. Also, don't just throw messages away without reading them. Extended version; custom TEXT.DAT included.")
+LEVEL_AUTHORS("DzjeeAr","")

@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00679
+REM Automatically generated on 21 Aug 2008, 08:39:34
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(1160405216,1219300774)
+USER_COMMANDS_COUNT(10,2,0,0)
+LEVEL_DESCRIPTION("In this level, you find yourself in a particular configuration: all players are back to back. Explore the kingdom, then conquer the field of your neighbors. Important hint: strengthen your walls and make progress slowly outside the square formed by the four branches. 4 players(4 joueurs) multi, originated in France.")
+LEVEL_AUTHORS("Yohabro","")

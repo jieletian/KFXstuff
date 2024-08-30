@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map01002
+REM Automatically generated on 22 Aug 2008, 15:49:54
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(1055365232,1219412994)
+USER_COMMANDS_COUNT(24,2,0,0)
+LEVEL_DESCRIPTION("The blue keeper will defend his Dungeon Heart (Danjonhato) at any cost. Blue keeper who is a brave man under siege, and wealth is no value for him, so he won't dig for gold. A brave and prudent man who prepared his fortress for the siege, and now is waiting for the well-trained reinforcements.")
+LEVEL_AUTHORS("","")

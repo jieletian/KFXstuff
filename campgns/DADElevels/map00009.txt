@@ -1,0 +1,128 @@
+REM Level 9/Flame shadows
+
+set_generate_speed(300)
+
+max_creatures(player0,40)
+
+start_money(player0,25000)
+
+add_creature_to_pool(vampire,14)
+add_creature_to_pool(troll,18)
+add_creature_to_pool(tentacle,12)
+add_creature_to_pool(bile_demon,18)
+add_creature_to_pool(hell_hound,16)
+add_creature_to_pool(dark_mistress,18)
+add_creature_to_pool(time_mage,18)
+
+creature_available(player0,vampire,1,1)
+creature_available(player0,troll,1,1)
+creature_available(player0,tentacle,1,1)
+creature_available(player0,bile_demon,1,1)
+creature_available(player0,hell_hound,1,1)
+creature_available(player0,dark_mistress,1,1)
+creature_available(player0,time_mage,1,1)
+
+room_available(all_players,treasure,1,1)
+room_available(all_players,lair,1,1)
+room_available(all_players,garden,1,1)
+room_available(all_players,training,1,0)
+room_available(all_players,research,1,1)
+room_available(all_players,graveyard,1,0)
+room_available(all_players,workshop,1,0)
+room_available(all_players,prison,1,0)
+room_available(all_players,barracks,1,0)
+room_available(all_players,torture,1,0)
+room_available(all_players,temple,1,0)
+room_available(all_players,guard_post,1,0)
+room_available(all_players,scavenger,1,0)
+
+magic_available(all_players,power_imp,1,0)
+magic_available(all_players,power_sight,1,0)
+magic_available(all_players,power_obey,1,0)
+magic_available(all_players,power_speed,1,0)
+magic_available(all_players,power_call_to_arms,1,0)
+magic_available(all_players,power_cave_in,1,0)
+magic_available(all_players,power_heal_creature,1,0)
+magic_available(all_players,power_protect,1,0)
+magic_available(all_players,power_conceal,1,0)
+magic_available(all_players,power_hold_audience,1,0)
+magic_available(all_players,power_chicken,1,0)
+magic_available(all_players,power_lightning,1,0)
+magic_available(all_players,power_disease,1,0)
+magic_available(all_players,power_destroy_walls,1,0)
+
+trap_available(all_players,word_of_power,1,0)
+trap_available(all_players,lightning,1,0)
+trap_available(all_players,boulder,1,0)
+door_available(all_players,steel,1,0)
+door_available(all_players,magic,1,0)
+
+if(player0,game_turn >= 10)
+ quick_objective(1,"这里是三个叛徒藏身的避难所。这些叛徒从你手中偷走了部分军队。用武力夺回他们或消灭他们。你应该找到新的、更忠诚的生物吗？",player0)
+endif
+
+create_party(dragi)
+ add_to_party(dragi,dragon,6,3000,attack_enemies,0)
+ add_to_party(dragi,dragon,6,3000,attack_enemies,0)
+ add_to_party(dragi,hell_hound,9,3000,attack_enemies,0)
+ add_to_party(dragi,vampire,6,3000,attack_enemies,0)
+ add_to_party(dragi,vampire,8,3000,attack_enemies,0)
+ add_to_party(dragi,witch,7,3000,attack_enemies,0)
+
+create_party(drada)
+ add_to_party(drada,dragon,10,5000,attack_enemies,0)
+ add_to_party(drada,dragon,10,5000,attack_enemies,0)
+ add_to_party(drada,horny,7,5000,attack_enemies,0)
+ add_to_party(drada,horny,9,5000,attack_enemies,0)
+ add_to_party(drada,vampire,10,5000,attack_enemies,0)
+ add_to_party(drada,witch,8,5000,attack_enemies,0)
+ 
+create_party(yar)
+ add_to_party(yar,samurai,10,0,attack_enemies,0)
+ add_to_party(yar,druid,10,0,attack_enemies,0)
+ add_to_party(yar,sorceror,10,0,attack_enemies,0)
+
+if_action_point(1,player0)
+ add_party_to_level(player_good,dragi,2,1)
+ add_party_to_level(player_good,dragi,3,1)
+ add_party_to_level(player_good,dragi,4,1)
+ add_party_to_level(player_good,dragi,5,1)
+endif
+
+if_action_point(6,player0)
+ set_creature_armour(samurai,198)
+ set_creature_strength(samurai,199)
+ set_creature_health(samurai,3899)
+ set_creature_armour(druid,168)
+ set_creature_strength(druid,169)
+ set_creature_health(druid,3266)
+ set_creature_armour(sorceror,198)
+ set_creature_health(sorceror,2566)
+  set_timer(player_good,timer0)
+  quick_objective(2,"可悲的是，他们决定装死。没关系，他们呼吸不了多久，很快他们肯定会真的去死。",-1)
+endif
+
+if(player_good,treasure == 0)
+ room_available(all_players,bridge,1,1)
+endif
+
+ if(player_good,timer0 >= 900)
+  if_action_point(6,player0)
+   if(player_good,total_creatures == 0)
+    win_game
+   endif
+  endif
+ endif
+
+if(player_good,timer0 >= 500)
+ quick_objective(3,"他们出来了！给他们点教训吧！",-1)
+ add_party_to_level(player_good,yar,-1,1)
+  add_party_to_level(player_good,drada,2,1)
+  add_party_to_level(player_good,drada,3,1)
+  add_party_to_level(player_good,drada,4,1)
+  add_party_to_level(player_good,drada,5,1)
+endif
+
+if(player0,dungeon_destroyed == 1)
+ lose_game
+endif

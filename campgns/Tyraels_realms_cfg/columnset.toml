@@ -1,0 +1,26 @@
+[common]
+ColumnsCount = 2048
+
+[column1266]
+Lintel = 0
+Height = 3
+SolidMask = 7
+FloorTexture = 0
+Orientation = 0
+Cubes = [148, 399, 398, 0, 0, 0, 0, 0]
+
+[column1267]
+Lintel = 0
+Height = 0
+SolidMask = 0
+FloorTexture = 0
+Orientation = 0
+Cubes = [0, 0, 0, 0, 0, 0, 0, 0]
+
+[column1268]
+Lintel = 0
+Height = 2
+SolidMask = 3
+FloorTexture = 0
+Orientation = 0
+Cubes = [44, 43, 0, 0, 0, 0, 0, 0]

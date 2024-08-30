@@ -1,0 +1,288 @@
+
+REM 百度“地下城守护者”吧吧主倾情奉献
+
+COMPUTER_PLAYER(PLAYER1,	10)
+
+START_MONEY(	PLAYER0,	0)
+START_MONEY(	PLAYER1,	0) 
+
+SET_CREATURE_MAX_LEVEL(PLAYER0,DARK_MISTRESS,9)
+SET_CREATURE_MAX_LEVEL(PLAYER0,HORNY,9)
+
+MAGIC_AVAILABLE(	PLAYER0,	POWER_HOLD_AUDIENCE,	1,			0)
+MAGIC_AVAILABLE(	PLAYER0,	POWER_HEAL_CREATURE,	1,			0)   
+MAGIC_AVAILABLE(	PLAYER1,	POWER_IMP,		1,			1)
+MAGIC_AVAILABLE(	PLAYER1,	POWER_CALL_TO_ARMS,	1,			0)
+MAGIC_AVAILABLE(	PLAYER1,	POWER_CAVE_IN,		1,			0)
+MAGIC_AVAILABLE(	PLAYER1,	POWER_PROTECT,		1,			0)
+MAGIC_AVAILABLE(	PLAYER1,	POWER_CONCEAL,		1,			0) 
+
+
+ROOM_AVAILABLE(		ALL_PLAYERS,	TREASURE,	1,			0)
+ROOM_AVAILABLE(		ALL_PLAYERS,	WORKSHOP,	1,			0)
+ROOM_AVAILABLE(		ALL_PLAYERS,	GARDEN,		1,			0)
+ROOM_AVAILABLE(		ALL_PLAYERS,	LAIR,		1,			0)
+ROOM_AVAILABLE(		ALL_PLAYERS,	TRAINING,	1,			0)
+ROOM_AVAILABLE(		ALL_PLAYERS,	TEMPLE,		1,			0)
+ROOM_AVAILABLE(		ALL_PLAYERS,	BRIDGE,		1,			0) 
+ROOM_AVAILABLE(		ALL_PLAYERS,	BARRACKS,	1,			0)
+
+
+TRAP_AVAILABLE(		PLAYER0,	POISON_GAS,		1,			0)
+TRAP_AVAILABLE(		PLAYER0,	LIGHTNING,		1,			0)
+TRAP_AVAILABLE(		PLAYER0,	WORD_OF_POWER,		1,			0)
+TRAP_AVAILABLE(		PLAYER1,	POISON_GAS,		1,			0) 
+
+DOOR_AVAILABLE(		PLAYER0,	STEEL,			1,			0)
+DOOR_AVAILABLE(		PLAYER0,	MAGIC,			1,			0)
+DOOR_AVAILABLE(		PLAYER1,	STEEL,			1,			0) 
+
+CREATE_PARTY(PARTY1)
+CREATE_PARTY(PARTY2)
+CREATE_PARTY(PARTY3)
+CREATE_PARTY(PARTY4)
+CREATE_PARTY(PARTY5)
+CREATE_PARTY(PARTY6)
+CREATE_PARTY(PARTY7)
+CREATE_PARTY(PARTY8)
+CREATE_PARTY(PARTY9)
+CREATE_PARTY(PARTY10)
+CREATE_PARTY(PARTY11)
+CREATE_PARTY(PARTY12)
+CREATE_PARTY(PARTY13)
+CREATE_PARTY(PARTY14)
+CREATE_PARTY(PARTY15)
+CREATE_PARTY(PARTY16)
+CREATE_PARTY(PARTY17)
+CREATE_PARTY(PARTY18)
+CREATE_PARTY(PARTY19)
+
+ADD_TO_PARTY(      PARTY1,	TUNNELLER,	1,   	100,        ATTACK_ENEMIES,      0)
+ADD_TO_PARTY(      PARTY2,	ARCHER,	        2,   	100,        ATTACK_ENEMIES,      0)
+ADD_TO_PARTY(      PARTY3,	THIEF,	        3,   	100,        ATTACK_ENEMIES,      0)
+ADD_TO_PARTY(      PARTY4,	FAIRY,	        2,   	100,        ATTACK_ENEMIES,      0)
+ADD_TO_PARTY(      PARTY5,	BARBARIAN,	5,   	100,        ATTACK_ENEMIES,      0)
+ADD_TO_PARTY(      PARTY6,	GIANT,	        4,   	100,        ATTACK_ENEMIES,      0)
+ADD_TO_PARTY(      PARTY7,	KNIGHT,	        6,   	1000,       ATTACK_ENEMIES,      0)
+ADD_TO_PARTY(      PARTY8,	BARBARIAN,	1,   	100,        DEFEND_PARTY,        0)
+ADD_TO_PARTY(      PARTY9,	ARCHER,  	5,   	100,        DEFEND_PARTY,        0)
+ADD_TO_PARTY(      PARTY10,	FLY,	        1,   	10,         DEFEND_PARTY,        0)
+ADD_TO_PARTY(      PARTY11,	BUG,	        1,   	50,         DEFEND_PARTY,        0)
+ADD_TO_PARTY(      PARTY12,	IMP,	        10,   	2000,       DEFEND_PARTY,        0)
+ADD_TO_PARTY(      PARTY13,	FAIRY,	        1,   	20,         ATTACK_ENEMIES,      0)
+ADD_TO_PARTY(      PARTY14,	GHOST,	        1,   	30,         ATTACK_ENEMIES,      0)
+ADD_TO_PARTY(      PARTY15,	MONK,	        1,   	40,         ATTACK_ENEMIES,      0)
+ADD_TO_PARTY(      PARTY16,	WITCH,	        1,   	40,         ATTACK_ENEMIES,      0)
+ADD_TO_PARTY(      PARTY17,	WIZARD,	        1,   	50,         ATTACK_ENEMIES,      0)
+ADD_TO_PARTY(      PARTY18,	IMP,	        1,   	100,        ATTACK_ENEMIES,      0)
+ADD_TO_PARTY(      PARTY19,	GIANT,	        10,   	1000,       DEFEND_PARTY,        0)
+
+
+
+QUICK_OBJECTIVE(1,"百度{地下城守护者}吧 吧主[地下城统治者]倾情奉献 地图名称:rpg(灵魂附身) 版本号:v.1.10 地图类型:角色扮演类 难度系数：较难 作者:地下城统治者 ",PLAYER0)
+
+
+SET_TIMER(PLAYER0,TIMER0)
+
+IF(PLAYER0,TIMER0>=10)
+
+QUICK_INFORMATION(0,"你的力量被一个自称是圣者的忍者神鳖抢走了,他派他的军队来剿杀你.现在你只剩下一个忠实的仆人,好好利用它,我相信你能够报仇.",PLAYER0)
+
+ENDIF
+
+IF(PLAYER0,TIMER0>=100)
+
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY1,         19,		             3)
+
+ENDIF
+
+
+IF(PLAYER0,TIMER0>=230)
+
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY2,         19,		             3)
+
+ENDIF
+
+
+IF(PLAYER0,TIMER0>=450)
+
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY3,         19,		             5)
+
+ENDIF
+
+
+IF(PLAYER0,TIMER0>=650)
+
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY4,         19,		             12)
+
+ENDIF
+
+
+IF(PLAYER0,TIMER0>=800)
+
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY5,         19,		             1)
+
+ENDIF
+
+
+IF(PLAYER0,TIMER0>=1000)
+
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY6,         19,		             2)
+
+ENDIF
+
+
+IF(PLAYER0,TIMER0>=1400)
+
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY7,         19,		             1)
+
+ENDIF
+
+
+IF(PLAYER0,TIMER0>=1700)
+
+QUICK_INFORMATION(2,"是不是觉得少点什么?确实,连你造小鬼的魔法都被盗走了.但是我感觉到附近有几个小鬼在寻找他们的主人.",PLAYER0)
+
+ENDIF
+
+
+IF_ACTION_POINT(17,PLAYER0)
+
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY8,         17,		             3)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY9,         17,		             5)
+ENDIF
+
+
+IF_ACTION_POINT(1,PLAYER0)
+
+QUICK_INFORMATION(3,"啊!我看到你得到了一个放屁专家!好好利用哦!不要觉得他又慢又笨,我想他会帮你不少忙的.",PLAYER0)
+
+ENDIF
+
+IF_ACTION_POINT(2,PLAYER0)
+
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY10,         2,		             20)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY11,         2,		             10)
+
+ENDIF
+
+IF_ACTION_POINT(3,PLAYER0)
+
+QUICK_INFORMATION(4,"太好了!女王的加入无疑又给你添上了一份力量,利用她的速度穿越试图阻挡你的任何障碍.但,谨慎行事,一步走错......就要读档!",PLAYER0)
+
+ENDIF
+
+IF_ACTION_POINT(4,PLAYER0)
+
+ADD_PARTY_TO_LEVEL(       PLAYER0,          PARTY12,         19,		             8)
+
+QUICK_INFORMATION(5,"这群小鬼很高兴能够为你服务.你可以选择继续前进或是另辟新径,因为前面这条路障碍重重.但如果你走了过去,我觉得,你将得到无尽的财富!",PLAYER0)
+
+ENDIF
+
+IF_ACTION_POINT(5,PLAYER0)
+
+QUICK_INFORMATION(6,"经历了种种磨难,你终于证明了你的坚强,传说中的连环石阵也被你破了,我真不知该怎么称赞你了,守护者.",PLAYER0)
+
+ENDIF
+
+IF_ACTION_POINT(6,PLAYER0)
+
+QUICK_INFORMATION(7,"终于,你恢复了一些力量,但仍有许多魔法散落在整个区域,你要一一寻找他们.一只忠诚的龙加入了你,它说它已经找了你好久了.利用它聪明的头脑为你服务!",PLAYER0)
+
+ENDIF
+
+IF_ACTION_POINT(7,PLAYER0)
+
+QUICK_INFORMATION(8,"啊哈!你找到了一个冥界使者,我认为那是你最好的仆人,不是吗?但是奇怪,明明只有一个冥界使者,怎么有两个宫殿?莫非,这片区域里有[繁殖怪物]?!!!",PLAYER0)
+
+ENDIF
+
+IF_ACTION_POINT(8,PLAYER0)
+
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY10,         8,		             20)
+
+ENDIF
+
+IF_ACTION_POINT(9,PLAYER0)
+
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY13,         9,		             20)
+
+ENDIF
+
+IF_ACTION_POINT(10,PLAYER0)
+
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY14,         10,		             20)
+
+ENDIF
+
+IF_ACTION_POINT(11,PLAYER0)
+
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY15,         11,		             10)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY16,         11,		             10)
+
+ENDIF
+
+IF_ACTION_POINT(12,PLAYER0)
+
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY17,         12,		             20)
+
+ENDIF
+
+IF_ACTION_POINT(13,PLAYER0)
+
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY18,         13,		             40)
+
+ENDIF
+
+IF_ACTION_POINT(14,PLAYER0)
+
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY19,         14,		             8)
+
+ENDIF
+
+IF_ACTION_POINT(15,PLAYER0)
+
+QUICK_INFORMATION(9,"如果你的仆人数量翻了一番,看看谁敢阻挡你!",PLAYER0)
+
+ENDIF
+
+IF_ACTION_POINT(16,PLAYER0)
+
+QUICK_INFORMATION(10,"你离你的仇人更近了,我想他听到你的脚步会怎样的发抖?过关斩将!守护者!",PLAYER0)
+
+ENDIF
+
+IF(	PLAYER_GOOD,	DUNGEON_DESTROYED	==		1)
+
+QUICK_INFORMATION(11,"哈哈,你终于报了仇!现在你恢复了法力,另一位守护着不自量力地挑战你，干掉他，证明你的力量!",PLAYER0)
+
+ENDIF
+
+IF(	PLAYER1,	DUNGEON_DESTROYED	==		1)
+
+QUICK_INFORMATION(12,"你赢了,守护者,没有人比你表现得更出色了,一切荣誉都是你的!既然你已经通了关,那就赶紧联系我吧.QQ:447044090,有什么意见或建议尽管提,希望你能将这张地图介绍给其他爱地下城的人,再次感谢您的支持.",PLAYER0)
+
+ENDIF
+
+IF(	PLAYER1,	DUNGEON_DESTROYED	==		1)
+         WIN_GAME
+ENDIF
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

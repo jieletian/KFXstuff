@@ -1,0 +1,181 @@
+REM Level 14/Madr?
+
+set_generate_speed(150)
+
+max_creatures(player0,40)
+
+start_money(player0,2000)
+
+add_creature_to_pool(dragon,24)
+add_creature_to_pool(troll,24)
+add_creature_to_pool(time_mage,24)
+add_creature_to_pool(sorceror,24)
+add_creature_to_pool(bile_demon,24)
+add_creature_to_pool(hell_hound,24)
+add_creature_to_pool(dark_mistress,24)
+add_creature_to_pool(druid,24)
+add_creature_to_pool(orc,24)
+add_creature_to_pool(vampire,24)
+
+creature_available(player0,dragon,1,1)
+creature_available(player0,troll,1,1)
+creature_available(player0,time_mage,1,1)
+creature_available(player0,sorceror,1,1)
+creature_available(player0,bile_demon,1,1)
+creature_available(player0,hell_hound,1,1)
+creature_available(player0,dark_mistress,1,1)
+creature_available(player0,druid,1,1)
+creature_available(player0,orc,1,1)
+creature_available(player0,vampire,1,1)
+
+room_available(all_players,treasure,1,0)
+room_available(all_players,lair,1,0)
+room_available(all_players,garden,1,0)
+room_available(all_players,training,1,0)
+room_available(all_players,research,1,0)
+room_available(all_players,graveyard,1,0)
+room_available(all_players,workshop,1,0)
+room_available(all_players,prison,1,0)
+room_available(all_players,barracks,1,0)
+room_available(all_players,torture,1,0)
+room_available(all_players,temple,1,0)
+room_available(all_players,guard_post,1,0)
+room_available(all_players,scavenger,1,0)
+
+magic_available(all_players,power_sight,1,0)
+magic_available(all_players,power_obey,1,0)
+magic_available(all_players,power_speed,1,0)
+magic_available(all_players,power_call_to_arms,1,0)
+magic_available(all_players,power_cave_in,1,0)
+magic_available(all_players,power_heal_creature,1,0)
+magic_available(all_players,power_protect,1,0)
+magic_available(all_players,power_conceal,1,0)
+magic_available(all_players,power_hold_audience,1,0)
+magic_available(all_players,power_chicken,1,0)
+magic_available(all_players,power_lightning,1,0)
+magic_available(all_players,power_disease,1,0)
+
+trap_available(all_players,word_of_power,1,0)
+trap_available(all_players,lightning,1,0)
+trap_available(all_players,boulder,1,0)
+door_available(all_players,steel,1,0)
+door_available(all_players,magic,1,0)
+
+if(player0,game_turn >= 10)
+ quick_objective(1,"马德尔找了个地方躲起来了。快去除掉这个懦夫！",player0)
+endif
+
+if(player0,game_turn >= 30)
+  quick_information(12,"入口处施放了一道魔法，因此你的部分知识消失了。我认为这里某处有一个档案库，可以用来恢复。")
+endif
+
+if(player0,game_turn >= 9999) 
+  quick_objective(2,"大厅里空无一人，你很可能应该为突然袭击做好准备。",player0)
+endif
+
+if_action_point(1,player0)
+  quick_objective(3,"寂静而空旷的走廊。也许马德尔在这里留下了很多陷阱。",1)
+endif
+
+if_action_point(10,player0)
+  quick_objective(4,"看起来那个懦夫已经逃跑了……",10)
+endif
+
+if(player_good,dungeon_destroyed == 1)
+set_timer(player_good,timer0)
+endif
+
+if(player0,game_turn >= 61999)  
+   if(player_good,total_creatures == 0)
+    win_game
+   endif  
+ endif
+ 
+if(player0,game_turn >= 19)
+ add_creature_to_level(player0,druid,player0,2,5,0)
+endif
+ 
+if(player0,game_turn >= 60999)
+ add_creature_to_level(player_good,bile_demon,1,3,9,1000)
+ add_creature_to_level(player_good,bile_demon,1,3,8,1000)
+ add_creature_to_level(player_good,bile_demon,2,3,9,1000)
+ add_creature_to_level(player_good,bile_demon,2,3,8,1000)
+ add_creature_to_level(player_good,bile_demon,3,3,10,1000)
+ add_creature_to_level(player_good,bile_demon,3,3,10,1000)
+endif
+
+if(player0,game_turn >= 60799)
+ add_creature_to_level(player_good,orc,2,3,10,1000)
+ add_creature_to_level(player_good,druid,2,3,10,1000)
+ add_creature_to_level(player_good,orc,3,3,9,1000)
+ add_creature_to_level(player_good,druid,3,3,8,1000)
+ add_creature_to_level(player_good,orc,4,3,9,1000)
+ add_creature_to_level(player_good,druid,4,3,8,1000)
+endif
+
+if(player0,game_turn >= 60199)
+ quick_objective(5,"敌人大军已经来袭。希望你们已经做好准备。",player0)
+ add_creature_to_level(player_good,wizard,3,2,8,1000)
+ add_creature_to_level(player_good,time_mage,3,2,8,1000)
+ add_creature_to_level(player_good,wizard,4,2,9,1000)
+ add_creature_to_level(player_good,time_mage,4,2,9,1000)
+ add_creature_to_level(player_good,wizard,5,2,7,1000)
+ add_creature_to_level(player_good,time_mage,5,2,7,1000)
+endif
+
+if(player0,game_turn >= 60299)
+ add_creature_to_level(player_good,dark_mistress,4,2,9,1000)
+ add_creature_to_level(player_good,witch,4,2,10,1000)
+ add_creature_to_level(player_good,dark_mistress,5,2,9,1000)
+ add_creature_to_level(player_good,witch,5,2,10,1000)
+ add_creature_to_level(player_good,dark_mistress,6,2,9,1000)
+ add_creature_to_level(player_good,witch,6,2,10,1000)
+endif
+
+if(player0,game_turn >= 60399)
+ add_creature_to_level(player_good,giant,9,3,8,0)
+ add_creature_to_level(player_good,giant,9,3,8,0)
+ add_creature_to_level(player_good,giant,8,3,8,0)
+ add_creature_to_level(player_good,giant,8,3,8,0)
+ add_creature_to_level(player_good,giant,1,3,8,0)
+ add_creature_to_level(player_good,giant,1,3,8,0)
+endif
+
+if(player0,game_turn >= 60499)
+ add_creature_to_level(player_good,samurai,9,2,10,1000)
+ add_creature_to_level(player_good,monk,9,2,8,1000)
+ add_creature_to_level(player_good,samurai,8,2,10,1000)
+ add_creature_to_level(player_good,monk,8,2,8,1000)
+ add_creature_to_level(player_good,samurai,1,2,10,1000)
+ add_creature_to_level(player_good,monk,1,2,8,1000)
+endif
+
+if(player0,game_turn >= 60599)
+ add_creature_to_level(player_good,knight,9,2,10,10000)
+ add_creature_to_level(player_good,knight,9,2,10,10000)
+ add_creature_to_level(player_good,thief,8,3,10,5000)
+ add_creature_to_level(player_good,thief,8,3,10,5000)
+ add_creature_to_level(player_good,thief,1,3,10,5000)
+ add_creature_to_level(player_good,thief,1,3,10,5000)
+endif
+
+if(player0,game_turn >= 60699)
+ add_creature_to_level(player_good,vampire,9,2,9,1000)
+ add_creature_to_level(player_good,vampire,9,2,8,1000)
+ add_creature_to_level(player_good,vampire,8,2,9,1000)
+ add_creature_to_level(player_good,vampire,8,2,8,1000)
+ add_creature_to_level(player_good,vampire,1,2,9,1000)
+ add_creature_to_level(player_good,vampire,1,2,8,1000)
+endif
+
+if(player0,research == 1)
+ room_available(all_players,research,1,1)
+endif
+
+if(player0,imp == 0)
+ quick_information(11,"任务变得更加困难了，但是你仍然可以尝试安全。")
+endif
+
+if(player0,dungeon_destroyed == 1)
+ lose_game
+endif

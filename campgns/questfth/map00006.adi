@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00006
+REM Automatically generated on 29 Aug 2008, 17:48:31
+
+LEVEL_VERSION(1,0,2)
+LEVEL_TIMESTAMP(1163510608,1220024911)
+USER_COMMANDS_COUNT(15,1,0,0)
+LEVEL_DESCRIPTION("Marvelous! When the dam breached, the heated lava quickly reclaimed its original path, and is now slowly melting away the weak walls surrounding the Tower's fundament. The heroes are trapped and scattered, this is your chance to find and destroy the enemy heart!")
+LEVEL_AUTHORS("DzjeeAr","")

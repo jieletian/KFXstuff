@@ -1,0 +1,267 @@
+REM ***********************************************************************
+REM   Script for Level  364(064).Path To Glory 荣耀之路 B版（修改版）
+REM ***********************************************************************
+REM Level originated in Japan.
+REM 
+REM ***********************************************************************
+REM 修改情况：
+REM 1、为防止玩家绕过触发点1先触发2而出现过不了关的bug,修改了触发点（1）的语句
+REM 2、金库大于15，挖金超过一万块就可以建造基础建筑。
+REM 3、地图中触发点2可能太小有时候没反应，加大了它，同时增加了到达触发点2就可以建监狱和审讯室。
+REM 4、地图中把紫金换到附近并把旁边的岩石改为墙，有破墙魔法可挖其它三面。
+REM 5、地图中把刷巨魔的地方改成绿色，更容易看到。
+REM 6、为了降低无谓的难度，在地图中增加了十来个升级宝物，前面的每个区加一个，后面中立
+REM 　　巨小魔处加了几个，在某些还加了显示地图宝物。
+REM 7、地图中，在外面很多岩石改变泥地，胜利后有更多建设空间。
+REM ***********************************************************************
+START_MONEY(PLAYER0,768)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(PLAYER0,POWER_HAND,1,1)
+MAGIC_AVAILABLE(PLAYER0,POWER_SLAP,1,1)
+MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+DOOR_AVAILABLE(PLAYER0,STEEL,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定陷阱*********************************
+REM  (玩家,陷阱名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+TRAP_AVAILABLE(ALL_PLAYERS,LIGHTNING,1,0)
+
+REM ****************************增援部队**********************************
+REM CREATE_PARTY =>组建队伍                (队伍名称)   
+REM ADD_TO_PARTY=>添加生物到队伍中   (队伍名称,生物名称,生物等级,携带金钱数量,任务,延时)
+REM 巨魔1队
+CREATE_PARTY(BILES1)
+    ADD_TO_PARTY(BILES1,BILE_DEMON,7,500,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(BILES1,BILE_DEMON,5,200,ATTACK_ENEMIES,0)
+REM 巨魔2队
+CREATE_PARTY(BILES2)
+    ADD_TO_PARTY(BILES2,BILE_DEMON,10,800,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(BILES2,BILE_DEMON,7,300,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(BILES2,BILE_DEMON,7,300,ATTACK_ENEMIES,0)
+REM 巨魔3队
+CREATE_PARTY(BILES3)
+    ADD_TO_PARTY(BILES3,BILE_DEMON,10,500,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(BILES3,BILE_DEMON,10,500,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(BILES3,BILE_DEMON,10,500,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(BILES3,BILE_DEMON,10,500,ATTACK_ENEMIES,0)
+REM 杀手1队
+CREATE_PARTY(K1)
+    ADD_TO_PARTY(K1,DWARFA,8,500,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(K1,ARCHER,8,200,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(K1,THIEF,8,200,ATTACK_ENEMIES,0)
+REM 杀手2队
+CREATE_PARTY(K2)
+    ADD_TO_PARTY(K2,BARBARIAN,8,500,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(K2,SAMURAI,8,500,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(K2,GIANT,8,500,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(K2,MONK,8,500,ATTACK_ENEMIES,0)
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+
+REM ********************************************************************************
+REM 测试地图用
+REM SET_CREATURE_STRENGTH(DARK_MISTRESS,255)
+REM SET_CREATURE_HEALTH(DARK_MISTRESS,7000)
+REM SET_CREATURE_ARMOUR(DARK_MISTRESS,255)
+REM DOOR_AVAILABLE(PLAYER0,MAGIC,1,100)
+REM 测试重置触发点
+SET_FLAG(PLAYER0,FLAG1,0)
+REM IF_ACTION_POINT(3,PLAYER0)
+REM     IF(PLAYER0,FLAG1 == 1)
+REM         NEXT_COMMAND_REUSABLE
+REM         SET_FLAG(PLAYER0,FLAG1,0)
+REM         NEXT_COMMAND_REUSABLE
+REM         QUICK_INFORMATION(19,"这是触发点3，重置触发点4。",PLAYER0) 
+REM         NEXT_COMMAND_REUSABLE
+REM         ADD_GOLD_TO_PLAYER (PLAYER0,9999)
+REM         NEXT_COMMAND_REUSABLE
+REM         RESET_ACTION_POINT(4)
+REM     ENDIF
+REM ENDIF
+REM IF_ACTION_POINT(4,PLAYER0)
+REM     IF(PLAYER0,FLAG1 == 0)
+REM         NEXT_COMMAND_REUSABLE
+REM         SET_FLAG(PLAYER0,FLAG1,1)
+REM         NEXT_COMMAND_REUSABLE
+REM         QUICK_INFORMATION(20,"这是触发点4，重置触发点3。",PLAYER0) 
+REM         NEXT_COMMAND_REUSABLE
+REM         ADD_GOLD_TO_PLAYER (PLAYER0,9999)
+REM         NEXT_COMMAND_REUSABLE
+REM         RESET_ACTION_POINT(3)
+REM     ENDIF
+REM ENDIF
+
+REM ********************************************************************************
+SET_FLAG(PLAYER0,FLAG0,0)
+
+REM 触发点（1） 开始计时，flag0赋值为1
+IF_ACTION_POINT(1,PLAYER0)
+    SET_TIMER(PLAYER0,TIMER0)
+    REM 为防止玩家绕过触发点1先触发2而出现过不了关的bug,增加以下语句（比用重置触发点简单）
+    IF(PLAYER0,FLAG0 < 1)
+        SET_FLAG(PLAYER0,FLAG0,1)
+        QUICK_INFORMATION(7,"你被敌人发现了，他们将派出部队进攻你，准备迎战或到附近找到传送通道并摧毁它！",PLAYER0)
+    ENDIF
+ENDIF
+
+REM 触发点（2），flag0赋值为2,还可以修改为杀敌超过70就可以建监狱和审讯室。
+IF_ACTION_POINT(2,PLAYER0)
+   SET_FLAG(PLAYER0,FLAG0,2)
+　 REM 修改版增加以下部分，到达触发点2就可建造监狱和审讯室。
+    ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+    ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+   QUICK_INFORMATION(8,"你已经摧毁了一条敌人的传送通道，最后几波敌人会从附近传送过来，做好最后几波战斗的准备！战争临近，现在允许你建造监狱和审讯室，带领你的怪逃出生天，不要让它们失望！",PLAYER0) 
+ENDIF
+
+REM 当flag0为1时，无限循环刷怪;直到触发点2被触发，你的人数越多，刷出来的巨魔越多。
+REM 到达触发点2后，flag0赋值为2，以后每刷一次怪，flag0+1，直到它的值为8。
+IF(PLAYER0,TIMER0 > 5000)
+    IF(PLAYER0,FLAG0 == 1)
+        IF(PLAYER0,BILE_DEMON < 3)
+            NEXT_COMMAND_REUSABLE
+            ADD_PARTY_TO_LEVEL(PLAYER_GOOD,BILES1,-1,1)
+        ENDIF
+        IF(PLAYER0,BILE_DEMON >= 3)
+            IF(PLAYER0,BILE_DEMON < 6)
+                NEXT_COMMAND_REUSABLE
+                ADD_PARTY_TO_LEVEL(PLAYER_GOOD,BILES2,-1,1)
+            ENDIF
+        ENDIF
+        IF(PLAYER0,BILE_DEMON >= 6)
+            NEXT_COMMAND_REUSABLE
+            ADD_PARTY_TO_LEVEL(PLAYER_GOOD,BILES3,-1,1)
+        ENDIF
+        QUICK_INFORMATION(10,"复仇的巨魔来了！",PLAYER0) 
+    ENDIF
+    IF(PLAYER0,FLAG0 == 2)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD,K1,2,2)
+        SET_FLAG(PLAYER0,FLAG0,3)
+　　 QUICK_INFORMATION(11,"最后战役第一波来了（6波）！",PLAYER0) 
+    ENDIF
+    IF(PLAYER0,FLAG0 == 3)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD,K2,2,2)
+        SET_FLAG(PLAYER0,FLAG0,4)
+　　  QUICK_INFORMATION(12,"最后战役第二波来了（6波）！",PLAYER0) 
+    ENDIF
+    IF(PLAYER0,FLAG0 == 4)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD,K1,2,2)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD,K2,2,1)
+        SET_FLAG(PLAYER0,FLAG0,5)
+　     QUICK_INFORMATION(13,"最后战役第三波来了（6波）！",PLAYER0) 
+    ENDIF
+    IF(PLAYER0,FLAG0 == 5)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD,K1,2,1)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD,K2,2,2)
+        SET_FLAG(PLAYER0,FLAG0,6)
+　　  QUICK_INFORMATION(14,"最后战役第四波来了（6波）！",PLAYER0) 
+    ENDIF
+    IF(PLAYER0,FLAG0 == 6)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD,K1,2,2)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD,K2,2,2)
+        SET_FLAG(PLAYER0,FLAG0,7)
+　　  QUICK_INFORMATION(16,"最后战役第五波来了（6波）！",PLAYER0) 
+    ENDIF
+    IF(PLAYER0,FLAG0 == 7)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD,K1,2,3)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD,K2,2,3)
+        ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,KNIGHT,2,1,10,10000)
+        SET_FLAG(PLAYER0,FLAG0,8)
+　　 QUICK_INFORMATION(17,"国王亲自带领部队来了，干掉他们就胜利了！",PLAYER0) 
+    ENDIF
+    NEXT_COMMAND_REUSABLE
+    SET_TIMER(PLAYER0,TIMER0)
+ENDIF
+
+REM 修改版增加部分，如果金库大于15，意味首已经占领了紫金旁边的金库
+IF(PLAYER0,TREASURE >= 15)
+    IF(PLAYER0,TOTAL_GOLD_MINED > 10000)
+        ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+        ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+        ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+        ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+        ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+        ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+        TUTORIAL_FLASH_BUTTON(2,-1)
+        QUICK_INFORMATION(18,"你找到了宝石矿并挖了一万多块，现在允许建造一些基础建筑了！",PLAYER0) 
+    ENDIF
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+REM 杀死骑士就胜利过关
+IF(PLAYER0,FLAG0 == 8)
+    IF(PLAYER_GOOD,KNIGHT == 0)
+
+        REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+        LEVEL_VERSION(1)
+        REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+        ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+        ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+        ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+        ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+        ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+        ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+        ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+        ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+        ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+        ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+        
+        MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+        MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+        DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+        TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+        TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+        QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+        WIN_GAME
+    ENDIF
+ENDIF
+IF(PLAYER0,DUNGEON_DESTROYED == 1)
+    LOSE_GAME
+ENDIF
+
+REM ****************************提示信息**********************************
+QUICK_OBJECTIVE(1,"参考提示：1、当你走进这迷宫，注定艰难险阻在前方；2、路很长，走起来有些难，但也给了你喘息的机会；3、有些陷阱，如果你聪明，不会害死你，反会帮你不少忙！4、前面有些雷区，当你踩到了，敌人跟你没完，有些雷区，踩到了，你注定要杀出一条血路，两个雷区不能倒过顺序来踩，否则永远走不过去。",PLAYER0)  
+IF(PLAYER0,GAME_TURN > 500)
+    QUICK_INFORMATION(2,"在这里，你要靠巨魔带你走出这个黑森林，所以你要把巨魔侍奉好，打完仗把鸡肉送到他嘴里，这样他才能带你走出去！",PLAYER0) 
+ENDIF
+IF(PLAYER0,GAME_TURN > 1500)
+    QUICK_INFORMATION(3,"东边有个破墙魔法，后面就有很多小巨魔，要顺利逃走，就要靠他们了！",PLAYER0) 
+ENDIF
+IF(PLAYER0,GAME_TURN > 2500)
+    QUICK_INFORMATION(4,"有些地方是雷区，虽然要走出去一定要面对它们，不过你没准备好前最好不要踩它",PLAYER0) 
+ENDIF
+IF(PLAYER0,GAME_TURN > 3500)
+    QUICK_INFORMATION(5,"这个地方有个诅咒，踩雷区的顺序倒过来的话，你永远逃不出去，不过一般人不会把顺序倒过来的！",PLAYER0) 
+ENDIF
+IF(PLAYER0,GAME_TURN > 4000)
+    QUICK_INFORMATION(6,"祝你好运，守护者！",PLAYER0) 
+ENDIF
+
+
+
+
+
+
+
+
+
+
+
+
+

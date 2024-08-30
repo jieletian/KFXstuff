@@ -1,0 +1,148 @@
+REM ***********************************************************************
+REM   Script for Level   646(146).Winters Death 死亡冬季
+REM ***********************************************************************
+REM Steve Tupper
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+START_MONEY(PLAYER0, 999999)
+MAX_CREATURES(PLAYER0, 50)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE(PLAYER0, TREASURE,  1,1)
+ROOM_AVAILABLE(PLAYER0, BARRACKS,  1,1)
+ROOM_AVAILABLE(PLAYER0, GARDEN,    1,1)
+ROOM_AVAILABLE(PLAYER0, LAIR,      1,1)
+ROOM_AVAILABLE(PLAYER0, BRIDGE,    1,1)
+ROOM_AVAILABLE(PLAYER0, GUARD_POST,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(PLAYER0, POWER_OBEY,         1,0)
+MAGIC_AVAILABLE(PLAYER0, POWER_SIGHT,        1,0)
+MAGIC_AVAILABLE(PLAYER0, POWER_CALL_TO_ARMS, 1,0)
+MAGIC_AVAILABLE(PLAYER0, POWER_CAVE_IN,      1,0)
+MAGIC_AVAILABLE(PLAYER0, POWER_HEAL_CREATURE,1,0)
+MAGIC_AVAILABLE(PLAYER0, POWER_HOLD_AUDIENCE,1,0)
+MAGIC_AVAILABLE(PLAYER0, POWER_LIGHTNING,    1,0)
+MAGIC_AVAILABLE(PLAYER0, POWER_SPEED,        1,0)
+MAGIC_AVAILABLE(PLAYER0, POWER_PROTECT,      1,0)
+MAGIC_AVAILABLE(PLAYER0, POWER_CONCEAL,      1,0)
+MAGIC_AVAILABLE(PLAYER0, POWER_DISEASE,      1,0)
+MAGIC_AVAILABLE(PLAYER0, POWER_CHICKEN,      1,0)
+MAGIC_AVAILABLE(PLAYER0, POWER_DESTROY_WALLS,1,0)
+MAGIC_AVAILABLE(PLAYER0, POWER_ARMAGEDDON,   1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+DOOR_AVAILABLE(PLAYER0, WOOD,  0,8)
+DOOR_AVAILABLE(PLAYER0, BRACED,0,6)
+DOOR_AVAILABLE(PLAYER0, STEEL, 0,4)
+DOOR_AVAILABLE(PLAYER0, MAGIC, 0,2)
+
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+QUICK_OBJECTIVE(1,"参考提示：1、你心脏北面不远的地方，有个房子，里面有吸血鬼守护地图唯一一只中立小鬼，领它回家注意保护好它；2、东北部的紫金矿东边有一群蟑螂，如果要利用它们，挖紫金矿的时候注意不要挖穿东边；3、地图中有不少水域，加上哨所能困住敌人;4、东南角的1级龙，利用得好的话，它可以成为免费的训练室，让你的圣者升级吧；5、敌人基地中，东边有监狱、审讯室、训练室、东边有寺庙和招募室。",PLAYER0)  
+
+IF_ACTION_POINT(1, PLAYER0)
+   REM QUICK_INFORMATION(2, "The dark gods have heard of your victory over their servant and have sent powerful demons to destroy you!")
+   QUICK_INFORMATION(3, "黑暗之神已经听说你战胜了他们的仆人，并派出强大的恶魔来摧毁你！")
+   ADD_CREATURE_TO_LEVEL(PLAYER_GOOD, BILE_DEMON,   -1, 4, 10, 1000)
+   ADD_CREATURE_TO_LEVEL(PLAYER_GOOD, DARK_MISTRESS, 2, 6, 9, 1000)
+   ADD_CREATURE_TO_LEVEL(PLAYER_GOOD, HORNY,         1, 3, 8, 5000)
+ENDIF
+IF_ACTION_POINT(2, PLAYER0)
+   ADD_CREATURE_TO_LEVEL(PLAYER_GOOD, SKELETON, 2, 10, 4, 400)
+ENDIF
+IF_ACTION_POINT(3, PLAYER0)
+   ADD_CREATURE_TO_LEVEL(PLAYER0, SPIDER, -1, 3,  7,  0)
+   ADD_CREATURE_TO_LEVEL(PLAYER0, BUG,    -1, 6,  8,  0)
+   ADD_CREATURE_TO_LEVEL(PLAYER0, FLY,    -1, 10, 10, 0)
+   ADD_CREATURE_TO_LEVEL(PLAYER0, DRAGON, -1, 1,  6 , 4000)
+   REM QUICK_INFORMATION(3, "You have found her! Now on hearing the news of the dark lord's betrayal your sister has used her considerable powers to summon creatures of the forest to help you.")
+   QUICK_INFORMATION(4, "你找到她了！现在，在听到黑暗主背叛你姐姐的消息时，她用自己相当大的力量去召唤森林里的生物来帮助你。")
+ENDIF
+
+IF(PLAYER0, GAME_TURN > 500)
+    REM QUICK_INFORMATION(5, "Your sister, a powerful shamanic priestess, has agreed to be held by the Lord in his mighty fortress in return for the towns and villages in the area to be left in peace, safe from his dark army. He is shrewd and knows that only she has the power to defeat him")
+   QUICK_INFORMATION(6, "你的妹妹，一个强大的萨满祭司，已经同意由他在该地区的城镇和村庄回到留在和平堡垒主举行，远离他的黑暗大军。他很精明，知道只有她有能力打败他")
+   REM QUICK_OBJECTIVE(1, "Dark times have arrived in your home village of Thistle-thorn. The lord of the land, once a good man, has turned to the forces of evil and now worships dark gods!", PLAYER0)
+   QUICK_INFORMATION((2, "黑暗的时代已经来到你的家乡蓟刺。那领主，一个很好的人，变成了邪恶的力量现在崇拜黑暗之神！", PLAYER0)
+ENDIF
+IF(PLAYER0, GAME_TURN > 1500)
+   REM QUICK_INFORMATION(6, "However, as soon as she was out of sight he raised your home to the ground and slaughtered many of your people. For this he must pay. You have some old adventuring friends who will help you, heroes that this lord has not counted on!")
+   QUICK_INFORMATION(7, "然而，当她一看到他就把你的家举起来，屠杀了许多人。为此他必须付出。你有一些旧的冒险的朋友会帮助你，英雄，这领主没有指望！")
+ENDIF
+IF(PLAYER0, GAME_TURN > 2500)
+   REM QUICK_INFORMATION(7, "You must find your sister and tell her of the lord's betrayal so that she can act. This won't be easy, his fortress has only three entrances - the main door above ground - suicide to anyone foolish enough to try, and two underground entrances.")
+   QUICK_INFORMATION(8, "你必须找到你的妹妹，告诉她主的背叛，这样她才能行动。这不容易，他的城堡只有三个入口-大门以上的地面-自杀的人愚蠢到足够的尝试，和2个地下入口。")
+ENDIF
+
+IF(PLAYER0, GAME_TURN > 3500)
+   REM QUICK_INFORMATION(8, "The land beneath the fortress is riddled with underground caves. These caves, although dangerous, lead to the other entrances to the fortress - the supply entrance, via the Ghunok river is heavily defended but a second, less known entrance leads you straight into the castle via the stronghold's graveyard, opened by the cavern's beasts to feed on the carrion")
+   QUICK_INFORMATION(9, "在要塞的土地布满地下洞穴。这些洞穴，虽然危险，导致其他入口要塞-供应入口，通过ghunok河是重兵防守，但第二，少为人知的入口通往城堡通过据点的墓地，由洞穴的野兽开食腐肉")
+ENDIF
+IF(PLAYER0, GAME_TURN > 60000)
+   REM QUICK_INFORMATION(4, "The fairies of the Kordian Vales hearing of your quest from their kindred in the area have pledged their support and joined you.")
+   QUICK_INFORMATION(5, "kordian山谷的仙女从他们的亲属在该地区听到你的追求已承诺支持和加入你。")
+   ADD_CREATURE_TO_LEVEL(PLAYER0, FAIRY, -1, 4, 5, 10000)
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER0, ALL_DUNGEONS_DESTROYED == 1)
+   
+        REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+        LEVEL_VERSION(1)
+        REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+        ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+        ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+        ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+        ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+        ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+        ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+        ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+        ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+        ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+        ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+        
+        MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+        MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+        DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+        TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+        TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+        QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+        WIN_GAME
+ENDIF
+
+REM ****************************提示信息**********************************
+
+
+
+
+
+
+
+
+
+
+
+
+

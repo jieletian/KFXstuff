@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00580
+REM Automatically generated on 21 Aug 2008, 08:32:06
+
+LEVEL_VERSION(1,0,2)
+LEVEL_TIMESTAMP(1174476872,1219300326)
+USER_COMMANDS_COUNT(8,2,0,0)
+LEVEL_DESCRIPTION("Go forth fishing the heroes to take possession of whole territory. Choose your targets carefully or you may end up with a bad pick... Originally published on dk.net as 'Prisonnier'.")
+LEVEL_AUTHORS("Blackdemon","")

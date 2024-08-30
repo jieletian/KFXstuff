@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00262
+REM Automatically generated on 20 Aug 2008, 00:52:23
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(873695804,1219186343)
+USER_COMMANDS_COUNT(147,4,2,0)
+LEVEL_DESCRIPTION("After circling the island one of our imps has found a relatively undefended entrance, through a submerged tunnel.  This leads to a cavern knee-deep in water, and defended by a cut off hero base. Problem is, the imps were the only ones who could swim, and our task force have been stranded, awaiting us to find a way of getting them on shore.")
+LEVEL_AUTHORS("","")

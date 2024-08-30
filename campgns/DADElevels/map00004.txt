@@ -1,0 +1,157 @@
+REM Level 4/Best friend
+
+set_generate_speed(300)
+
+set_creature_strength(barbarian,200)
+set_creature_health(barbarian,2000)
+set_creature_armour(barbarian,180)
+
+computer_player(player5,0)
+computer_player(player4,0)
+
+max_creatures(player0,30)
+max_creatures(player5,30)
+max_creatures(player4,30)
+
+start_money(player0,2500)
+start_money(player5,8250000)
+start_money(player4,8250000)
+
+ally_players(player5,player4)
+ally_players(player0,player4)
+ally_players(player5,player0)
+
+add_creature_to_pool(bile_demon,20)
+add_creature_to_pool(dragon,20)
+add_creature_to_pool(spider,20)
+add_creature_to_pool(demonspawn,20)
+add_creature_to_pool(bug,20)
+add_creature_to_pool(troll,20)
+add_creature_to_pool(orc,20)
+add_creature_to_pool(sorceror,30)
+add_creature_to_pool(dark_mistress,20)
+
+creature_available(all_players,bile_demon,1,1)
+creature_available(all_players,dragon,1,1)
+creature_available(all_players,troll,1,1)
+creature_available(all_players,orc,1,1)
+creature_available(all_players,sorceror,1,1)
+creature_available(all_players,dark_mistress,1,1)
+creature_available(player4,spider,1,1)
+creature_available(player4,bug,1,1)
+creature_available(player5,demonspawn,1,1)
+
+room_available(player0,treasure,1,1)
+room_available(player0,lair,1,1)
+room_available(player0,garden,1,1)
+room_available(player0,training,1,1)
+room_available(player0,research,1,1)
+room_available(player0,bridge,1,0)
+room_available(player0,graveyard,1,0)
+room_available(player0,workshop,1,0)
+room_available(player0,prison,1,0)
+room_available(player0,barracks,1,0)
+room_available(player0,torture,1,0)
+
+magic_available(player0,power_imp,1,0)
+magic_available(all_players,power_sight,1,0)
+magic_available(all_players,power_obey,1,0)
+magic_available(all_players,power_speed,1,0)
+magic_available(player0,power_call_to_arms,1,0)
+magic_available(player0,power_cave_in,1,0)
+magic_available(player0,power_heal_creature,1,0)
+magic_available(all_players,power_protect,1,0)
+magic_available(player0,power_conceal,1,0)
+magic_available(player0,power_hold_audience,1,0)
+magic_available(all_players,power_chicken,1,0)
+
+trap_available(player0,word_of_power,1,0)
+trap_available(player0,lightning,1,0)
+door_available(player0,braced,1,0)
+door_available(all_players,steel,1,0)
+
+create_party(repka)
+	add_to_party(repka,fairy,5,0,attack_enemies,0)
+	add_to_party(repka,giant,6,0,attack_rooms,0)
+	add_to_party(repka,fairy,5,0,steal_spells,0)
+	add_to_party(repka,fairy,5,0,steal_spells,0)
+	add_to_party(repka,giant,6,0,attack_rooms,0)
+
+create_party(tupka)
+	add_to_party(tupka,thief,5,0,steal_gold,0)
+	add_to_party(tupka,archer,6,0,attack_enemies,0)
+	add_to_party(tupka,thief,5,0,steal_gold,0)
+	add_to_party(tupka,thief,5,0,steal_gold,0)
+	add_to_party(tupka,archer,6,0,attack_enemies,0)
+
+create_party(tripka)
+	add_to_party(tripka,giant,8,0,attack_enemies,0)
+	add_to_party(tripka,dwarfa,8,0,attack_rooms,0)
+	add_to_party(tripka,giant,8,0,attack_enemies,0)
+	add_to_party(tripka,dwarfa,8,0,attack_rooms,0)
+	add_to_party(tripka,giant,8,0,attack_enemies,0)
+
+create_party(vlad)
+	add_to_party(vlad,barbarian,9,30000,attack_enemies,0)
+	add_to_party(vlad,knight,6,15000,defend_party,0)
+	add_to_party(vlad,knight,6,15000,defend_party,0)
+	add_to_party(vlad,knight,6,15000,defend_party,0)
+	add_to_party(vlad,knight,6,15000,defend_party,0)
+
+create_party(vladiko)
+	add_to_party(vladiko,archer,7,1,attack_enemies,0)
+	add_to_party(vladiko,archer,7,1,attack_enemies,0)
+	add_to_party(vladiko,archer,7,1,attack_enemies,0)
+	add_to_party(vladiko,archer,7,1,attack_enemies,0)
+	add_to_party(vladiko,archer,7,1,attack_enemies,0)
+	add_to_party(vladiko,archer,7,1,attack_enemies,0)
+
+if(player0,game_turn >= 10)
+quick_objective(1,"你的朋友被马德尔的一位密友所控制。是时候缩小马德尔信任的人的名单了。记住，你最好的朋友是紫色的。第二个朋友只是保护你。",player0)
+ set_timer(player_good,timer0)
+ set_timer(player_good,timer1)
+ set_timer(player_good,timer2)
+endif
+
+if(player_good,timer0 >= 5000)
+ next_command_reusable
+ add_party_to_level(player_good,tupka,1,1)
+ next_command_reusable
+ set_timer(player_good,timer0)
+endif
+
+if(player_good,timer1 >= 10000)
+ next_command_reusable
+ add_party_to_level(player_good,repka,2,1)
+ next_command_reusable
+ set_timer(player_good,timer1)
+endif
+
+if(player_good,timer2 >= 20000)
+ next_command_reusable
+ add_party_to_level(player_good,tripka,3,1)
+ next_command_reusable
+ set_timer(player_good,timer2)
+endif
+
+if_action_point(4,player0)
+ quick_objective(3,"这位善良的人决定在你的地盘上铲除邪恶。",player0)
+ add_party_to_level(player_good,vlad,player_good,1)
+ add_party_to_level(player_good,vladiko,1,1)
+ add_party_to_level(player_good,vladiko,2,1)
+ add_party_to_level(player_good,vladiko,3,1)
+endif
+
+if(player_good,dungeon_destroyed == 1)
+ if(player_good,barbarian == 0)
+   win_game
+ endif
+endif
+
+if(player0,dungeon_destroyed == 1)
+ lose_game
+endif
+
+if(player4,dungeon_destroyed == 1)
+ lose_game
+endif

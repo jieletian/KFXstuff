@@ -1,0 +1,11 @@
+Name: Faqhuin's Chess 1.0.0
+Author: Dayokay, Created on 09 May 2021
+Keepers: Red, Yellow
+Pool: 
+Objects on map:
+Creatures: 44, Traps: 0, Doors: 2, Items: 20
+Dungeon hearts: 2, Hero gates: 0, Special Boxes: 0
+Description:
+  An chess-based arena map, where you, a great and famous Keeper have been invited to Faqhuin's realm to watch and participate in his festival of Evil games. Time is limited, and victory is solely based on defeat of the Avatar (The King).
+
+Required version: KeeperFX 0.4.9

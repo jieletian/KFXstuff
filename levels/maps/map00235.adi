@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00235
+REM Automatically generated on 19 Aug 2008, 05:23:43
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(898109594,1219116223)
+USER_COMMANDS_COUNT(7,1,0,0)
+LEVEL_DESCRIPTION("Two dungeons face off with a lava pit in between them. Luckily for you, your opponent cannot build a bridge to your dungeon. This is the second installment of my Starter series. This gives you time to get used to DK without the threat of attack.")
+LEVEL_AUTHORS("BlackDawn","")

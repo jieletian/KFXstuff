@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map01116
+REM Automatically generated on 04 Sep 2008, 00:42:00
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(1148854210,1220481720)
+USER_COMMANDS_COUNT(40,4,0,0)
+LEVEL_DESCRIPTION("This map is a free adaptation for DK: DD of the map 'ImpWars v1.7' created by 'The Evil One' for DK2. Enemy waves of level 5 heros comes every time you'll try to reach Gems. Two training rooms and two workshops can be found with possession. Even if found, it is still impossible to build these rooms.")
+LEVEL_AUTHORS("Yohabro","")

@@ -1,0 +1,279 @@
+REM ***********************************************************************
+REM    Script for Level    357(057).Goki 高崎 
+REM ***********************************************************************
+REM    修改版（B版）
+REM 
+REM ***********************************************************************
+REM　修改情况
+REM　1、原来怪物池只有5个黑暗女王，现改为10。
+REM　2、如果玩家吸血鬼数目大于1，就可以研究金库。
+REM　3、杀敌数目达300，增加可研究训练室、图书馆、工厂。
+REM　4、杀敌数目达500，增加可研究审讯室、寺庙、招募室。
+REM　5、到达触发点4就可以建造哨所，到达触发点6，就可以造桥。
+REM　7、监狱数量大于0，就可建监狱。
+REM　8、如果玩家圣者数量大于0，就要杀1500只蟑螂才胜利（原来只需要杀1000只）。
+REM　9、如果玩家圣者数量大于0又建造了大于8格哨所，就要杀2000只蟑螂才过关。
+REM　10、地图中增加紫金矿可挖面，修改了一下地形，增加了一些奖品，还增加了些一建设空间。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+START_MONEY(PLAYER0,10000)
+
+REM 虽然没有入口，有招募室可以招募怪物池中的怪。
+ADD_CREATURE_TO_POOL(SORCEROR,5)
+ADD_CREATURE_TO_POOL(ORC,5)
+ADD_CREATURE_TO_POOL(TROLL,5)
+ADD_CREATURE_TO_POOL(DARK_MISTRESS,10)
+
+
+REM *************************************主要脚本*************************************
+REM 如果捡到一个小鬼，就有制造小鬼的魔法
+IF (PLAYER0 , TOTAL_IMPS > 0)
+    MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+    QUICK_INFORMATION(6,"虽然你暂时还不能建基地，不过有现成的，占过来就可以！",PLAYER0) 
+ENDIF
+
+REM ***********************************************************************
+REM 以下脚本段是修改版（B版）增加的东西。
+REM 1、FLAG1是胜利开关变量，FLAG是控制杀死多少蟑螂可以过关。
+SET_FLAG(PLAYER0,FLAG1,0)
+SET_FLAG(PLAYER0,FLAG2,0)
+REM 2、如果玩家吸血鬼数目大于1，就可以研究金库。
+IF(PLAYER0,VAMPIRE > 1)
+    ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,0)
+    TUTORIAL_FLASH_BUTTON(2,-1)
+    QUICK_INFORMATION(7,"因为你养了1个以上的吸血鬼，你需要研究建造金库！",PLAYER0) 
+ENDIF
+REM 3、修改版增加的东西，监狱数量大于0，就可建监狱、陵墓。
+IF(PLAYER0,PRISON > 1)
+    ROOM_AVAILABLE(ALL_PLAYERS,PRISON,1,0)
+    ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+    TUTORIAL_FLASH_BUTTON(2,-1)
+    QUICK_INFORMATION(8,"你占领了一个监狱，现在可以仿造监狱了！",PLAYER0) 
+ENDIF
+
+REM ***********************************************************************
+REM 到达各触发点（地标）开启不同级别、数量的刷怪，并发出提示。
+IF_ACTION_POINT(1,PLAYER0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,1,7,1,0)
+    SET_FLAG(PLAYER0,FLAG0,1)
+    QUICK_INFORMATION(9,"你进入了新的蟑螂的领地，被触怒的它们会对你发起进攻！",PLAYER0) 
+ENDIF
+IF_ACTION_POINT(2,PLAYER0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,2,7,2,0)
+    SET_FLAG(PLAYER0,FLAG0,2)
+    QUICK_INFORMATION(9,"你进入了新的蟑螂的领地，被触怒的它们会对你发起进攻！",PLAYER0) 
+ENDIF
+IF_ACTION_POINT(3,PLAYER0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,3,7,5,0)
+    SET_FLAG(PLAYER0,FLAG0,3)
+    QUICK_INFORMATION(9,"你进入了新的蟑螂的领地，被触怒的它们会对你发起进攻！",PLAYER0) 
+ENDIF
+IF_ACTION_POINT(4,PLAYER0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,4,7,7,0)
+    SET_FLAG(PLAYER0,FLAG0,4)
+    QUICK_INFORMATION(9,"你进入了新的蟑螂的领地，被触怒的它们会对你发起进攻！",PLAYER0) 
+
+    REM 修改版增加的东西（可建造哨所，这句也可以移到得到圣者的语句里）
+    ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+    TUTORIAL_FLASH_BUTTON(2,-1)
+ENDIF
+IF_ACTION_POINT(5,PLAYER0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,5,7,8,0)
+    SET_FLAG(PLAYER0,FLAG0,5)
+    QUICK_INFORMATION(9,"你进入了新的蟑螂的领地，被触怒的它们会对你发起进攻！",PLAYER0) 
+ENDIF
+IF_ACTION_POINT(6,PLAYER0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,6,7,10,0)
+    SET_FLAG(PLAYER0,FLAG0,6)
+    QUICK_INFORMATION(9,"你进入了新的蟑螂的领地，被触怒的它们会对你发起进攻！",PLAYER0) 
+
+    REM 修改版增加的东西
+    ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+    TUTORIAL_FLASH_BUTTON(2,-1)
+ENDIF
+
+REM ***********************************************************************
+REM 在各地标上无限循环的刷怪（刷怪强度是根据前面开启FLAG0值而定），直到胜利为止。
+IF(PLAYER_GOOD,TOTAL_CREATURES < 5)
+    IF (PLAYER0,FLAG0 > 0)
+        NEXT_COMMAND_REUSABLE
+        ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,1,2,2,0)
+    ENDIF
+    IF (PLAYER0,FLAG0 > 1)
+        NEXT_COMMAND_REUSABLE
+        ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,2,2,4,0)
+    ENDIF
+    IF (PLAYER0,FLAG0 > 2)
+        NEXT_COMMAND_REUSABLE
+        ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,3,2,6,0)
+    ENDIF
+    IF (PLAYER0,FLAG0 > 3)
+        NEXT_COMMAND_REUSABLE
+        ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,4,2,8,0)
+    ENDIF
+    IF (PLAYER0,FLAG0 > 4)
+        NEXT_COMMAND_REUSABLE
+        ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,5,2,10,0)
+    ENDIF
+    IF (PLAYER0,FLAG0 > 5)
+        NEXT_COMMAND_REUSABLE
+        ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,6,5,4,0)
+    ENDIF
+    IF (PLAYER_GOOD,DUNGEON_DESTROYED == 1)
+        NEXT_COMMAND_REUSABLE
+        ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,7,8,4,0)
+        ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,1,8,4,0)
+    ENDIF
+ENDIF
+
+REM ***********************************************************************
+REM 杀蟑螂达到一定数量发奖品，并发出提示。
+REM 杀敌数超过20 钢门 无上权威
+IF (PLAYER_GOOD,BATTLES_LOST>20)
+    MAGIC_AVAILABLE(PLAYER0,POWER_OBEY,1,0)
+    DOOR_AVAILABLE(PLAYER0,STEEL,1,0)
+    TUTORIAL_FLASH_BUTTON(3,-1)
+    QUICK_INFORMATION(10,"你已经杀死了20只蟑螂，注意领取奖品！",PLAYER0) 
+ENDIF
+REM 杀敌数超过50 闪电陷阱 加速魔法
+IF (PLAYER_GOOD,BATTLES_LOST>50)
+    TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+    MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,0)
+    TUTORIAL_FLASH_BUTTON(3,-1)
+    QUICK_INFORMATION(11,"你已经杀死了50只蟑螂，注意领取奖品！",PLAYER0) 
+ENDIF
+REM 杀敌数超过100 治疗魔法 魔法门
+IF (PLAYER_GOOD,BATTLES_LOST>100)
+    MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,0)
+    DOOR_AVAILABLE(PLAYER0,MAGIC,1,0)
+    TUTORIAL_FLASH_BUTTON(4,-1)
+    QUICK_INFORMATION(12,"你已经杀死了100只蟑螂，注意领取奖品！",PLAYER0) 
+ENDIF
+REM 杀敌数超过200 孵化室 巢穴
+IF (PLAYER_GOOD,BATTLES_LOST>200)
+    ROOM_AVAILABLE(PLAYER0,GARDEN,1,0)
+    ROOM_AVAILABLE(PLAYER0,LAIR,1,0)
+    TUTORIAL_FLASH_BUTTON(2,-1)
+    QUICK_INFORMATION(13,"你已经杀死了200只蟑螂，注意领取奖品！",PLAYER0) 
+
+    REM 修改版增加的东西
+    ROOM_AVAILABLE(PLAYER0,RESEARCH,1,0)
+ENDIF
+REM 增加此条件（杀敌数超过300，可建工厂，训练室、兵营）
+IF (PLAYER_GOOD,BATTLES_LOST>300)
+　ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,BARRACKS,1,1)
+    TUTORIAL_FLASH_BUTTON(2,-1)
+    QUICK_INFORMATION(14,"你已经杀死了300只蟑螂，注意领取奖品！",PLAYER0) 
+ENDIF
+REM 杀敌数超过500 塌方术 滚石陷阱
+IF (PLAYER_GOOD,BATTLES_LOST>500)
+    MAGIC_AVAILABLE(PLAYER0,POWER_CAVE_IN,1,0)
+    TRAP_AVAILABLE(PLAYER0,BOULDER,1,0)
+    TUTORIAL_FLASH_BUTTON(4,-1)
+    QUICK_INFORMATION(16,"你已经杀死了500只蟑螂，注意领取奖品！",PLAYER0) 
+
+    REM 修改版增加的东西
+    ROOM_AVAILABLE(ALL_PLAYERS,TORTURE, 1, 1)
+    ROOM_AVAILABLE(ALL_PLAYERS,TEMPLE,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,SCAVENGER, 1, 0)
+    MAGIC_AVAILABLE(PLAYER0,POWER_CONCEAL,1,0)
+    TUTORIAL_FLASH_BUTTON(2,-1)
+ENDIF
+
+REM ***********************************************************************
+REM 修改版增加的东西，提示就快要过关（杀1000只和1500只两种过关方案）
+IF (PLAYER_GOOD,BATTLES_LOST>950)
+    QUICK_INFORMATION(17,"你已经杀死了950只蟑螂！",PLAYER0) 
+ENDIF
+IF (PLAYER_GOOD,BATTLES_LOST>1450)
+    QUICK_INFORMATION(18,"你已经杀死了1450只蟑螂！",PLAYER0) 
+ENDIF
+
+REM ****************************胜利的控制开关**********************************
+REM 正常情况下玩家只需要杀1000只蟑螂就过关；如果玩家圣者数量大于0就要杀1500只蟑螂才胜利；如果玩家得到圣者哨所又大于8，就要杀2000只蟑螂才胜利。
+REM FLAG1＝1（即FLAG1>0）就胜利；FLAG2正常情况下是0，得到圣者时为1，得到圣者又建了大于8格哨所时为2.
+REM 控制开关FLAG2的语句
+IF(PLAYER0,AVATAR > 0)
+    QUICK_OBJECTIVE(19,"你得有圣者的帮助，你就必须杀1500只蟑螂才能过关！",PLAYER0) 
+    SET_FLAG(PLAYER0,FLAG2,1)
+    IF(PLAYER0,GUARD_POST > 8)
+            QUICK_OBJECTIVE(20,"既然你想挑战难度就杀2000只蟑螂才过关，好好享受杀戮吧，大恶人！",PLAYER0) 
+            SET_FLAG(PLAYER0,FLAG2,2)
+    ENDIF
+ENDIF
+REM ****************************胜利/失败条件**********************************
+IF (PLAYER_GOOD,BATTLES_LOST>1000)
+    IF(PLAYER0,FLAG2 <1)
+            SET_FLAG(PLAYER0,FLAG1,1)
+    ENDIF
+ENDIF
+IF (PLAYER_GOOD,BATTLES_LOST>1500)
+    IF(PLAYER0,FLAG2 >0)
+            SET_FLAG(PLAYER0,FLAG1,1)
+    ENDIF
+ENDIF
+IF (PLAYER_GOOD,BATTLES_LOST>2000)
+    IF(PLAYER0,FLAG2 >1)
+            SET_FLAG(PLAYER0,FLAG1,1)
+    ENDIF
+ENDIF
+
+IF(PLAYER0,FLAG1>0)
+
+    REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+    LEVEL_VERSION(1)
+    REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+    ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+    ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+    ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+    ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+    ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+    ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+    ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+    ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+    ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+    ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+    ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+    ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+    ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+    ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+    ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+    
+    MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+    MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+    DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+    TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+    TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+    QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+    WIN_GAME
+ENDIF
+
+REM ****************************提示信息**********************************
+QUICK_OBJECTIVE(1,"参考提示：1、正常情况下杀1000只蟑螂就胜利，越往外扩张越多高级蟑螂进攻，难度越高，惊喜也会多不少，不占外围的也能胜利，就是时间长些；2、没小鬼是过不了关的，没有基地也是过不了关的；3、附近除了有金库、巢穴、孵化室、图书馆，还有工厂、陵墓、扫墓中心等；4、杀的蟑螂越多，得到的奖品越多，外面还有不少惊喜，如果你拥有圣者，就得杀1500蟑螂才能过关。",PLAYER0)  
+IF(PLAYER0,GAME_TURN > 500)
+    QUICK_INFORMATION(2,"小鬼在野外，冲出去把它找回来，有些事只能是它们做的！",PLAYER0) 
+ENDIF
+IF(PLAYER0,GAME_TURN > 1500)
+    QUICK_INFORMATION(3,"听说北面有个破墙魔法，找到它那就可以挖大金矿了，外面的紫金矿也能挖，不过你要自己捡金子回家！",PLAYER0) 
+ENDIF
+IF(PLAYER0,GAME_TURN > 2500)
+    QUICK_INFORMATION(4,"打爆敌人心脏就会额外的敌兵进攻你，普通人是挡不住的！不太扩张也能胜利，就是时间长些",PLAYER0) 
+ENDIF
+IF(PLAYER0,GAME_TURN > 3500)
+    QUICK_INFORMATION(5,"附近有陵墓，不过附近机关重重，小心！",PLAYER0) 
+ENDIF
+
+
+
+
+
+
+

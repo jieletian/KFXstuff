@@ -1,0 +1,276 @@
+REM ***********************************************************************
+REM   Script for Level 419.Rangex
+REM   by Rangex :-)        10.01.2004
+REM   English translation by Mefistotelis
+REM ***********************************************************************
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+SET_GENERATE_SPEED(500)
+MAX_CREATURES(PLAYER0,15)
+MAX_CREATURES(PLAYER1,50)
+START_MONEY(PLAYER0,20000)
+START_MONEY(PLAYER1,40000)
+
+COMPUTER_PLAYER(PLAYER1,1)
+
+ADD_CREATURE_TO_POOL(SORCEROR,30)
+ADD_CREATURE_TO_POOL(BILE_DEMON,30)
+ADD_CREATURE_TO_POOL(DARK_MISTRESS,30)
+ADD_CREATURE_TO_POOL(TROLL,20)
+ADD_CREATURE_TO_POOL(BUG,20)
+ADD_CREATURE_TO_POOL(SPIDER,20)
+ADD_CREATURE_TO_POOL(FLY,20)
+ADD_CREATURE_TO_POOL(ORC,20)
+ADD_CREATURE_TO_POOL(DRAGON,30)
+
+CREATURE_AVAILABLE(ALL_PLAYERS,TROLL,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,DARK_MISTRESS,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,SORCEROR,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,BILE_DEMON,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,DRAGON,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,VAMPIRE,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,ORC,1,1)
+CREATURE_AVAILABLE(PLAYER0,BUG,1,1)
+CREATURE_AVAILABLE(PLAYER0,SPIDER,1,1)
+CREATURE_AVAILABLE(PLAYER0,FLY,1,1)
+
+ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,WORKSHOP,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,BARRACKS,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,BRIDGE,1,0)
+ROOM_AVAILABLE(PLAYER1,PRISON,1,0)
+ROOM_AVAILABLE(PLAYER1,TORTURE,1,0)
+ROOM_AVAILABLE(PLAYER1,TEMPLE,1,0)
+ROOM_AVAILABLE(PLAYER1,GRAVEYARD,1,0)
+
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+MAGIC_AVAILABLE(PLAYER1,POWER_SIGHT,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CALL_TO_ARMS,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_HEAL_CREATURE,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_SPEED,1,1)
+MAGIC_AVAILABLE(PLAYER1,POWER_LIGHTNING,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_PROTECT,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CONCEAL,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_DISEASE,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_CAVE_IN,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_CHICKEN,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HOLD_AUDIENCE,1,0)
+
+DOOR_AVAILABLE(ALL_PLAYERS,WOOD,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,BRACED,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,STEEL,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,MAGIC,1,0)
+
+TRAP_AVAILABLE(ALL_PLAYERS,POISON_GAS,1,0)
+TRAP_AVAILABLE(ALL_PLAYERS,ALARM,1,0)
+TRAP_AVAILABLE(ALL_PLAYERS,LIGHTNING,1,0)
+TRAP_AVAILABLE(ALL_PLAYERS,WORD_OF_POWER,1,0)
+
+
+CREATE_PARTY(PARTY1)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+
+CREATE_PARTY(PARTY2)
+    ADD_TO_PARTY(PARTY2,KNIGHT,5,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY2,KNIGHT,5,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY2,KNIGHT,5,0,ATTACK_ENEMIES,0)
+
+CREATE_PARTY(PARTY3)
+    ADD_TO_PARTY(PARTY3,KNIGHT,7,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY3,KNIGHT,7,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY3,KNIGHT,7,0,ATTACK_ENEMIES,0)
+
+CREATE_PARTY(PARTY4)
+    ADD_TO_PARTY(PARTY4,AVATAR,5,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY4,AVATAR,7,0,ATTACK_ENEMIES,0)
+
+CREATE_PARTY(PARTY5)
+    ADD_TO_PARTY(PARTY5,KNIGHT,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY5,KNIGHT,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY5,KNIGHT,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY5,KNIGHT,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY5,KNIGHT,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY5,KNIGHT,10,0,ATTACK_ENEMIES,0)
+
+CREATE_PARTY(PARTY6)
+    ADD_TO_PARTY(PARTY6,HORNY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY6,HORNY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY6,HORNY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY6,HORNY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY6,HORNY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY6,HORNY,10,0,ATTACK_ENEMIES,0)
+
+CREATE_PARTY(PARTY7)
+    ADD_TO_PARTY(PARTY7,AVATAR,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY7,AVATAR,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY7,AVATAR,10,0,ATTACK_ENEMIES,0)
+
+CREATE_PARTY(PARTY8)
+    ADD_TO_PARTY(PARTY8,BARBARIAN,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY8,BARBARIAN,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY8,BARBARIAN,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY8,BARBARIAN,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY8,GIANT,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY8,GIANT,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY8,GIANT,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY8,GIANT,10,0,ATTACK_DUNGEON_HEART,0)
+
+CREATE_PARTY(PARTY9)
+    ADD_TO_PARTY(PARTY9,FAIRY,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY9,FAIRY,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY9,FAIRY,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY9,FAIRY,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY9,DARK_MISTRESS,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY9,DARK_MISTRESS,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY9,DARK_MISTRESS,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY9,DARK_MISTRESS,10,0,ATTACK_DUNGEON_HEART,0)
+
+CREATE_PARTY(PARTY10)
+    ADD_TO_PARTY(PARTY10,SAMURAI,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY10,SAMURAI,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY10,SAMURAI,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY10,MONK,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY10,MONK,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY10,MONK,10,0,ATTACK_DUNGEON_HEART,0)
+
+CREATE_PARTY(PARTY11)
+    ADD_TO_PARTY(PARTY11,KNIGHT,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY11,KNIGHT,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY11,KNIGHT,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY11,SKELETON,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY11,SKELETON,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY11,VAMPIRE,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY11,VAMPIRE,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY11,VAMPIRE,10,0,ATTACK_DUNGEON_HEART,0)
+
+
+IF_ACTION_POINT(1,PLAYER0)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,2,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,3,1)
+    REM QUICK_INFORMATION(11,"You've come to a nest of giant bloodthirsty flies! These are certainly mutants, inspired by diabolic magic of Rangex. Do not underestimate the evil-driven power of this opponent! Who knows what else he has up hes sleeve?")
+    QUICK_INFORMATION(11,"你来到了一个巨大的嗜血苍蝇的巢穴！这些都是突变体，来自RangEX的恶魔般的魔力。不要低估对手的邪恶驱动力！谁知道他还有什么袖子？")
+ENDIF
+
+IF_ACTION_POINT(4,PLAYER0)
+    REM QUICK_INFORMATION(2,"Be vigilant, Keeper! The most powerful ancient spell, which would be a great strengthen to your army, is kept by mighty guards - paladins of the Order of Shining Blades. Prepare yourself well to deal with them!")
+    QUICK_INFORMATION(2,"保持警惕，守护者！最强大的古代咒语，将是一个伟大的加强到你的军队，是由强大的卫士-圣骑士的顺序闪亮的刀片。准备好应付他们吧！")
+ENDIF
+
+IF_ACTION_POINT(8,PLAYER0)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY2,6,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY3,7,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY4,5,1)
+ENDIF
+
+IF_ACTION_POINT(9,PLAYER0)
+    REM QUICK_INFORMATION(3,"Finally, you managed to find the notorious Nostradamus Library, a place treated great magical power. Look at the ancient artefact capable to double the ranks of your army; but before you use it, try to gather under your flag the largest number of servants. Rumours has it that in the surrounding bastions, heroes are holding 10 prisoners, who released, will be happy to join you.")
+    QUICK_INFORMATION(3,"最后，你终于找到了臭名昭著的诺查丹玛斯图书馆，一个拥有巨大魔力的地方。看看古老的手工艺品能使你的军队增加一倍，但是在你使用它之前，试着在你的旗帜下收集最多的仆人。有谣言说，在周围的堡垒里，英雄们手持10名囚犯，他们释放了，很高兴加入你们。")
+ENDIF
+
+IF_ACTION_POINT(10,PLAYER0)
+    REM QUICK_INFORMATION(4,"It looks like you managed to find an ancient treasure of dragons. Behind its doors lie considerable wealth, but be aware of eventuality, that their existing owners won't give you a warm welcome.")
+    QUICK_INFORMATION(4,"看起来你总算找到了一条古老的龙宝藏。在它的门后面有相当大的财富，但要意识到可能发生的事情，他们现有的主人不会给你热烈的欢迎。")
+ENDIF
+
+IF_ACTION_POINT(11,PLAYER0)
+    REM QUICK_INFORMATION(5,"Through the secret corridors of Boastburg, ruined fortress of the Heroes, you succeeded in reaching back of the Rangex's dungeon. You might find an attack from that position as wise and more promising.")
+    QUICK_INFORMATION(5,"穿过波斯堡的秘密走廊，被毁灭的英雄堡垒，你成功地到达了RangeX的地牢。你可能会发现从那个位置进攻是明智的和更有希望的。")
+ENDIF
+
+IF_ACTION_POINT(12,PLAYER0)
+    REM QUICK_INFORMATION(6,"You have reached the old, decaying stronghold of heroes. Do not venture to the east of this point - there may be still ongoing battle between Rangex and rumps of the good warriors army. You can look for luck digging west.")
+    QUICK_INFORMATION(6,"你已经到达了旧的腐朽的英雄阵地。不要冒险到这一点的东边——Rangex和好战部队的阵营之间可能仍在进行战斗。你可以寻找运气挖西.")
+ENDIF
+
+
+IF_ACTION_POINT(18,PLAYER0)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,18,2)
+ENDIF
+
+IF_ACTION_POINT(19,PLAYER0)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY5,20,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY6,21,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY7,22,1)
+    REM QUICK_OBJECTIVE(8,"Now it is time for the final game! Rangex casts against you his personal guards, composed of the most exquisite warriors of Underground. Do not show mercy - only one keeper is worthy to rule over the world... and it needs to be you!",PLAYER0)
+    QUICK_OBJECTIVE(8,"现在是最后一场比赛的时间了！RangEX向你展示了他的个人警卫，由最精湛的地下武士组成。不要怜悯——只有一个守护神值得统治这个世界…它需要你！",PLAYER0)
+ENDIF
+
+REM QUICK_OBJECTIVE(1,"Archikeeper Rangex inseparably governs this land. You've thrown challenge to the tremendous power, so you must know that you won't overcome it with conventional methods. Instead, you must resort to deception. Search the surrounding corridors - a powerful magic resides there, able to turn the scale of victory on your side.",PLAYER0)
+QUICK_OBJECTIVE(1,"Archikeeper Rangex不可分割地统治着这块土地。你已经挑战了巨大的力量，所以你必须知道你不会用传统的方法去克服它。相反，你必须采取欺骗手段。搜索周围的走廊-一个强大的魔法驻留在那里，能够扭转胜利的规模在你的身边。",PLAYER0)
+
+
+
+IF(PLAYER0,GAME_TURN >= 500)
+    REM QUICK_INFORMATION(13,"This level is not easy. Save the game often to avoid unpleasant surprises.")
+    QUICK_INFORMATION(13,"这个王国并不容易。经常保存游戏以避免不愉快的惊喜。")
+ENDIF
+
+IF(PLAYER0,GAME_TURN >= 2500)
+   REM  QUICK_INFORMATION(7,"Nearby portal does not attract too many servants, and you have only plans of basic rooms and a few spells. This happens when you try to settle on land, already exploited by someone else. However, do not lose hope - there are bastions of heroes in the area that make up the resistance movement against the Rangex. Plunder those, and you will grow in power.")
+    QUICK_INFORMATION(7,"附近的入口不会吸引太多的仆人，你只有基本房间和一些咒语。当你试图在别人已经开发的土地上定居时就会发生这种情况。然而，不要失去希望——在该地区建立抵抗运动的英雄们的堡垒。掠夺那些，你将在权力中成长.")
+ENDIF
+
+IF(PLAYER0,GAME_TURN >= 10000)
+    REM QUICK_INFORMATION(9,"In the end you have discovered the nature of powerful magic in the west. Its source are magic resources collected in the legendary Library of Nostradamus. Wise step would be to go west and to seize this library, with its treasures; but keep watch - the most powerful Wizards of the Underworld reside in it, and certainly they won't give the treasures by goodness.")
+    QUICK_INFORMATION(9,"最后你发现了西方强大魔法的本质。它的来源是传说中的诺查丹玛斯图书馆收集的魔法资源。明智的一步是到西部去，用它的宝藏抓住这座图书馆；但要留心——冥冥中最强大的巫师栖息在里面，当然他们不会用善良赐予宝藏。")
+ENDIF
+
+
+IF(PLAYER1,DUNGEON_DESTROYED == 1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+    REM QUICK_INFORMATION(10,"You have beaten the Rangex's Dungeon Heart, but his spirit has managed to escape on the north, to specially designed hideout. Fortunately you've taken from him a magical ability to break down fortified walls, so now no obstacle is able to stop you. But first, you should take care of the army of heroes whose Rangex have entrapped with his power of mind, and sent against you. They will be here soon - so arrange a defense!")
+    QUICK_INFORMATION(10,"你打败了RangeX的地下城，但是他的灵魂在北方逃了出来，去了特别设计的藏身之处。幸运的是，你从他身上获得了一个神奇的能力去打破坚固的墙，所以现在没有障碍能阻止你。但首先，你应该照顾英雄的军队，他们的RangEX已经被他的思想力量所俘虏，并被送去攻击你。他们很快就会来的，所以安排防守！")
+    SET_TIMER(PLAYER_GOOD,TIMER0)
+ENDIF
+IF(PLAYER_GOOD,TIMER0 >= 1000)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY8,13,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY10,16,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY9,15,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY11,14,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY10,23,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY9,24,1)
+ENDIF
+
+
+IF(PLAYER0,ALL_DUNGEONS_DESTROYED == 1)
+    REM QUICK_OBJECTIVE(12,"Finally, you've defeated your enemy and sent his soul in Nonbeing. Now you are an absolute ruler of the Underground and demons from the deepest circles of hell worship your wickedness, as against you they look as hosts of saints. Congratulations, Master! You mark up canons being Evil! Future generations will read thy name with delight from the papers of history books.",PLAYER0)
+    QUICK_OBJECTIVE(12,"最后，你打败了你的敌人，把灵魂送进了无生命的世界。现在你是地下的绝对统治者，地狱深处的恶魔崇拜你的邪恶，和你一样，他们是圣徒的主人。恭喜你，主人！你把教条标记为邪恶！子孙后代将从历史书籍的书中读到你的名字。.",PLAYER0)
+    WIN_GAME
+ENDIF
+IF(PLAYER0,DUNGEON_DESTROYED == 1)
+    LOSE_GAME
+ENDIF
+
+
+
+
+
+
+
+
+
+
+
+
+

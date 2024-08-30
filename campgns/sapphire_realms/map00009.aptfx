@@ -1,0 +1,122 @@
+[common]
+ActionPointsCount = 20
+
+[actionpoint0]
+PointNumber = 1
+PointRange = [5, 0]
+SubtileX = [133, 128]
+SubtileY = [207, 128]
+
+[actionpoint1]
+PointNumber = 2
+PointRange = [4, 0]
+SubtileX = [205, 128]
+SubtileY = [193, 128]
+
+[actionpoint2]
+PointNumber = 3
+PointRange = [0, 0]
+SubtileX = [200, 128]
+SubtileY = [193, 128]
+
+[actionpoint3]
+PointNumber = 4
+PointRange = [4, 0]
+SubtileX = [241, 128]
+SubtileY = [193, 128]
+
+[actionpoint4]
+PointNumber = 5
+PointRange = [0, 0]
+SubtileX = [246, 128]
+SubtileY = [193, 128]
+
+[actionpoint5]
+PointNumber = 6
+PointRange = [5, 0]
+SubtileX = [34, 128]
+SubtileY = [41, 128]
+
+[actionpoint6]
+PointNumber = 8
+PointRange = [5, 0]
+SubtileX = [204, 128]
+SubtileY = [208, 128]
+
+[actionpoint7]
+PointNumber = 7
+PointRange = [3, 0]
+SubtileX = [133, 128]
+SubtileY = [67, 128]
+
+[actionpoint8]
+PointNumber = 11
+PointRange = [8, 0]
+SubtileX = [133, 128]
+SubtileY = [86, 128]
+
+[actionpoint9]
+PointNumber = 9
+PointRange = [15, 0]
+SubtileX = [101, 128]
+SubtileY = [40, 128]
+
+[actionpoint10]
+PointNumber = 10
+PointRange = [20, 0]
+SubtileX = [170, 128]
+SubtileY = [42, 128]
+
+[actionpoint11]
+PointNumber = 12
+PointRange = [10, 0]
+SubtileX = [133, 128]
+SubtileY = [73, 128]
+
+[actionpoint12]
+PointNumber = 13
+PointRange = [0, 0]
+SubtileX = [133, 128]
+SubtileY = [46, 128]
+
+[actionpoint13]
+PointNumber = 14
+PointRange = [0, 0]
+SubtileX = [129, 128]
+SubtileY = [44, 128]
+
+[actionpoint14]
+PointNumber = 15
+PointRange = [0, 0]
+SubtileX = [137, 128]
+SubtileY = [44, 128]
+
+[actionpoint15]
+PointNumber = 16
+PointRange = [0, 0]
+SubtileX = [127, 128]
+SubtileY = [40, 128]
+
+[actionpoint16]
+PointNumber = 17
+PointRange = [0, 0]
+SubtileX = [139, 128]
+SubtileY = [40, 128]
+
+[actionpoint17]
+PointNumber = 18
+PointRange = [0, 0]
+SubtileX = [129, 128]
+SubtileY = [36, 128]
+
+[actionpoint18]
+PointNumber = 19
+PointRange = [0, 0]
+SubtileX = [137, 128]
+SubtileY = [36, 128]
+
+[actionpoint19]
+PointNumber = 20
+PointRange = [0, 0]
+SubtileX = [133, 128]
+SubtileY = [34, 128]

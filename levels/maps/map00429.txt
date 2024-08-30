@@ -1,0 +1,207 @@
+REM ***********************************************************************
+REM   Script for Level   429.Gang of Nowel
+REM ***********************************************************************
+REM  
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+SET_GENERATE_SPEED(150)
+SET_CREATURE_MAX_LEVEL(PLAYER0,DEMONSPAWN,10)
+MAX_CREATURES(PLAYER0,30)
+START_MONEY(PLAYER0,35000)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+ADD_CREATURE_TO_POOL(BILE_DEMON,10)
+ADD_CREATURE_TO_POOL(TROLL,15)
+ADD_CREATURE_TO_POOL(DEMONSPAWN,10)
+ADD_CREATURE_TO_POOL(SORCEROR,15)
+ADD_CREATURE_TO_POOL(ORC,10)
+ADD_CREATURE_TO_POOL(TENTACLE,10)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+CREATURE_AVAILABLE(ALL_PLAYERS,TROLL,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,DEMONSPAWN,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,SORCEROR,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,TENTACLE,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,ORC,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,WORKSHOP,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,PRISON,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,BARRACKS,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,TEMPLE,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,BRIDGE,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+DOOR_AVAILABLE(ALL_PLAYERS,WOOD,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,BRACED,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,STEEL,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定陷阱*********************************
+REM  (玩家,陷阱名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+TRAP_AVAILABLE(ALL_PLAYERS,ALARM,1,0)
+
+
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+
+IF(PLAYER0,BATTLES_WON >= 2)
+    REM QUICK_INFORMATION(4,"Conflicts have started, but apparently, your creatures have found the method. A snowball battle... at least, they would enjoy it!")
+    QUICK_INFORMATION(4,"冲突已经开始，但显然，你的生物已经找到了方法。滚雪球大战…至少，他们会喜欢的！")
+    CREATURE_AVAILABLE(ALL_PLAYERS,BILE_DEMON,1,1)
+ENDIF
+IF(PLAYER0,BATTLES_WON >= 10)
+    REM QUICK_INFORMATION(3,"The Lord Mentalow wants to write a history without you... Should I send him swear words, to let him know our intentions?")
+    QUICK_INFORMATION(3,"明达洛领主想写一部没有你的历史…我应该向他宣誓，让他知道我们的意图吗？")
+ENDIF
+
+IF(PLAYER0,BILE_DEMON == 1)
+    REM QUICK_INFORMATION(5,"The Bile Demon is also the party! Apparently, he small balls won't make ane effect on him...")
+    QUICK_INFORMATION(5,"巨魔也在搞聚会！显然，他的小球不会对他产生任何影响。") 
+ENDIF
+IF(PLAYER0,TROLL > 4)
+    IF(PLAYER0,BILE_DEMON > 1)
+    REM  QUICK_INFORMATION(6,"Jealous of the Bile Demons which make larger balls with ease, your trolls have adopted another technique... Go have a look in the workshop!")
+    QUICK_INFORMATION(6,"巨魔嫉妒那些制造更大球（滚石），你的巨魔采用了另一种技术…去车间看看吧！")
+        TRAP_AVAILABLE(ALL_PLAYERS,BOULDER,1,3)
+    ENDIF
+ENDIF
+
+IF(PLAYER0,SPELLS_STOLEN == 1)
+    REM QUICK_INFORMATION(12,"It seems that some magic books were stolen. Further research is needed!")
+    QUICK_INFORMATION(12,"似乎有些魔法书被偷了。需要进一步研究！")
+ENDIF
+
+SET_TIMER(PLAYER0,TIMER0)
+IF(PLAYER0,TIMER0 >= 1)
+    REM QUICK_OBJECTIVE(1,"You are facing a cruel dilemma, Keeper. The Lord Mentalow is a cheerful buffoon who spends his days celebrating with his people. Snow lies constantly on its territory and surplus, it has horribly beneficial properties. It is loaded with antimagic. As a result, you and your creatures can't launch spells. You will have to find a good method for this...",PLAYER0)
+    QUICK_OBJECTIVE(1,"你面临着一个残酷的困境，守护者。明达洛领主是一个快乐的小丑，每天和他的人民一起庆祝。积雪不断地在其领土上和过剩，它有极其有益的特性。它装载了反物质。因此，你和你的生物无法发动魔法。你必须找到一个很好的方法…",PLAYER0)
+ENDIF
+IF(PLAYER0,TIMER0 >= 200)
+    REM QUICK_INFORMATION(2,"Although Mentalow pass most of every day and night on party, it has no less a fairly consistent army; even tax inspectors never dare to approach them. Be the first to tax their enormous wealth!")
+    QUICK_INFORMATION(2,"虽然明达洛日夜聚会，但是它拥有一支相当稳定的军队，甚至税务稽查员也不敢接近他们。是第一个为他们巨额财富纳税的人！")
+ENDIF
+IF(PLAYER0,TIMER0 >= 500)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,THIEF,1,5,2,2500)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,THIEF,1,3,4,7500)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,THIEF,1,1,5,10000)
+ENDIF
+IF(PLAYER0,TIMER0 >= 30000)
+    REM QUICK_INFORMATION(7,"Let's play a little game, Keeper! The forces Mentalow overwhelm you if you're not prepared. A creature is waiting for you WEST here. Make him cross the trail to reach the other side: a surprise is waiting for you! Be careful not to make it stuck...")
+    QUICK_INFORMATION(7,"让我们玩一个小游戏，守护者！如果你没有准备好的话，这些力量会压倒你。一个生物在这里等你。让他穿过小径到达另一边：一个惊喜在等着你！小心别让它卡住了…")
+    ADD_CREATURE_TO_LEVEL(PLAYER0,IMP,7,1,7,0)
+ENDIF
+
+IF_ACTION_POINT(2,PLAYER0)
+    REM QUICK_INFORMATION(10,"Merry Christmas, Keeper!")
+    QUICK_INFORMATION(10,"怪诞快乐，守护者！")
+    SET_TIMER(PLAYER0,TIMER1)
+ENDIF
+IF(PLAYER0,TIMER1 >= 200)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,IMP,2,7,1,10000)
+ENDIF
+IF_ACTION_POINT(4,PLAYER0)
+    REM QUICK_INFORMATION(9,"STOP! Watch out, Guard! Your greed may lost you! These gems are only gold cleverly concealed. If you approach them, heroes ambush will not hesitate to kill you. You will have to accelerate to be able to run out with gold.")
+   QUICK_INFORMATION(9,"住手！小心，守护者！你的贪婪可能会失去你！这些宝石只是巧妙地隐藏了黄金。如果你接近他们，英雄埋伏会毫不犹豫地杀了你。你必须加速才能用完黄金。")
+ENDIF
+IF_ACTION_POINT(5,PLAYER0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,WIZARD,6,5,7,0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,GIANT,6,5,7,0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BARBARIAN,6,5,7,0)
+ENDIF
+IF_ACTION_POINT(8,PLAYER0)
+    REM QUICK_INFORMATION(8,"Good work, Keeper! Your perseverance allowed you to recall three ghosts to life. As immaterial, the ghosts will have the unfortunate habit of influencing material world if enemies are near.")
+    QUICK_INFORMATION(8,"干得好，守护者！你的毅力让你回忆起三个生命的幽灵。作为无关紧要的东西，如果敌人在附近，鬼魂将有一种不幸的影响物质世界的习惯。")
+    ADD_CREATURE_TO_LEVEL(PLAYER0,GHOST,9,1,7,0)
+    ADD_CREATURE_TO_LEVEL(PLAYER0,GHOST,10,1,7,0)
+    ADD_CREATURE_TO_LEVEL(PLAYER0,GHOST,11,1,7,0)
+ENDIF
+IF_ACTION_POINT(12,PLAYER0)
+    REM QUICK_INFORMATION(11,"This is the entrance to the Chateau of Lord Mentalow. Do not hesitate to use any means; for your own personal pleasure, of course!")
+    QUICK_INFORMATION(11,"这是明达洛领主的城堡的入口，毫不犹豫地使用任何手段；当然，为了你自己的个人快乐！")
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER_GOOD,DUNGEON_DESTROYED == 1)
+    REM QUICK_OBJECTIVE(13,"This is a good thing done! The Lord Mentalow will not celebrate any longer! Still, I hope you've taken a bit of fun...",PLAYER0)
+    QUICK_OBJECTIVE(13,"做得好！明达洛领主再也不会搞聚会了！不过，我希望你有一点乐趣…",PLAYER0)
+
+    REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+    LEVEL_VERSION(1)
+    REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+    ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+    ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+    ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+    ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+    ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+    ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+    ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+    ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+    ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+    ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+    ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+    ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+    ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+    ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+    ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+    
+    MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+    MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+    DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+    TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+    TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+    QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+    WIN_GAME
+ENDIF
+IF(PLAYER0,IMP == 0)
+    REM QUICK_OBJECTIVE(14,"You've lost all your Imps, keeper. I do not think you can still do something useful...",PLAYER0)
+    QUICK_OBJECTIVE(14,"你失去了你所有的小鬼，守护者。你令我感到失望。",PLAYER0)
+    LOSE_GAME
+ENDIF
+
+REM ****************************提示信息**********************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

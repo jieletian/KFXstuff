@@ -1,0 +1,134 @@
+REM ***********************************************************************
+REM   Script for Level 325(025).Hawk the Slayer 鹰的杀手
+REM ***********************************************************************
+REM   Clare Wykes  克莱尔·威克斯
+REM 
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+SET_GENERATE_SPEED(500)
+START_MONEY(PLAYER0,20000)
+MAX_CREATURES(PLAYER0,50)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+ADD_CREATURE_TO_POOL(SAMURAI,10)
+ADD_CREATURE_TO_POOL(MONK,20)
+ADD_CREATURE_TO_POOL(BARBARIAN,10)
+ADD_CREATURE_TO_POOL(FAIRY,10)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+
+CREATURE_AVAILABLE(PLAYER0,FAIRY,1,1)
+CREATURE_AVAILABLE(PLAYER0,MONK,1,1)
+CREATURE_AVAILABLE(PLAYER0,BARBARIAN,1,1)
+CREATURE_AVAILABLE(PLAYER0,SAMURAI,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+ROOM_AVAILABLE(PLAYER0,TEMPLE,1,0)
+ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+ROOM_AVAILABLE(PLAYER0,BRIDGE,1,0)
+ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,0)
+ROOM_AVAILABLE(PLAYER0,ENTRANCE,0,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+MAGIC_AVAILABLE(PLAYER0,POWER_OBEY,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_LIGHTNING,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_PROTECT,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_CONCEAL,1,0)
+
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+IF(PLAYER0,GAME_TURN < 50)    
+    REM QUICK_INFORMATION(1,"You are HAWK THE SLAYER, your evil brother has killed your sweetheart and father, and he has created an army of the undead to reek havoc over this once peaceful world ")
+    QUICK_INFORMATION(1,"你是鹰的杀手，你的邪恶的兄弟杀了你的爱人，父亲，他创造了臭气的不死族军队肆虐这一和平的世界。")
+ENDIF
+IF(PLAYER0,GAME_TURN > 50)    
+    REM QUICK_INFORMATION(2," You must destroy him and his minions, however he lives in a caslte, protected by lakes and forest full of the undead。 ")
+    QUICK_INFORMATION(2,"  你必须摧毁他和他的爪牙，但是他生活在一个充满不死族的湖泊和森林围绕的城堡里。")
+ENDIF
+IF(PLAYER0,GAME_TURN > 100)    
+    REM QUICK_INFORMATION(3,"So you have aquired the help of the witch 'Morag', to give you the gift of her teaching to research spells and summon your own minions。 ")
+    QUICK_INFORMATION(3," 所以你已经获得莫拉格女巫的帮助，把她研究法术礼物给你，召唤出自己的爪牙")
+ENDIF
+IF(PLAYER0,GAME_TURN > 200)    
+    REM QUICK_INFORMATION(4," You will also require the help of your old friends, the DWARF, the GIANT and the ELF, the last of their kind.。")
+    QUICK_INFORMATION(4," 你也需要你的老朋友，矮人，巨人和精灵，他们的友好。")
+ENDIF
+IF(PLAYER0,GAME_TURN > 300)  
+    REM QUICK_INFORMATION(5," They are being held prisioner in the forest by bands of thieves so find them. And good luck!!!") 
+    QUICK_INFORMATION(5," 他们被一群小偷关在森林里的监狱里，所以找到他们。祝你好运！！！") 
+    QUICK_OBJECTIVE(6,"提示：敌人不会主动进攻，中间的紫金矿可圈取，右下角有N个10级吸血鬼和1个圣者守心脏，打爆敌人心脏过关，其它可不打",PLAYER0)   
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER_GOOD,DUNGEON_DESTROYED == 1)    
+    
+        REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+        LEVEL_VERSION(1)
+        REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+        ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+        ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+        ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+        ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+        ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+        ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+        ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+        ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+        ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+        ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+        
+        MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+        MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+        DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+        TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+        TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+        QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+        WIN_GAME    
+ENDIF
+
+REM ****************************提示信息**********************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map01004
+REM Automatically generated on 22 Aug 2008, 16:24:13
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(1055365098,1219415053)
+USER_COMMANDS_COUNT(10,2,0,0)
+LEVEL_DESCRIPTION("Your enemy here can build Treasure Room - and you can't. To help you overcome this, you'll get 200000 at start. Don't think you won't see heroes on your way. Be assured that the Avatar is also here.")
+LEVEL_AUTHORS("","")

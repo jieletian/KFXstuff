@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00405
+REM Automatically generated on 21 Aug 2008, 04:01:52
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(1004989726,1219284112)
+USER_COMMANDS_COUNT(204,3,0,22)
+LEVEL_DESCRIPTION("4 Enemies, mostly ai fighting. Published by Oetelaer.")
+LEVEL_AUTHORS("","")

@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00748
+REM Automatically generated on 30 Aug 2008, 12:32:16
+
+LEVEL_VERSION(1,0,0)
+LEVEL_TIMESTAMP(1174930672,1220092336)
+USER_COMMANDS_COUNT(17,2,0,0)
+LEVEL_DESCRIPTION("You're an orc, Muahaha. Your job is to locate and exterminate about 12 Barbarian guards in the city before you can head over towards the arena (North West) to test your skills. Beware of any patrol parties though...")
+LEVEL_AUTHORS("DzjeeAr","")

@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00216
+REM Automatically generated on 06 Sep 2009, 03:29:11
+
+LEVEL_VERSION(0,1,0)
+LEVEL_TIMESTAMP(1252141734,1252200551)
+USER_COMMANDS_COUNT(1,0,0,0)
+LEVEL_DESCRIPTION("You have a following to-do, kill the enemy ruler so that people of this land could all have life of ease.")
+LEVEL_AUTHORS("Joachim Zielinski","")

@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00330
+REM Automatically generated on 19 Aug 2008, 22:00:27
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(897842632,1219176027)
+USER_COMMANDS_COUNT(7,2,0,0)
+LEVEL_DESCRIPTION("This relentlessly desolate terrain permits few of the usual rooms. On top of that, no-one lives here except a lot of beetles and spiders, so you'll have to make do. Rumour has it that there are some very nasty things living in the keep at the centre, so be careful.")
+LEVEL_AUTHORS("Nikolai Kingsley","")

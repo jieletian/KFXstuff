@@ -1,0 +1,194 @@
+REM basics
+
+    LEVEL_VERSION(1)
+    SET_GENERATE_SPEED(400)
+
+    START_MONEY(PLAYER0,7500)
+    START_MONEY(PLAYER3,20000)
+
+    MAX_CREATURES(PLAYER0,15)
+    MAX_CREATURES(PLAYER3,20)
+
+    RUN_AFTER_VICTORY(1)
+
+    SET_PLAYER_COLOR(PLAYER0, BLUE)
+
+    SET_MUSIC("campaign_music/mines_homeworld.mp3")
+
+    COMPUTER_PLAYER(PLAYER3, 5)
+
+REM Creatures
+
+    ADD_CREATURE_TO_POOL(TROLL,20)
+    ADD_CREATURE_TO_POOL(SPIDER,20)
+    ADD_CREATURE_TO_POOL(HELL_HOUND,20)
+    ADD_CREATURE_TO_POOL(SORCEROR,20)
+    ADD_CREATURE_TO_POOL(DRAGON,20)
+    ADD_CREATURE_TO_POOL(DARK_MISTRESS,20)
+
+    CREATURE_AVAILABLE(ALL_PLAYERS,TROLL,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,SPIDER,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,HELL_HOUND,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,SORCEROR,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,DRAGON,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,DARK_MISTRESS,1,0)
+
+REM Rooms
+
+    REM ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,BRIDGE,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,0)
+
+    ROOM_AVAILABLE(ALL_PLAYERS, WORKSHOP, 1, 0)
+    ROOM_AVAILABLE(ALL_PLAYERS, PRISON, 1, 0)
+    ROOM_AVAILABLE(ALL_PLAYERS, TORTURE, 1, 0)
+
+REM magic
+
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_POSSESS,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SPEED,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CALL_TO_ARMS,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CONCEAL,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HEAL_CREATURE,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_PROTECT,1,0)
+
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_LIGHTNING,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CHICKEN,1,0)
+
+REM Traps
+
+    TRAP_AVAILABLE(ALL_PLAYERS,POISON_GAS,1,0)
+    TRAP_AVAILABLE(ALL_PLAYERS,LIGHTNING,1,0)
+
+    DOOR_AVAILABLE(ALL_PLAYERS,WOOD,1,0)
+    DOOR_AVAILABLE(ALL_PLAYERS,STEEL,1,0)
+
+REM Main level logic
+
+    SET_CREATURE_FEAR(THIEF,255)
+
+    QUICK_OBJECTIVE(1, "欢迎守护者来到星界火湖。这里没有财富、战利品或奖励，你来这里只是为了自娱自乐。这个充满巨大熔岩湖的领域一次又一次地消失……很快它会再次消失，世界末日将决定你的命运。", PLAYER0)
+
+    SET_TIMER(PLAYER0, TIMER0)
+    DISPLAY_COUNTDOWN(PLAYER0, TIMER0, 36000, 1)
+
+REM Waves of thieves
+
+    CREATE_PARTY(thieves_low_gold)
+        ADD_TO_PARTY(thieves_low_gold, THIEF, 2, 0, STEAL_GOLD, 0)
+
+    CREATE_PARTY(thieves_low_spells)
+        ADD_TO_PARTY(thieves_low_spells, THIEF, 2, 0, STEAL_SPELLS, 0)
+
+    CREATE_PARTY(thief_medium_gold)
+        ADD_TO_PARTY(thief_medium_gold, THIEF, 5, 0, STEAL_GOLD, 0)
+
+    CREATE_PARTY(thief_medium_spells)
+        ADD_TO_PARTY(thief_medium_spells, THIEF, 5, 0, STEAL_SPELLS, 0)
+
+    CREATE_PARTY(thief_strong_gold)
+        ADD_TO_PARTY(thief_strong_gold, THIEF, 8, 0, STEAL_GOLD, 0)
+
+    CREATE_PARTY(thief_strong_spells)
+        ADD_TO_PARTY(thief_strong_spells, THIEF, 8, 0, STEAL_SPELLS, 0)
+
+    IF (PLAYER0, TIMER0 >= 7000)
+        QUICK_OBJECTIVE(5, "卑鄙的小偷四处游荡，寻找旅行者，窃取他们的金币和其他贵重物品。保持警惕。", -1)
+
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thieves_low_gold, -1, 3)
+
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thieves_low_gold, -2, 2)
+    ENDIF
+
+    IF (PLAYER0, TIMER0 >= 10000)
+        REM Upper is parties that hit the player
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thieves_low_gold, -1, 2)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thieves_low_spells, -1, 1)
+        REM Lower is parties that hit yellow / Yellow gets weaker/less parties on average
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thieves_low_gold, -2, 2)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thieves_low_spells, -2, 1)
+    ENDIF
+
+    IF (PLAYER0, TIMER0 >= 13000)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thief_medium_gold, -1, 2)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thieves_low_spells, -1, 1)
+    ENDIF
+
+    IF (PLAYER0, TIMER0 >= 16000)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thief_medium_gold, -1, 2)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thief_medium_spells, -1, 2)
+
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thieves_low_gold, -2, 2)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thieves_low_spells, -2, 1)
+    ENDIF
+
+    IF (PLAYER0, TIMER0 >= 19000)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thief_medium_gold, -1, 2)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thief_medium_spells, -1, 2)
+    ENDIF
+
+    IF (PLAYER0, TIMER0 >= 22000)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thief_strong_gold, -1, 2)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thief_strong_spells, -1, 2)
+
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thief_medium_gold, -2, 2)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thief_medium_spells, -2, 2)
+    ENDIF
+
+    IF (PLAYER0, TIMER0 >= 25000)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thief_strong_gold, -1, 3)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thief_strong_spells, -1, 3)
+    ENDIF
+
+    IF (PLAYER0, TIMER0 >= 28000)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thief_strong_gold, -1, 4)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thief_strong_spells, -1, 4)
+
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thief_medium_gold, -2, 3)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thief_medium_spells, -2, 2)
+    ENDIF
+
+    IF (PLAYER0, TIMER0 >= 31000)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thief_strong_gold, -1, 4)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, thief_strong_spells, -1, 4)
+    ENDIF
+
+REM Endgame
+
+    IF (PLAYER0, TIMER0 >= 36000)
+        USE_POWER(PLAYER0, POWER_ARMAGEDDON, 1)
+        QUICK_OBJECTIVE(2, "希望你做好准备。无论输赢，你在这里的时间都快结束了。", PLAYER0)
+    ENDIF
+
+
+REM Player wins at the end if the opponent has no monsters left
+
+    IF (PLAYER0, TIMER0 > 26500)
+
+        IF_CONTROLS(PLAYER3, TOTAL_CREATURES == 0)
+            SET_HEART_HEALTH(PLAYER3, 0)
+        ENDIF
+
+    ENDIF
+
+    IF (PLAYER3, DUNGEON_DESTROYED == 1)
+        WIN_GAME
+        QUICK_OBJECTIVE(3, "干得好，守护者。满月王国属于你了。")
+    ENDIF
+
+
+REM Give player vision if the player goes to the top right to get the book
+
+    SET_POWER_CONFIGURATION(POWER_VISION,PanelTabIndex,14,5)
+
+IF_AVAILABLE(PLAYER0, POWER_VISION > 0)
+    TUTORIAL_FLASH_BUTTON(31, 300)
+    QUICK_OBJECTIVE(4, "你找到的书看起来真不祥。也许你可以用它对付那些讨厌的小偷？拥有视力的怪物可以看到隐形的单位。")
+ENDIF

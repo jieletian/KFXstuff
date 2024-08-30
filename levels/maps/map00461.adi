@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00815
+REM Automatically generated on 22 Aug 2008, 06:30:46
+
+LEVEL_VERSION(1,0,2)
+LEVEL_TIMESTAMP(980702104,1219379446)
+USER_COMMANDS_COUNT(8,2,0,0)
+LEVEL_DESCRIPTION("It is night fall. For the past two weeks the villagers of Terror Island have endured a plague of evil demons intent on destroying them and their homes. Their crops, boats, food, and many of their lives have been lost. You have arrived just in time to train these farmers and fishermen into an army, to turn back this plague once and for all.")
+LEVEL_AUTHORS("Steve Tupper","")

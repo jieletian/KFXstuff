@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00813
+REM Automatically generated on 22 Aug 2008, 06:27:35
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(980082796,1219379255)
+USER_COMMANDS_COUNT(20,2,0,0)
+LEVEL_DESCRIPTION("The war to the east is going badly, last week you recieved news of the fall of Severentia, the last bastion of defensive power. If it hadn't been for your victory at the portal last year the war would have already been lost.")
+LEVEL_AUTHORS("Steve Tupper","")

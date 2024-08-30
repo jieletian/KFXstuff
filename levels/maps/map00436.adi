@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00412
+REM Automatically generated on 21 Aug 2008, 04:47:08
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(977005930,1219286828)
+USER_COMMANDS_COUNT(8,2,0,0)
+LEVEL_DESCRIPTION("This level has got a rather unconventional way of getting gold and doing research. You might have some problem at start, to sort this out. But I'm not gonne tell you. I have to warn you about the enemy keeper, who might have become strong, it takes some time to meet it, and he's not having problems with ... well, just play and find out.")
+LEVEL_AUTHORS("Oetelaer","")

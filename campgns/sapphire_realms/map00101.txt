@@ -1,0 +1,674 @@
+REM basics
+
+    LEVEL_VERSION(1)
+    RUN_AFTER_VICTORY(1)
+    SET_GENERATE_SPEED(400)
+    START_MONEY(ALL_PLAYERS,0)
+    MAX_CREATURES(ALL_PLAYERS,25)
+
+REM Player config
+    SET_PLAYER_COLOR(PLAYER0, BLUE)
+    COMPUTER_PLAYER(PLAYER5,ROAMING)
+
+    REM Make the end of the level go by faster
+    SET_HEART_HEALTH(PLAYER5, 500)
+
+REM Magic logic
+
+    REM Base skills
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_POSSESS,1,1)
+
+    REM Left library unlock
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CONCEAL,1,0)
+    REM Bottom library unlock
+    MAGIC_AVAILABLE(ALL_PLAYERS, POWER_REBOUND,1,0)
+    REM Upper library unlock
+    MAGIC_AVAILABLE(ALL_PLAYERS, POWER_FLIGHT,1, 0)
+    REM Right library unlock
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_DESTROY_WALLS,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SPEED,1,0)
+
+    REM Config for spells
+
+    SET_POWER_CONFIGURATION(POWER_CONCEAL,Cost,0,1)
+    SET_POWER_CONFIGURATION(POWER_CONCEAL,Cost,0,2)
+    SET_POWER_CONFIGURATION(POWER_CONCEAL,Cost,0,3)
+    SET_POWER_CONFIGURATION(POWER_CONCEAL,Cost,0,4)
+    SET_POWER_CONFIGURATION(POWER_CONCEAL,Cost,0,5)
+    SET_POWER_CONFIGURATION(POWER_CONCEAL,Cost,0,6)
+    SET_POWER_CONFIGURATION(POWER_CONCEAL,Cost,0,7)
+    SET_POWER_CONFIGURATION(POWER_CONCEAL,Cost,0,8)
+    SET_POWER_CONFIGURATION(POWER_CONCEAL,Cost,0,9)
+
+    SET_POWER_CONFIGURATION(POWER_REBOUND,Cost,0,1)
+    SET_POWER_CONFIGURATION(POWER_FLIGHT,Cost,0,1)
+    SET_POWER_CONFIGURATION(POWER_IMP,Cost,0,1)
+
+    SET_POWER_CONFIGURATION(POWER_REBOUND,PanelTabIndex,13,5)
+    SET_POWER_CONFIGURATION(POWER_FLIGHT,PanelTabIndex,14,6)
+
+REM Parties and objective
+
+    REM Make the horny not want pay
+    SET_CREATURE_CONFIGURATION(HORNY,Pay,0)
+
+    QUICK_OBJECTIVE(99, "在这个地下的玛瑙迷宫中，你失去了大部分能力。引导您的冥界使者穿过这些隧道，并搜查他们的图书馆以找到对你有用的魔法。但要小心，战斗并不是唯一的答案，时间正在流逝......")
+
+    CREATE_PARTY(party1)
+        ADD_TO_PARTY(party1,HELL_HOUND,4,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party1,HELL_HOUND,4,0,ATTACK_DUNGEON_HEART,0)
+
+    CREATE_PARTY(party1_monk)
+        ADD_TO_PARTY(party1_monk,MONK,4,0,ATTACK_DUNGEON_HEART,0)
+
+    CREATE_PARTY(party2)
+        ADD_TO_PARTY(party2,TENTACLE,5,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party2,DARK_MISTRESS,5,0,ATTACK_DUNGEON_HEART,0)
+
+    CREATE_PARTY(party3)
+        ADD_TO_PARTY(party3,MONK,3,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party3,GIANT,3,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party3,WIZARD,3,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party3,THIEF,3,0,ATTACK_DUNGEON_HEART,0)
+
+    CREATE_PARTY(party4)
+        ADD_TO_PARTY(party4,FAIRY,3,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party4,FAIRY,3,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party4,FAIRY,3,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party4,FAIRY,3,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party4,FAIRY,3,0,ATTACK_DUNGEON_HEART,0)
+
+    IF_ACTION_POINT(1, PLAYER0)
+        ADD_PARTY_TO_LEVEL(PLAYER5,party1,2,1)
+        ADD_PARTY_TO_LEVEL(PLAYER5,party1_monk,2,1)
+    ENDIF
+
+    IF_ACTION_POINT(12, PLAYER0)
+        ADD_PARTY_TO_LEVEL(PLAYER5,party2,11,1)
+    ENDIF
+
+    REM Light party in path 2
+    IF_ACTION_POINT(19, PLAYER0)
+        ADD_PARTY_TO_LEVEL(PLAYER5,party3,18,1)
+    ENDIF
+
+    REM Wizard party in path 2
+    IF_ACTION_POINT(20, PLAYER0)
+        ADD_PARTY_TO_LEVEL(PLAYER5,party4,17,1)
+    ENDIF
+
+    IF_ACTION_POINT(4, PLAYER0)
+        QUICK_OBJECTIVE(98, "遗憾的是，即使是冥界使者的镰刀也无法打破这些墙壁到达玛瑙之心。请寻找另一种方法进入这个封闭的房间。", 3)
+    ENDIF
+
+    IF (PLAYER0, HORNY == 0)
+        QUICK_OBJECTIVE(96, "失去了冥界使者，你就无法征服这个王国。你失败了。")
+        LOSE_GAME
+    ENDIF
+
+    REM Message for finding the special boxes
+    IF_ACTION_POINT(9, PLAYER0)
+        QUICK_OBJECTIVE(95, "你可以使用这些特殊技能打开或关闭这个王国的水闸。守护者的地下城被水淹没会带来重大的战术劣势。玛瑙和托帕兹似乎已经合谋对付你，计划淹没你的地下城。你能扭转局势吗？", 10)
+    ENDIF
+
+    IF(PLAYER5, DUNGEON_DESTROYED == 1)
+        QUICK_INFORMATION(97, "做得太棒了，守护者。希望你为邻国做出了正确的选择……")
+        SET_TIMER(PLAYER0, TIMER4)
+    ENDIF
+
+    REM Slight delay to the win level message
+    IF(PLAYER0, TIMER4 > 60)
+        WIN_GAME
+    ENDIF
+
+
+REM Timer to kill the player when time is up
+
+    CREATE_PARTY(party_timer_end)
+        ADD_TO_PARTY(party_timer_end,HORNY,10,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_timer_end,HORNY,10,0,ATTACK_DUNGEON_HEART,5)
+        ADD_TO_PARTY(party_timer_end,HORNY,10,0,ATTACK_DUNGEON_HEART,10)
+        ADD_TO_PARTY(party_timer_end,HORNY,10,0,ATTACK_DUNGEON_HEART,15)
+        ADD_TO_PARTY(party_timer_end,HORNY,10,0,ATTACK_DUNGEON_HEART,20)
+        ADD_TO_PARTY(party_timer_end,HORNY,10,0,ATTACK_DUNGEON_HEART,25)
+        ADD_TO_PARTY(party_timer_end,HORNY,10,0,ATTACK_DUNGEON_HEART,30)
+
+    DISPLAY_COUNTDOWN(PLAYER0, TIMER0, 18000, 1)
+
+    SET_TIMER(PLAYER0, TIMER1)
+
+    IF (PLAYER0, TIMER1 == 18000)
+        QUICK_OBJECTIVE(94, "很不幸。你的时间已经用完了。", -1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party_timer_end, -1, 1)
+    ENDIF
+
+REM ---------------------------------------------------------------------------
+REM Not finished: Logic for the libraries
+REM ---------------------------------------------------------------------------
+
+
+    REM Southern Library - Rebound
+
+    IF_ACTION_POINT(5, PLAYER0)
+        REM Claim tiles, library
+        CHANGE_SLAB_OWNER(41, 77, PLAYER0, NONE)
+
+        REM horizontal line
+        CHANGE_SLAB_OWNER(37, 77, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(38, 77, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(44, 77, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(45, 77, PLAYER0, NONE)
+        REM vertical line
+        CHANGE_SLAB_OWNER(41, 73, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(41, 74, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(41, 80, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(41, 81, PLAYER0, NONE)
+
+        PLAY_MESSAGE(PLAYER0, SOUND, "116")
+
+        REM Make blue sparkle (effect 57) on subtile x/y
+        CREATE_EFFECT_AT_POS(57, 121, 226)
+        CREATE_EFFECT_AT_POS(57, 124, 226)
+        CREATE_EFFECT_AT_POS(57, 127, 226)
+
+        TUTORIAL_FLASH_BUTTON(30, -1)
+    ENDIF
+
+    REM Western Library - Invis
+
+    IF_ACTION_POINT(6, PLAYER0)
+        REM Claim tiles, library
+        CHANGE_SLAB_OWNER(9, 40, PLAYER0, NONE)
+
+        REM horizontal line
+        CHANGE_SLAB_OWNER(3, 40, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(4, 40, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(10, 40, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(11, 40, PLAYER0, NONE)
+        REM vertical line
+        CHANGE_SLAB_OWNER(7, 36, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(7, 37, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(7, 43, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(7, 44, PLAYER0, NONE)
+
+        PLAY_MESSAGE(PLAYER0, SOUND, "116")
+
+        REM Make blue sparkle (effect 57) on subtile x/y
+        CREATE_EFFECT_AT_POS(57, 28, 118)
+        CREATE_EFFECT_AT_POS(57, 28, 121)
+        CREATE_EFFECT_AT_POS(57, 29, 124)
+
+        TUTORIAL_FLASH_BUTTON(29, -1)
+    ENDIF
+
+    REM Northern Library - Flight
+
+    IF_ACTION_POINT(7, PLAYER0)
+
+        REM Claim tiles, library
+        CHANGE_SLAB_OWNER(42, 9, PLAYER0, NONE)
+
+        REM horizontal line
+        CHANGE_SLAB_OWNER(37, 7, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(38, 7, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(44, 7, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(45, 7, PLAYER0, NONE)
+        REM vertical line
+        CHANGE_SLAB_OWNER(41, 3, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(41, 4, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(41, 10, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(41, 11, PLAYER0, NONE)
+
+        PLAY_MESSAGE(PLAYER0, SOUND, "116")
+
+        REM Make blue sparkle (effect 57) on subtile x/y
+        CREATE_EFFECT_AT_POS(57, 121, 28)
+        CREATE_EFFECT_AT_POS(57, 124, 28)
+        CREATE_EFFECT_AT_POS(57, 127, 28)
+
+        TUTORIAL_FLASH_BUTTON(31, -1)
+
+    ENDIF
+
+    REM Eastern Library
+
+    IF_ACTION_POINT(8, PLAYER0)
+
+        REM Claim tiles, library
+        CHANGE_SLAB_OWNER(75, 41, PLAYER0, NONE)
+
+        REM horizontal line
+        CHANGE_SLAB_OWNER(73, 40, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(74, 40, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(80, 40, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(81, 40, PLAYER0, NONE)
+        REM vertical line
+        CHANGE_SLAB_OWNER(77, 36, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(77, 37, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(77, 43, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(77, 44, PLAYER0, NONE)
+
+        PLAY_MESSAGE(PLAYER0, SOUND, "116")
+
+        REM Make blue sparkle (effect 57) on subtile x/y
+        CREATE_EFFECT_AT_POS(57, 226, 118)
+        CREATE_EFFECT_AT_POS(57, 226, 121)
+        CREATE_EFFECT_AT_POS(57, 226, 124)
+
+        TUTORIAL_FLASH_BUTTON(21, -1)
+
+    ENDIF
+
+REM Music Logic
+
+    SET_MUSIC("campaign_music/amala_theme.mp3")
+    SET_FLAG(PLAYER0,FLAG5,2)
+
+    IF(PLAYER0,FLAG5 != 4)
+        REM Time battle music been playing
+        NEXT_COMMAND_REUSABLE
+        SET_TIMER(PLAYER0,TIMER7)
+    ENDIF
+    IF(PLAYER0,ACTIVE_BATTLES == 0)
+        REM Time battle has been going on
+        NEXT_COMMAND_REUSABLE
+        SET_TIMER(PLAYER0,TIMER6)
+    ENDIF
+    IF(PLAYER0,ACTIVE_BATTLES > 0)
+        REM Time no battle has been going on
+        NEXT_COMMAND_REUSABLE
+        SET_TIMER(PLAYER0,TIMER5)
+    ENDIF
+
+    REM Start battle music if battle has been going on for at least 60 gameturns (3 seconds) and is not already playing
+    IF(PLAYER0,TIMER6 > 60)
+        IF(PLAYER0,FLAG5 != 4)
+            NEXT_COMMAND_REUSABLE
+            SET_MUSIC("campaign_music/amala_battle.mp3")
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER0,FLAG5,4)
+        ENDIF
+    ENDIF
+
+    REM Start regular music if battle music lasted at least 15 seconds and no fighting has occured for at least 5 seconds
+    IF(PLAYER0,TIMER7 > 300)
+        IF(PLAYER0,TIMER5 > 100)
+            IF(PLAYER0,FLAG5 != 2)
+                NEXT_COMMAND_REUSABLE
+                SET_MUSIC("campaign_music/amala_theme.mp3")
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0,FLAG5,2)
+            ENDIF
+        ENDIF
+    ENDIF
+
+REM Special Box Logic
+
+IF_ACTION_POINT(9, PLAYER0)
+    REM CLaim pillars as soon as the player reaches the room
+    CHANGE_SLAB_OWNER(9, 24, PLAYER0, NONE)
+    CHANGE_SLAB_OWNER(15, 24, PLAYER0, NONE)
+ENDIF
+
+REM ----------------------------------------------------------------------
+REM Logic for the yellow special box
+REM ----------------------------------------------------------------------
+
+    SET_BOX_TOOLTIP(1,"Change Yellow's Floodgate")
+    SET_FLAG(PLAYER0, FLAG3, 0)
+
+    IF(PLAYER0,BOX1_ACTIVATED > PLAYER0,FLAG0)
+
+        REM Actually execute the thing that's supposed to happen
+
+        REM Set the tiles around the statue depending on the state
+
+        QUICK_INFORMATION(51, "位于下一个王国的托帕兹地下城附近的水闸已经打开，这让他更难在水边建造……")
+
+        CHANGE_SLAB_TYPE(9, 20, WATER)
+        CHANGE_SLAB_TEXTURE(9, 20, SKULL_RELIEF)
+        CHANGE_SLAB_TYPE(8, 21, WATER)
+        CHANGE_SLAB_TEXTURE(8, 21, SKULL_RELIEF)
+        CHANGE_SLAB_TYPE(9, 21, WATER)
+        CHANGE_SLAB_TEXTURE(9, 21, SKULL_RELIEF)
+        CHANGE_SLAB_TYPE(10, 21, WATER)
+        CHANGE_SLAB_TEXTURE(10, 21, SKULL_RELIEF)
+        CHANGE_SLAB_TYPE(9, 22, WATER)
+        CHANGE_SLAB_TEXTURE(9, 22, SKULL_RELIEF)
+
+        REM Splashes and sounds and effect
+        PLAY_MESSAGE(PLAYER0, SOUND, "21")
+        PLAY_MESSAGE(PLAYER0, SOUND, "22")
+        PLAY_MESSAGE(PLAYER0, SOUND, "23")
+        PLAY_MESSAGE(PLAYER0, SOUND, "24")
+        PLAY_MESSAGE(PLAYER0, SOUND, "42")
+        PLAY_MESSAGE(PLAYER0, SOUND, "927")
+        CREATE_EFFECT_AT_POS(68, 28, 64)
+
+        REM Flag0 - Water level of Yellow for level 7
+        REM 0 is default - yellow has dry land
+        REM 1 is bonus - yellow gets flooded
+        SET_FLAG(PLAYER0, CAMPAIGN_FLAG0, 1)
+
+        IF (PLAYER0, FLAG3 == 0)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER0, FLAG3, 1)
+
+            REM Change the tiles to water - From top left to bottom right
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(9, 20, PATH)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(9, 20, GYPSUM)
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(8, 21, PATH)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(8, 21, GYPSUM)
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(9, 21, PATH)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(9, 21, GYPSUM)
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(10, 21, PATH)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(10, 21, GYPSUM)
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(9, 22, PATH)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(9, 22, GYPSUM)
+
+            REM Splashes and sounds and effect
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "21")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "22")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "23")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "24")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "42")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "927")
+            NEXT_COMMAND_REUSABLE
+            CREATE_EFFECT_AT_POS(68, 28, 64)
+
+            REM Yellow is dry
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER0, CAMPAIGN_FLAG0, 0)
+
+            NEXT_COMMAND_REUSABLE
+            QUICK_INFORMATION(52, "位于下一个王国的托帕兹地下城附近的水闸已关闭。这样他就可以更轻松地在水边建造地下城。")
+
+        ENDIF
+
+        IF (PLAYER0, FLAG3 == 1)
+
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER0, FLAG3, 0)
+
+            REM Change the tiles to sand
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(9, 20, WATER)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(9, 20, SKULL_RELIEF)
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(8, 21, WATER)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(8, 21, SKULL_RELIEF)
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(9, 21, WATER)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(9, 21, SKULL_RELIEF)
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(10, 21, WATER)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(10, 21, SKULL_RELIEF)
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(9, 22, WATER)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(9, 22, SKULL_RELIEF)
+
+            REM Splashes and sounds and effect
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "21")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "22")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "23")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "24")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "42")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "927")
+            NEXT_COMMAND_REUSABLE
+            CREATE_EFFECT_AT_POS(68, 28, 64)
+
+            REM Yellow is flooded
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER0, CAMPAIGN_FLAG0, 1)
+
+            NEXT_COMMAND_REUSABLE
+            QUICK_INFORMATION(53, "位于下一个王国的托帕兹地下城附近的水闸已经打开，这让他更难在水边建造……")
+
+        ENDIF
+
+        REM Timer and flag which determines the respawn timer of the box
+        NEXT_COMMAND_REUSABLE
+        SET_TIMER(PLAYER0,TIMER2)
+        NEXT_COMMAND_REUSABLE
+        SET_FLAG(PLAYER0, FLAG2, 1)
+
+        REM Flag ticks up progressively to prevent continuous triggering
+        NEXT_COMMAND_REUSABLE
+        ADD_TO_FLAG(PLAYER0, FLAG0, 1)
+
+    ENDIF
+
+    IF (PLAYER0, FLAG2 > 0)
+        REM Player successfully summoned - long timer
+        IF (PLAYER0, FLAG2 == 1)
+            REM This check determines when the box respawns
+            IF (PLAYER0, TIMER2 == 10)
+                REM Adds the box back to the level after using it
+                NEXT_COMMAND_REUSABLE
+                ADD_OBJECT_TO_LEVEL(SPECBOX_CUSTOM, 13, 1, PLAYER0)            
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, FLAG2, 0)
+            ENDIF
+        ENDIF
+    ENDIF
+
+REM ----------------------------------------------------------------------
+REM Blue special box logic
+REM ----------------------------------------------------------------------
+
+    SET_BOX_TOOLTIP(2,"扳动蓝色的闸门")
+    SET_FLAG(PLAYER0, FLAG4, 0)
+
+    IF(PLAYER0,BOX2_ACTIVATED > PLAYER0,flag1)
+
+        REM Actually execute the thing that's supposed to happen
+
+        REM Set the tiles around the statue depending on the state
+
+        CHANGE_SLAB_TYPE(15, 20, PATH)
+        CHANGE_SLAB_TEXTURE(15, 20, GYPSUM)
+        CHANGE_SLAB_TYPE(14, 21, PATH)
+        CHANGE_SLAB_TEXTURE(14, 21, GYPSUM)
+        CHANGE_SLAB_TYPE(15, 21, PATH)
+        CHANGE_SLAB_TEXTURE(15, 21, GYPSUM)
+        CHANGE_SLAB_TYPE(16, 21, PATH)
+        CHANGE_SLAB_TEXTURE(16, 21, GYPSUM)
+        CHANGE_SLAB_TYPE(15, 22, PATH)
+        CHANGE_SLAB_TEXTURE(15, 22, GYPSUM)
+
+        REM Splashes and sounds and effect
+        PLAY_MESSAGE(PLAYER0, SOUND, "21")
+        PLAY_MESSAGE(PLAYER0, SOUND, "22")
+        PLAY_MESSAGE(PLAYER0, SOUND, "23")
+        PLAY_MESSAGE(PLAYER0, SOUND, "24")
+        PLAY_MESSAGE(PLAYER0, SOUND, "42")
+        PLAY_MESSAGE(PLAYER0, SOUND, "927")
+        CREATE_EFFECT_AT_POS(68, 46, 64)
+
+        REM Flag0 - Water level of Yellow for level 7
+        REM 0 is default - yellow has dry land
+        REM 1 is bonus - yellow gets flooded
+        SET_FLAG(PLAYER0, CAMPAIGN_FLAG0, 0)
+
+        QUICK_INFORMATION(54, "下一个王国中你的地下城附近的水闸已关闭。你将可以更轻松地在水边建造地下城。")
+
+        IF (PLAYER0, FLAG4 == 0)
+
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER0, FLAG4, 1)
+
+            REM Change the tiles to water - From top left to bottom right
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(15, 20, WATER)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(15, 20, SKULL_RELIEF)
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(14, 21, WATER)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(14, 21, SKULL_RELIEF)
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(15, 21, WATER)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(15, 21, SKULL_RELIEF)
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(16, 21, WATER)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(16, 21, SKULL_RELIEF)
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(15, 22, WATER)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(15, 22, SKULL_RELIEF)
+
+            REM Splashes and sounds and effect
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "21")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "22")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "23")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "24")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "42")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "927")
+            NEXT_COMMAND_REUSABLE
+            CREATE_EFFECT_AT_POS(68, 46, 64)
+
+            REM Yellow is dry
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER0, CAMPAIGN_FLAG0, 1)
+
+            NEXT_COMMAND_REUSABLE
+            QUICK_INFORMATION(58, "下一个王国中你的地下城附近的水闸已打开。你会发现在水边建造更加危险……")
+
+        ENDIF
+
+        IF (PLAYER0, FLAG4 == 1)
+
+
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER0, FLAG4, 0)
+
+            REM Change the tiles to sand
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(15, 20, PATH)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(15, 20, GYPSUM)
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(14, 21, PATH)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(14, 21, GYPSUM)
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(15, 21, PATH)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(15, 21, GYPSUM)
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(16, 21, PATH)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(16, 21, GYPSUM)
+
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TYPE(15, 22, PATH)
+            NEXT_COMMAND_REUSABLE
+            CHANGE_SLAB_TEXTURE(15, 22, GYPSUM)
+
+            REM Splashes and sounds and effect
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "21")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "22")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "23")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "24")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "42")
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, "927")
+            NEXT_COMMAND_REUSABLE
+            CREATE_EFFECT_AT_POS(68, 46, 64)
+
+            REM Yellow is flooded
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER0, CAMPAIGN_FLAG1, 1)
+
+            NEXT_COMMAND_REUSABLE
+            QUICK_INFORMATION(56, "下一个王国中你的地下城附近的水闸已关闭。你将可以更轻松地在水边建造地下城。")
+
+        ENDIF
+
+        REM Timer and flag which determines the respawn timer of the box
+        NEXT_COMMAND_REUSABLE
+        SET_TIMER(PLAYER0,TIMER5)
+        NEXT_COMMAND_REUSABLE
+        SET_FLAG(PLAYER0, FLAG5, 1)
+
+        REM Flag ticks up progressively to prevent continuous triggering
+        NEXT_COMMAND_REUSABLE
+        ADD_TO_FLAG(PLAYER0, flag1, 1)
+
+    ENDIF
+
+    IF (PLAYER0, FLAG5 > 0)
+        REM Player successfully summoned - long timer
+        IF (PLAYER0, FLAG5 == 1)
+            REM This check determines when the box respawns
+            IF (PLAYER0, TIMER5 == 10)
+                REM Adds the box back to the level after using it
+                NEXT_COMMAND_REUSABLE
+                ADD_OBJECT_TO_LEVEL(SPECBOX_CUSTOM, 14, 2, PLAYER0)            
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, FLAG5, 0)
+            ENDIF
+        ENDIF
+    ENDIF

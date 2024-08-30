@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00411
+REM Automatically generated on 21 Aug 2008, 04:43:08
+
+LEVEL_VERSION(1,0,2)
+LEVEL_TIMESTAMP(976979198,1219286588)
+USER_COMMANDS_COUNT(8,2,0,0)
+LEVEL_DESCRIPTION("Free this Level from a Vampire desease. You're the Hero for once. Vampires and Keepers are deseasing your Dungeons. Your wine might get spoiled. Warning; Once the vampires have organized the will come in very large numbers, so be prepared. Also here; save, in order not to have to start all over again.")
+LEVEL_AUTHORS("Oetelaer","")

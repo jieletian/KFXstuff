@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00400
+REM Automatically generated on 20 Aug 2008, 13:47:03
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(896687490,1219232823)
+USER_COMMANDS_COUNT(34,4,0,0)
+LEVEL_DESCRIPTION("Here in the land of Flaming-Heck a great battle has been Raging between the force's of Good and their Betters, At the moment the Hero's have walled the other Keeper in. You must enter by the ruined side of the Hero's once mighty castle, Take out the Hero wimps and find a way across the Lava to destroy the trapped Keeper. Beware! Due to the long battle, the area is infested with Flys and Bugs!")
+LEVEL_AUTHORS("Paul Wellman","")

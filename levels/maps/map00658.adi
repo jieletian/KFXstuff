@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00520
+REM Automatically generated on 21 Aug 2008, 08:29:22
+
+LEVEL_VERSION(1,0,0)
+LEVEL_TIMESTAMP(1156669044,1219300162)
+USER_COMMANDS_COUNT(8,2,0,0)
+LEVEL_DESCRIPTION("The caves of the Dark River house a multitude of strange creatures of different kinds. Those, which does not use water, known as heroes, seems particularly appreciate this region. Admittedly that is only momentary... But be careful when putting your nose out... You may catch something other than a cold. Map originated in France.")
+LEVEL_AUTHORS("Santo","")

@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00203
+REM Automatically generated on 29 Aug 2008, 14:34:31
+
+LEVEL_VERSION(1,0,0)
+LEVEL_TIMESTAMP(899140808,1220013271)
+USER_COMMANDS_COUNT(38,2,0,0)
+LEVEL_DESCRIPTION("On the surface, Loveyheart is a tranquil haven, bunnies frolic, flowers grow, and everyone is at peace with each other. Below, however, an immense war has struck the subterrenean underlands. The resident Keeper, days before his attack on the overland, has been overthrown by a sinister, equally, nay, even more so evil force. This may be the work of another reign of Keepers. You must take care of this new threat before it becomes a challange to yur own throne. Note, however, that resources are low and you have been given only a few rooms and spells to work with. See what you can find at the previous Keeper's dungeon ruins.")
+LEVEL_AUTHORS("Grinic","")

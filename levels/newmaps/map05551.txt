@@ -1,0 +1,431 @@
+LEVEL_VERSION(1)
+REM ===============================================================
+REM   Puzzlebox
+REM     by Yani
+REM     29/07/2023
+REM ===============================================================
+REM   This mapscript contains SPOILERS! 
+REM  
+REM   The map itself has clues to what you need to do :) 
+REM ===============================================================
+REM -- Possible updates:
+REM -- - when you get orcs, make them die trough torture? so you can't make army of ghosts
+REM -- - make the gate at white heart always show 3 blocks high when on low height wall mode
+REM ===============================================================
+REM > As a rule of thumb, if a person tries and fails at a puzzle, 
+REM > and you tell him the solution, he should say "damn, I should
+REM > have thought of that". Those are great puzzles. If he says
+REM > something along the lines of "damn, how could I have known
+REM > that", it's a bad puzzle.
+REM -- Loobinex
+REM ===============================================================
+SET_MUSIC(5)
+RUN_AFTER_VICTORY(1)
+START_MONEY(ALL_PLAYERS,0)
+
+REM -- The portal should only provide a lvl 10 fly
+MAX_CREATURES(ALL_PLAYERS,1)
+SET_GENERATE_SPEED(20)
+CREATURE_ENTRANCE_LEVEL(PLAYER0,10)
+CREATURE_AVAILABLE(PLAYER0,FLY,1,1)
+ADD_CREATURE_TO_POOL(FLY,69)
+
+REM -- Fly should not have sight or speed
+SET_CREATURE_INSTANCE(FLY,5,NULL,1)
+SET_CREATURE_INSTANCE(FLY,8,NULL,1)
+
+REM -- Unlocks
+ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_POSSESS,1,1)
+RESEARCH_ORDER(ALL_PLAYERS,MAGIC,POWER_HAND,600)
+RESEARCH_ORDER(ALL_PLAYERS,MAGIC,POWER_SLAP,600)
+RESEARCH_ORDER(ALL_PLAYERS,ROOM,RESEARCH,800)
+RESEARCH_ORDER(ALL_PLAYERS,ROOM,GUARD_POST,800)
+
+REM -- Game rules
+SET_GAME_RULE(BodiesForVampire,4)
+SET_GAME_RULE(BodyRemainsFor,99999999999)
+SET_GAME_RULE(RoomSellGoldBackPercent,100)
+SET_GAME_RULE(TortureHealthLoss,500)
+SET_GAME_RULE(DungeonHeartHealHealth,0)
+
+REM -- Vampire training
+SET_CREATURE_CONFIGURATION(VAMPIRE,TrainingValue,50)
+SET_CREATURE_CONFIGURATION(VAMPIRE,TrainingCost,500)
+
+REM -- No corpses
+SET_CREATURE_PROPERTY(HELL_HOUND,NO_CORPSE_ROTTING,1)
+SET_CREATURE_PROPERTY(DRUID,NO_CORPSE_ROTTING,1)
+SET_CREATURE_PROPERTY(SKELETON,NO_CORPSE_ROTTING,1)
+SET_CREATURE_PROPERTY(ORC,NO_CORPSE_ROTTING,1)
+SET_CREATURE_PROPERTY(BUG,NO_CORPSE_ROTTING,1)
+SET_CREATURE_PROPERTY(FLY,NO_CORPSE_ROTTING,1)
+SET_CREATURE_PROPERTY(VAMPIRE,NO_CORPSE_ROTTING,1)
+SET_CREATURE_PROPERTY(BARBARIAN,NO_CORPSE_ROTTING,1)
+
+REM -- Make it so torches don't get removed when their slab is claimed
+SET_OBJECT_CONFIGURATION(TORCH,Properties,4)
+SET_OBJECT_CONFIGURATION(TORCHUN,Properties,4)
+
+SET_CREATURE_INSTANCE(SAMURAI,6,DRAIN,1)
+
+REM -- Intro text
+QUICK_OBJECTIVE(0,"欢迎来到神秘宝盒，守护者。你的目标是摧毁白色的心脏。祝你好运！",PLAYER0)
+
+REM -- Hide graveyard entrance
+CONCEAL_MAP_RECT(PLAYER0,106,142,1,1,1)
+
+REM -- Show decoy key
+REVEAL_MAP_RECT(PLAYER0,139,199,9,9)
+
+REM -- Show white heart
+REVEAL_MAP_RECT(PLAYER0,190,88,15,15)
+
+REM -- Add level up box to little tunnel if imp hasn't been to dungeon heart yet
+IF_ACTION_POINT(4,PLAYER0)
+    IF(PLAYER0,FLAG0==0)
+        ADD_OBJECT_TO_LEVEL(SPECBOX_INCLEV,3,0,PLAYER0)
+        CREATE_EFFECT(56,3)
+    ENDIF
+ENDIF
+
+REM -- Show invisibility spell
+REVEAL_MAP_RECT(PLAYER0,85,142,9,9)
+
+REM -- Count imp at Dungeon Heart
+IF(PLAYER0,FLAG0==0)
+    NEXT_COMMAND_REUSABLE
+    COUNT_CREATURES_AT_ACTION_POINT(1,PLAYER0,IMP,PLAYER0,FLAG0)
+ENDIF
+
+REM -- When there is an imp at the Dungeon Heart
+IF(PLAYER0,FLAG0>=1)
+
+    REM -- Open path to library
+    CHANGE_SLAB_TYPE(42,44,PATH)
+    USE_POWER_AT_POS(PLAYER0,127,133,POWER_CAVE_IN,9,1)
+    CHANGE_SLAB_TYPE(43,44,PATH)
+    USE_POWER_AT_POS(PLAYER0,130,133,POWER_CAVE_IN,9,1)
+
+    REM -- Give bridge
+    ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+    TUTORIAL_FLASH_BUTTON(18,-1)
+
+    REM -- Also kill avatar that's being tortured
+    KILL_CREATURE(PLAYER_GOOD,AVATAR,AT_ACTION_POINT[14],1)
+
+    REM -- Remove level up special boxes
+    SET_OBJECT_CONFIGURATION(SPECBOX_INCLEV,UpdateFunction,UPDATE_POWER_LIGHTNING)
+
+ENDIF
+
+REM -- When we get the vampire
+IF(PLAYER0,VAMPIRE>=1)
+
+    REM -- Open some doors
+    CHANGE_SLAB_TYPE(43,47,PATH)
+    USE_POWER_AT_POS(PLAYER0,130,142,POWER_CAVE_IN,9,1)
+    CHANGE_SLAB_TYPE(46,49,PATH)
+    USE_POWER_AT_POS(PLAYER0,139,148,POWER_CAVE_IN,9,1)
+    CHANGE_SLAB_TYPE(46,50,PATH)
+    USE_POWER_AT_POS(PLAYER0,139,151,POWER_CAVE_IN,7,1)
+
+    REM -- We don't want any more
+    SET_GAME_RULE(BodiesForVampire,100)
+ENDIF
+
+REM -- Show doggies behind bars when entering their area
+IF_ACTION_POINT(5,PLAYER0)
+    REVEAL_MAP_RECT(PLAYER0,112,67,12,12)
+    REVEAL_MAP_RECT(PLAYER0,157,85,12,12)
+ENDIF
+IF_ACTION_POINT(12,PLAYER0)
+    REVEAL_MAP_RECT(PLAYER0,136,52,15,20)
+ENDIF
+
+REM -- Make sure doggies are endless
+IF(PLAYER_GOOD,HELL_HOUND<14)
+    NEXT_COMMAND_REUSABLE
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,HELL_HOUND,21,1,10,0)
+    NEXT_COMMAND_REUSABLE
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,HELL_HOUND,22,1,10,0)
+ENDIF
+
+REM -- Gate open button
+SET_BOX_TOOLTIP(100,"Release the hounds!")
+IF(PLAYER0,BOX100_ACTIVATED>=1)
+
+    REM -- Play dog bark
+    PLAY_MESSAGE(PLAYER0,SOUND,553)
+
+    REM -- Open gate
+    CHANGE_SLAB_TYPE(44,20,PATH)
+    CHANGE_SLAB_TYPE(45,20,PATH)
+    CHANGE_SLAB_TYPE(46,20,PATH)
+
+    REM -- Open dogs left
+    CHANGE_SLAB_TYPE(36,21,PATH)
+    CHANGE_SLAB_TYPE(36,22,PATH)
+    CHANGE_SLAB_TYPE(36,23,PATH)
+    CHANGE_SLAB_TYPE(37,21,PATH)
+    CHANGE_SLAB_TYPE(37,23,PATH)
+    CHANGE_SLAB_TYPE(38,21,PATH)
+    CHANGE_SLAB_TYPE(38,22,PATH)
+    CHANGE_SLAB_TYPE(38,23,PATH)
+
+    REM -- Open dogs right
+    CHANGE_SLAB_TYPE(51,27,PATH)
+    CHANGE_SLAB_TYPE(51,28,PATH)
+    CHANGE_SLAB_TYPE(51,53,PATH)
+    CHANGE_SLAB_TYPE(51,53,PATH)
+    CHANGE_SLAB_TYPE(51,29,PATH)
+    CHANGE_SLAB_TYPE(52,27,PATH)
+    CHANGE_SLAB_TYPE(52,29,PATH)
+    CHANGE_SLAB_TYPE(53,27,PATH)
+    CHANGE_SLAB_TYPE(53,28,PATH)
+    CHANGE_SLAB_TYPE(53,29,PATH)
+
+    REM -- Open treasury
+    CHANGE_SLAB_TYPE(47,53,PATH)
+    CHANGE_SLAB_TYPE(51,53,PATH)
+    USE_POWER_AT_POS(PLAYER0,142,160,POWER_CAVE_IN,9,1)
+
+    REM -- Create and open hatchery
+    CHANGE_SLAB_TYPE(53,55,PATH)
+    CHANGE_SLAB_TYPE(53,56,PATH)
+    CHANGE_SLAB_TYPE(53,57,PATH)
+    CHANGE_SLAB_TYPE(53,60,HATCHERY,MATCH)
+
+    REM -- Let the player know the puzzle shifted
+    SET_TIMER(PLAYER_GOOD,TIMER0)
+    IF(PLAYER_GOOD,TIMER0>=60)
+        PLAY_MESSAGE(PLAYER0,SOUND,35) REM -- Sound: rockroll.wav
+    ENDIF
+
+ENDIF
+
+REM -- Wait for barbarians to die
+COUNT_CREATURES_AT_ACTION_POINT(10,PLAYER_GOOD,BARBARIAN,PLAYER_GOOD,FLAG3)
+IF(PLAYER_GOOD,FLAG3>=1)
+    NEXT_COMMAND_REUSABLE
+    COUNT_CREATURES_AT_ACTION_POINT(10,PLAYER_GOOD,BARBARIAN,PLAYER_GOOD,FLAG3)
+ENDIF
+IF(PLAYER_GOOD,FLAG3==0)
+
+    REM -- Show next area
+    CHANGE_SLAB_TYPE(54,46,PATH)
+    USE_POWER_AT_POS(PLAYER0,163,139,POWER_CAVE_IN,9,1)
+
+    REM -- Create unbreakable magic door
+    REM -- By using change slab type it should make an unbreakable door
+    CHANGE_SLAB_TYPE(55,46,DOOR_MAGIC)
+
+    REM -- Change cave at the torture room 
+    CHANGE_SLAB_TYPE(54,65,PATH)
+    CHANGE_SLAB_TYPE(55,65,PATH)
+    CHANGE_SLAB_TYPE(56,65,PATH)
+    CHANGE_SLAB_TYPE(54,66,PATH)
+    CHANGE_SLAB_TYPE(54,67,PATH)
+    USE_POWER_AT_POS(PLAYER0,163,196,POWER_CAVE_IN,9,1)
+
+    REM -- Make it so we WILL get a ghost if we torture something
+    SET_GAME_RULE(TortureDeathChance,0)
+    SET_GAME_RULE(TortureConvertChance,0)
+    SET_GAME_RULE(GhostConvertChance,100)
+
+    REM -- Let the player know the puzzle shifted
+    SET_TIMER(PLAYER_GOOD,TIMER1)
+    IF(PLAYER_GOOD,TIMER1>=60)
+        PLAY_MESSAGE(PLAYER0,SOUND,35) REM -- Sound: rockroll.wav
+    ENDIF
+ENDIF
+REM ENDIF
+
+REM -- Reveal skeleton and samurai outpost
+IF_ACTION_POINT(20,PLAYER0)
+    REVEAL_MAP_RECT(PLAYER0,181,139,18,15)
+ENDIF
+
+REM -- Reveal ghost sacrificer
+IF_ACTION_POINT(11,PLAYER0)
+    REVEAL_MAP_RECT(PLAYER0,193,115,12,12)
+ENDIF
+
+REM -- Ghost sacrificer
+IF_ACTION_POINT(7,PLAYER0)
+
+    REM -- Create explosion effect
+    CREATE_EFFECT(5,7)
+
+    REM -- Change slabs
+    CHANGE_SLAB_TYPE(63,37,PATH)
+    CHANGE_SLAB_TYPE(63,38,PATH)
+    CHANGE_SLAB_TYPE(63,39,PATH)
+    CHANGE_SLAB_TYPE(64,37,PATH)
+    CHANGE_SLAB_TYPE(64,38,PATH)
+    CHANGE_SLAB_TYPE(64,39,PATH)
+    CHANGE_SLAB_TYPE(65,37,PATH)
+    CHANGE_SLAB_TYPE(65,38,PATH)
+    CHANGE_SLAB_TYPE(65,39,PATH)
+
+    REM -- Say "The gods are pleased with your sacrifice"
+    SET_TIMER(PLAYER0,TIMER7)
+    IF(PLAYER0,TIMER7>=18)
+        PLAY_MESSAGE(PLAYER0,SPEECH,65)
+    ENDIF
+
+    REM -- Kill all creatures
+    KILL_CREATURE(PLAYER0,ANY_CREATURE,ANYWHERE,99)
+
+    REM -- Open up path to ghost sacrificer
+    CHANGE_SLAB_TYPE(61,40,PATH)
+    USE_POWER_AT_POS(PLAYER0,184,121,POWER_CAVE_IN,9,1)
+
+    REM -- Open up barracks
+    CHANGE_SLAB_TYPE(64,49,PATH)
+    USE_POWER_AT_POS(PLAYER0,193,148,POWER_CAVE_IN,9,1)
+
+    REM -- Open up portal
+    CHANGE_SLAB_TYPE(33,18,PATH)
+    USE_POWER_AT_POS(PLAYER0,100,55,POWER_CAVE_IN,9,1)
+    CHANGE_SLAB_TYPE(38,19,PATH)
+    USE_POWER_AT_POS(PLAYER0,139,148,POWER_CAVE_IN,9,1)
+
+    REM -- Open up path to the next area
+    CHANGE_SLAB_TYPE(45,50,PATH)
+    USE_POWER_AT_POS(PLAYER0,136,151,POWER_CAVE_IN,9,1)
+    CHANGE_SLAB_TYPE(41,50,PATH)
+    CHANGE_SLAB_TYPE(42,50,PATH)
+    CHANGE_SLAB_TYPE(35,50,PATH)
+    CHANGE_SLAB_TYPE(30,50,PATH)
+    CHANGE_SLAB_TYPE(26,50,PATH)
+    CHANGE_SLAB_TYPE(28,49,PATH)
+    USE_POWER_AT_POS(PLAYER0,85,148,POWER_CAVE_IN,9,1)
+
+    REM -- Let the player know the puzzle shifted
+    SET_TIMER(PLAYER_GOOD,TIMER2)
+    IF(PLAYER_GOOD,TIMER2>=60)
+        PLAY_MESSAGE(PLAYER0,SOUND,35) REM -- Sound: rockroll.wav
+    ENDIF
+
+ENDIF
+
+REM -- Show the whole split-room when we enter it
+IF_ACTION_POINT(13,PLAYER0)
+    REVEAL_MAP_RECT(PLAYER0,70,148,15,15)
+ENDIF
+
+CREATE_PARTY(DRUID_DEFENDER)
+ADD_TO_PARTY(DRUID_DEFENDER,DRUID,10,0,DEFEND_LOCATION,0)
+
+REM -- When we have portal
+IF(PLAYER0,ENTRANCE>=1)
+
+    REM -- Open path to swampy area
+    CHANGE_SLAB_TYPE(20,49,PATH)
+    USE_POWER_AT_POS(PLAYER0,61,148,POWER_CAVE_IN,9,1)
+    CHANGE_SLAB_TYPE(21,53,PATH)
+    CHANGE_SLAB_TYPE(22,53,PATH)
+    CHANGE_SLAB_TYPE(25,56,PATH)
+
+    REM -- Let the player know the puzzle shifted
+    PLAY_MESSAGE(PLAYER0,SOUND,35) REM -- Sound: rockroll.wav
+
+    REM -- Add swamp druids
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,DRUID_DEFENDER,8,5)
+
+    REM -- Wait for swamp druids to die
+    NEXT_COMMAND_REUSABLE
+    COUNT_CREATURES_AT_ACTION_POINT(15,PLAYER_GOOD,DRUID,PLAYER_GOOD,FLAG2)
+    IF(PLAYER_GOOD,FLAG2==0)
+
+        REM -- Claim tile under book
+        CHANGE_SLAB_OWNER(25,61,PLAYER0)
+        CREATE_EFFECT(53,16)
+
+        REM -- Kill all creates and disable portal
+        KILL_CREATURE(PLAYER0,ANY_CREATURE,ANYWHERE,9999)
+        MAX_CREATURES(ALL_PLAYERS,0)
+    ENDIF
+ENDIF
+
+REM -- When we get destroy wall spell
+IF_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS>=1)
+
+    REM -- Play gold sound
+    PLAY_MESSAGE(PLAYER0,SOUND,34)
+
+    REM -- No gold for player!
+    ADD_GOLD_TO_PLAYER(PLAYER0,-99999)
+    SET_GAME_RULE(RoomSellGoldBackPercent,0)
+
+    REM -- Reset treasury
+    CHANGE_SLAB_TYPE(54,54,LAVA,MATCH)
+    CHANGE_SLAB_TYPE(54,54,TREASURY_AREA,MATCH)
+    CHANGE_SLAB_OWNER(54,54,PLAYER0,MATCH)
+
+    CHANGE_SLAB_TYPE(48,12,LAVA)
+    CHANGE_SLAB_TYPE(49,12,LAVA)
+    CHANGE_SLAB_TYPE(48,13,LAVA)
+    CHANGE_SLAB_TYPE(49,13,LAVA)
+
+    REM -- Give player a gem
+    CHANGE_SLAB_TYPE(46,66,GEMS)
+    USE_POWER_AT_POS(PLAYER0,139,199,POWER_CAVE_IN,9,1)
+
+    REM -- But then surround with lava xD
+    CHANGE_SLAB_TYPE(45,65,LAVA)
+    CHANGE_SLAB_TYPE(46,65,LAVA)
+    CHANGE_SLAB_TYPE(47,65,LAVA)
+    CHANGE_SLAB_TYPE(45,66,LAVA)
+    CHANGE_SLAB_TYPE(47,66,LAVA)
+    CHANGE_SLAB_TYPE(45,67,LAVA)
+    CHANGE_SLAB_TYPE(46,67,LAVA)
+    CHANGE_SLAB_TYPE(47,67,LAVA)
+    CHANGE_SLAB_TYPE(44,66,LAVA)
+    CHANGE_SLAB_TYPE(48,66,LAVA)
+
+    REM -- Open path to gem
+    CHANGE_SLAB_TYPE(46,62,PATH)
+    USE_POWER_AT_POS(PLAYER0,139,187,POWER_CAVE_IN,9,1)
+
+    REM -- Let the player know the puzzle shifted
+    SET_TIMER(PLAYER_GOOD,TIMER3)
+    IF(PLAYER_GOOD,TIMER3>=40)
+        PLAY_MESSAGE(PLAYER0,SOUND,35) REM -- Sound: rockroll.wav
+    ENDIF
+ENDIF
+
+REM -- Make the White heart lose a lot of health if we come close
+IF_ACTION_POINT(17,PLAYER0)
+    SET_HEART_HEALTH(PLAYER_GOOD,100)
+    CREATE_EFFECT(56,18)
+ENDIF
+
+REM -- Can't lose the imp!
+IF(PLAYER0,IMP<1)
+    LOSE_GAME
+ENDIF
+
+REM -- When we kill white
+IF(PLAYER_GOOD,DUNGEON_DESTROYED==1)
+
+    REM -- Kill leftover creatures
+    KILL_CREATURE(PLAYER_GOOD,ANY_CREATURE,ANYWHERE,99)
+
+    REM -- Show walter
+    REVEAL_MAP_RECT(PLAYER0,148,217,9,9)
+
+    REM -- Show cool effect and win!
+    CREATE_EFFECT(53,18)
+    WIN_GAME
+ENDIF
+
+REM -- Make Walter an angry little man
+IF(PLAYER0,WIZARD>=1)
+    CHANGE_CREATURES_ANNOYANCE(PLAYER0,WIZARD,SET,10000)
+    PLAY_MESSAGE(PLAYER0,SOUND,845)
+ENDIF

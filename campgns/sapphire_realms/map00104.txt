@@ -1,0 +1,90 @@
+REM Basics
+
+    LEVEL_VERSION(1)
+    RUN_AFTER_VICTORY(1)
+    SET_GENERATE_SPEED(400)
+    START_MONEY(ALL_PLAYERS,0)
+    MAX_CREATURES(ALL_PLAYERS,1)
+
+    SET_PLAYER_COLOR(PLAYER0, BLUE)
+
+REM Availability
+
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_POSSESS,1,1)
+
+REM Level start conditions, messages, music
+
+    QUICK_OBJECTIVE(3, "穿过这个扭曲的迷宫而不被发现，以在下一个王国增强你的力量。如果你被抓住了，你就完了……你得到了一个具有隐身能力的冥界使者来完成这项任务，但要小心……冥界使者并不精通魔法，因此隐身不会持续很长时间。祝你好运。", PLAYER_GOOD)
+
+    SET_MUSIC("campaign_music/spirit_realm.mp3")
+
+    IF_ACTION_POINT(2, PLAYER0)
+        QUICK_INFORMATION(5, "在这里，邪恶之手无法触及。引导你的冥界使者并小心行事。如果你引起敌人的注意，你就完了。")
+        MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,0,0)
+        MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,0,0)
+        SET_MUSIC("campaign_music/umineko_play.mp3")
+    ENDIF
+
+    SET_BOX_TOOLTIP(1,"召唤增援部队") 
+
+REM Logic for loss condition
+
+    CREATE_PARTY(HORNY_PARTY)
+        ADD_TO_PARTY(HORNY_PARTY,HORNY,10,0,ATTACK_DUNGEON_HEART,0)
+
+    IF (PLAYER0, ACTIVE_BATTLES > 0)
+
+        QUICK_MESSAGE(4, "做好接受惩罚的准备。", HORNY)
+        QUICK_MESSAGE(2, "你失败了。", HORNY)
+        
+        REM The enemy has broken through your walls speech
+        PLAY_MESSAGE(PLAYER0,SPEECH,7)
+
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, HORNY_PARTY, -1, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, HORNY_PARTY, -2, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, HORNY_PARTY, -3, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, HORNY_PARTY, -4, 1)
+
+    ENDIF
+
+    IF (PLAYER0, TOTAL_CREATURES == 0)
+        LOSE_GAME
+    ENDIF
+
+REM Wincon
+
+    IF_ACTION_POINT(1, PLAYER0)
+        ADD_PARTY_TO_LEVEL(PLAYER0, HORNY_PARTY, -5, 4)
+    ENDIF
+
+    IF (PLAYER_GOOD, DUNGEON_DESTROYED > 0)
+        QUICK_INFORMATION(99, "干得好，守护者。你的工作完成了。你可以使用这个特殊物品来增强你在“深渊祭坛”关卡中的初始力量。")
+        CHANGE_SLAB_OWNER(68, 13, PLAYER0, NONE)
+        PLAY_MESSAGE(PLAYER0, SOUND, "116")
+        CREATE_EFFECT_AT_POS(57, 205, 40)
+
+        MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,0,0)
+        MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,0,0)
+
+        SET_TIMER(PLAYER0, TIMER7)
+
+    ENDIF
+
+    REM Special box reward
+    IF(PLAYER0,BOX1_ACTIVATED == 1)
+        PLAY_MESSAGE(PLAYER0,SPEECH,80)
+        REM Set the campaign flag for the next level
+        SET_FLAG(PLAYER0, CAMPAIGN_FLAG2, 1)
+    ENDIF
+
+    REM Slight delay to the win level message
+    IF(PLAYER0, TIMER7 > 80)
+        WIN_GAME
+    ENDIF
+
+    REM Make sure the Hornies can't get hungry or need lair/pay
+
+    SET_CREATURE_CONFIGURATION(HORNY,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(HORNY,Pay,0)

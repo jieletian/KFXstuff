@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map01120
+REM Automatically generated on 04 Sep 2008, 14:07:31
+
+LEVEL_VERSION(1,2,0)
+LEVEL_TIMESTAMP(1172402706,1220530051)
+USER_COMMANDS_COUNT(55,3,0,0)
+LEVEL_DESCRIPTION("While arriving on the grounds of the wandering spectres Curdic, as usual the so-called knight screams threats of death without any sense in your direction. After you have explained him that he was already dead, the Curdic lord loosely cursed you (for once, somebody had the mouth bigger than you). It goes without saying that this is not necessarily the biggest one that wins... English and French translations.")
+LEVEL_AUTHORS("Zephyr","")

@@ -1,0 +1,257 @@
+REM ***********************************************************************
+REM   Script for Level   648(148).The Portal 入口
+REM Steve Tupper
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+SET_GENERATE_SPEED(500)
+START_MONEY(PLAYER0,900000)
+MAX_CREATURES(PLAYER0,40)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+ADD_CREATURE_TO_POOL(ARCHER,10)
+ADD_CREATURE_TO_POOL(MONK,2)
+ADD_CREATURE_TO_POOL(KNIGHT,10)
+ADD_CREATURE_TO_POOL(THIEF,27)
+ADD_CREATURE_TO_POOL(TUNNELLER,1)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+
+CREATURE_AVAILABLE(PLAYER0,ARCHER,1,1)
+CREATURE_AVAILABLE(PLAYER0,MONK,1,1)
+CREATURE_AVAILABLE(PLAYER0,KNIGHT,1,1)
+CREATURE_AVAILABLE(PLAYER0,THIEF,1,1)
+CREATURE_AVAILABLE(PLAYER0,TUNNELLER,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+ROOM_AVAILABLE(PLAYER0,BRIDGE,1,0)
+ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,0)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(PLAYER0,POWER_OBEY,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_HOLD_AUDIENCE,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_PROTECT,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_ARMAGEDDON,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+DOOR_AVAILABLE(PLAYER0,BRACED,1,0)
+DOOR_AVAILABLE(PLAYER0,STEEL,1,0)
+DOOR_AVAILABLE(PLAYER0,MAGIC,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定陷阱*********************************
+REM  (玩家,陷阱名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+TRAP_AVAILABLE(PLAYER0,BOULDER,1,0)
+TRAP_AVAILABLE(PLAYER0,ALARM,1,0)
+TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+TRAP_AVAILABLE(PLAYER0,WORD_OF_POWER,1,0)
+
+REM ****************************增援部队**********************************
+REM CREATE_PARTY =>组建队伍                (队伍名称)   
+REM ADD_TO_PARTY=>添加生物到队伍中   (队伍名称,生物名称,生物等级,携带金钱数量,任务,延时)
+CREATE_PARTY(WEAK)
+    ADD_TO_PARTY(WEAK,FLY,10,0,ATTACK_ROOMS,0)
+    ADD_TO_PARTY(WEAK,BUG,5,0,ATTACK_ROOMS,0)
+    ADD_TO_PARTY(WEAK,IMP,5,1000,ATTACK_ROOMS,0)
+    ADD_TO_PARTY(WEAK,SPIDER,3,0,ATTACK_ROOMS,0)
+CREATE_PARTY(MEDIUM)
+    ADD_TO_PARTY(MEDIUM,DEMONSPAWN,6,0,STEAL_SPELLS,0)
+    ADD_TO_PARTY(MEDIUM,HELL_HOUND,7,0,STEAL_SPELLS,0)
+    ADD_TO_PARTY(MEDIUM,TENTACLE,10,0,STEAL_SPELLS,0)
+    ADD_TO_PARTY(MEDIUM,SORCEROR,10,1000,STEAL_SPELLS,0)
+CREATE_PARTY(STRONG)
+    ADD_TO_PARTY(STRONG,DRAGON,5,1000,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(STRONG,DARK_MISTRESS,6,400,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(STRONG,BILE_DEMON,5,400,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(STRONG,VAMPIRE,8,800,ATTACK_ENEMIES,0)
+CREATE_PARTY(DEADLY)
+    ADD_TO_PARTY(DEADLY,HORNY,8,800,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(DEADLY,BILE_DEMON,8,800,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(DEADLY,DARK_MISTRESS,8,800,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(DEADLY,DRAGON,8,800,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(UNDEAD)
+    ADD_TO_PARTY(UNDEAD,VAMPIRE,10,400,DEFEND_PARTY,0)
+    ADD_TO_PARTY(UNDEAD,SKELETON,10,10,DEFEND_PARTY,0)
+    ADD_TO_PARTY(UNDEAD,GHOST,10,0,DEFEND_PARTY,0)
+    ADD_TO_PARTY(UNDEAD,VAMPIRE,3,100,DEFEND_PARTY,0)
+CREATE_PARTY(DEMONS)
+    ADD_TO_PARTY(DEMONS,BILE_DEMON,10,100,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(DEMONS,HORNY,10,4000,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(DEMONS,DEMONSPAWN,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(DEMONS,DARK_MISTRESS,10,1000,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(DEMONS,DEMONSPAWN,5,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(DEMONS,DEMONSPAWN,3,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(DEMONS,DEMONSPAWN,2,0,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(ORCS)
+    ADD_TO_PARTY(ORCS,ORC,10,100,STEAL_GOLD,0)
+    ADD_TO_PARTY(ORCS,TROLL,10,200,STEAL_GOLD,0)
+    ADD_TO_PARTY(ORCS,ORC,3,10,STEAL_GOLD,0)
+    ADD_TO_PARTY(ORCS,TROLL,5,20,STEAL_GOLD,0)
+    ADD_TO_PARTY(ORCS,ORC,2,5,STEAL_GOLD,0)
+    ADD_TO_PARTY(ORCS,TROLL,3,10,STEAL_GOLD,0)
+    ADD_TO_PARTY(ORCS,TROLL,2,0,STEAL_GOLD,0)
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+SET_CREATURE_MAX_LEVEL(PLAYER0,AVATAR,5)
+
+REM 北面寺庙中
+NEXT_COMMAND_REUSABLE
+IF_ACTION_POINT(1,PLAYER0)
+   NEXT_COMMAND_REUSABLE
+   RESET_ACTION_POINT(1)
+   NEXT_COMMAND_REUSABLE
+   ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,HORNY,1,1,10,5000)
+ENDIF
+
+REM 你基地中东边墙中封住的地方
+IF_ACTION_POINT(2,PLAYER0)
+    REM QUICK_INFORMATION(5,"You have found a secret room in this creaky old castle,and look a ghost haunts it!")
+    QUICK_INFORMATION(6,"你发现在这个老城堡的一个秘密的房间，看看闹鬼了！")
+ENDIF
+
+IF(PLAYER0,GAME_TURN > 7200)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,WEAK,-1,1)
+ENDIF
+IF(PLAYER0,GAME_TURN > 10800)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,MEDIUM,-1,1)
+ENDIF
+IF(PLAYER0,GAME_TURN > 14400)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,STRONG,-1,1)
+    REM QUICK_INFORMATION(6,"It is as you feared,this structure is a portal from some dark land,defend the pass as long as you can while you send a messenger. Hopefully your homelands will have time to prepare or evacuate before some dark horde devours them all!")
+    REM QUICK_INFORMATION(7,"这是你所担心的，这种结构是黑暗土地的传送口，尽你所能地守卫关口，你已派一个信使，希望你的家乡在黑暗部落吞没他们之前有时间准备或撤离！")
+ENDIF
+IF(PLAYER0,GAME_TURN > 25200)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,WEAK,-1,5)
+ENDIF
+IF(PLAYER0,GAME_TURN > 32400)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,MEDIUM,-1,5)
+ENDIF
+IF(PLAYER0,GAME_TURN > 39600)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,STRONG,-1,3)
+ENDIF
+IF(PLAYER0,GAME_TURN > 46800)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,DEADLY,-1,1)
+ENDIF
+IF(PLAYER0,GAME_TURN > 54000)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,ORCS,-1,5)
+ENDIF
+IF(PLAYER0,GAME_TURN > 61200)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,UNDEAD,-1,5)
+ENDIF
+IF(PLAYER0,GAME_TURN > 68400)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,DEMONS,-1,3)
+ENDIF
+IF(PLAYER0,GAME_TURN > 79200)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,MEDIUM,-1,10)
+ENDIF
+IF(PLAYER0,GAME_TURN > 82800)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,STRONG,-1,7)
+ENDIF
+IF(PLAYER0,GAME_TURN > 86400)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,DEADLY,-1,5)
+ENDIF
+IF(PLAYER0,GAME_TURN > 97200)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,WEAK,-1,10)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,MEDIUM,-1,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,STRONG,-1,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,DEADLY,-1,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,DEMONS,-1,3)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,ORCS,-1,2)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,UNDEAD,-1,1)
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER0,GAME_TURN > 97200)
+   IF(PLAYER_GOOD,TOTAL_CREATURES == 0)
+      
+        REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+        LEVEL_VERSION(1)
+        REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+        ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+        ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+        ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+        ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+        ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+        ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+        ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+        ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+        ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+        ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+        
+        MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+        MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+        DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+        TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+        TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+        QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+        WIN_GAME
+        REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+        MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,1)
+        ROOM_AVAILABLE(ALL_PLAYERS,TORTURE,1,1)
+        ROOM_AVAILABLE(ALL_PLAYERS,TEMPLE,1,1)
+        QUICK_INFORMATION(8,"修改了游戏，增加胜利后可以建设一下，让你回味一下胜利的喜悦！！",PLAYER0) 
+   ENDIF
+ENDIF
+
+REM ****************************提示信息**********************************
+QUICK_OBJECTIVE(1,"参考提示：1、胜利的方法有很多种，建议智取；2、精灵在工厂的工作效率很高；3、东边某地方有监狱，过了监狱人类就会不断增援;4、好好利用监狱。",PLAYER0)  
+IF(PLAYER0,GAME_TURN > 500)
+ REM QUICK_OBJECTIVE(1,"Dark times have come to the lands of the Knights,an unusually dark,long winter grips the land and now scouts from the North have brought you disturbing news. A strange structure has appeared from nowhere at the ancient Standing Stones of Aberfras,spitting the land asunder. Fearing an attack your superiors have sent you to investigate.",PLAYER0)
+ QUICK_INFORMATION(2,"黑暗时代已经来到了骑士的土地，一个不同寻常的黑暗，漫长的冬天，侦察兵从北方带来了你令人不安的消息，一个奇怪的结构已经出现在古代的aberfras立石，因害怕攻击，你的上级派你去调查。",PLAYER0)
+ENDIF
+IF(PLAYER0,GAME_TURN > 1500)
+    REM QUICK_INFORMATION(2,"You are your Order's Avatar,Knight Protector,and have been given permission to use the old deserted castle at Aberfras,the only stronghold that stands between the structure and your lands to the South. The castle has stood empty for many years and is in need of repair and ridding of the animals that have settled there before your charges can arrive.")
+    QUICK_INFORMATION(3,"你是秩序的圣者，骑士保护者，并已获准在Aberfras使用旧的废弃的城堡--唯一的要塞，坐落在结构和你的土地之间南端。城堡已经空了很多年了，是需要修复和清除那些动物，你的主管到来之前，定居在里面。")
+ENDIF
+IF(PLAYER0,GAME_TURN > 2000)
+    REM QUICK_INFORMATION(3,"You are accompanied to the castle by a small unit of young knights,your order's Chaplain and Caretaker to repair the doors and walls. You have been given orders to set up a training school for young squires hoping to become Knights whilst continually monitoring the mysterious structure for any unusual occurances. After all it could just be nothing.")
+    QUICK_INFORMATION(4,"陪同你到城堡的年轻骑士小单位，你的牧师和看守修理的门和墙,你已经下令对希望成为骑士年轻人成立培训学校，同时不断监测的神秘的结构，任何不寻常的事件。直到没有什么发生。")
+ENDIF
+IF(PLAYER0,GAME_TURN > 2500)
+    REM QUICK_INFORMATION(4,"Your superiors are obviously worried,although the Knights generally shun magic,distrusting it with a passion,they have provided you with some magical items and plans for a library to research spells incase the worst should happen.")
+    QUICK_INFORMATION(5,"你的上司很担心，虽然骑士通常回避魔术，很不相信魔法，他们还为您提供了一些魔法物品和图书馆研究魔法的计划以防万一。")
+ENDIF
+
+
+
+
+
+
+
+
+
+
+

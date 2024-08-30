@@ -1,0 +1,283 @@
+REM ***********************************************************************
+REM   Script for Level  420.Drosophilium
+REM ***********************************************************************
+REM   by Rangex        24.01.2004
+REM  Translated by Mefistotelis
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+SET_GENERATE_SPEED(500)
+MAX_CREATURES(PLAYER0,23)
+START_MONEY(PLAYER0,20000)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+ADD_CREATURE_TO_POOL(SORCEROR,15)
+ADD_CREATURE_TO_POOL(BILE_DEMON,20)
+ADD_CREATURE_TO_POOL(DARK_MISTRESS,15)
+ADD_CREATURE_TO_POOL(TROLL,15)
+ADD_CREATURE_TO_POOL(ORC,15)
+ADD_CREATURE_TO_POOL(DRAGON,20)
+ADD_CREATURE_TO_POOL(DEMONSPAWN,15)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+CREATURE_AVAILABLE(ALL_PLAYERS,TROLL,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,DARK_MISTRESS,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,SORCEROR,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,BILE_DEMON,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,HELL_HOUND,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,DRAGON,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,VAMPIRE,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,ORC,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,DRAGON,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,WORKSHOP,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,BARRACKS,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,TORTURE,1,0)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+DOOR_AVAILABLE(ALL_PLAYERS,WOOD,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,BRACED,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定陷阱*********************************
+REM  (玩家,陷阱名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+TRAP_AVAILABLE(ALL_PLAYERS,POISON_GAS,1,0)
+TRAP_AVAILABLE(ALL_PLAYERS,ALARM,1,0)
+TRAP_AVAILABLE(ALL_PLAYERS,LIGHTNING,1,0)
+TRAP_AVAILABLE(ALL_PLAYERS,WORD_OF_POWER,1,0)
+
+REM CREATE_PARTY =>组建队伍                (队伍名称)   
+REM ADD_TO_PARTY=>添加生物到队伍中   (队伍名称,生物名称,生物等级,携带金钱数量,任务,延时)
+CREATE_PARTY(PARTY1)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTY2)
+    ADD_TO_PARTY(PARTY2,BUG,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY2,BUG,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY2,BUG,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY2,BUG,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY2,BUG,10,0,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTY3)
+    ADD_TO_PARTY(PARTY3,SPIDER,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY3,SPIDER,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY3,SPIDER,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY3,SPIDER,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY3,SPIDER,10,0,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTY4)
+    ADD_TO_PARTY(PARTY4,TENTACLE,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY4,TENTACLE,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY4,TENTACLE,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY4,TENTACLE,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY4,TENTACLE,10,0,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTY6)
+    ADD_TO_PARTY(PARTY6,HORNY,5,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY6,HORNY,5,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY6,HORNY,5,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY6,HORNY,5,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY6,HORNY,5,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY6,HORNY,5,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY6,HORNY,5,0,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTY7)
+    ADD_TO_PARTY(PARTY7,HORNY,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY7,HORNY,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY7,HORNY,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY7,HORNY,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY7,HORNY,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY7,HORNY,10,0,ATTACK_DUNGEON_HEART,0)
+
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+
+IF(PLAYER0,GAME_TURN >= 20000)
+    REM QUICK_INFORMATION(4,"It appears that under the influence of devilish magic of the Shrine,cave insects have a fit of raving madness and attack everything they encounter on their way. Be on guard,keeper - soon the wave of vermin will flood!")
+    QUICK_INFORMATION(4,"看来，在神魔的影响下，洞穴昆虫有一种狂妄的疯狂和攻击，他们在路上遇到的一切。当心，守卫——很快害虫的浪潮就会泛滥！")
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,1,2)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,2,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,3,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,6,2)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,7,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,8,1)
+ENDIF
+IF(PLAYER0,GAME_TURN >= 20500)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,1,2)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,2,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,3,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY3,7,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY2,8,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,9,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,10,2)
+ENDIF
+IF(PLAYER0,GAME_TURN >= 20750)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY2,1,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY4,7,2)
+ENDIF
+IF(PLAYER0,GAME_TURN >= 22500)
+   ROOM_AVAILABLE(ALL_PLAYERS,BRIDGE,1,1)
+    REM  QUICK_INFORMATION(5,"Your whole dungeon is buried with rotten bodies of insects; You've gathered enough magic power to build bridges,and almost as much as you need to ruin walls of the Shrine. On the northeast there's an ancient Dungeon Heart,being powerful catalyst of energy. Destroy it,and the magic unleashed will certainly attract more insects - enough for you to gather full force.")
+    QUICK_INFORMATION(5,"你的整个地下城都埋满了腐烂的昆虫尸体；你已经收集了足够的魔法力量来建造桥梁，几乎就像你需要破坏神龛的墙壁一样。在东北部有一个古老的地牢心，是强大的能量催化剂。消灭它，释放出来的魔法一定会吸引更多的昆虫，足够聚集你的力量。")
+ENDIF
+
+REM 人类心脏被摧毁
+IF(PLAYER_GOOD,DUNGEON_DESTROYED == 1)
+    SET_TIMER(PLAYER_GOOD,TIMER0)
+    REM QUICK_INFORMATION(6,"The plan has worked,Keeper. In the distance,you can now hear tramp made by hundreds of pattes. Prepare properly!")
+    QUICK_INFORMATION(6,"这个计划已经奏效了，守护者。在远处，你可以听到数以百计的流浪者所做的流浪汉。准备妥当！")
+ENDIF
+IF(PLAYER_GOOD,TIMER0 >= 500)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,10,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,2,2)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,7,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY3,8,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY3,3,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY2,4,1)
+ENDIF
+IF(PLAYER_GOOD,TIMER0 >= 1500)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,10,2)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,2,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,7,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY4,8,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY3,3,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY2,4,2)
+ENDIF
+IF(PLAYER_GOOD,TIMER0 >= 2500)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,10,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,2,2)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY4,7,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY4,8,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY3,3,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY3,4,2)
+ENDIF
+IF(PLAYER_GOOD,TIMER0 >= 3500)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,10,2)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,2,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY4,7,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY4,8,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY4,3,2)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY3,4,1)
+ENDIF
+IF(PLAYER_GOOD,TIMER0 >= 5000)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,10,2)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY4,1,2)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY4,7,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY4,8,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY4,3,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY4,4,1)
+ENDIF
+IF(PLAYER_GOOD,TIMER0 >= 7000)
+    MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+    REM QUICK_INFORMATION(7,"Congratulations,Keeper! Now,with one move of your little finger,you can turn even the most tremendous wall into dust. Use this newly-acquired ability to get to the Shrine; but remain vigilant - great danger lurks inside...")
+    QUICK_INFORMATION(7,"祝贺你，守护者！现在，用你的小指移动，你甚至可以把最巨大的墙壁变成灰尘。使用这个新获得的能力去神龛；但保持警觉-巨大的危险潜伏在里面…")
+ENDIF
+
+IF_ACTION_POINT(11,PLAYER0)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY6,12,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY6,13,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY7,14,1)
+    QUICK_INFORMATION(8,"The Everseeing Eye will not yield so easily to your dishonourable will,Keeper! First,you have to overcome the bloodthirsty demons it summoned in defence.")
+    QUICK_INFORMATION(8,"守望的眼睛不会轻易屈服于你不光彩的意志，守护者！首先，你必须克服它在防御中召唤出来的嗜血恶魔。")
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER_GOOD,HORNY == 0)
+    IF(PLAYER_GOOD,SCAVENGER == 0)
+        REM QUICK_OBJECTIVE(9,"Flawless victory! Now you see the whole Underground as clear as hands,and nothing is able to escape your mind,even the farts let surreptitiously by uneducated bumpkins. Big Brother looks - let the plebs tremble!",PLAYER0)
+        QUICK_OBJECTIVE(9,"完美的胜利！现在你看到整个地下都像手一样清晰，什么也逃不过你的头脑，连屁屁都被那些没受过教育的乡巴佬偷偷摸摸地偷走了。大哥看起来——让平民们颤抖吧！",PLAYER0)
+        REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+        LEVEL_VERSION(1)
+        REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+        ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+        ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+        ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+        ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+        ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+        ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+        ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+        ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+        ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+        ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+        
+        MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+        MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+        DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+        TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+        TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+        QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+        WIN_GAME
+    ENDIF
+ENDIF
+IF(PLAYER0,DUNGEON_DESTROYED == 1)
+    LOSE_GAME
+ENDIF
+
+REM ****************************提示信息**********************************
+REM QUICK_OBJECTIVE(1,"You've finally discovered the location of the legendary Shrine of Everseeing Eye. Taking control over it allows you to see everything that happens in the underground world; why total invigilation is total power. Unfortunately,it appears that you're unable to force through massive walls of the Shrine until you accumulate enough magical power. Ransack the surrounding caves carefully - solution may be hidden inside.",PLAYER0)
+QUICK_OBJECTIVE(1,"你终于找到了传说中的永生眼圣殿的位置。控制它可以让你看到地下世界里发生的一切；为什么总的监考是完全的权力。不幸的是，你似乎无法通过神殿的巨大墙，直到你积累足够的魔力。仔细搜查周围的洞穴--解决办法可能隐藏在里面.",PLAYER0)
+
+IF(PLAYER0,GAME_TURN >= 750)
+    REM QUICK_INFORMATION(2,"The dark magic emanating from the Shrine in north has deprived you of almost all the spells. But do not lose hope - in this land,many mystical coils are hidden. Finding them will allow you to recover lost forces.")
+    QUICK_INFORMATION(2,"来自北方神龛的黑暗魔法剥夺了你几乎所有的法术。但不要失去希望——在这片土地上，隐藏着许多神秘的线圈。找到它们可以让你找回丢失的力量。.")
+ENDIF
+
+IF(PLAYER0,GAME_TURN >= 5000)
+    REM QUICK_INFORMATION(3,"The demonic magic of Everseeing Eye has pervaded many insects living on this area. As a consequence,they become gigantic proportions. Try to find and destroy as many of these magic-swollen creatures - then you will grab the energy which fills them.")
+    QUICK_INFORMATION(3,"在这个地区生活着许多昆虫的眼睛。结果，它们成了巨大的比例。试着去发现和破坏这些神奇的膨胀生物——然后你会抓住充满它们的能量。")
+ENDIF
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00320
+REM Automatically generated on 19 Aug 2008, 20:57:17
+
+LEVEL_VERSION(1,5,0)
+LEVEL_TIMESTAMP(895598230,1219172237)
+USER_COMMANDS_COUNT(84,6,0,0)
+LEVEL_DESCRIPTION("This is My first Level with DK; I've added a few nice touches by either borrowing or actually by pain staking testing of my level. Includes creatures.txt replacement.")
+LEVEL_AUTHORS("Mark Nash","")

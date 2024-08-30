@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00343
+REM Automatically generated on 20 Aug 2008, 01:54:41
+
+LEVEL_VERSION(1,0,4)
+LEVEL_TIMESTAMP(910721926,1219190081)
+USER_COMMANDS_COUNT(1986,14,0,105)
+LEVEL_DESCRIPTION("Another level with 'The Pit' view, but there is some water instead of lava. Also, some other elements are different.")
+LEVEL_AUTHORS("","")

@@ -1,0 +1,372 @@
+REM Player Logic and basic settings
+    LEVEL_VERSION(1)
+    RUN_AFTER_VICTORY(1)
+
+    SET_GENERATE_SPEED(400)
+    START_MONEY(ALL_PLAYERS,5000)
+    MAX_CREATURES(ALL_PLAYERS,10)
+    SET_PLAYER_COLOR(PLAYER0, BLUE)
+    COMPUTER_PLAYER(PLAYER5,ROAMING)
+
+    REM This is there so the stylemixing doesn't break near the hidden realm special
+    SET_TEXTURE(PLAYER0, STANDARD)
+
+REM Music Logic - atmospheric music at the start and then transition when the player goes out
+
+    SET_MUSIC("campaign_music/teensie_ambience.mp3")
+    IF_ACTION_POINT(2, PLAYER0)
+        SET_MUSIC("campaign_music/wfto_labyrinth.mp3")
+    ENDIF
+    IF_ACTION_POINT(3, PLAYER0)
+        SET_MUSIC("campaign_music/wfto_labyrinth.mp3")
+    ENDIF
+    IF_ACTION_POINT(4, PLAYER0)
+        SET_MUSIC("campaign_music/wfto_labyrinth.mp3")
+    ENDIF
+    IF_ACTION_POINT(5, PLAYER0)
+        SET_MUSIC("campaign_music/wfto_labyrinth.mp3")
+    ENDIF
+
+REM Basic settings
+
+    ADD_CREATURE_TO_POOL(WIZARD,2)
+    ADD_CREATURE_TO_POOL(BARBARIAN,2)
+    ADD_CREATURE_TO_POOL(ARCHER,2)
+    ADD_CREATURE_TO_POOL(MONK,2)
+    ADD_CREATURE_TO_POOL(DWARFA,2)
+    ADD_CREATURE_TO_POOL(WITCH,2)
+    ADD_CREATURE_TO_POOL(GIANT,2)
+    ADD_CREATURE_TO_POOL(FAIRY,2)
+    ADD_CREATURE_TO_POOL(THIEF,2)
+    ADD_CREATURE_TO_POOL(SAMURAI,2)
+    REM Just a single knight instead of 2 due to their strength
+    ADD_CREATURE_TO_POOL(KNIGHT,1)
+
+    CREATURE_AVAILABLE(PLAYER0,WIZARD,1,0)
+    CREATURE_AVAILABLE(PLAYER0,BARBARIAN,1,0)
+    CREATURE_AVAILABLE(PLAYER0,ARCHER,1,0)
+    CREATURE_AVAILABLE(PLAYER0,MONK,1,0)
+    CREATURE_AVAILABLE(PLAYER0,DWARFA,1,0)
+    CREATURE_AVAILABLE(PLAYER0,WITCH,1,0)
+    CREATURE_AVAILABLE(PLAYER0,GIANT,1,0)
+    CREATURE_AVAILABLE(PLAYER0,FAIRY,1,0)
+    CREATURE_AVAILABLE(PLAYER0,THIEF,1,0)
+    CREATURE_AVAILABLE(PLAYER0,SAMURAI,1,0)
+    CREATURE_AVAILABLE(PLAYER0,KNIGHT,1,0)
+
+    REM Rooms
+
+    ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,BRIDGE,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,WORKSHOP,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,BARRACKS,1,0)
+
+    REM Magic
+
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_POSSESS,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CALL_TO_ARMS,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CONCEAL,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HOLD_AUDIENCE,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HEAL_CREATURE,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CHICKEN,1,0)
+    REM Sight, Speed, Protect can be found on the map
+
+    REM Workshop Items
+
+    TRAP_AVAILABLE(ALL_PLAYERS,POISON_GAS,1,0)
+    TRAP_AVAILABLE(ALL_PLAYERS,LIGHTNING,1,0)
+
+    DOOR_AVAILABLE(ALL_PLAYERS,WOOD,1,0)
+    DOOR_AVAILABLE(ALL_PLAYERS,BRACED,1,0)
+
+REM Intro
+
+    QUICK_OBJECTIVE(1, "醒醒，准备工作吧，守护者！一群玛瑙流氓巫师正试图阻止您进入岛屿，他们向您投掷大量昆虫以拖延时间。如果您不抓紧时间，比虫子更糟糕的事情即将来临……您最好占领传送门以关闭它们。")
+
+    IF (PLAYER0, ENTRANCE > 0)
+        QUICK_INFORMATION(10, "钻石公会的英雄唯一比你更讨厌的，就是他们那些恶棍玛瑙兄弟。这些英雄愿意暂时加入你的阵营以消灭他们的死对头。但是，请记住，你最多只能吸引 10 名英雄……趁这个暂时的联盟还存在时，好好利用它吧。", 6)
+    ENDIF
+
+REM parties and timer
+
+    CREATE_PARTY(party1)
+        ADD_TO_PARTY(party1,FLY,6,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party1,FLY,6,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party1,FLY,6,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party1,FLY,6,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party1,FLY,6,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party1,FLY,6,0,ATTACK_DUNGEON_HEART,0)
+
+    CREATE_PARTY(party2)
+        ADD_TO_PARTY(party2,MAIDEN,7,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party2,SPIDER,6,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party2,SPIDER,6,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party2,SPIDER,6,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party2,SPIDER,6,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party2,SPIDER,6,0,ATTACK_DUNGEON_HEART,0)
+
+    CREATE_PARTY(party3)
+        ADD_TO_PARTY(party3,BUG,6,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party3,BUG,6,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party3,BUG,6,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party3,BUG,6,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party3,BUG,6,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party3,BUG,6,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party3,BUG,6,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party3,BUG,6,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party3,BUG,6,0,ATTACK_DUNGEON_HEART,0)
+
+    CREATE_PARTY(party4)
+        ADD_TO_PARTY(party4,KNIGHT,10,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party4,WIZARD,10,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party4,MAIDEN,10,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party4,SPIDER,10,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party4,SPIDER,10,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party4,SPIDER,10,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party4,SPIDER,10,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party4,SPIDER,10,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party4,SPIDER,10,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party4,SPIDER,10,0,ATTACK_DUNGEON_HEART,0)
+        
+    REM Hero parties if the player takes too long
+
+    CREATE_PARTY(party_top_heroes)
+        ADD_TO_PARTY(party_top_heroes,FAIRY,8,0,ATTACK_DUNGEON_HEART,0)
+
+    CREATE_PARTY(party_mid_heroes)
+        ADD_TO_PARTY(party_mid_heroes,WIZARD,8,0,ATTACK_DUNGEON_HEART,0)
+
+    CREATE_PARTY(party_bot_heroes)
+        ADD_TO_PARTY(party_bot_heroes,HELL_HOUND,8,0,ATTACK_DUNGEON_HEART,0)
+
+    IF (PLAYER0, TOTAL_CREATURES > 5)
+        SET_TIMER(PLAYER0, TIMER0)
+    ENDIF
+
+REM Parties that spawn depending on the timer and hero portal ownership
+
+    IF (PLAYER0, TIMER0 > 6000)
+        IF_SLAB_OWNER(30, 5, PLAYER5)
+
+            REM Testing another way of spawning the party
+            REM ADD_CREATURE_TO_LEVEL(PLAYER5, IMP, -1, 1, 1, 200)
+            REM ADD_PARTY_TO_LEVEL(PLAYER5, party1, -1, 1)
+
+            ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER5, party1, -1, DUNGEON, 0, 1, 200)
+
+            QUICK_INFORMATION(6, "第一批敌人正在赶来。注意地图，他们会不断派出大批敌人，直到你占领他们的传送门阻止他们。")
+        ENDIF
+    ENDIF
+
+    IF (PLAYER0, TIMER0 > 10000)
+        IF_SLAB_OWNER(30, 5, PLAYER5)
+            ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER5, party1, -1, DUNGEON, 0, 1, 200)
+        ENDIF
+    ENDIF
+
+    IF (PLAYER0, TIMER0 > 14000)
+        IF_SLAB_OWNER(67, 71, PLAYER5)
+            REM the lower bug portal
+            ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER5, party3, -3, DUNGEON, 0, 1, 200)
+        ENDIF
+    ENDIF
+
+    IF (PLAYER0, TIMER0 > 18000)
+        IF_SLAB_OWNER(54, 27, PLAYER5)
+            ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER5, party2, -2, DUNGEON, 0, 1, 200)
+        ENDIF
+    ENDIF
+
+
+    REM Logic for spawning all waves at once
+
+    IF (PLAYER0, TIMER0 > 23000)
+        QUICK_INFORMATION(99, "敌人的增援部队正在赶来……如果你还没有占领任何入口，你应该考虑尽快这么做。")
+    ENDIF
+
+    IF (PLAYER0, TIMER0 > 26000)
+
+        IF_SLAB_OWNER(30, 5, PLAYER5)
+            REM Hero Gate 1 - Flies, top
+            ADD_PARTY_TO_LEVEL(PLAYER5, party1, -1, 2)
+        ENDIF
+
+        IF_SLAB_OWNER(54, 27, PLAYER5)
+            REM Hero gate 2 - Spiders, middle
+            ADD_PARTY_TO_LEVEL(PLAYER5, party2, -2, 1)
+        ENDIF
+
+        IF_SLAB_OWNER(67, 71, PLAYER5)
+            REM Hero Gate 3 - bugs, lower right
+            ADD_PARTY_TO_LEVEL(PLAYER5, party3, -3, 2)
+        ENDIF
+
+    ENDIF
+
+    REM Give the player a warning about heroes coming up
+
+    REM Set the flag that determines the warning
+    SET_FLAG(PLAYER0, FLAG5, 0)
+
+    IF (PLAYER0, TIMER0 > 36000)
+        IF (PLAYER0, FLAG5 > 0)
+            QUICK_OBJECTIVE(84, "你浪费了太多时间。玛瑙英雄们已经赶来支援他们的兄弟。")
+        ENDIF
+    ENDIF
+
+    REM If any of the portals are still active, show a message
+    IF (PLAYER0, TIMER0 > 36000)
+
+        IF_SLAB_OWNER(30, 5, PLAYER5)
+            SET_FLAG(PLAYER0, FLAG5, 1)
+        ENDIF
+
+        IF_SLAB_OWNER(54, 27, PLAYER5)
+            SET_FLAG(PLAYER0, FLAG5, 1)
+        ENDIF
+
+        IF_SLAB_OWNER(67, 71, PLAYER5)
+            SET_FLAG(PLAYER0, FLAG5, 1)
+        ENDIF
+    ENDIF
+
+    REM Spawn heroes on each unclaimed gate
+
+    IF (PLAYER0, TIMER0 > 36010)
+        IF_SLAB_OWNER(30, 5, PLAYER5)
+            REM Hero Gate 1 - Flies, top
+            QUICK_MESSAGE(3, "仙女们，把他炸飞吧！", FAIRY)
+            ADD_PARTY_TO_LEVEL(PLAYER5, party_top_heroes, -1, 4)
+        ENDIF
+    ENDIF
+
+    IF (PLAYER0, TIMER0 > 36020)
+        IF_SLAB_OWNER(54, 27, PLAYER5)
+            REM Hero gate 2 - Spiders, middle
+            QUICK_MESSAGE(4, "派遣巫师小队来消灭他！", WIZARD)
+            ADD_PARTY_TO_LEVEL(PLAYER5, party_mid_heroes, -2, 4)
+        ENDIF
+    ENDIF
+
+    IF (PLAYER0, TIMER0 > 36030)
+        IF_SLAB_OWNER(67, 71, PLAYER5)
+            REM Hero Gate 3 - bugs, lower right
+            QUICK_MESSAGE(5, "放出地狱犬来吞噬他！", HELL_HOUND)
+            ADD_PARTY_TO_LEVEL(PLAYER5, party_bot_heroes, -3, 4)
+        ENDIF
+    ENDIF
+
+REM Final wave logic
+
+    IF_ACTION_POINT(1, PLAYER0)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party4, -4, 1)
+    ENDIF
+
+REM Logic for the hero portals and win con
+
+    IF(PLAYER5, DUNGEON_DESTROYED == 1)
+
+        WIN_GAME
+
+        REM Count campaign flag up by one
+        IF(PLAYER0, CAMPAIGN_FLAG6 == 1)
+            SET_FLAG(PLAYER0, CAMPAIGN_FLAG6, 2)
+        ENDIF
+        
+        REM If player is in NG+, advance the state of that too
+        IF (PLAYER0, CAMPAIGN_FLAG5 == 1)
+            IF(PLAYER0, CAMPAIGN_FLAG7 == 1)
+                SET_FLAG(PLAYER0, CAMPAIGN_FLAG7, 2)
+            ENDIF
+        ENDIF
+    ENDIF
+
+    IF_SLAB_OWNER(54, 27, PLAYER0)
+        IF_SLAB_OWNER(67, 71, PLAYER0)
+            IF_SLAB_OWNER(30, 5, PLAYER0)
+
+                QUICK_OBJECTIVE(50, "三个传送门全部被占领后，是时候向敌人发起攻击了。给这些愚蠢的英雄们一个教训，让他们知道这里真正邪恶的家伙就是你。", 7)
+                USE_POWER_AT_LOCATION(PLAYER0,7,POWER_SIGHT,9,1)
+
+            ENDIF
+        ENDIF
+    ENDIF
+
+REM Logic for hiding hero gates
+
+    IF_SLAB_OWNER(30, 5, PLAYER0)
+        REM Hero Gate 1 - Flies, top
+        HIDE_HERO_GATE(1, 1)
+        CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_WHITE, 91, 16)
+    ENDIF
+
+    IF_SLAB_OWNER(54, 27, PLAYER0)
+        REM Hero gate 2 - Spiders, middle
+        HIDE_HERO_GATE(2, 1)
+        CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_WHITE, 163, 82)
+    ENDIF
+
+    IF_SLAB_OWNER(67, 71, PLAYER0)
+        REM Hero Gate 3 - bugs, lower right
+        HIDE_HERO_GATE(3, 1)
+        CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_WHITE, 202, 214)
+    ENDIF
+
+REM just some funny flair at the start
+
+    SET_TIMER(PLAYER0, TIMER4)
+
+    IF (PLAYER0, TIMER4 >= 40)
+        REM USE_POWER_AT_LOCATION(PLAYER0, PLAYER0, POWER_LIGHTNING, 1, 1)
+    ENDIF
+
+    IF (PLAYER0, TIMER4 >= 50)
+        PLAY_MESSAGE(PLAYER0, SOUND, 147)
+
+        CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_BLUE, 70, 184)
+        CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_BLUE, 76, 184)
+        CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_BLUE, 70, 190)
+        CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_BLUE, 76, 190)
+
+        ADD_OBJECT_TO_LEVEL(HEARTFLAME_BLUE, 8, 0, PLAYER0)
+        ADD_OBJECT_TO_LEVEL(HEARTFLAME_BLUE, 9, 0, PLAYER0)
+        ADD_OBJECT_TO_LEVEL(HEARTFLAME_BLUE, 10, 0, PLAYER0)
+        ADD_OBJECT_TO_LEVEL(HEARTFLAME_BLUE, 11, 0, PLAYER0)
+    ENDIF
+
+    IF (PLAYER0, TIMER4 >= 75)
+        PLAY_MESSAGE(PLAYER0, SOUND, 148)
+
+        CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_BLUE, 67, 181)
+        CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_BLUE, 79, 181)
+        CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_BLUE, 67, 193)
+        CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_BLUE, 79, 193)
+
+        ADD_OBJECT_TO_LEVEL(HEARTFLAME_BLUE, 12, 0, PLAYER0)
+        ADD_OBJECT_TO_LEVEL(HEARTFLAME_BLUE, 13, 0, PLAYER0)
+        ADD_OBJECT_TO_LEVEL(HEARTFLAME_BLUE, 14, 0, PLAYER0)
+        ADD_OBJECT_TO_LEVEL(HEARTFLAME_BLUE, 15, 0, PLAYER0)
+    ENDIF
+
+REM WIP / TODO - Do new game+ conditions
+
+IF (PLAYER0, CAMPAIGN_FLAG5 == 1)
+    QUICK_INFORMATION(2, "增强难度已开启 - 目前尚未实现")
+ENDIF
+
+
+
+
+
+
+
+
+

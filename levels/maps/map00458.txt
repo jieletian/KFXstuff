@@ -1,0 +1,221 @@
+REM ***********************************************************************
+REM   Script for Level   458.Vangloria
+REM ***********************************************************************
+REM  
+REM   Vangloria
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+START_MONEY(PLAYER0,8000)
+SET_GENERATE_SPEED(500)
+MAX_CREATURES(PLAYER0,25)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+ADD_CREATURE_TO_POOL(FLY,5)
+ADD_CREATURE_TO_POOL(DEMONSPAWN,10)
+ADD_CREATURE_TO_POOL(SORCEROR,10)
+ADD_CREATURE_TO_POOL(TROLL,20)
+ADD_CREATURE_TO_POOL(SPIDER,30)
+ADD_CREATURE_TO_POOL(ORC,10)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+CREATURE_AVAILABLE(PLAYER0,FLY,1,1)
+CREATURE_AVAILABLE(PLAYER0,DEMONSPAWN,1,1)
+CREATURE_AVAILABLE(PLAYER0,SORCEROR,1,1)
+CREATURE_AVAILABLE(PLAYER0,TROLL,1,1)
+CREATURE_AVAILABLE(PLAYER0,SPIDER,1,1)
+CREATURE_AVAILABLE(PLAYER0,ORC,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+ROOM_AVAILABLE(PLAYER0,GARDEN,	1,1)
+ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,0)
+ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,0)
+ROOM_AVAILABLE(PLAYER0,BARRACKS,1,0)
+ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,0)
+ROOM_AVAILABLE(PLAYER0,TEMPLE,1,0)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+MAGIC_AVAILABLE(PLAYER0,POWER_SLAP,1,1)
+MAGIC_AVAILABLE(PLAYER0,POWER_SIGHT,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,	1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_PROTECT,	1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,0)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+DOOR_AVAILABLE(PLAYER0,WOOD,1,0)
+DOOR_AVAILABLE(PLAYER0,BRACED,1,0)
+DOOR_AVAILABLE(PLAYER0,STEEL,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+TRAP_AVAILABLE(PLAYER0,ALARM,1,0)
+TRAP_AVAILABLE(PLAYER0,POISON_GAS,1,0)
+
+CREATE_PARTY(PARTYA)
+    ADD_TO_PARTY(PARTYA,DWARFA,2,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTYA,DWARFA,2,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTYA,DWARFA,3,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTYA,DWARFA,3,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTYA,WIZARD,3,500,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTYB)
+    ADD_TO_PARTY(PARTYB,DWARFA,3,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTYB,DWARFA,3,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTYB,DWARFA,3,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTYB,WIZARD,5,600,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTYB,WIZARD,5,600,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTYC)
+    ADD_TO_PARTY(PARTYC,DWARFA,5,300,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTYC,DWARFA,5,300,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTYC,DWARFA,6,400,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTYC,WIZARD,5,600,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTYC,WIZARD,5,600,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTYC,WIZARD,6,800,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(LORDPARTY)
+    ADD_TO_PARTY(LORDPARTY,KNIGHT,8,4000,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(LORDPARTY,WIZARD,7,1200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(LORDPARTY,WIZARD,7,1200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(LORDPARTY,DWARFA,8,800,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(LORDPARTY,DWARFA,7,400,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(LORDPARTY,DWARFA,7,400,ATTACK_DUNGEON_HEART,0)
+
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+
+SET_CREATURE_MAX_LEVEL(PLAYER0,DEMONSPAWN,10)
+
+REM QUICK_OBJECTIVE(0,"Forgotten tunnels and putrid rivers criss-cross this underworld. Prime real estate of course,but do not delay in establishing your forces,Keeper. Repungant legions of do-gooders will be upon us soon.",PLAYER0)
+QUICK_OBJECTIVE(0,"被遗忘的隧道和腐烂的河流纵横交错地穿过这个阴间。当然，首要的房地产，但不要拖延建立你的部队，守护者。很快就会有大批的好心人来找我们。.",PLAYER0)
+
+
+IF(PLAYER0,GAME_TURN > 8000)
+    REM QUICK_INFORMATION(1,"Know that a self-righteous band is already on the march. See that all pointed implements are sharpened in preparation; many more will follow.")
+    QUICK_INFORMATION(1,"知道一个自以为是联队已经开始行军了。请注意，把所有武器都磨锐和更多的将跟随者。")
+    ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER_GOOD,PARTYA,-3,DUNGEON_HEART,0,2,200)
+ENDIF
+IF(PLAYER0,GAME_TURN > 11000)
+    ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER_GOOD,PARTYA,-4,DUNGEON_HEART,0,2,200)
+ENDIF
+IF(PLAYER0,GAME_TURN > 15000)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTYB,-3,1)
+ENDIF
+IF(PLAYER0,GAME_TURN > 18000)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTYB,-4,1)
+ENDIF
+IF(PLAYER0,GAME_TURN > 22000)
+    ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER_GOOD,PARTYC,-1,DUNGEON_HEART,0,5,500)
+ENDIF
+IF(PLAYER0,GAME_TURN > 26000)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTYB,-4,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTYB,-3,1)
+ENDIF
+IF(PLAYER0,GAME_TURN > 30000)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTYC,-4,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTYC,-3,1)
+ENDIF
+
+IF(PLAYER0,BARRACKS >= 1)
+    ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+ENDIF
+IF(PLAYER0,BRIDGE >= 1)
+    REM  QUICK_OBJECTIVE(2,"The bridge design you've acquired will allow you to control more of this realm than before. Keep exploring,but with haste; the leaders of this land won't tolerate you for much longer.",PLAYER0)
+    QUICK_OBJECTIVE(2,"您已经获得的桥梁设计将允许您比以前更多地控制这王国。赶紧继续探索，这个王国的领导人不会给你你更长的时间。",PLAYER0)
+    ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+    SET_TIMER(PLAYER0,TIMER0)
+ENDIF
+IF(PLAYER0,TIMER0 >= 4000)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTYC,-2,1)
+ENDIF
+IF(PLAYER0,TIMER0 >= 8000)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,LORDPARTY,-2,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTYC,-1,1)
+    SET_FLAG(PLAYER0,FLAG0,1)
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER0,FLAG0 == 1)
+    IF(PLAYER_GOOD,KNIGHT == 0)
+        IF(PLAYER_GOOD,WIZARD == 0)
+            REM QUICK_OBJECTIVE(3,"Well done,Keeper. The pitiful forces of justice here are no more. Shall we continue our improvements on the now-defenceless inhabitants of the surface?",PLAYER0)
+            QUICK_OBJECTIVE(3,"干得好，守护者，这里不再有正义的力量了。我们是否继续对毫无防御能力的居民进行修理？",PLAYER0)
+
+            REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+            LEVEL_VERSION(1)
+            REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+            ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+            ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+            ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+            ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+            ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+            ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+            ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+            ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+            ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+            ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+            ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+            ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+            ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+            ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+            ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+            
+            MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+            MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+            MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+            MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+            MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+            DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+            TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+            TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+            QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+            WIN_GAME
+        ENDIF
+    ENDIF
+ENDIF
+
+
+REM ****************************提示信息**********************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

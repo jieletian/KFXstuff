@@ -1,0 +1,13 @@
+Name: DeadCenter 2.0.0
+Author:  TackerTacker, Created on 02 Dec 2021
+Keepers: Red, Blue
+Pool: Skeleton, Troll, Dragon, Demon Spawn, Fly, Dark Mistress
+  Warlock, Bile Demon, Beetle, Vampire, Spider, Hell Hound
+  Ghost, Tentacle, Orc
+Objects on map:
+Creatures: 16, Traps: 0, Doors: 0, Items: 19
+Dungeon hearts: 2, Hero gates: 0, Special Boxes: 2
+Description:
+   TackerTacker's first map, a level where you have a corridor you can fill up with lots of traps.
+
+Required version: KeeperFX 0.4.9

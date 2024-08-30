@@ -1,0 +1,170 @@
+REM ***********************************************************************
+REM   Script for Level  376(076).Can You See Me ?
+REM ***********************************************************************
+REM 
+REM 
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+REM 速度500，守护者1为蠢笨的防御性对手，你开始有10000元
+SET_GENERATE_SPEED(500)
+COMPUTER_PLAYER(PLAYER1,3)
+START_MONEY(ALL_PLAYERS,10000)
+MAX_CREATURES(PLAYER0,10)
+MAX_CREATURES(PLAYER1,30)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+REM (贼3人、魔术师10人、龙10条、兽人10个、黑暗女王10人)
+ADD_CREATURE_TO_POOL(THIEF,3)
+ADD_CREATURE_TO_POOL(SORCEROR,10)
+ADD_CREATURE_TO_POOL(DRAGON,10)
+ADD_CREATURE_TO_POOL(ORC,10)
+ADD_CREATURE_TO_POOL(DARK_MISTRESS,10)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+
+CREATURE_AVAILABLE(PLAYER0,THIEF,1,1)
+CREATURE_AVAILABLE(PLAYER0,SORCEROR,1,1)
+CREATURE_AVAILABLE(PLAYER1,DRAGON,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,ORC,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,DARK_MISTRESS,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+ROOM_AVAILABLE(PLAYER1,WORKSHOP,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+DOOR_AVAILABLE(ALL_PLAYERS,MAGIC,1,0)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_OBEY,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SPEED,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CALL_TO_ARMS,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HEAL_CREATURE,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_PROTECT,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_CHICKEN,1,0)
+
+REM ****************************增援部队**********************************
+REM CREATE_PARTY =>组建队伍                (队伍名称)   
+REM ADD_TO_PARTY=>添加生物到队伍中   (队伍名称,生物名称,生物等级,携带金钱数量,任务,延时)
+CREATE_PARTY(KNIGHTS)
+    ADD_TO_PARTY(KNIGHTS,BARBARIAN,10,300,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(KNIGHTS,KNIGHT,10,3000,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(KNIGHTS,FAIRY,10,300,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(KNIGHTS,WIZARD,10,300,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(ATTACKERS)
+    ADD_TO_PARTY(ATTACKERS,GIANT,10,1000,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(ATTACKERS,SAMURAI,10,1000,ATTACK_ENEMIES,0)
+CREATE_PARTY(DESTROYERS)
+    ADD_TO_PARTY(DESTROYERS,THIEF,10,1000,ATTACK_ROOMS,0)
+CREATE_PARTY(STEALERS)
+    ADD_TO_PARTY(STEALERS,WITCH,10,500,STEAL_SPELLS,0)
+
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+REM 如果人类心脏被打爆，游戏者可以造桥
+IF(PLAYER_GOOD,DUNGEON_DESTROYED == 1)
+    ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+    QUICK_INFORMATION(7,"你现在可以建桥了，记得尽快建哨所，让敌人进不了你的地盘，同时，尽快抢占紫金矿，你的钱很快就用完了，没占紫金矿前不要大量训练你的兵！",PLAYER0) 
+ENDIF
+
+REM 守护者1心脏被打爆，刷出几队人类
+IF(PLAYER1,DUNGEON_DESTROYED == 1)
+    SET_FLAG(PLAYER0,FLAG0,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,KNIGHTS,-1,1)
+    ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER_GOOD,KNIGHTS,-2,DUNGEON,0,10,600)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,ATTACKERS,-3,2)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,DESTROYERS,-3,2)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,STEALERS,-3,2)
+ENDIF
+
+
+REM ****************************胜利/失败条件**********************************
+REM 杀光人类就胜利
+IF(PLAYER0,FLAG0 == 1)
+    IF(PLAYER_GOOD,TOTAL_CREATURES < 1)
+
+        REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+        LEVEL_VERSION(1)
+        REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+        ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+        ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+        ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+        ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+        ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+        ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+        ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+        ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+        ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+        ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+        
+        MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+        MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+        DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+        TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+        TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+        QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+        WIN_GAME
+    ENDIF
+ENDIF
+
+REM ****************************提示信息**********************************
+QUICK_OBJECTIVE(1,"参考提示：1、绕到敌人后面，打爆它的心脏；2、不招惹人类注意的地方，搭桥绕过去，占领基地并尽快建哨所，让敌人进不了你的地盘；3、要解决经济问题，就得占紫金矿。",PLAYER0)  
+IF(PLAYER0,GAME_TURN > 500)
+    QUICK_INFORMATION(2,"开始你只能招小偷，注定你要干偷鸡摸狗的活，绕到敌人后面，打爆它的心脏，你就可以建桥了！",PLAYER0) 
+ENDIF
+IF(PLAYER0,GAME_TURN > 1500)
+    QUICK_INFORMATION(3,"因为你太弱了，你建桥也要建到不惹人注意的地方，绕到敌后，占了他们的基地，并用哨所巩固你的地盘，不要让敌人上来！",PLAYER0) 
+ENDIF
+IF(PLAYER0,GAME_TURN > 2500)
+    QUICK_INFORMATION(4,"你没有多少金矿，也没有工厂，得把紫金矿抢到手，才可以解决经济问题。",PLAYER0) 
+ENDIF
+IF(PLAYER0,GAME_TURN > 3500)
+    QUICK_INFORMATION(5,"你可以想办法让人类和守护者相互撕杀，也可以自己亲手把他们都解决了！",PLAYER0) 
+ENDIF
+IF(PLAYER0,GAME_TURN > 4000)
+    QUICK_INFORMATION(6,"前途是光明的，道路是曲折的，祝你好运，守护者！",PLAYER0) 
+ENDIF
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

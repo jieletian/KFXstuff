@@ -1,0 +1,249 @@
+REM ********************************************
+REM
+REM             Script for Level 232
+REM                One Eyed King
+REM ********************************************
+
+REM 232,4,540,700,1iking
+
+REM	:   : :   :   :
+REM	:   : :   :   Name of map
+REM	:   : :   Y coordinate of flag on Levels Map
+REM	:   : X coordinate of flag on Levels Map
+REM	:   Number of players
+REM	Level number (change this if you change the level number)
+REM	This is a deeper dungeons level
+
+
+SET_GENERATE_SPEED(800)
+
+MAX_CREATURES(	ALL_PLAYERS,	1)
+
+START_MONEY(	ALL_PLAYERS,	1000)
+
+ALLY_PLAYERS(PLAYER0, PLAYER2)
+ALLY_PLAYERS(PLAYER1, PLAYER3)
+
+REM ADD_CREATURE_TO_POOL(	BILE_DEMON,	4)
+REM ADD_CREATURE_TO_POOL(	DARK_MISTRESS,	30)
+REM ADD_CREATURE_TO_POOL(   SORCEROR,	8)
+REM ADD_CREATURE_TO_POOL(   SPIDER,       4)
+REM ADD_CREATURE_TO_POOL(   TROLL,        8)
+REM ADD_CREATURE_TO_POOL(   DRAGON,       20)
+REM ADD_CREATURE_TO_POOL(   DEMONSPAWN,   8)
+ADD_CREATURE_TO_POOL(   FLY,          8)
+REM ADD_CREATURE_TO_POOL(   BUG,          8)
+REM ADD_CREATURE_TO_POOL(   HELL_HOUND,   60)
+REM ADD_CREATURE_TO_POOL(   ORC,          60)
+REM ADD_CREATURE_TO_POOL(   WIZARD,       0)
+REM ADD_CREATURE_TO_POOL(   BARBARIAN,    no of creatures)
+REM ADD_CREATURE_TO_POOL(   ARCHER,       no of creatures)
+REM ADD_CREATURE_TO_POOL(   MONK,         no of creatures)
+REM ADD_CREATURE_TO_POOL(   DWARFA,       no of creatures)
+REM ADD_CREATURE_TO_POOL(   KNIGHT,       no of creatures)
+REM ADD_CREATURE_TO_POOL(   WITCH,        no of creatures)
+REM ADD_CREATURE_TO_POOL(   GIANT,        no of creatures)
+REM ADD_CREATURE_TO_POOL(   FAIRY,        no of creatures)
+REM ADD_CREATURE_TO_POOL(   THIEF,        no of creatures)
+REM ADD_CREATURE_TO_POOL(   SAMURAI,      no of creatures)
+REM ADD_CREATURE_TO_POOL(   SKELETON,     no of creatures)
+REM ADD_CREATURE_TO_POOL(   VAMPIRE,      no of creatures)
+REM ADD_CREATURE_TO_POOL(   GHOST,        no of creatures)
+REM ADD_CREATURE_TO_POOL(   TENTACLE,     no of creatures)
+REM ADD_CREATURE_TO_POOL(   HORNY,        no of creatures)
+REM ADD_CREATURE_TO_POOL(   TUNNELLER,    no of creatures)
+REM ADD_CREATURE_TO_POOL(   AVATAR,       no of creatures)
+ADD_CREATURE_TO_POOL(   IMP,          1)
+
+REM			Player		Creatures	Can be available	Is now available
+
+REM *** the 1 field must be in here ***
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	TROLL,        1, 1)
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	DRAGON,       1, 1)
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	DEMONSPAWN,   1, 1)
+CREATURE_AVAILABLE(	ALL_PLAYERS,	FLY,          1, 1)
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	DARK_MISTRESS,1, 1)
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	SORCEROR,     1, 1)
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	BILE_DEMON,   1, 1)
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	BUG,          1, 1)
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	SPIDER,       1, 1)
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	HELL_HOUND,   1, 1)
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	ORC,          1, 1)
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	WIZARD,       1, whether can come out of portal(1))
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	BARBARIAN,    1, whether can come out of portal(1))
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	ARCHER,       1, whether can come out of portal(1))
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	MONK,         1, whether can come out of portal(1))
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	DWARFA,       1, whether can come out of portal(1))
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	KNIGHT,       1, whether can come out of portal(1))
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	WITCH,        1, whether can come out of portal(1))
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	GIANT,        1, whether can come out of portal(1))
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	FAIRY,        1, whether can come out of portal(1))
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	THIEF,        1, whether can come out of portal(1))
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	SAMURAI,      1, whether can come out of portal(1))
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	SKELETON,     1, 0)
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	VAMPIRE,      1, 0)
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	GHOST,        1, 0)
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	HORNY,        1, 0)
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	TENTACLE,     1, whether can come out of portal(1))
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	TUNNELLER,    1, whether can come out of portal(1))
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	AVATAR,       1, whether can come out of portal(1))
+REM CREATURE_AVAILABLE(	ALL_PLAYERS,	IMP,          1, whether can come out of portal(1))
+
+ROOM_AVAILABLE(	ALL_PLAYERS,	TREASURE,  1, 1)
+ROOM_AVAILABLE(	ALL_PLAYERS,	RESEARCH,  1, 1)
+ROOM_AVAILABLE(	ALL_PLAYERS,	PRISON,    1, 0)
+ROOM_AVAILABLE(	ALL_PLAYERS,	TORTURE,   1, 0)
+ROOM_AVAILABLE(	ALL_PLAYERS,	TRAINING,  1, 0)
+ROOM_AVAILABLE(	ALL_PLAYERS,	WORKSHOP,  1, 0)
+ROOM_AVAILABLE(	ALL_PLAYERS,	SCAVENGER, 1, 0)
+ROOM_AVAILABLE(	ALL_PLAYERS,	TEMPLE,    1, 0)
+ROOM_AVAILABLE(	ALL_PLAYERS,	GRAVEYARD, 1, 0)
+ROOM_AVAILABLE(	ALL_PLAYERS,	BARRACKS,  1, 0)
+ROOM_AVAILABLE(	ALL_PLAYERS,	GARDEN,    1, 1)
+ROOM_AVAILABLE(	ALL_PLAYERS,	LAIR,      1, 1)
+ROOM_AVAILABLE(	ALL_PLAYERS,	BRIDGE,    1, 0)
+ROOM_AVAILABLE(	ALL_PLAYERS,	GUARD_POST,1, 0)
+
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_IMP,          1, 1)
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_OBEY,         1, 0)
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_SIGHT,        1, 0)
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_CALL_TO_ARMS, 1, 0)
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_CAVE_IN,      1, 0)
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_HEAL_CREATURE,1, 0)
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_HOLD_AUDIENCE,1, 0)
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_LIGHTNING,    1, 0)
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_SPEED,        1, 0)
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_PROTECT,      1, 0)
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_CONCEAL,      1, 0)
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_DISEASE,      1, 0)
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_CHICKEN,      1, 0)
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_DESTROY_WALLS,1, 0)
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_ARMAGEDDON,   1, 0)
+
+REM DOOR_AVAILABLE(	ALL_PLAYERS,	WOOD,  1, 0)
+REM DOOR_AVAILABLE(	ALL_PLAYERS,	BRACED,1, 0)
+REM DOOR_AVAILABLE(	ALL_PLAYERS,	STEEL, 1, 0)
+DOOR_AVAILABLE(	ALL_PLAYERS,	MAGIC, 1, 0)
+
+REM TRAP_AVAILABLE(	ALL_PLAYERS,	BOULDER,      1, 0)
+REM TRAP_AVAILABLE(	ALL_PLAYERS,	ALARM,        1, 0)
+REM TRAP_AVAILABLE(	ALL_PLAYERS,	POISON_GAS,   1, 0)
+TRAP_AVAILABLE(	ALL_PLAYERS,	LIGHTNING,    1, 0)
+REM TRAP_AVAILABLE(	ALL_PLAYERS,	WORD_OF_POWER,0, 0)
+REM TRAP_AVAILABLE(	ALL_PLAYERS,	LAVA,         0, 0)
+
+REM *** type = ROOM, MAGIC. name = room or spell name. ? = 0 - 16777216 ***
+RESEARCH(ALL_PLAYERS, ROOM, PRISON,    1000)
+RESEARCH(ALL_PLAYERS, ROOM, TORTURE,   1000)
+RESEARCH(ALL_PLAYERS, ROOM, TRAINING,  1000)
+RESEARCH(ALL_PLAYERS, ROOM, WORKSHOP,  1000)
+RESEARCH(ALL_PLAYERS, ROOM, SCAVENGER, 1000)
+RESEARCH(ALL_PLAYERS, ROOM, TEMPLE,    5000)
+RESEARCH(ALL_PLAYERS, ROOM, GRAVEYARD, 2000)
+RESEARCH(ALL_PLAYERS, ROOM, BARRACKS,  1000)
+RESEARCH(ALL_PLAYERS, ROOM, BRIDGE,    1000)
+RESEARCH(ALL_PLAYERS, ROOM, GUARD_POST,1000)
+
+REM *** ? = 1 - 10 ***
+REM SET_CREATURE_MAX_LEVEL(PLAYER?, creature, ?)
+
+REM *** ? = 0 - 255 ***
+REM SET_CREATURE_STRENGTH(creature, ?)
+
+REM *** ? = 0 - 1024 ***
+REM SET_CREATURE_HEALTH(creature, ?)
+
+REM *** ? = 0 - 255 ***
+REM SET_CREATURE_ARMOUR(creature, ?)
+
+REM *** ? = 0 - 255 ***
+REM SET_CREATURE_FEAR(creature, ?)
+
+REM *** PARTY? can actually be any name in capitals as long as not one used elsewhere eg VAMPYRES but not VAMPIRE ***
+REM CREATE_PARTY(PARTY?)
+
+REM *** objective = STEAL_GOLD, STEAL_SPELLS, ATTACK_ENEMIES, ATTACK_DUNGEON_HEART, ATTACK_ROOMS, DEFEND_PARTY ***
+REM ADD_TO_PARTY(PARTY?, creature, experience, gold, objective, 0)
+
+
+REM ********** Set flags and timer up *********
+
+REM *** value = 0 - 255. Only 8 flags ***
+REM SET_FLAG(PLAYER?, FLAG?, value)
+
+REM *** sets timer to 0 ***
+REM SET_TIMER(PLAYER?, TIMER?)
+
+
+REM ************************************************
+REM ********** CONDITIONS & GAME COMMANDS **********
+REM ************************************************
+
+REM *** condition = variable followed by either == != > < <= >= followed by a whole number (integer) ***
+REM IF(PLAYER?, condition)
+
+REM ENDIF
+
+REM *** if PLAYER? creature sets foot near action pt ***
+REM IF_ACTION_POINT(action pt no, PLAYER?)
+
+REM ENDIF
+
+REM *** condition = room, trap, door, creature or spell ***
+REM IF_AVAILABLE(PLAYER?, condition)
+
+REM ENDIF
+
+REM *** ? is just an action pt no ***
+REM RESET_ACTION_POINT(?)
+
+REM *** command following this can be activated each game turn instead of just once as with all others ***
+REM NEXT_COMMAND_REUSABLE
+
+REM *** drops beasty at action pt ***
+REM ADD_CREATURE_TO_LEVEL(PLAYER?, creature, action pt no, no of cretures, experience, gold)
+
+REM *** head for = ACTION_POINT, DUNGEON, DUNGEON_HEART, APPROPIATE_DUNGEON (one whos winning) ***
+REM ADD_TUNNELLER_TO_LEVEL(PLAYER?, action pt no appear at, head for, action pt no or player to head for, experience, gold)
+
+REM *** see above for head for ***
+REM ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER?, PARTY?, appear at action pt no, head for, action pt no or player to head for, experience, gold)
+
+REM *** drops pre defined party at action pt or hero gate (if hero gate then use negative number eg -1 for gate 1) ***
+REM ADD_PARTY_TO_LEVEL(PLAYER?, PARTY?, action pt no, no of copies)
+
+REM *** Might require this to be in an IF statement, also needs to be less than certain number of characters to appear ? = 1 - 30. Cannot use ALL_PLAYERS ***
+REM QUICK_OBJECTIVE(1, "In the kingdom of the blind the one eyed man is king", ALL_PLAYERS)
+
+REM *** As above ***
+REM QUICK_INFORMATION(?, "text")
+
+REM ************************************************
+REM ********** WIN / LOSE GAME CONDITIONS **********
+REM ************************************************
+
+REM	Player		Variable		Comparison	Value
+
+IF(	PLAYER0,	ALL_DUNGEONS_DESTROYED	==		1)
+
+	WIN_GAME
+
+ENDIF
+
+IF(PLAYER1,ALL_DUNGEONS_DESTROYED==1)
+
+	WIN_GAME
+
+ENDIF
+
+IF(PLAYER2,ALL_DUNGEONS_DESTROYED==1)
+
+	WIN_GAME
+
+ENDIF
+
+IF(PLAYER3,ALL_DUNGEONS_DESTROYED==1)
+
+	WIN_GAME
+
+ENDIF

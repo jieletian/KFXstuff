@@ -1,0 +1,280 @@
+rem Level 18 level/Ancient lizard
+
+if(player0,game_turn >= 10)
+ quick_objective(1,"为了对抗马德尔，我们需要凯恩囚禁在雪地里的野兽。这里肯定藏着一只强大的蜥蜴。当然，如果没有凯恩的魔法陷阱，这不可能发生，你又得找到一些档案来改善你的经济。",player0)
+endif
+
+set_generate_speed(1000)
+
+set_creature_armour(knight,160)
+set_creature_armour(samurai,90)
+set_creature_armour(hell_hound,50)
+set_creature_armour(avatar,120)
+set_creature_armour(thief,70)
+set_creature_armour(archer,70)
+set_creature_armour(dark_mistress,70)
+set_creature_armour(wizard,50)
+set_creature_armour(monk,50)
+set_creature_armour(witch,50)
+set_creature_armour(fairy,30)
+set_creature_armour(sorceror,50)
+set_creature_armour(spider,70)
+set_creature_armour(tentacle,70)
+set_creature_armour(ghost,200)
+set_creature_armour(skeleton,1)
+set_creature_armour(dwarfa,150)
+
+set_creature_strength(knight,120)
+set_creature_strength(giant,150)
+set_creature_strength(barbarian,100)
+set_creature_strength(samurai,100)
+set_creature_strength(hell_hound,80)
+set_creature_strength(avatar,150)
+set_creature_strength(thief,80)
+set_creature_strength(archer,100)
+set_creature_strength(monk,100)
+set_creature_strength(spider,120)
+set_creature_strength(tentacle,80)
+set_creature_strength(skeleton,180)
+
+set_creature_health(knight,1200)
+set_creature_health(giant,1000)
+set_creature_health(dwarfa,1000)
+set_creature_health(barbarian,1200)
+set_creature_health(samurai,1000)
+set_creature_health(hell_hound,700)
+set_creature_health(avatar,3000)
+set_creature_health(thief,800)
+set_creature_health(archer,700)
+set_creature_health(dark_mistress,800)
+set_creature_health(time_mage,500)
+set_creature_health(wizard,500)
+set_creature_health(monk,800)
+set_creature_health(witch,800)
+set_creature_health(fairy,500)
+set_creature_health(sorceror,800)
+set_creature_health(spider,800)
+set_creature_health(tentacle,1200)
+
+set_creature_armour(demonspawn,150)
+set_creature_strength(demonspawn,150)
+set_creature_health(demonspawn,2500)
+set_creature_max_level(player0,demonspawn,10)
+
+start_money(player0,500)
+
+max_creatures(player0,20)
+
+add_creature_to_pool(troll,20)
+add_creature_to_pool(spider,20)
+add_creature_to_pool(hell_hound,20)
+add_creature_to_pool(tentacle,20)
+add_creature_to_pool(sorceror,20)
+add_creature_to_pool(dark_mistress,20)
+add_creature_to_pool(ghost,20)
+add_creature_to_pool(skeleton,20)
+add_creature_to_pool(vampire,20)
+add_creature_to_pool(wizard,20)
+add_creature_to_pool(giant,20)
+add_creature_to_pool(time_mage,20)
+
+creature_available(player0,troll,1,1)
+creature_available(player0,spider,1,1)
+creature_available(player0,hell_hound,1,1)
+creature_available(player0,tentacle,1,1)
+creature_available(player0,sorceror,1,1)
+creature_available(player0,dark_mistress,1,1)
+creature_available(player0,ghost,1,1)
+creature_available(player0,skeleton,1,1)
+creature_available(player0,vampire,1,1)
+creature_available(player0,wizard,1,1)
+creature_available(player0,giant,1,1)
+creature_available(player0,time_mage,1,1)
+
+room_available(player0,treasure,1,0)
+room_available(player0,lair,1,0)
+room_available(player0,garden,1,0)
+room_available(player0,training,1,0)
+room_available(player0,research,1,0)
+room_available(player0,guard_post,1,0)
+room_available(player0,workshop,1,0)
+room_available(player0,prison,1,0)
+room_available(player0,torture,1,0)
+room_available(player0,barracks,1,0)
+room_available(player0,temple,1,0)
+room_available(player0,graveyard,1,0)
+room_available(player0,scavenger,1,0)
+room_available(player0,bridge,1,0)
+
+magic_available(player0,power_imp,1,0)
+magic_available(player0,power_call_to_arms,1,0)
+magic_available(player0,power_hold_audience,1,0)
+magic_available(player0,power_cave_in,1,0)
+magic_available(player0,power_protect,1,0)
+magic_available(player0,power_chicken,1,0)
+magic_available(player0,power_lightning,1,0)
+magic_available(player0,power_disease,1,0)
+magic_available(player0,power_heal_creature,1,0)
+magic_available(player0,power_destroy_walls,1,0)
+magic_available(player0,power_sight,1,0)
+magic_available(player0,power_obey,1,0)
+magic_available(player0,power_speed,1,0)
+magic_available(player0,power_conceal,1,0)
+
+trap_available(player0,poison_gas,1,0)
+trap_available(player0,word_of_power,1,0)
+trap_available(player0,lightning,1,0)
+door_available(player0,magic,1,0)
+
+create_party(mowi)
+	add_to_party(mowi,wizard,8,0,steal_spells,0)
+	add_to_party(mowi,wizard,8,0,steal_spells,0)
+	add_to_party(mowi,wizard,8,0,steal_spells,0)
+	add_to_party(mowi,monk,6,0,steal_spells,0)
+	add_to_party(mowi,monk,6,0,steal_spells,0)
+	add_to_party(mowi,monk,6,0,steal_spells,0)
+	
+create_party(fava)
+	add_to_party(fava,avatar,10,0,attack_enemies,10000)
+	add_to_party(fava,fairy,10,0,steal_spells,5000)
+	add_to_party(fava,fairy,10,0,steal_spells,5000)
+	add_to_party(fava,fairy,10,0,steal_spells,5000)
+	add_to_party(fava,fairy,10,0,steal_spells,5000)
+	add_to_party(fava,fairy,10,0,steal_spells,5000)
+	
+create_party(kin)
+	add_to_party(kin,knight,9,0,attack_enemies,3000)
+	add_to_party(kin,knight,9,0,attack_enemies,3000)
+	add_to_party(kin,knight,9,0,attack_enemies,3000)
+	add_to_party(kin,knight,9,0,attack_enemies,3000)
+	
+create_party(pivo) 
+	add_to_party(pivo,barbarian,8,0,attack_enemies,1)
+	add_to_party(pivo,barbarian,7,0,attack_enemies,1)
+	add_to_party(pivo,barbarian,4,0,attack_enemies,1)
+	add_to_party(pivo,giant,9,0,attack_enemies,1)
+	add_to_party(pivo,giant,10,0,attack_enemies,1)
+	add_to_party(pivo,giant,6,0,attack_enemies,1)
+	
+create_party(pripo) 
+	add_to_party(pripo,hell_hound,6,0,attack_enemies,0)
+	add_to_party(pripo,hell_hound,6,0,attack_enemies,0)
+	add_to_party(pripo,archer,8,0,attack_enemies,0)
+	add_to_party(pripo,archer,8,0,attack_enemies,0)
+	add_to_party(pripo,archer,10,0,attack_enemies,0)
+	
+create_party(worka) 
+	add_to_party(worka,dwarfa,9,0,attack_rooms,800)
+	add_to_party(worka,dwarfa,8,0,attack_rooms,800)
+	add_to_party(worka,dwarfa,8,0,attack_rooms,800)
+	add_to_party(worka,giant,10,0,attack_rooms,1800)
+	
+create_party(magi) 
+	add_to_party(magi,time_mage,10,0,steal_spells,0)
+	add_to_party(magi,time_mage,10,0,steal_spells,0)
+	add_to_party(magi,time_mage,10,0,steal_spells,0)
+	add_to_party(magi,time_mage,10,0,steal_spells,0)
+	add_to_party(magi,time_mage,10,0,steal_spells,0)
+	
+create_party(vori) 
+	add_to_party(vori,thief,6,0,steal_gold,0)
+	add_to_party(vori,thief,8,0,steal_gold,0)
+		
+create_party(necr)
+	add_to_party(necr,monk,10,0,attack_enemies,0)
+	add_to_party(necr,skeleton,10,0,attack_enemies,0)
+	add_to_party(necr,skeleton,9,0,attack_enemies,0)
+	add_to_party(necr,skeleton,9,0,attack_enemies,0)
+	add_to_party(necr,skeleton,8,0,attack_enemies,0)
+	add_to_party(necr,skeleton,8,0,attack_enemies,0)
+
+if(player_good,dungeon_destroyed == 1)
+ add_party_to_level(player_good,fava,-5,1)
+ add_party_to_level(player_good,kin,-5,1)
+endif
+
+if(player_good,torture == 0)
+ add_party_to_level(player_good,pivo,2,1)
+ add_party_to_level(player_good,pivo,2,1)
+endif
+
+if_action_point(4,player0)
+ add_party_to_level(player_good,pivo,4,1)
+ add_party_to_level(player_good,pivo,4,1)
+endif
+
+if(player0,money >= 444444)
+ add_creature_to_level(player0,time_mage,3,1,9,0)
+endif
+
+if(player_good,prison == 0)
+ add_tunneller_party_to_level(player_good,pripo,5,dungeon,0,9,0)
+ add_tunneller_party_to_level(player_good,pripo,5,dungeon,0,9,0)
+ add_tunneller_party_to_level(player_good,pripo,5,dungeon,0,9,0)
+endif
+
+if(player_good,workshop == 0)
+ add_tunneller_party_to_level(player_good,worka,6,dungeon,0,7,1000)
+ add_tunneller_party_to_level(player_good,worka,6,dungeon,0,7,1000)
+ add_tunneller_party_to_level(player_good,worka,6,dungeon,0,7,1000)
+ add_tunneller_party_to_level(player_good,worka,6,dungeon,0,7,1000)
+endif
+
+if(player_good,treasure == 0)
+ add_tunneller_party_to_level(player_good,pripo,5,dungeon,0,9,0)
+ add_party_to_level(player_good,mowi,5,1)
+ add_party_to_level(player_good,mowi,5,1)
+endif
+
+if(player0,total_gold_mined >= 100000)
+ add_party_to_level(player_good,vori,-2,1)
+ add_party_to_level(player_good,vori,-2,1)
+ add_party_to_level(player_good,vori,-2,1)
+ add_party_to_level(player_good,vori,-2,1)
+ add_party_to_level(player_good,vori,-2,1)
+ add_party_to_level(player_good,vori,-2,1)
+ add_party_to_level(player_good,vori,-2,1)
+ add_party_to_level(player_good,vori,-2,1)
+endif
+
+if(player_good,graveyard != 65)
+ add_party_to_level(player_good,necr,-3,1)
+ add_party_to_level(player_good,necr,-3,1)
+ add_party_to_level(player_good,necr,-4,1)
+ add_party_to_level(player_good,necr,-4,1)
+endif
+
+if_available(player0,power_destroy_walls == 1)
+ add_party_to_level(player_good,magi,-2,1)
+ add_party_to_level(player_good,magi,-2,1)
+endif
+	
+if(player_good,research == 0)
+ add_party_to_level(player_good,mowi,1,1)
+ add_party_to_level(player_good,mowi,1,1)
+endif
+
+if(player0,dungeon_destroyed == 1)
+ lose_game
+endif
+
+if(player_good,dungeon_destroyed == 1)
+ quick_information(2,"在我们夺取马德尔的首级之前，有必要先消灭所有敌军。")
+ if(player_good,total_creatures == 0)
+  if(player0,demonspawn == 0)
+   quick_objective(3,"剩下的就是找到那只蜥蜴。",7)
+  endif
+ endif
+endif
+ 
+if(player0,demonspawn >= 1)
+ quick_information(4,"也许这种怪物的力量被夸大了，但我们还是试着利用一下吧。也许它至少是有毒的……")
+endif
+
+if(player_good,dungeon_destroyed == 1)
+ if(player_good,total_creatures == 0)
+  if(player0,demonspawn >= 1)
+   win_game
+  endif
+ endif
+endif

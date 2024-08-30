@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00417
+REM Automatically generated on 21 Aug 2008, 05:28:09
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(1015719446,1219289289)
+USER_COMMANDS_COUNT(49,3,0,2)
+LEVEL_DESCRIPTION("Less than ten, but still fun.")
+LEVEL_AUTHORS("Oetelaer","")

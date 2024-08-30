@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00002
+REM Automatically generated on 29 Aug 2008, 17:39:39
+
+LEVEL_VERSION(1,0,0)
+LEVEL_TIMESTAMP(1162834216,1220024379)
+USER_COMMANDS_COUNT(12,2,0,0)
+LEVEL_DESCRIPTION("A dark, clammy maze. The Dark Gods are putting you to the test, great one. Find yourself a way out of this, but beware. Who knows what could lurk deep inside these mysterious hallways...")
+LEVEL_AUTHORS("DzjeeAr","")

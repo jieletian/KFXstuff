@@ -1,0 +1,140 @@
+REM ***********************************************************************
+REM   Script for Level   680(180).Impomania
+REM ***********************************************************************
+REM Level created by Mr U 06/04/98 with the official DK-editor
+REM final version for the net 06/07/98
+REM A single player map for Dungeon Keeper and/or Deeper Dungeons
+REM note: make use of your "never-dying" imps!
+REM for contact (bugs found, ideas for improving the map etc.):
+REM email: udo.weiler@cyberfun.de
+REM ... or have a look at Fizzban keep!
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+SET_GENERATE_SPEED(180)
+
+START_MONEY(PLAYER0,5000)
+START_MONEY(PLAYER1,6000)
+
+MAX_CREATURES(PLAYER0,14)
+MAX_CREATURES(PLAYER1,17)
+
+COMPUTER_PLAYER(PLAYER1,0)
+SET_COMPUTER_CHECKS(PLAYER1,"CHECK FOR QUICK ATTACK",700,70,3000,8,12500)
+SET_COMPUTER_PROCESS(PLAYER1,"ATTACK SAFE ATTACK",0,70,8,70,0)
+SET_COMPUTER_PROCESS(PLAYER1,"ATTACK PLAN 1",0,70,8,70,0)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+ADD_CREATURE_TO_POOL(DEMONSPAWN,22)
+ADD_CREATURE_TO_POOL(GIANT,8)
+ADD_CREATURE_TO_POOL(WIZARD,8)
+ADD_CREATURE_TO_POOL(WITCH,12)
+ADD_CREATURE_TO_POOL(BARBARIAN,12)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+
+CREATURE_AVAILABLE(ALL_PLAYERS,DEMONSPAWN,1,1)
+CREATURE_AVAILABLE(PLAYER0,WIZARD,1,1)
+CREATURE_AVAILABLE(PLAYER0,GIANT,1,1)
+
+CREATURE_AVAILABLE(PLAYER1,WITCH,1,1)
+CREATURE_AVAILABLE(PLAYER1,BARBARIAN,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_OBEY,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SPEED,1,0)
+
+MAGIC_AVAILABLE(PLAYER0,POWER_CAVE_IN,1,0)
+
+MAGIC_AVAILABLE(PLAYER1,POWER_IMP,1,1)
+MAGIC_AVAILABLE(PLAYER1,POWER_LIGHTNING,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_CALL_TO_ARMS,1,0)
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+IF(PLAYER0,TOTAL_IMPS <= 4)
+    NEXT_COMMAND_REUSABLE
+    ADD_CREATURE_TO_LEVEL(PLAYER0,IMP,PLAYER0,1,3,0)
+ENDIF
+
+IF_ACTION_POINT(1,PLAYER0)
+    IF(PLAYER1,TOTAL_CREATURES <= 5)
+        ADD_CREATURE_TO_LEVEL(PLAYER1,WITCH,1,3,6,1200)
+        ADD_CREATURE_TO_LEVEL(PLAYER1,BARBARIAN,1,5,6,1000)
+    ENDIF
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER1,DUNGEON_DESTROYED == 1)
+    
+        REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+        LEVEL_VERSION(1)
+        REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+        ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+        ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+        ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+        ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+        ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+        ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+        ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+        ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+        ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+        ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+        
+        MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+        MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+        DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+        TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+        TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+        QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+        WIN_GAME
+ENDIF
+
+REM ****************************提示信息**********************************
+QUICK_OBJECTIVE(1,"参考提示：1、看形势一切对你都很不利；2、你的小鬼小于4只时就会刷3级小鬼给你；3、拖住敌人小鬼的进攻速度，拐个弯深入敌后才有机会反败为胜。",PLAYER0)  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

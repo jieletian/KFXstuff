@@ -1,0 +1,12 @@
+Name: Shackled Hand 1.0.0
+Author: Loobinex, Created on 10 Jun 2022
+Keepers: Red, Green
+Pool: Troll, Demon Spawn, Fly, Dark Mistress, Warlock
+  Spider, Hell Hound, Orc
+Objects on map:
+Creatures: 21, Traps: 4, Doors: 7, Items: 92
+Dungeon hearts: 2, Hero gates: 7, Special Boxes: 3
+Description:
+  Wizards found an ancient shrine they can use to bind your hand. When they do you need to trust your creatures will stop the invading heroes using nothing but their own wits.
+
+Required version: KeeperFX 0.4.9

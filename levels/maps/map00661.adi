@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00580
+REM Automatically generated on 21 Aug 2008, 08:23:01
+
+LEVEL_VERSION(1,0,2)
+LEVEL_TIMESTAMP(1158844620,1219299781)
+USER_COMMANDS_COUNT(9,2,0,0)
+LEVEL_DESCRIPTION("You're in trouble, keeper! The only way to avoid the strike your creatures is to give them as much gold as possible. Also, you must pay attention to other keepers. They are the ones who shall receive the crisis hell, not you! Seek in the old underground kingdom for the Grec gold you desire. Map origined in France.")
+LEVEL_AUTHORS("Santo","")

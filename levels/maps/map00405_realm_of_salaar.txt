@@ -1,0 +1,97 @@
+							    10-05-98
+====================================================================
+Title                   : The Realm of Salaar
+Filename                : map00244.*
+Author                  : Pawel Simbierowicz
+Email Address           : Pawel.Simbierowicz@vtt.fi
+Description             : Dungeon Keeper / Deeper Dungeons level
+Credits                 : Jon Skeet for Adikted,
+                          the authors of UnDed,
+                          Dayo Kay for adding text and playtesting,
+                          and of course Bullfrog
+
+====================================================================
+
+
+How to play this level
+
+If this is the first extra level you're playing, you'll have to
+make a few changes first:
+
+1. Go into the 'Keeper' directory on your harddisk and create two 
+directories called 'ldata' and 'levels'.
+
+2. Copy all files from the \keeper\ldata and \keeper\levels directories 
+of the original Dungeon Keeper CD into the two directories you just 
+created. If you have Deeper Dungeons copy these files (from the same
+sub-directories) also.
+
+3. Edit your keeper.cfg file in your keeper directory on your harddisk,
+to point to the keeper directory on your harddisk, like this:
+
+INSTALL_PATH=C:\Program Files\Bullfrog\keeper
+or
+INSTALL_PATH=C:\games\keeper
+
+4. Unzip dksalaar.zip to your \levels directory. No files will be 
+written over if you haven't already used slot 244.
+
+If you have already used slot 244 (if in doubt you haven't) then rename all
+the files from map00244.* to a different number.
+
+If you have Deeper Dungeons then skip steps 5. to 8, and go directly to 9.
+
+5. If you do not have Deeper Dungeons, edit the \levels\levels.txt file 
+and add this line at the end of it:
+
+244,2,810,290,Salaar
+
+6. Re-name the file map00244_dk.txt to map00244.txt, and replace the file
+text.dat in your c:\..\keeper\data\ directory with the one provided in
+this zip file (see below for text.dat details).
+
+7. Run Dungeon Keeper as a 1-player multiplayer game by entering 
+this from the command line:
+	
+	keeper -1player   (for the Dos version) 
+	or
+	keeper95 -1player (for the Win95 version)
+
+
+8. In the multiplayer level select screen there'll be a flag
+for level 244 in the top left hand corner of the screen. Click
+on this to begin the game.
+
+(End of instructions for users without Deeper Dungeons)
+
+9. To play this level using Deeper Dungeons, re-name the file
+map00244_dd.txt to map00244.txt. If you have re-numbered the level
+edit the file map00244.lif using Notepad, to change the first
+number to the level number you have chosen.
+
+10. Run Deeper Dungeons. Choose Deeper Dungeons from the Main
+Menu; The Realm of Salaar should be available.
+
+Construction
+
+Base                    : New level from scratch
+Editors used          	: UnDed, Adikted, & Bullfrog Editor
+Known Bugs              : none known
+Build Time              : a couple of hours
+
+Introduction
+
+Behold, the abandoned realm of Salaar, one of the Great 
+Ancient Keepers. Paranoid heroes guard this realm with care.
+Conquer the hero castles in this realm, and you will be a
+worthy successor to Salaar. Be bold for He is watching 
+from below!
+
+Additional
+
+Included with these files is a replacement for ..keeper\data\text.dat.
+This is only required if you don't have Deeper Dungeons.Over-write 
+your current copy and you will see relevant text during gameplay
+Should any other level writers want a copy of all available messages
+drop me an e-mail. This text.dat file is consistent with all standard
+DK levels, and Lord of the Flies, Shao-Lin Temple, & Injustitia.

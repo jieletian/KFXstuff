@@ -1,0 +1,99 @@
+REM *********************************************************
+REM             Script for Level 2001.Zul'dare
+REM *********************************************************             
+REM             本地图制作者： 始作俑者
+REM                  QQ：331672578
+REM  欢迎加1128460424（地下城守护者 - Dungeon Keeper）群交流
+REM *********************************************************
+REM 地图的大概情况与参考建议：
+
+REM ***********************************************************************
+
+SET_GENERATE_SPEED(400)
+
+MAX_CREATURES(PLAYER0,10)
+
+START_MONEY(PLAYER0,10000)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+
+ADD_CREATURE_TO_POOL(ORC,6)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+
+
+CREATURE_AVAILABLE(ALL_PLAYERS,ORC,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+
+ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,BARRACKS,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SPEED,1,1)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+
+DOOR_AVAILABLE(ALL_PLAYERS,WOOD,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,BRACED,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,STEEL,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,MAGIC,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定陷阱*********************************
+REM  (玩家,陷阱名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+
+TRAP_AVAILABLE(ALL_PLAYERS,ALARM,1,0)
+TRAP_AVAILABLE(ALL_PLAYERS,POISON_GAS,1,0)
+TRAP_AVAILABLE(ALL_PLAYERS,LIGHTNING,1,0)
+
+REM CREATE_PARTY =>组建队伍                (队伍名称)   
+REM ADD_TO_PARTY=>添加生物到队伍中   (队伍名称,生物名称,生物等级,携带金钱数量,任务,延时)
+
+CREATE_PARTY(ONE)
+	ADD_TO_PARTY(ONE,ARCHER,8,600,ATTACK_ENEMIES,0)
+	ADD_TO_PARTY(ONE,ARCHER,8,600,ATTACK_ENEMIES,0)
+	ADD_TO_PARTY(ONE,ARCHER,8,600,ATTACK_ENEMIES,0)
+	ADD_TO_PARTY(ONE,KNIGHT,8,700,ATTACK_ENEMIES,0)
+	ADD_TO_PARTY(ONE,DWARFA,8,700,ATTACK_ENEMIES,0)
+        ADD_TO_PARTY(ONE,DWARFA,8,700,ATTACK_ENEMIES,0)
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+
+QUICK_OBJECTIVE(1,"任务:建设兵营并招募4个兽人，摧毁敌人心脏.",PLAYER0)
+
+IF(PLAYER0, ORC == 4)
+    ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER_GOOD,ONE,-1,DUNGEON_HEART,0,1,700)
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+
+IF(PLAYER_GOOD,DUNGEON_DESTROYED == 1)
+    IF(PLAYER_GOOD, TOTAL_CREATURES == 0)
+	WIN_GAME
+    ENDIF
+ENDIF
+
+IF(PLAYER0,DUNGEON_DESTROYED == 1)
+	LOSE_GAME
+ENDIF
+
+
+
+
+
+
+
+

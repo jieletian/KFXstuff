@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00331
+REM Automatically generated on 19 Aug 2008, 22:03:20
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(899169774,1219176200)
+USER_COMMANDS_COUNT(23,2,0,0)
+LEVEL_DESCRIPTION("Another castle. I'm sure you will deal with these sad fools in the traditional manner. Keep in mind: another Keeper to the south has similar intentions, and is rumoured to be rather better equipped than we.")
+LEVEL_AUTHORS("Nikolai Kingsley","")

@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map01015
+REM Automatically generated on 23 Aug 2008, 04:11:00
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(1122771048,1219457460)
+USER_COMMANDS_COUNT(137,5,0,1)
+LEVEL_DESCRIPTION("Hero in this realm is basically a defense specialist, but this time his own Samurai has betayed him. Samurai joined your casuse; this is your chance. Dig the gold near volcano and raise the true forces of evil.")
+LEVEL_AUTHORS("","")

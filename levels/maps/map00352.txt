@@ -1,0 +1,152 @@
+REM ***********************************************************************
+REM   Script for Level  352(052). Jumping 跳跃
+REM ***********************************************************************
+REM 
+REM 
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+SET_GENERATE_SPEED(400)
+
+REM 正常智商的电脑，最大人口7，另外两守护者分别20和25，初始金钱数一样
+COMPUTER_PLAYER(PLAYER1,10)
+COMPUTER_PLAYER(PLAYER2,10)
+
+MAX_CREATURES(PLAYER0,7)
+MAX_CREATURES(PLAYER1,20)
+MAX_CREATURES(PLAYER2,25)
+START_MONEY(ALL_PLAYERS,2000)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+ADD_CREATURE_TO_POOL(DARK_MISTRESS,30)
+ADD_CREATURE_TO_POOL(VAMPIRE,40)
+ADD_CREATURE_TO_POOL(ORC,20)
+ADD_CREATURE_TO_POOL(DRAGON,2)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+
+CREATURE_AVAILABLE(PLAYER0,DRAGON,1,1)
+CREATURE_AVAILABLE(PLAYER1,DARK_MISTRESS,1,1)
+CREATURE_AVAILABLE(PLAYER2,ORC,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+ROOM_AVAILABLE(PLAYER0,BRIDGE,1,0)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_OBEY,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,1)
+MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+MAGIC_AVAILABLE(PLAYER1,POWER_CALL_TO_ARMS,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_CAVE_IN,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_HEAL_CREATURE,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_HOLD_AUDIENCE,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_CHICKEN,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_LIGHTNING,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_CONCEAL,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_PROTECT,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,0)
+MAGIC_AVAILABLE(PLAYER2,POWER_HEAL_CREATURE,1,1)
+MAGIC_AVAILABLE(PLAYER2,POWER_CHICKEN,1,1)
+MAGIC_AVAILABLE(PLAYER2,POWER_LIGHTNING,1,1)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+DOOR_AVAILABLE(ALL_PLAYERS,MAGIC,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定陷阱*********************************
+REM  (玩家,陷阱名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+TRAP_AVAILABLE(PLAYER2,POISON_GAS,1,0)
+TRAP_AVAILABLE(PLAYER2,BOULDER,1,0)
+TRAP_AVAILABLE(PLAYER2,LIGHTNING,1,0)
+
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+REM 如果有一个以上的黑暗女王并可招龙，就可以招女王
+IF_AVAILABLE(PLAYER0,DARK_MISTRESS >= 1)
+    IF_AVAILABLE(PLAYER0,DRAGON >= 1)
+        CREATURE_AVAILABLE(PLAYER0,DARK_MISTRESS,1,1)
+    ENDIF
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER0,ALL_DUNGEONS_DESTROYED == 1)
+
+    REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+    LEVEL_VERSION(1)
+    REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+    ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+    ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+    ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+    ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+    ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+    ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+    ROOM_AVAILABLE(PLAYER0,RIDGE,1,1)
+    ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+    ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+    ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+    ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+    ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+    ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+    ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+    ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+    
+    MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+    MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+    DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+    TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+    TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+    QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0) 
+
+    WIN_GAME
+ENDIF
+IF(PLAYER0,DUNGEON_DESTROYED == 1)
+    LOSE_GAME
+ENDIF
+
+REM ****************************提示信息**********************************
+QUICK_OBJECTIVE(1,"参考提示：1、敌人强大的时候，你不要以卵击石；2、抢占敌人基地，封锁敌人补给，切断敌人经济也能干掉敌人；3、占到敌人的建筑，能卖的卖了，有些是不能卖的，比如训练室，你不能自己建！",PLAYER0)  
+IF(PLAYER0,GAME_TURN > 500)
+    QUICK_INFORMATION(2,"有线报，野外有2个小鬼、一只蜘蛛、一只蟑螂！",PLAYER0) 
+ENDIF
+IF(PLAYER0,GAME_TURN > 1500)
+    QUICK_INFORMATION(3,"如果你能飞到野外就好办了！",PLAYER0) 
+ENDIF
+IF(PLAYER0,GAME_TURN > 2500)
+    QUICK_INFORMATION(4,"如果你有一个以上的黑暗女王，你就可以从入口招更多的黑暗女王！",PLAYER0) 
+ENDIF
+IF(PLAYER0,GAME_TURN > 3500)
+    QUICK_INFORMATION(5,"敌人兵力是你的几倍，你得智取，占敌人基地，封锁敌人补给，切断敌人经济就是智取！",PLAYER0) 
+ENDIF
+IF(PLAYER0,GAME_TURN > 4000)
+    QUICK_INFORMATION(6,"祝你好运，守护者！",PLAYER0) 
+ENDIF
+
+
+
+
+
+
+
+
+
+

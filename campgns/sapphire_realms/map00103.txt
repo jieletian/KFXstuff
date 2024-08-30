@@ -1,0 +1,299 @@
+REM General level conditions and properties
+
+    LEVEL_VERSION(1)
+    RUN_AFTER_VICTORY(1)
+    SET_GENERATE_SPEED(400)
+    START_MONEY(ALL_PLAYERS,0)
+    MAX_CREATURES(ALL_PLAYERS,25)
+
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_POSSESS,1,1)
+    REM no slap!!!!! slap bad
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,0,0)
+
+    SET_PLAYER_COLOR(PLAYER0, BLUE)
+
+    SET_MUSIC("campaign_music/rayman3_swamp_echoes.mp3")
+
+    SET_BOX_TOOLTIP(1,"开始挑战")
+    SET_BOX_TOOLTIP(2,"释放混沌")
+    SET_BOX_TOOLTIP(3,"解除混沌模式")
+
+    QUICK_OBJECTIVE(1, "您已经走出了这个世界的水晶之心。更深的地下是一个由邪恶、无情的神统治的王国。他会要求频繁献祭新生命给他……否则他会夺走您的生命。您需要探索以找到更多生物来献祭，但不能使用你的巴掌。您遇到的墓地可以用作检查站，以继续深入探索。最后一个奖励在等着您……但在您领取之前，这个王国将考验您的知识和技能。您能在时间耗尽之前穿过这个迷宫吗？", 3)
+
+    REVEAL_MAP_LOCATION(PLAYER0,1,-1)
+
+REM Logic for the sacrifices
+
+    REM This flag determines the amount of creatures sacrificed
+    SET_FLAG(PLAYER0, FLAG0, 0)
+
+    REM This flag tracks if the player has reached the imp room yet
+    SET_FLAG(PLAYER0, FLAG1, 0)
+
+    REM The amount of imps to be sacrificed
+    SET_FLAG(PLAYER0, FLAG5, 50)
+
+REM Logic for what happens when box1 is activated, to start the gauntlet
+
+    IF(PLAYER0,BOX1_ACTIVATED == 1)
+        QUICK_OBJECTIVE(5, "在倒计时结束前献祭一个生物，否则你就输了。祝你好运。")
+
+        ADD_CREATURE_TO_LEVEL(PLAYER0, SORCEROR, -1, 1, 3, 0)
+        ADD_CREATURE_TO_LEVEL(PLAYER0, BUG, -1, 1, 1, 0)
+
+        SET_TIMER(PLAYER0, TIMER0)
+
+        DISPLAY_COUNTDOWN(PLAYER0, TIMER0, 1200, 1)
+
+        USE_POWER_AT_LOCATION(PLAYER2, 7, POWER_DESTROY_WALLS, 1, 1)
+        USE_POWER_AT_LOCATION(PLAYER2, 8, POWER_DESTROY_WALLS, 1, 1)
+        USE_POWER_AT_LOCATION(PLAYER2, 9, POWER_DESTROY_WALLS, 1, 1)
+
+        PLAY_MESSAGE(PLAYER0, SOUND, "72")
+    ENDIF
+
+REM While player hasn't hit the imp room yet, make the player sacrifice creatures repeatedly
+
+    IF (PLAYER0, FLAG1 == 0)
+        REM if the player has sacrificed a new creature, reset the timer, both the visual bonus game timer and internal timer
+        IF (PLAYER0, CREATURES_SACRIFICED > PLAYER0,FLAG0)
+
+            NEXT_COMMAND_REUSABLE
+            SET_TIMER(PLAYER0, TIMER0)
+
+            NEXT_COMMAND_REUSABLE
+            DISPLAY_COUNTDOWN(PLAYER0, TIMER0, 1200, 1)
+
+            NEXT_COMMAND_REUSABLE
+            ADD_TO_FLAG(PLAYER0, FLAG0, 1)
+        ENDIF
+    ENDIF
+
+REM Only let the player lose via this condition, if the imp room hasn't been reached yet
+
+    IF (PLAYER0, FLAG1 == 0)
+        IF(PLAYER0, TIMER0 > 1200)
+            QUICK_MESSAGE(11, "你的生命已经没了！", SPELL_FLIGHT)
+            QUICK_MESSAGE(10, "你没有及时给我送来祭品……", SPELL_FLIGHT)
+
+            SET_HEART_HEALTH(PLAYER0, 0)
+
+        ENDIF
+    ENDIF
+
+REM If the player has hit the room with the imps, change the rules
+
+    IF_ACTION_POINT(2, PLAYER0)
+        SET_FLAG(PLAYER0, FLAG1, 1)
+        SET_TIMER(PLAYER0, TIMER3)
+        QUICK_MESSAGE(3, "你的寺庙里有这么多小鬼！", SPELL_FLIGHT)
+        QUICK_MESSAGE(9, "很快，你必须继续献祭", SPELL_FLIGHT)
+
+        DISPLAY_COUNTDOWN(PLAYER0, TIMER3, 800, 1)
+
+        Rem determines the amount of imps on the map
+        SET_FLAG(PLAYER0, FLAG5, 0)
+        COMPUTE_FLAG(PLAYER0, FLAG5, INCREASE, PLAYER0, IMP)
+        COMPUTE_FLAG(PLAYER0, FLAG5, INCREASE, PLAYER_NEUTRAL, IMP)
+
+        DISPLAY_VARIABLE(PLAYER0, FLAG5)
+    ENDIF
+
+REM Imp mode logic
+
+    IF (PLAYER0, FLAG1 == 1)
+        IF (PLAYER0, TIMER3 > 800)
+            LOSE_GAME
+            QUICK_MESSAGE(13, "准时的小鬼……", SPELL_FLIGHT)
+            QUICK_MESSAGE(12, "你没能献祭", SPELL_FLIGHT)
+        ENDIF
+    ENDIF
+
+REM When all imps are dead, the level is won
+
+IF (PLAYER0, FLAG1 == 1)
+    IF (PLAYER_NEUTRAL, IMP == 0)
+        IF(PLAYER0, IMP == 0)
+            
+            QUICK_MESSAGE(7, "来到尽头的特殊物品之处并使用它吧...如果你敢的话。", HORNY)
+            QUICK_MESSAGE(6, "看来你有两下子。", HORNY)
+
+            REM Falls der Spieler aus versehen seinen Horny sacrificed hat, einen neuen spawnwn
+            IF (PLAYER0, TOTAL_CREATURES == 0)
+                ADD_CREATURE_TO_LEVEL(PLAYER0, HORNY, -1, 1, 3, 0)
+            ENDIF
+
+            USE_POWER_AT_LOCATION(PLAYER2, 4, POWER_DESTROY_WALLS, 1, 1)
+            USE_POWER_AT_LOCATION(PLAYER2, 4, POWER_DESTROY_WALLS, 1, 1)
+
+            BONUS_LEVEL_TIME(0)
+            HIDE_TIMER
+            HIDE_VARIABLE
+
+            SET_FLAG(PLAYER0, FLAG1, 2)
+        ENDIF
+    ENDIF
+ENDIF
+
+REM Sacrificing imps logic
+
+    IF (PLAYER0, FLAG1 == 1)
+        NEXT_COMMAND_REUSABLE
+        SET_FLAG(PLAYER0, FLAG5, 0)
+        NEXT_COMMAND_REUSABLE
+        COMPUTE_FLAG(PLAYER0, FLAG5, INCREASE, PLAYER0, IMP)
+        NEXT_COMMAND_REUSABLE
+        COMPUTE_FLAG(PLAYER0, FLAG5, INCREASE, PLAYER_NEUTRAL, IMP)
+    ENDIF
+
+REM End of the level hint
+
+    IF_ACTION_POINT(3, PLAYER0)
+
+        WIN_GAME
+
+        CHANGE_SLAB_OWNER(24, 8, PLAYER0, NONE)
+
+        CHANGE_SLAB_OWNER(24, 9, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(24, 10, PLAYER0, NONE)
+
+        CHANGE_SLAB_OWNER(24, 11, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(24, 12, PLAYER0, NONE)
+
+        CHANGE_SLAB_OWNER(22, 10, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(23, 10, PLAYER0, NONE)
+
+        CHANGE_SLAB_OWNER(25, 10, PLAYER0, NONE)
+        CHANGE_SLAB_OWNER(26, 10, PLAYER0, NONE)
+
+        PLAY_MESSAGE(PLAYER0, SOUND, "116")
+
+        CREATE_EFFECT_AT_POS(57, 73, 34)
+        CREATE_EFFECT_AT_POS(57, 73, 28)
+        CREATE_EFFECT_AT_POS(57, 70, 31)
+        CREATE_EFFECT_AT_POS(57, 76, 31)
+
+        QUICK_INFORMATION(2, "此特殊功能将开启混沌模式。可以将其视为增强难度。游戏阶段将变得更难或略有不同。按顺序再次玩这些领域以跟踪中心中的进度。您可以通过按顺序触摸雕像来打开或关闭中心中的混沌模式：蓝色、白色、黑色和黄色。基本上，逆时针移动并停在每个雕像处以解锁隐藏的房间。", 3)
+    ENDIF
+
+REM Logic for second special box
+
+    IF(PLAYER0,BOX2_ACTIVATED == 1)
+
+        QUICK_MESSAGE(15, "期待未来的更新。", SPELL_FLIGHT)
+        QUICK_MESSAGE(14, "尚未完全添加", SPELL_FLIGHT)
+        QUICK_MESSAGE(4, "警告：增强难度尚未完成", SPELL_FLIGHT)
+
+        QUICK_INFORMATION(66, "混沌模式现已开启。再次探索这个王国，看看有什么变化。")
+        PLAY_MESSAGE(PLAYER0,SPEECH,80)
+        SET_FLAG(PLAYER0, CAMPAIGN_FLAG5, 1)
+    ENDIF
+
+REM Be able to turn NG+ mode off again when it's already on and the player restarts the level
+
+    IF (PLAYER0, CAMPAIGN_FLAG5 == 1)
+        IF (PLAYER0, TIMER0 == 0)
+            QUICK_INFORMATION(8, "目前，混沌模式（增强难度）已开启。如果您愿意，可以通过此特殊盒子将其再次关闭。", 6)
+            ADD_OBJECT_TO_LEVEL(SPECBOX_CUSTOM, 6, 3, PLAYER_NEUTRAL)
+        ENDIF
+    ENDIF
+
+    IF(PLAYER0,BOX3_ACTIVATED == 1)
+        WIN_GAME
+        QUICK_OBJECTIVE(52, "混沌模式（增强模式）已再次关闭。")
+        SET_FLAG(PLAYER0, CAMPAIGN_FLAG5, 0)
+    ENDIF
+
+REM Logic for taking over the lairs - Fairy
+
+    IF_ACTION_POINT (10, PLAYER0)
+        CHANGE_SLAB_OWNER(38, 139, PLAYER0, NONE)
+        PLAY_MESSAGE(PLAYER0, SOUND, "116")
+    ENDIF
+
+REM Spider
+
+    IF_ACTION_POINT(11, PLAYER0)
+        REM Claim lair as a checkpoint
+        CHANGE_SLAB_OWNER(7, 103, PLAYER0, NONE)
+        PLAY_MESSAGE(PLAYER0, SOUND, "116")
+    ENDIF
+
+REM Man 眉bernimmt den Raum mit script-claim wo man die creatures findet als checkpoint - Empty Lair
+
+    IF_ACTION_POINT(5, PLAYER0)
+        REM Claim lair as a checkpoint
+        CHANGE_SLAB_OWNER(38, 78, PLAYER0, NONE)
+        PLAY_MESSAGE(PLAYER0, SOUND, "116")
+    ENDIF
+
+
+REM Man 眉bernimmt den Raum mit script-claim wo man die creatures findet als checkpoint - misstress
+
+    IF_ACTION_POINT(12, PLAYER0)
+        REM Claim lair as a checkpoint
+        CHANGE_SLAB_OWNER(43, 61, PLAYER0, NONE)
+        PLAY_MESSAGE(PLAYER0, SOUND, "116")
+    ENDIF
+
+REM Man 眉bernimmt den Raum mit script-claim wo man die creatures findet als checkpoint - troll
+
+    IF_ACTION_POINT(13, PLAYER0)
+        REM Claim lair as a checkpoint
+        CHANGE_SLAB_OWNER(8, 48, PLAYER0, NONE)
+        PLAY_MESSAGE(PLAYER0, SOUND, "116")
+    ENDIF
+
+REM Man 眉bernimmt den Raum mit script-claim wo man die creatures findet als checkpoint - bile demon
+
+    IF_ACTION_POINT(14, PLAYER0)
+        REM Claim lair as a checkpoint
+        CHANGE_SLAB_OWNER(42, 39, PLAYER0, NONE)
+        PLAY_MESSAGE(PLAYER0, SOUND, "116")
+    ENDIF
+
+REM Man 眉bernimmt den Raum mit script-claim wo man die creatures findet als checkpoint - final lair
+
+    IF_ACTION_POINT(15, PLAYER0)
+        REM Claim lair as a checkpoint
+        CHANGE_SLAB_OWNER(7, 24, PLAYER0, NONE)
+        PLAY_MESSAGE(PLAYER0, SOUND, "116")
+    ENDIF
+
+REM very final lair
+
+    IF_ACTION_POINT(16, PLAYER0)
+        REM Claim lair as a checkpoint
+        CHANGE_SLAB_OWNER(36, 20, PLAYER0, NONE)
+        PLAY_MESSAGE(PLAYER0, SOUND, "116")
+    ENDIF
+
+REM Set configs for all the creatures to make hatchery and pay for them optional
+
+    SET_CREATURE_CONFIGURATION(BUG,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(BUG,Pay,0)
+
+    SET_CREATURE_CONFIGURATION(SORCEROR,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(SORCEROR,Pay,0)
+
+    SET_CREATURE_CONFIGURATION(SPIDER,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(SPIDER,Pay,0)
+
+    SET_CREATURE_CONFIGURATION(DARK_MISTRESS,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(DARK_MISTRESS,Pay,0)
+
+    SET_CREATURE_CONFIGURATION(HORNY,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(HORNY,Pay,0)
+
+    SET_CREATURE_CONFIGURATION(BILE_DEMON,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(BILE_DEMON,Pay,0)
+
+    SET_CREATURE_CONFIGURATION(TROLL,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(TROLL,Pay,0)
+
+    SET_CREATURE_CONFIGURATION(FAIRY,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(FAIRY,Pay,0)
+
+    SET_CREATURE_CONFIGURATION(GIANT,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(GIANT,Pay,0)

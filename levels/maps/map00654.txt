@@ -1,0 +1,127 @@
+REM ***********************************************************************
+REM   Script for Level   654(154).M I N E
+REM ***********************************************************************
+REM Author: Mike Short
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+SET_GENERATE_SPEED(250)
+MAX_CREATURES(PLAYER0,34)
+START_MONEY(PLAYER0,1010101)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+ADD_CREATURE_TO_POOL(AVATAR,110)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+
+CREATURE_AVAILABLE(PLAYER0,AVATAR,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(PLAYER0,POWER_HOLD_AUDIENCE,1,1)
+MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,0)
+
+REM ****************************增援部队**********************************
+REM CREATE_PARTY =>组建队伍                (队伍名称)   
+REM ADD_TO_PARTY=>添加生物到队伍中   (队伍名称,生物名称,生物等级,携带金钱数量,任务,延时)
+CREATE_PARTY(PLATE)
+    ADD_TO_PARTY(PLATE,WIZARD,7,100,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PLATE,AVATAR,9,4141,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PLATE,WITCH,8,0,DEFEND_PARTY,0)
+
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+IF_AVAILABLE(PLAYER0,SCAVENGER >= 0)
+    ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+    REM QUICK_INFORMATION(3,"A SCANVENGER IS YOURS, ALSO WITH THE POWER TO BUILD A TORTURE CHAMBER")
+    QUICK_INFORMATION(3,"招募中心是你的了，也有能力建立一个酷刑室")
+ENDIF
+
+IF(PLAYER_GOOD,DUNGEON_DESTROYED == 1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PLATE,1,4)
+    IF(PLAYER_GOOD,TOTAL_CREATURES == 0)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+    ENDIF
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER_GOOD,TOTAL_CREATURES == 0)
+    
+        REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+        LEVEL_VERSION(1)
+        REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+        ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+        ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+        ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+        ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+        ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+        ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+        ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+        ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+        ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+        ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+        
+        MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+        MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+        DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+        TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+        TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+        QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+        WIN_GAME
+ENDIF
+IF(PLAYER0,TOTAL_CREATURES == 0)
+    LOSE_GAME
+ENDIF
+IF(PLAYER0,DUNGEON_DESTROYED == 1)
+    LOSE_GAME
+ENDIF
+
+REM ****************************提示信息**********************************
+REM QUICK_OBJECTIVE(1,"YOU'VE COME HERE WITH LITTLE ASSISTANCE, KEEPER. THE BATTLE HAS ALREADY BEGUN, SO DESTROY ALL ENEMIES BUT BE CAREFUL AVATARS MAY APPEAR, THOUGH I'LL GIVE YOU SOMETHING ALONG WITH THE LAIR if you get there.",PLAYER0)
+QUICK_OBJECTIVE(1,"你来这里有点帮助，守护者。战斗已经开始，消灭所有的敌人，但要小心，头圣者会出现，尽管如果你到达那里，我随着巢穴给你的东西。",PLAYER0)
+
+REM QUICK_INFORMATION(2,"YOU'RE GOING TO BE DESTROYED IF YOUR NOT CAREFUL.")
+QUICK_INFORMATION(2,"如果你不小心，你将被摧毁。")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

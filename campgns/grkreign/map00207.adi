@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00207
+REM Automatically generated on 29 Aug 2008, 15:07:31
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(899135854,1220015251)
+USER_COMMANDS_COUNT(343,5,276,0)
+LEVEL_DESCRIPTION("We have found the source of these rouge Keepers. Castle Sadlack. Sadlack is quite an architechteral masterpiece, and its dungeons are..... occupied.  The heroes within have an immense generator, powered by three dungeon hearts which they have connected directly to four Portals, and are luring innocent demons in and bewitching them. This would explain the hero activity in the previous areas. The fortress is nearly impregnable and a stategy will be required if success is to be achieved. Because bringing in legions of troops from your previous dungeons will take far to long and be highly expensive, and that all nearby Portals are taken by the heroes, you shall have to get your soldiers from other sources.")
+LEVEL_AUTHORS("Grinic","")

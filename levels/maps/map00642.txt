@@ -1,0 +1,225 @@
+REM ***********************************************************************
+REM   Script for Level   642(142).Steve First 史提夫一世？
+REM Steve Tupper
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+SET_GENERATE_SPEED(400)
+COMPUTER_PLAYER(PLAYER1,3)
+COMPUTER_PLAYER(PLAYER2,4)
+COMPUTER_PLAYER(PLAYER3,5)
+
+MAX_CREATURES(PLAYER0,15)
+MAX_CREATURES(PLAYER1,20)
+MAX_CREATURES(PLAYER2,20)
+MAX_CREATURES(PLAYER3,20)
+
+START_MONEY(PLAYER0,100000)
+START_MONEY(PLAYER1,10000)
+START_MONEY(PLAYER2,10000)
+START_MONEY(PLAYER3,10000)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+ADD_CREATURE_TO_POOL(BUG,30)
+ADD_CREATURE_TO_POOL(FLY,20)
+ADD_CREATURE_TO_POOL(SPIDER,30)
+ADD_CREATURE_TO_POOL(TROLL,30)
+ADD_CREATURE_TO_POOL(DRAGON,20)
+ADD_CREATURE_TO_POOL(DARK_MISTRESS,30)
+ADD_CREATURE_TO_POOL(BILE_DEMON,30)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+
+CREATURE_AVAILABLE(ALL_PLAYERS,BUG,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,FLY,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,SPIDER,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,TROLL,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,DRAGON,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,DARK_MISTRESS,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,BILE_DEMON,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,HORNY,1,0)
+CREATURE_AVAILABLE(ALL_PLAYERS,SORCEROR,1,0)
+CREATURE_AVAILABLE(ALL_PLAYERS,VAMPIRE,1,0)
+CREATURE_AVAILABLE(ALL_PLAYERS,SKELETON,1,0)
+CREATURE_AVAILABLE(ALL_PLAYERS,GHOST,1,0)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,PRISON,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,TORTURE,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,WORKSHOP,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,TEMPLE,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,GRAVEYARD,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,0)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SIGHT,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CALL_TO_ARMS,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HEAL_CREATURE,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HOLD_AUDIENCE,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SPEED,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_PROTECT,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CONCEAL,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CHICKEN,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_ARMAGEDDON,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+DOOR_AVAILABLE(ALL_PLAYERS,MAGIC,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定陷阱*********************************
+REM  (玩家,陷阱名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+TRAP_AVAILABLE(ALL_PLAYERS,POISON_GAS,1,0)
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+SET_FLAG(PLAYER0,FLAG0,0)
+
+REM 人类地盘入口处
+IF_ACTION_POINT(1,PLAYER0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,WIZARD,1,2,10,10000)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,MONK,1,2,10,10000)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,WITCH,1,2,10,10000)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,FAIRY,1,2,10,10000)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,SAMURAI,1,2,10,10000)
+    REM QUICK_INFORMATION(3,"Ye Gods! A party of powerful magic users have used their combined power to save themselves from your summoning - see to it they don't survive any longer!")
+    QUICK_INFORMATION(4,"神！一强大魔法使用者使他们联合力量来拯救自己从你的召唤-看看他们没有任何生存的时间！")
+ENDIF
+REM 人类心脏上
+IF_ACTION_POINT(2,PLAYER0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BARBARIAN,2,2,10,10000)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,ARCHER,2,2,10,10000)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,KNIGHT,2,2,10,90000)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,GIANT,2,2,10,10000)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,THIEF,2,2,10,10000)
+    REM QUICK_INFORMATION(4,"AARRGGGHH! Warriors from above have obviously heard of the fate of their kin below and seek vengience, kill them, kill them allll....")
+    QUICK_INFORMATION(5,"呀！战士从上面有明显的听到他们亲人在命运寻求荣耀，杀了他们，杀了他们全部....")
+ENDIF
+REM 岩石围墙之内你心脏正南面，有个繁殖宝物
+IF_ACTION_POINT(3,PLAYER0)
+    REM QUICK_INFORMATION(5,"You have found one of the three ingredients you need to destroy these scum - use with great care Master, this bonus could be dangerous if used at the wrong time. Go forth and multiply sire")
+    QUICK_INFORMATION(6,"你已经找到了三种成分之一，你需要摧毁这些渣滓-使用与伟大的护理大师，这奖金可能是危险的，如果在错误的时间使用,去繁殖")
+ENDIF
+IF_ACTION_POINT(4,PLAYER0)
+REM 岩石围墙内，东北角有寺庙，还有个偷英雄的宝物
+    REM QUICK_INFORMATION(6,"You have found one of the three ingredients you need to destroy your neighbours. This temple will allow you to build the strongest army before summoning your opponents. A word of warning master, do not ask of the gods too quickly or you could have a riot on your evil hands.")
+    REM QUICK_INFORMATION(7,"你已经找到了你要摧毁你的邻居的三种成分之一,这座寺庙将允许你在召唤你的对手建立强大的军队,一个警告大师的话，不要问神太快，否则你会有一个你邪恶手的暴乱。")
+ENDIF
+
+REM 当你研究出末日审判
+IF_AVAILABLE(PLAYER0,POWER_ARMAGEDDON == 1)
+    REM QUICK_INFORMATION(7,"Finally you have the last of the three components that you need to defeat your enemies, crush them with your Darkness")
+    QUICK_INFORMATION(8,"最终，你剩下的三分之一，你需要击败你的敌人，粉碎他们带给你的黑暗。")
+ENDIF
+
+REM P5在你心脏与入口之间，P6在你心脏上；假如有敌人接近你心脏的话，就让你有破墙术
+IF(PLAYER0,FLAG0 == 0)
+    IF_ACTION_POINT(5,PLAYER1)
+        SET_FLAG(PLAYER0,FLAG0,1)
+    ENDIF
+    IF_ACTION_POINT(6,PLAYER1)
+        SET_FLAG(PLAYER0,FLAG0,1)
+    ENDIF
+    IF_ACTION_POINT(5,PLAYER2)
+        SET_FLAG(PLAYER0,FLAG0,1)
+    ENDIF
+    IF_ACTION_POINT(6,PLAYER2)
+        SET_FLAG(PLAYER0,FLAG0,1)
+    ENDIF
+    IF_ACTION_POINT(5,PLAYER3)
+        SET_FLAG(PLAYER0,FLAG0,1)
+    ENDIF
+    IF_ACTION_POINT(6,PLAYER3)
+        SET_FLAG(PLAYER0,FLAG0,1)
+    ENDIF
+    IF_ACTION_POINT(5,PLAYER_GOOD)
+        SET_FLAG(PLAYER0,FLAG0,1)
+    ENDIF
+    IF_ACTION_POINT(6,PLAYER_GOOD)
+        SET_FLAG(PLAYER0,FLAG0,1)
+    ENDIF
+ENDIF
+
+REM 人类人数小于20，就让你有破墙术
+IF(PLAYER_GOOD,TOTAL_CREATURES < 20)
+    SET_FLAG(PLAYER0,FLAG0,1)
+ENDIF
+
+IF(PLAYER0,FLAG0 == 1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER0,ALL_DUNGEONS_DESTROYED == 1)
+    
+        REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+        LEVEL_VERSION(1)
+        REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+        ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+        ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+        ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+        ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+        ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+        ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+        ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+        ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+        ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+        ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+        
+        MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+        MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+        DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+        TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+        TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+        QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+        WIN_GAME
+ENDIF
+
+REM ****************************提示信息**********************************
+QUICK_OBJECTIVE(1,"参考提示：1、这是一个准备退休老守护者的故事，因平静的生活被打扰而惩罚那些好战的家伙；2、故事中提的三大神器繁殖宝物、偷英雄宝物、你研究出来的末日审判魔法，好好利用它们，你会事半功倍；3、当有敌人靠近你心脏附近或者敌人数量小于20，你就有破墙魔法，直捣黄龙！",PLAYER0)  
+IF(PLAYER0,GAME_TURN < 50)
+    REM QUICK_INFORMATION(1,"After the defeat of the Avatar you decided to build yourself a little retiREMent dungeon, with the heroic scum's body reanimated as a butler. You did a good job, well re-enforced, plenty of gold and easily defendable. What you didn't count on however is your new neighbours.")
+    QUICK_INFORMATION(2,"战败后圣者之后，你决定自己建造一个隐退小地下城，作为一个英雄的人渣复活身体管家，你干的很好，大量的黄金会容易化解危机，不要指望你的新邻居。")
+ENDIF
+IF(PLAYER0,GAME_TURN > 100)
+    REM QUICK_INFORMATION(2,"These pityful worms have ruined your little holiday home and so must pay with their lives! Only thing is, they've blocked the only exit and hidden the destroy walls spell that you need to break thier barrier. You have a trick up your sleeve though master - the most powerful spell in the realm - research it and teach these scum the meaning of pain.")
+   QUICK_INFORMATION(3,"这些可怜虫毁了你回家小假期，所以必须付出生命的代价！唯一的问题是，他们已经封锁了唯一的出口和隐藏破坏墙壁魔法，你需要打破他们的障碍法术，你有一个诡计，你的袖子，主人，领域中最强大的咒语-研究它，教这些渣滓的意思")
+ENDIF
+
+
+
+
+
+
+
+
+
+
+
+
+

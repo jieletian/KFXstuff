@@ -1,0 +1,16 @@
+Name: Prescora War 1.1.0
+Author: Oetelaer, Created on 19 Aug 2000
+Keepers: Red, Blue, White
+Pool: Troll, Dragon, Demon Spawn, Fly, Dark Mistress
+  Warlock, Bile Demon, Beetle, Spider, Hell Hound, Tentacle
+  Orc
+Objects on map:
+Creatures: 67, Traps: 6, Doors: 31, Items: 208
+Dungeon hearts: 3, Hero gates: 1, Special Boxes: 8
+Description:
+  Just another Keeper to kill. The first level I
+  uploaded - not perfect, but has some nice
+  surprises. There is a bug: The enemy keeper might
+  get killed. No problem, but if that happens, you
+  will have won the game, and the scripts to get
+  creatures into the level won't work anymore.

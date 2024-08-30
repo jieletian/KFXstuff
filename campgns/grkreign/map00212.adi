@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00212
+REM Automatically generated on 29 Aug 2008, 15:37:04
+
+LEVEL_VERSION(1,2,0)
+LEVEL_TIMESTAMP(900023642,1220017024)
+USER_COMMANDS_COUNT(327,5,266,0)
+LEVEL_DESCRIPTION("There is trouble m'lord. In Sadlack. Since your conquest of Castle Sadlack, a fellow Keeper, Meeninas, has been looking after it, rebuilding, repairing walls, paying creatures and so forth. But now Meeninas is missing, presumed dead and all the previous foes have met: the undead Sadlackians, the Hangdamien wizards, the summoned demons and the Hopemirth heroes have banded together to rid the under and over world of you. Quite an honour I would say.")
+LEVEL_AUTHORS("Grinic","")

@@ -1,0 +1,1 @@
+Unzip into the campaign folder so that the mp3 files are in campgns\sapphire_realms_media\campaign_music.

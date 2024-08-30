@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map01016
+REM Automatically generated on 23 Aug 2008, 04:32:30
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(1125337048,1219458750)
+USER_COMMANDS_COUNT(31,2,0,0)
+LEVEL_DESCRIPTION("The land rich in lava. Dig around, maybe you'll find something that will help you in your crusade on another keeper.")
+LEVEL_AUTHORS("","")

@@ -1,0 +1,730 @@
+REM Basics
+    LEVEL_VERSION(1)
+    RUN_AFTER_VICTORY(1)
+    SET_GENERATE_SPEED(300)
+    START_MONEY(ALL_PLAYERS,15000)
+    MAX_CREATURES(ALL_PLAYERS,10)
+
+    SET_MUSIC("campaign_music/mines_homeworld.mp3")
+
+    SET_TEXTURE(PLAYER0, SKULL_RELIEF)
+    SET_PLAYER_COLOR(PLAYER0, BLUE)
+
+    COMPUTER_PLAYER(PLAYER5, ROAMING)
+
+    REM Commands to make a green faction that isn't mandatory to kill but is friendly to black and looks like black - used for the reapers and skeletons
+    SET_PLAYER_COLOR(PLAYER2, BLACK)
+    COMPUTER_PLAYER(PLAYER2, ROAMING)
+    ALLY_PLAYERS(PLAYER2, PLAYER5, 3)
+
+REM Availability
+
+    REM Creatures available at 4
+    ADD_CREATURE_TO_POOL(TROLL,4)
+    ADD_CREATURE_TO_POOL(SPIDER,4)
+    ADD_CREATURE_TO_POOL(HELL_HOUND,4)
+    ADD_CREATURE_TO_POOL(TENTACLE,4)
+    ADD_CREATURE_TO_POOL(SORCEROR,4)
+    ADD_CREATURE_TO_POOL(MAIDEN,4)
+    ADD_CREATURE_TO_POOL(DWARFA,4)
+
+    REM Creatures available at 2
+    ADD_CREATURE_TO_POOL(ORC,2)
+    ADD_CREATURE_TO_POOL(BILE_DEMON,2)
+    ADD_CREATURE_TO_POOL(DRAGON,2)
+    ADD_CREATURE_TO_POOL(MONK,2)
+
+    CREATURE_AVAILABLE(ALL_PLAYERS,TROLL,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,SPIDER,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,HELL_HOUND,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,TENTACLE,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,SORCEROR,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,MAIDEN,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,DWARFA,1,0)
+
+    CREATURE_AVAILABLE(ALL_PLAYERS,ORC,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,MONK,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,BILE_DEMON,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,DRAGON,1,0)
+
+REM Rooms
+
+    ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,WORKSHOP,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,BARRACKS,1,1)
+
+    ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,TEMPLE,1,0)
+
+REM Magic
+
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_POSSESS,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,1)
+
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SPEED,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CALL_TO_ARMS,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HOLD_AUDIENCE,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CAVE_IN,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HEAL_CREATURE,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_PROTECT,1,0)
+
+    REM Make REBOUND and FREEZE researchable
+
+    MAGIC_AVAILABLE(ALL_PLAYERS, POWER_REBOUND,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS, POWER_FREEZE,1,0)
+
+    SET_POWER_CONFIGURATION(POWER_REBOUND,Cost,2500,1)
+    SET_POWER_CONFIGURATION(POWER_FREEZE,Cost,2500,1)
+
+    SET_POWER_CONFIGURATION(POWER_REBOUND,PanelTabIndex,13,5)
+    SET_POWER_CONFIGURATION(POWER_FREEZE,PanelTabIndex,14,6)
+
+REM Workshop
+
+    TRAP_AVAILABLE(ALL_PLAYERS,POISON_GAS,1,0)
+    TRAP_AVAILABLE(ALL_PLAYERS,LIGHTNING,1,0)
+    TRAP_AVAILABLE(ALL_PLAYERS,BOULDER,1,0)
+    TRAP_AVAILABLE(ALL_PLAYERS,WORD_OF_POWER,1,0)
+
+    DOOR_AVAILABLE(ALL_PLAYERS,WOOD,1,0)
+    DOOR_AVAILABLE(ALL_PLAYERS,BRACED,1,0)
+    DOOR_AVAILABLE(ALL_PLAYERS,STEEL,1,0)
+    DOOR_AVAILABLE(ALL_PLAYERS,MAGIC,1,0)
+
+REM Intro message
+
+    QUICK_OBJECTIVE(1, "诅咒把大教堂摧毁得面目全非，但有些不对劲……你被困在一个熟悉而又陌生的镜像空间中。这里的入口很脆弱，只能吸引极少数生物。一支军队似乎正朝你袭来，你必须尽最大努力生存下来，直到我们能逃离这里。敌人需要一段时间才能到达，好好利用这段时间。")
+
+REM Explanation for freeze when player has researched it
+
+    IF_AVAILABLE(PLAYER0, POWER_FREEZE > 0)
+        TUTORIAL_FLASH_BUTTON(31, 600)
+        QUICK_INFORMATION(15, "您的怪物已研究出“冰冻”魔法。它本质上是“变鸡”魔法的强化版，能够将强大的敌人变成一坨冰，使其完全无法动弹！")
+    ENDIF
+
+REM Start the timer
+
+REM APs 9, 10, 12 to start the global timer when the player breaches one of the doors
+
+    IF_ACTION_POINT(9, PLAYER0)
+        SET_FLAG(PLAYER0, FLAG3, 1)
+    ENDIF
+
+    IF_ACTION_POINT(10, PLAYER0)
+        SET_FLAG(PLAYER0, FLAG3, 1)
+    ENDIF
+
+    IF_ACTION_POINT(12, PLAYER0)
+        SET_FLAG(PLAYER0, FLAG3, 1)
+    ENDIF
+
+    REM 45 min is 54000 / 72000 is 60
+    REM Wave every 4 minutes / 4800 ticks
+
+    IF(PLAYER0, FLAG3 == 1)
+        SET_TIMER(PLAYER0, TIMER0)
+        DISPLAY_COUNTDOWN(PLAYER0, TIMER0, 72000, 1)
+    ENDIF
+
+REM Waves and timer
+
+REM 14400 / Start at 12 minutes
+
+    CREATE_PARTY(party3middle)
+        ADD_TO_PARTY(party3middle, BARBARIAN, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party3middle, ARCHER, 4, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party3middle, ARCHER, 4, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party3middle, ARCHER, 4, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party3middle, ARCHER, 4, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party3middle, ARCHER, 4, 0, ATTACK_DUNGEON_HEART, 0)
+
+    REM Start spawning the waves
+    IF (PLAYER0, TIMER0 == 14400)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party3middle, -2, 1)
+        QUICK_OBJECTIVE(5, "敌人的攻击开始了。尽量别被干掉。")
+    ENDIF
+
+REM Timer 19200 / 16 minutes
+
+    CREATE_PARTY(party4left)
+        ADD_TO_PARTY(party4left, THIEF, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party4left, THIEF, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party4left, THIEF, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party4left, THIEF, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party4left, HELL_HOUND, 3, 0, ATTACK_DUNGEON_HEART, 0)
+
+    IF (PLAYER0, TIMER0 == 19200)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party4left, -1, 1)
+    ENDIF
+
+    REM Spawn another small wave a little later - at 17 minutes
+
+    CREATE_PARTY(party4left2)
+        ADD_TO_PARTY(party4left2, THIEF, 4, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party4left2, THIEF, 4, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party4left2, THIEF, 4, 0, ATTACK_DUNGEON_HEART, 0)
+
+    IF (PLAYER0, TIMER0 == 20400)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party4left2, -1, 1)
+    ENDIF
+
+REM Timer 24000 / Segment 5
+
+    CREATE_PARTY(party5right)
+
+        ADD_TO_PARTY(party5right, MAIDEN, 8, 0, ATTACK_DUNGEON_HEART, 0)
+
+        ADD_TO_PARTY(party5right, SPIDER, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party5right, SPIDER, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party5right, SPIDER, 5, 0, ATTACK_DUNGEON_HEART, 0)
+
+        ADD_TO_PARTY(party5right, BUG, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party5right, BUG, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party5right, BUG, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party5right, BUG, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party5right, BUG, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party5right, BUG, 5, 0, ATTACK_DUNGEON_HEART, 0)
+
+        ADD_TO_PARTY(party5right, FLY, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party5right, FLY, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party5right, FLY, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party5right, FLY, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party5right, FLY, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party5right, FLY, 5, 0, ATTACK_DUNGEON_HEART, 0)
+
+    IF (PLAYER0, TIMER0 == 24000)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party5right, -3, 1)
+    ENDIF
+
+    REM Spawn another small wave afterwards - 21 minutes
+
+    CREATE_PARTY(party5right2)
+        ADD_TO_PARTY(party5right2, SPIDER, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party5right2, SPIDER, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party5right2, SPIDER, 6, 0, ATTACK_DUNGEON_HEART, 0)
+
+    IF (PLAYER0, TIMER0 == 25200)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party5right2, -3, 1)
+    ENDIF
+
+REM Timer 28800 / Segment 6
+REM Wave with all 3 lanes but weak
+
+    CREATE_PARTY(party6left)
+        ADD_TO_PARTY(party6left, DWARFA, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party6left, MONK, 4, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party6left, THIEF, 4, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party6left, SAMURAI, 4, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party6middle)
+        ADD_TO_PARTY(party6middle, GIANT, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party6middle, WITCH, 4, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party6middle, ARCHER, 4, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party6middle, WIZARD, 5, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party6right)
+        ADD_TO_PARTY(party6right, BARBARIAN, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party6right, FAIRY, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party6right, WIZARD, 4, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party6right, THIEF, 5, 0, ATTACK_DUNGEON_HEART, 0)
+
+    IF (PLAYER0, TIMER0 == 28800)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party6left, -1, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party6middle, -2, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party6right, -3, 1)
+    ENDIF
+
+REM Timer 33600 / Segment 7
+REM Break at the halfway point
+
+    IF (PLAYER0, TIMER0 == 33600)
+        QUICK_MESSAGE(10, "敌人不会离开太久。", SPELL_FLIGHT)
+        QUICK_MESSAGE(9, "充分利用这额外的时间，", SPELL_FLIGHT)
+        QUICK_MESSAGE(8, "好像可以稍微休息一下。", SPELL_FLIGHT)
+    ENDIF
+
+REM Timer 38400 / Segment 8
+
+    CREATE_PARTY(party8left)
+        ADD_TO_PARTY(party8left, FAIRY, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party8left, FAIRY, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party8left, FAIRY, 4, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party8left, FAIRY, 4, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party8left, DWARFA, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party8left, DWARFA, 7, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party8middle)
+        ADD_TO_PARTY(party8middle, GIANT, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party8middle, GIANT, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party8middle, GIANT, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party8middle, WIZARD, 8, 0, ATTACK_DUNGEON_HEART, 0)
+
+    IF (PLAYER0, TIMER0 == 38400)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party8left, -1, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party8middle, -2, 1)
+    ENDIF
+
+    REM Spawn another small wave 1 minute later
+
+    CREATE_PARTY(party8left2)
+        ADD_TO_PARTY(party8left2, FAIRY, 4, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party8left2, FAIRY, 4, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party8middle2)
+        ADD_TO_PARTY(party8middle2, GIANT, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party8middle2, GIANT, 8, 0, ATTACK_DUNGEON_HEART, 0)
+
+    IF (PLAYER0, TIMER0 == 39600)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party8left2, -1, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party8middle2, -2, 1)
+    ENDIF
+
+REM Timer 43200 / Segment 9
+
+    CREATE_PARTY(party9middle)
+        ADD_TO_PARTY(party9middle, DRAGON, 9, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party9middle, DEMONSPAWN, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party9middle, DEMONSPAWN, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party9middle, DEMONSPAWN, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party9middle, DEMONSPAWN, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party9middle, DEMONSPAWN, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party9middle, DEMONSPAWN, 7, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party9right)
+        ADD_TO_PARTY(party9right, TENTACLE, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party9right, TENTACLE, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party9right, TENTACLE, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party9right, TENTACLE, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party9right, TROLL, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party9right, TROLL, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party9right, TROLL, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party9right, TROLL, 7, 0, ATTACK_DUNGEON_HEART, 0)
+
+    IF (PLAYER0, TIMER0 == 43200)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party9middle, -2, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party9right, -3, 1)
+    ENDIF
+
+    REM Second slightly smaller wave 2 minutes afterwards
+
+    CREATE_PARTY(party9middle2)
+        ADD_TO_PARTY(party9middle2, DRAGON, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party9middle2, DEMONSPAWN, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party9middle2, TENTACLE, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party9middle2, TROLL, 7, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party9right2)
+        ADD_TO_PARTY(party9right2, DRAGON, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party9right2, DEMONSPAWN, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party9right2, TENTACLE, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party9right2, TROLL, 7, 0, ATTACK_DUNGEON_HEART, 0)
+
+    IF (PLAYER0, TIMER0 == 45600)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party9middle2, -2, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party9right2, -3, 1)
+    ENDIF
+
+REM Timer 48000 / Segment 10
+
+    rem giant wave from the middle
+    CREATE_PARTY(party10middle)
+
+        ADD_TO_PARTY(party10middle, GIANT, 9, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party10middle, DWARFA, 9, 0, ATTACK_DUNGEON_HEART, 0)
+
+        ADD_TO_PARTY(party10middle, MONK, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party10middle, WITCH, 8, 0, ATTACK_DUNGEON_HEART, 0)
+
+        ADD_TO_PARTY(party10middle, WIZARD, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party10middle, ARCHER, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party10middle, THIEF, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party10middle, BARBARIAN, 7, 0, ATTACK_DUNGEON_HEART, 0)
+
+    IF (PLAYER0, TIMER0 == 48000)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party10middle, -2, 1)
+    ENDIF
+
+    REM Small subwave that spawns left and right a minute afterwards
+
+    CREATE_PARTY(party10left)
+        ADD_TO_PARTY(party10left, THIEF, 7, 0, STEAL_SPELLS, 0)
+        ADD_TO_PARTY(party10left, THIEF, 7, 0, STEAL_SPELLS, 0)
+
+    CREATE_PARTY(party10right)
+        ADD_TO_PARTY(party10right, THIEF, 7, 0, STEAL_SPELLS, 0)
+        ADD_TO_PARTY(party10right, THIEF, 7, 0, STEAL_SPELLS, 0)
+
+    IF (PLAYER0, TIMER0 == 49200)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party10left, -1, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party10right, -3, 1)
+    ENDIF
+
+
+REM Timer 52800 / Segment 11
+REM 3 basic waves from everywhere with a lot of trash mobs
+
+    CREATE_PARTY(party11left)
+        ADD_TO_PARTY(party11left, BARBARIAN, 9, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party11left, THIEF, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party11left, THIEF, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party11left, THIEF, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party11left, THIEF, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party11left, THIEF, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party11left, THIEF, 6, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party11middle)
+        ADD_TO_PARTY(party11middle, BARBARIAN, 9, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party11middle, ARCHER, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party11middle, ARCHER, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party11middle, ARCHER, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party11middle, ARCHER, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party11middle, ARCHER, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party11middle, ARCHER, 8, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party11right)
+        ADD_TO_PARTY(party11right, BARBARIAN, 9, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party11right, WIZARD, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party11right, WIZARD, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party11right, WIZARD, 7, 0, ATTACK_DUNGEON_HEART, 0)
+
+    IF (PLAYER0, TIMER0 == 52800)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party11left, -1, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party11middle, -2, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party11right, -3, 1)
+    ENDIF
+
+REM Timer 57600 / Segment 12
+REM Undead lads, ghosts to mess with the player
+
+    CREATE_PARTY(party12middle)
+        ADD_TO_PARTY(party12middle, GHOST, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party12middle, GHOST, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party12middle, GHOST, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party12middle, GHOST, 8, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party12right1)
+        ADD_TO_PARTY(party12right1, SKELETON, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party12right1, SKELETON, 8, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party12right2)
+        ADD_TO_PARTY(party12right2, GHOST, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party12right2, GHOST, 8, 0, ATTACK_DUNGEON_HEART, 0)
+
+    IF (PLAYER0, TIMER0 == 57600)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party12middle, -2, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party12right1, -3, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party12right2, -3, 1)
+    ENDIF
+
+    REM Another wave 2 minutes later
+
+    CREATE_PARTY(party12left)
+        ADD_TO_PARTY(party12left, GHOST, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party12left, GHOST, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party12left, GHOST, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party12left, GHOST, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party12left, GHOST, 8, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party12middle2)
+        ADD_TO_PARTY(party12middle2, SKELETON, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party12middle2, SKELETON, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party12middle2, GHOST, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party12middle2, GHOST, 8, 0, ATTACK_DUNGEON_HEART, 0)
+
+    IF (PLAYER0, TIMER0 == 58800)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party12left, -1, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party12middle2, -2, 1)
+    ENDIF
+
+REM 62400 / Mod 13
+
+    CREATE_PARTY(party13left)
+        ADD_TO_PARTY(party13left, GIANT, 10, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party13left, GIANT, 10, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party13middle)
+        ADD_TO_PARTY(party13middle, HELL_HOUND, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party13middle, HELL_HOUND, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party13middle, HELL_HOUND, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party13middle, HELL_HOUND, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party13middle, HELL_HOUND, 6, 0, ATTACK_DUNGEON_HEART, 0)
+
+    IF (PLAYER0, TIMER0 == 62400)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party13left, -1, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party13middle, -2, 1)
+    ENDIF
+
+    REM At 8 minutes to the end, reveal the special?
+
+    IF_ACTION_POINT(8, PLAYER0)
+        SET_FLAG(PLAYER0, FLAG4, 1)
+    ENDIF
+
+    REM Todo: decide if I want to show this or not
+    IF (PLAYER0, TIMER0 > 62400)
+
+        REM Only show this if the player hasn't found the secret passage
+        IF (PLAYER0, FLAG4 == 0)
+            REVEAL_MAP_LOCATION(PLAYER0, 1, -1)
+            QUICK_MESSAGE(7, "如果你不尽快抓住它，它就会消失。", SPELL_FLIGHT)
+            QUICK_MESSAGE(6, "这里，有一个隐藏的王国？", SPELL_FLIGHT)
+        ENDIF
+
+    ENDIF
+
+REM 67200 Second to last wave
+REM Mod 14 - spawn the 3 signature lads for each room
+
+    CREATE_PARTY(party14left)
+        ADD_TO_PARTY(party14left, WITCH, 10, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party14left, DWARFA, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party14left, DWARFA, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party14left, DWARFA, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party14left, DWARFA, 5, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party14middle)
+        ADD_TO_PARTY(party14middle, WIZARD, 10, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party14middle, ARCHER, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party14middle, ARCHER, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party14middle, ARCHER, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party14middle, ARCHER, 7, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party14right)
+        ADD_TO_PARTY(party14right, MONK, 10, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party14right, THIEF, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party14right, THIEF, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party14right, THIEF, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party14right, THIEF, 7, 0, ATTACK_DUNGEON_HEART, 0)
+
+    IF (PLAYER0, TIMER0 == 67200)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party14left, -1, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party14middle, -2, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party14right, -3, 1)
+
+        QUICK_MESSAGE(3, "复仇！", WIZARD)
+        QUICK_MESSAGE(11, "夺回我们的...", WITCH)
+        QUICK_MESSAGE(12, "我们将...", MONK)
+    ENDIF
+
+    REM Support wave a minute later
+
+    CREATE_PARTY(party14left2)
+        ADD_TO_PARTY(party14left2, DWARFA, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party14left2, DWARFA, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party14left2, DWARFA, 8, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party14middle2)
+        ADD_TO_PARTY(party14middle2, ARCHER, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party14middle2, ARCHER, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party14middle2, ARCHER, 8, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party14right2)
+        ADD_TO_PARTY(party14right2, THIEF, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party14right2, THIEF, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party14right2, THIEF, 8, 0, ATTACK_DUNGEON_HEART, 0)
+
+    IF (PLAYER0, TIMER0 == 68400)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party14left2, -1, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party14middle2, -2, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party14right2, -3, 1)
+    ENDIF
+
+REM Full 60 minutes hit - 72000
+REM Mod 15
+
+    CREATE_PARTY(party15left)
+        ADD_TO_PARTY(party15left, DARK_MISTRESS, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party15left, BILE_DEMON, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party15left, TROLL, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party15left, SPIDER, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party15left, FLY, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party15left, TENTACLE, 8, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party15middle)
+        ADD_TO_PARTY(party15middle, HORNY, 10, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party15right)
+        ADD_TO_PARTY(party15right, DRAGON, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party15right, MAIDEN, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party15right, ORC, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party15right, BUG, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party15right, HELL_HOUND, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party15right, WIZARD, 8, 0, ATTACK_DUNGEON_HEART, 0)
+
+    REM Final wave
+    IF (PLAYER0, TIMER0 == 72000)
+        HIDE_TIMER
+        QUICK_INFORMATION(4, "最后的攻击已经到来。杀了他们，我们就能逃走！")
+        ADD_PARTY_TO_LEVEL(PLAYER5, party15left, -1, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party15middle, -2, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party15right, -3, 1)
+    ENDIF
+
+    REM The special has to be collected before the time is over
+    IF (PLAYER0, TIMER0 == 72000)
+
+        CHANGE_SLAB_TYPE(44,73, LAVA, NONE)
+
+        CHANGE_SLAB_TYPE(44,72, LAVA, NONE)
+        CHANGE_SLAB_TYPE(44,74, LAVA, NONE)
+
+        CHANGE_SLAB_TYPE(43,73, LAVA, NONE)
+        CHANGE_SLAB_TYPE(45,73, LAVA, NONE)
+
+    ENDIF
+
+REM Win condition - the final heroes have spawned and all of them are dead
+
+    IF (PLAYER0, TIMER0 > 72050)
+        IF_CONTROLS(PLAYER5, TOTAL_CREATURES == 0)
+
+            QUICK_OBJECTIVE(13, "终于，我们可以逃离这个镜像空间，继续我们的征服之旅了。离开这里吧，守护者。")
+
+            WIN_GAME
+
+            REM Count campaign flag up by one
+            IF(PLAYER0, CAMPAIGN_FLAG6 == 8)
+                SET_FLAG(PLAYER0, CAMPAIGN_FLAG6, 9)
+            ENDIF
+            
+            REM If player is in NG+, advance the state of that too
+            IF (PLAYER0, CAMPAIGN_FLAG5 == 1)
+                IF(PLAYER0, CAMPAIGN_FLAG7 == 8)
+                    SET_FLAG(PLAYER0, CAMPAIGN_FLAG7, 9)
+                ENDIF
+            ENDIF
+
+        ENDIF
+    ENDIF
+
+REM --------------------------------------------------------------------------------------------------
+
+REM The left black knight
+
+    IF_ACTION_POINT(2, PLAYER0)
+        ADD_CREATURE_TO_LEVEL(PLAYER5, BLACK_KNIGHT, 3, 1, 5, 500)
+        SET_TIMER(PLAYER0, TIMER1)
+    ENDIF
+
+    IF (PLAYER0, TIMER1 > 33)
+        PLAY_MESSAGE(PLAYER0, SOUND, 73)
+        CREATE_EFFECT_AT_POS(EFFECT_EXPLOSION_3, 200, 193)
+    ENDIF
+
+REM The right black knight
+
+    IF_ACTION_POINT(4, PLAYER0)
+        ADD_CREATURE_TO_LEVEL(PLAYER5, BLACK_KNIGHT, 5, 1, 5, 500)
+        SET_TIMER(PLAYER0, TIMER2)
+    ENDIF
+
+    IF (PLAYER0, TIMER2 > 33)
+        PLAY_MESSAGE(PLAYER0, SOUND, 73)
+        CREATE_EFFECT_AT_POS(EFFECT_EXPLOSION_3, 246, 193)
+    ENDIF
+
+REM Special boxes logic
+
+    REM Todo - use a portal and then hide the portal
+    REM Find a better effect
+
+    IF_ACTION_POINT(11, PLAYER0)
+        QUICK_INFORMATION(2, "你可以从三种强大的怪物中挑选一只来帮助你：迅捷如闪电、且致命的黑暗女王、坚韧而强大的骑士，或者拥有强大魔法、研究迅速的巫师。请明智选择。", 11)
+    ENDIF
+
+    REM Give the lava platform to the player
+    IF_ACTION_POINT(7, PLAYER0)
+        CHANGE_SLAB_OWNER(43, 28, PLAYER0, MATCH)
+    ENDIF
+
+    SET_BOX_TOOLTIP(1,"召唤黑暗女王")
+    SET_BOX_TOOLTIP(2,"召唤骑士")
+    SET_BOX_TOOLTIP(3,"召唤巫师")
+
+    IF(PLAYER0,BOX1_ACTIVATED > 0)
+        ADD_CREATURE_TO_LEVEL(PLAYER0, DARK_MISTRESS, -4, 1, 4, 0)
+        SET_FLAG(PLAYER0, FLAG1, 1)
+    ENDIF
+
+    IF(PLAYER0,BOX2_ACTIVATED > 0)
+        ADD_CREATURE_TO_LEVEL(PLAYER0, KNIGHT, -4, 1, 4, 0)
+        SET_FLAG(PLAYER0, FLAG1, 1)
+    ENDIF
+
+    IF(PLAYER0,BOX3_ACTIVATED > 0)
+        ADD_CREATURE_TO_LEVEL(PLAYER0, WIZARD, -4, 1, 4, 0)
+        SET_FLAG(PLAYER0, FLAG1, 1)
+    ENDIF
+
+    REM Turn the floor into lava
+
+    IF(PLAYER0, FLAG1 == 1)
+        CHANGE_SLAB_TYPE(43, 28, LAVA)
+        CHANGE_SLAB_TYPE(44, 28, LAVA)
+        CHANGE_SLAB_TYPE(45, 28, LAVA)
+
+        PLAY_MESSAGE(PLAYER0, SPEECH, 80)
+
+        CREATE_EFFECT_AT_POS(EFFECT_EXPLOSION_3, 133, 85)
+
+        SET_TIMER(PLAYER0, TIMER3)
+    ENDIF
+
+    REM Turn the hero gate into a puff of smoke
+    IF (PLAYER0, TIMER3 > 20)
+        HIDE_HERO_GATE(4, 1)
+        CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_WHITE, 133, 79)
+    ENDIF
+
+
+
+SET_TIMER(PLAYER0, TIMER4)
+
+IF (PLAYER0, TIMER4 >= 35)
+    PLAY_MESSAGE(PLAYER0, SOUND, 148)
+    CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_BLACK, 133, 46)
+    ADD_OBJECT_TO_LEVEL(HEARTFLAME_BLACK, 13, 0, PLAYER0)
+ENDIF
+
+IF (PLAYER0, TIMER4 >= 55)
+    PLAY_MESSAGE(PLAYER0, SOUND, 147)
+
+    CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_BLACK, 129, 44)
+    ADD_OBJECT_TO_LEVEL(HEARTFLAME_BLACK, 14, 0, PLAYER0)
+
+    CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_BLACK, 137, 44)
+    ADD_OBJECT_TO_LEVEL(HEARTFLAME_BLACK, 15, 0, PLAYER0)
+ENDIF
+
+IF (PLAYER0, TIMER4 >= 75)
+    PLAY_MESSAGE(PLAYER0, SOUND, 148)
+
+    CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_BLACK, 127, 40)
+    ADD_OBJECT_TO_LEVEL(HEARTFLAME_BLACK, 16, 0, PLAYER0)
+
+    CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_BLACK, 139, 40)
+    ADD_OBJECT_TO_LEVEL(HEARTFLAME_BLACK, 17, 0, PLAYER0)
+ENDIF
+
+IF (PLAYER0, TIMER4 >= 95)
+    PLAY_MESSAGE(PLAYER0, SOUND, 149)
+
+    CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_BLACK, 129, 36)
+    ADD_OBJECT_TO_LEVEL(HEARTFLAME_BLACK, 18, 0, PLAYER0)
+
+    CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_BLACK, 137, 36)
+    ADD_OBJECT_TO_LEVEL(HEARTFLAME_BLACK, 19, 0, PLAYER0)
+ENDIF
+
+IF (PLAYER0, TIMER4 >= 115)
+    PLAY_MESSAGE(PLAYER0, SOUND, 148)
+
+    CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_BLACK, 133, 34)
+    ADD_OBJECT_TO_LEVEL(HEARTFLAME_BLACK, 20, 0, PLAYER0)
+ENDIF

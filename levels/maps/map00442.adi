@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00269
+REM Automatically generated on 20 Aug 2008, 08:13:40
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(1019611430,1219212820)
+USER_COMMANDS_COUNT(20,2,0,0)
+LEVEL_DESCRIPTION("This is a satire on Jezus's raising Lazerus from the death. Although, 10 imps make one Vampire, it's something else. Looking for a way to get creatures? You can push a boulder trap whith this green hand over your imps.")
+LEVEL_AUTHORS("","")

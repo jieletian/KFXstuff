@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00415
+REM Automatically generated on 16 Apr 2009, 01:06:59
+
+LEVEL_VERSION(1,0,1)
+LEVEL_TIMESTAMP(1239636564,1239836819)
+USER_COMMANDS_COUNT(42,1,0,0)
+LEVEL_DESCRIPTION("There are two keepers, blue and green. You come in as different waves of heroes, like in the real game. Possess one of the creatures from the hero gate, and go with the tunnellers to invade either blue or green. The rest will follow you... most of the time. Both keepers can get every creature, research every spell besides chicken, and manufacture every trap and door as well as build every room. However the settings are random, I used the RANDOM(X,Y) command alot, to even decide whether a computer is a general or aggressive player.")
+LEVEL_AUTHORS("Diety Demon","")

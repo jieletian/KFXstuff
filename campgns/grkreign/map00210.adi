@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00210
+REM Automatically generated on 29 Aug 2008, 15:18:01
+
+LEVEL_VERSION(0,1,0)
+LEVEL_TIMESTAMP(899573838,1220015881)
+USER_COMMANDS_COUNT(4,1,0,0)
+LEVEL_DESCRIPTION("The Hangdamiens' experiment was... half-successful. Even with Castle Hangdamien conquered, the undead researchers managed to set up their continued research in a yet unknown location. Before you proceed there however, you shall need the knowledge to build a Scavenger Room, which will aid you in the battles to come. The knowledge lies in the Chief Librarian (as he is known) of Happiclap Dungeon, a vampire of great intellect. He is currently imprisoned in the labrinth deep below Castle Hangdamien, awaiting torture to extract the plans for the aforementioned Scavenger Room out of him. Rescue him.")
+LEVEL_AUTHORS("Grinic","")

@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map01012
+REM Automatically generated on 23 Aug 2008, 03:48:38
+
+LEVEL_VERSION(0,2,0)
+LEVEL_TIMESTAMP(1121136264,1219456118)
+USER_COMMANDS_COUNT(44,2,0,0)
+LEVEL_DESCRIPTION("While moving moving here, you've lost lost several rolls of black magic spells which allowed you to build some rooms. That's unfortunate; you will have to acquire the knowledge from your enemy. The keeper Niyake, was stupid enough to recover and rise again the Avatar so he could help in crushing you. Send him back to hell, as many times as it's needed. First head east and make sure the enemies lose their bastion. This way you will get Prison and a Torture chamber.")
+LEVEL_AUTHORS("","")

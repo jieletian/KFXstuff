@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00821
+REM Automatically generated on 22 Aug 2008, 08:04:01
+
+LEVEL_VERSION(1,0,2)
+LEVEL_TIMESTAMP(934475978,1219385041)
+USER_COMMANDS_COUNT(9,2,0,0)
+LEVEL_DESCRIPTION("This is dangerous realm. Build and develop your dungeon before venturing anywhere!")
+LEVEL_AUTHORS("Jim","")

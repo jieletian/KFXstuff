@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00683
+REM Automatically generated on 03 Sep 2008, 23:32:03
+
+LEVEL_VERSION(1,0,0)
+LEVEL_TIMESTAMP(1142603238,1220477523)
+USER_COMMANDS_COUNT(20,2,0,0)
+LEVEL_DESCRIPTION("Here is a basic symmetrical level for DK. Keepers have the same opportunities to win and all creatures/rooms/doors/traps/spells are available. You can use all possible means to make fierce and bloody fight!")
+LEVEL_AUTHORS("CyberSympa","")

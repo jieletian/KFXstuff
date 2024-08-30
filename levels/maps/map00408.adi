@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00221
+REM Automatically generated on 20 Aug 2008, 09:52:32
+
+LEVEL_VERSION(1,0,0)
+LEVEL_TIMESTAMP(1161047520,1219218752)
+USER_COMMANDS_COUNT(4,1,0,0)
+LEVEL_DESCRIPTION("This map has three variants - you can play Metilians, Grors or Necromancers. There are different script files for them. Level has also replacement for CREATURE.TXT.")
+LEVEL_AUTHORS("DzjeeAr","")

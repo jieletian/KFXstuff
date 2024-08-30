@@ -1,0 +1,312 @@
+REM Basic settings
+
+    LEVEL_VERSION(1)
+    RUN_AFTER_VICTORY(1)
+    SET_GENERATE_SPEED(400)
+
+    START_MONEY(PLAYER0,10000)
+    START_MONEY(PLAYER3,9000000)
+
+    MAX_CREATURES(PLAYER0,15)
+    MAX_CREATURES(PLAYER3,10)
+
+    SET_PLAYER_COLOR(PLAYER0, BLUE)
+    COMPUTER_PLAYER(PLAYER3,9)
+
+    COMPUTER_PLAYER(PLAYER5,ROAMING)
+
+    ALLY_PLAYERS(PLAYER3, PLAYER5, 3)
+
+    SET_MUSIC("campaign_music/prime3_bryyo_ice.mp3")
+
+REM Availability
+
+REM Creatures
+
+    ADD_CREATURE_TO_POOL(FLY,20)
+    ADD_CREATURE_TO_POOL(DEMONSPAWN,20)
+    ADD_CREATURE_TO_POOL(TROLL,20)
+    ADD_CREATURE_TO_POOL(SPIDER,20)
+
+    CREATURE_AVAILABLE(ALL_PLAYERS,FLY,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,DEMONSPAWN,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,TROLL,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,SPIDER,1,0)
+
+REM Rooms
+
+    ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,WORKSHOP,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,TEMPLE,1,0)
+
+REM Magic
+
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_POSSESS,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SIGHT,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SPEED,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CALL_TO_ARMS,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HOLD_AUDIENCE,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_PROTECT,1,0)
+
+    MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+    MAGIC_AVAILABLE(PLAYER3,POWER_IMP,0,0)
+
+    REM Can be found by creatures and doesn't have to be researched
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CONCEAL,0,0)
+
+    REM For when rebound becomes available as a book
+    SET_POWER_CONFIGURATION(POWER_REBOUND,PanelTabIndex,13,5)
+
+REM Workshop
+
+    TRAP_AVAILABLE(ALL_PLAYERS,POISON_GAS,1,0)
+    TRAP_AVAILABLE(ALL_PLAYERS,LIGHTNING,1,0)
+    TRAP_AVAILABLE(ALL_PLAYERS,WORD_OF_POWER,1,0)
+
+    DOOR_AVAILABLE(ALL_PLAYERS,WOOD,1,0)
+    DOOR_AVAILABLE(ALL_PLAYERS,BRACED,1,0)
+
+REM Objective
+
+    QUICK_OBJECTIVE(1, "在玛瑙盗贼和托帕兹的合作下，你被困在了这个王国，看来你的冥界使者已被敌人捕获。不幸的是，除了你的冥界使者，你被困在了弱小的生物中。救出你饥饿难耐、被囚禁的冥界使者，并粉碎这两个敢于反抗你的人。")
+
+REM Win game when both dungeons are destroyed
+
+    IF (PLAYER5, DUNGEON_DESTROYED == 1)
+        IF (PLAYER3, DUNGEON_DESTROYED == 1)
+
+            WIN_GAME
+
+            REM Count campaign flag up by one
+            IF(PLAYER0, CAMPAIGN_FLAG6 == 5)
+                SET_FLAG(PLAYER0, CAMPAIGN_FLAG6, 6)
+            ENDIF
+            
+            REM If player is in NG+, advance the state of that too
+            IF (PLAYER0, CAMPAIGN_FLAG5 == 1)
+                IF(PLAYER0, CAMPAIGN_FLAG7 == 5)
+                    SET_FLAG(PLAYER0, CAMPAIGN_FLAG7, 6)
+                ENDIF
+            ENDIF
+
+        ENDIF
+    ENDIF
+
+REM Show player rebound is available when the player obtains the library that contains the book
+
+    IF_SLAB_OWNER(13,40, PLAYER0)
+        QUICK_INFORMATION(11, "你获得了反弹术魔法书。这是一本强大的魔法书，你可以将它施展在你的生物身上，让它们反弹敌人的炮火。")
+        TUTORIAL_FLASH_BUTTON(30, 200)
+    ENDIF
+
+REM Parties and their spawns - WIP!
+
+    SET_TIMER(PLAYER0, TIMER0)
+
+    REM Parties
+
+    CREATE_PARTY(party1)
+        ADD_TO_PARTY(party1,THIEF,3,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party1,THIEF,4,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party1,DWARFA,3,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party1,DWARFA,4,0,ATTACK_DUNGEON_HEART,0)
+
+    CREATE_PARTY(party2)
+        ADD_TO_PARTY(party2,THIEF,3,0,ATTACK_DUNGEON_HEART,100)
+        ADD_TO_PARTY(party2,THIEF,3,0,ATTACK_DUNGEON_HEART,100)
+        ADD_TO_PARTY(party2,ARCHER,3,0,ATTACK_DUNGEON_HEART,100)
+        ADD_TO_PARTY(party2,ARCHER,3,0,ATTACK_DUNGEON_HEART,100)
+
+    CREATE_PARTY(party3)
+        ADD_TO_PARTY(party3,WIZARD,4,0,ATTACK_DUNGEON_HEART,100)
+        ADD_TO_PARTY(party3,ARCHER,4,0,ATTACK_DUNGEON_HEART,100)
+        ADD_TO_PARTY(party3,MONK,4,0,ATTACK_DUNGEON_HEART,100)
+        ADD_TO_PARTY(party3,DWARFA,4,0,ATTACK_DUNGEON_HEART,100)
+
+    CREATE_PARTY(party4)
+        ADD_TO_PARTY(party4, SKELETON, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party4, SKELETON, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party4, SKELETON, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party4, SKELETON, 5, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party4, SKELETON, 5, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party5)
+        ADD_TO_PARTY(party5, MONK, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party5, HELL_HOUND, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party5, HELL_HOUND, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party5, HELL_HOUND, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party5, HELL_HOUND, 6, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party5, HELL_HOUND, 6, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party6)
+        ADD_TO_PARTY(party6, DARK_MISTRESS, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party6, THIEF, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party6, THIEF, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party6, THIEF, 7, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party6, THIEF, 7, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party7)
+        ADD_TO_PARTY(party7, ARCHER, 10, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party7, ARCHER, 10, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party7, ARCHER, 10, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party7, ARCHER, 10, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party7, WIZARD, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party7, WIZARD, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party7, WIZARD, 8, 0, ATTACK_DUNGEON_HEART, 0)
+        ADD_TO_PARTY(party7, WIZARD, 8, 0, ATTACK_DUNGEON_HEART, 0)
+
+    CREATE_PARTY(party_final_top)
+        ADD_TO_PARTY(party_final_top, ARCHER, 10, 0, ATTACK_ENEMIES, 0)
+        ADD_TO_PARTY(party_final_top, ARCHER, 10, 0, ATTACK_ENEMIES, 0)
+        ADD_TO_PARTY(party_final_top, MAIDEN, 10, 0, ATTACK_ENEMIES, 0)
+        ADD_TO_PARTY(party_final_top, MAIDEN, 10, 0, ATTACK_ENEMIES, 0)
+        ADD_TO_PARTY(party_final_top, SPIDER, 10, 0, ATTACK_ENEMIES, 0)
+        ADD_TO_PARTY(party_final_top, SPIDER, 10, 0, ATTACK_ENEMIES, 0)
+        ADD_TO_PARTY(party_final_top, SPIDER, 10, 0, ATTACK_ENEMIES, 0)
+
+    CREATE_PARTY(party_final)
+        ADD_TO_PARTY(party_final,BLACK_KNIGHT,10,1000,ATTACK_DUNGEON_HEART,0)
+
+    REM Spawn conditions
+
+    IF (PLAYER0, TIMER0 == 8000)
+        ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER5, party2, -2, DUNGEON, 0, 1, 200)
+    ENDIF
+
+    IF (PLAYER0, TIMER0 == 16000)
+        ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER5, party1, -2, DUNGEON, 0, 3, 200)
+    ENDIF
+
+    REM This one is AP based and not based on a timer
+    IF_ACTION_POINT(4, PLAYER0)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party3, -1, 1)
+    ENDIF
+
+    IF (PLAYER0, TIMER0 == 36000)
+        ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER5, party4, -2, DUNGEON, 0, 5, 200)
+    ENDIF
+
+    REM Stronger lategame parties on the left
+
+    IF (PLAYER0, TIMER0 == 48000)
+        QUICK_MESSAGE(14, "猎犬！趁守卫不注意时将其消灭。", MONK)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party5, -2, 1)
+    ENDIF
+
+    IF (PLAYER0, TIMER0 == 60000)
+        QUICK_MESSAGE(15, "来吧，伙计们，抓住他！", DARK_MISTRESS)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party6, -2, 1)
+    ENDIF
+
+    IF (PLAYER0, TIMER0 == 72000)
+        QUICK_MESSAGE(16, "解决掉他！", WIZARD)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party7, -2, 1)
+    ENDIF
+
+    IF_ACTION_POINT(2, PLAYER0)
+        QUICK_OBJECTIVE(13, "玛瑙盗贼派出精英黑骑士向你发起最后的进攻。消灭他并摧毁他们的心脏，即可获得胜利！", -3)
+        PLAY_MESSAGE(PLAYER0, SPEECH, 19)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party_final, -3, 1)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party_final_top, -4, 1)
+    ENDIF
+
+REM Special box to unlock the heart
+
+    SET_BOX_TOOLTIP(1,"解锁心脏回廊")
+
+    IF(PLAYER0,BOX1_ACTIVATED > 0)
+        CHANGE_SLAB_TYPE(33,22,PATH)
+        CHANGE_SLAB_TYPE(33,23,PATH)
+
+        CREATE_EFFECT_AT_POS(68, 100, 67)
+        CREATE_EFFECT_AT_POS(68, 100, 67)
+
+        PLAY_MESSAGE(PLAYER0, SOUND, 72)
+
+        QUICK_OBJECTIVE(3, "通往敌人基地的道路现已打开。摧毁他们的心脏！", 3)
+
+        REM Flag to prevent sending the message if the player already found the way
+        SET_FLAG(PLAYER0, FLAG4, 1)
+
+    ENDIF
+
+    IF_ACTION_POINT(3, PLAYER0)
+
+        REM only show hint if the player went here first
+        IF (PLAYER0, FLAG4 == 0)
+            QUICK_MESSAGE(5, "祝你好运！", PLAYER5)
+            QUICK_MESSAGE(4, "我们不会让你从这里过去的！", PLAYER5)
+        ENDIF
+
+    ENDIF
+
+    REM This conceals the impenetrable rock at the start of the map
+    CONCEAL_MAP_RECT(PLAYER0, 100, 66, 1, 6, 1)
+
+REM Logic for destroying the prison when the player obtains the horny
+REM This is probably pretty damn difficult without a prison so deactivate this for now and maybe readd it as a NG+ condition
+
+REM    IF_CONTROLS(PLAYER0, HORNY == 1)
+REM        CHANGE_SLAB_TYPE(35, 49, PRETTY_PATH, MATCH)
+REM        PLAY_MESSAGE(PLAYER0, SOUND, "152")
+REM        CREATE_EFFECT_AT_POS(EFFECT_WORD_OF_POWER, 112, 151)
+REM    ENDIF
+
+
+REM If player doesn't have reaper yet, send reminder
+
+    IF_CONTROLS(PLAYER0, HORNY == 0)
+        IF (PLAYER0, TIMER0 == 27000)
+            QUICK_INFORMATION(9, "如果你不去拯救你最强大的战士，你将很难征服这个王国。", 5)
+
+            QUICK_MESSAGE(10, "我们必须杀掉这些把我关起来的蠢货们！", HORNY)
+            QUICK_MESSAGE(8, "立刻把我从这该死的监狱里放出来！", HORNY)
+        ENDIF
+    ENDIF
+
+REM NG+
+
+IF (PLAYER0, CAMPAIGN_FLAG5 == 1)
+    QUICK_INFORMATION(2, "混沌模式：除了冥界使者外，您将不会得到任何其他生物。开动脑筋，祝你好运。")
+    
+    REM Remove the player's entrance
+
+    CHANGE_SLAB_TYPE(68,62, DIRT, MATCH)
+
+    REM Remove the enemy entrance
+
+    CHANGE_SLAB_TYPE(4,80, DIRT, MATCH)
+
+    REM Rework this because the player can't get a prison anyway
+
+    IF (PLAYER5, PRISON > 0)
+        QUICK_MESSAGE(7, "但制造骷髅会很困难...", SPELL_FLIGHT)
+        QUICK_MESSAGE(6, "你现在可能有一个监狱，", SPELL_FLIGHT)
+    ENDIF
+
+    CHANGE_SLAB_TYPE(37, 46, TWINS_WALL)
+
+    MAX_CREATURES(PLAYER0,1)
+
+    SET_GAME_RULE(PrisonSkeletonChance, 0)
+    SET_GAME_RULE(GhostConvertChance, 0)
+    SET_GAME_RULE(TortureDeathChance, 100)
+    SET_GAME_RULE(StunEvilEnemyChance, 0)
+    SET_GAME_RULE(StunGoodEnemyChance, 0)
+
+ENDIF
+
+
+
+REM Make it clear what the invis is there for
+IF_AVAILABLE(PLAYER0, POWER_CONCEAL > 0)
+    QUICK_OBJECTIVE(12, "你将很难与托帕兹正面交锋，因为你的怪物太弱了。也许你可以找到一种其他方法来接管他的地下城？你的怪物似乎找到了一本有用的书……")
+    TUTORIAL_FLASH_BUTTON(29, 300)
+ENDIF

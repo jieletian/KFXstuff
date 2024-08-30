@@ -1,0 +1,1381 @@
+rem		LEVELPACK				rem
+rem		Undivine Dungeon 1.34	rem
+rem		03, SUILNA MEALLADH		rem
+rem		by Shinthoras0815		rem
+
+rem some flags
+REM FLAGS used:
+REM p1.0 could prevent Player1 Creatures spawning, but is never set
+REM p2.0 could prevent Player2 Creatures spawning, but is never set
+REM p0.4 randomize Player1 spawning Creatures (1Orc,2Sorceror,3Dragon)
+REM p1.4 randomize Player2 spawning Creatures (1Troll,2BileD,3Tentacle)
+REM p2.4 Player own the temple or Player1 herocrystal is destroyed, Player1 is weak now
+REM p3.4 Player own the temple or Player2 herocrystal is destroyed, Player1 is weak now
+REM p3.5 Blue Player Hero Fortress reachable
+REM p3.5 Green Player Hero Fortress reachable
+LEVEL_VERSION(1)
+
+SET_MUSIC(3)
+
+SET_GENERATE_SPEED(800)
+
+START_MONEY(PLAYER0, 12500)
+START_MONEY(PLAYER1, 20000)
+START_MONEY(PLAYER2, 20000)
+
+NEXT_COMMAND_REUSABLE
+CREATURE_ENTRANCE_LEVEL(PLAYER0, 1)
+NEXT_COMMAND_REUSABLE
+CREATURE_ENTRANCE_LEVEL(PLAYER1, 4)
+NEXT_COMMAND_REUSABLE
+CREATURE_ENTRANCE_LEVEL(PLAYER2, 4)
+
+REM     Computer Player stuff 
+COMPUTER_PLAYER(PLAYER2, 0)
+COMPUTER_PLAYER(PLAYER1, 0)
+NEXT_COMMAND_REUSABLE
+ALLY_PLAYERS(PLAYER1, PLAYER2, 0)
+
+rem "Player1 like magic"
+rem "he will get more creatures that like to work in librarys(sorccerer, dragon)"
+rem "Build a bigger library"
+SET_COMPUTER_PROCESS(PLAYER1, "BUILD A RESEARCH ROOM", 0, 8, 8, 3, 7)
+rem "but a small workshop"
+SET_COMPUTER_PROCESS(PLAYER1, "BUILD A WORKSHOP ROOM", 0, 4, 4, 8, 13)
+rem "don't wait too long to claim the temple"
+SET_COMPUTER_CHECKS(PLAYER1, "CHECK TO PRETTY", 1000, 7, 0, 0, 0)
+rem "use speed up more"
+SET_COMPUTER_CHECKS(PLAYER1, "CHECK FOR SPEED UP", 500, 0, 4, 3, 0)
+rem  "use more offensiv keeper powers"
+SET_COMPUTER_EVENT(PLAYER1, "EVENT MAGIC FOE", 100, 5, 1, 0, 0)
+rem "use more keeper powers to help creatures in combat"
+SET_COMPUTER_EVENT(PLAYER1, "EVENT CHECK FIGHTERS", 80, 9, 0, 0, 0)
+rem "more prisoners, more torture, less doors, save his creatures"
+SET_COMPUTER_CHECKS(PLAYER1, "COMPUTER CHECK IMPRISONMENT", 400, 1, 2, 25, 200)
+SET_COMPUTER_EVENT(PLAYER1, "EVENT MOANING PRISONER", 100, 2, 9, 5, 0)
+SET_COMPUTER_EVENT(PLAYER1, "EVENT ENEMY DOOR", 400, 30, 2500, 2, 0)
+SET_COMPUTER_EVENT(PLAYER1, "EVENT FIGHT", 600, 40, 1, 0, 0)
+
+rem "Player2 like traps and doors"
+rem "he will get more creatures that like to work in workshop(bile_demon, troll)"
+rem "still not enough traps and doors, he get a mechanic to get regulary traps in his workshop(templerecipe)"
+rem  "build a bigger workshop"
+SET_COMPUTER_PROCESS(PLAYER2, "BUILD A WORKSHOP ROOM", 0, 8, 8, 8, 13)
+rem "but a smaller library"
+SET_COMPUTER_PROCESS(PLAYER2, "BUILD A RESEARCH ROOM", 0, 4, 4, 3, 7)
+rem  "build more doors in your dungeon"
+SET_COMPUTER_CHECKS(PLAYER2, "CHECK AVAILIABLE TRAP", 50, 1, 4, 0, 0)
+rem "build more traps in your dungeon"
+SET_COMPUTER_CHECKS(PLAYER2, "CHECK AVAILIABLE DOOR", 100, 0, 0, 0, 0)
+rem "together with some other scripts, this should stop him to sell all his traps for money"
+SET_COMPUTER_CHECKS(PLAYER2, "CHECK MONEY", 200, 0, -1000, 0, 0)
+rem "don't wait too long to claim the temple"
+SET_COMPUTER_CHECKS(PLAYER2, "CHECK TO PRETTY", 1000, 7, 0, 0, 0)
+rem "more prisoners, more torture, less doors, save his creatures"
+SET_COMPUTER_EVENT(PLAYER2, "EVENT ENEMY DOOR", 400, 30, 2500, 2, 0)
+SET_COMPUTER_EVENT(PLAYER2, "EVENT FIGHT", 500, 50, 1, 0, 0)
+SET_COMPUTER_CHECKS(PLAYER2, "COMPUTER CHECK IMPRISONMENT", 400, 1, 2, 25, 200)
+SET_COMPUTER_EVENT(PLAYER2, "EVENT MOANING PRISONER", 100, 2, 9, 5, 0)
+
+NEXT_COMMAND_REUSABLE
+SET_CREATURE_TENDENCIES(PLAYER2, FLEE, 1)
+NEXT_COMMAND_REUSABLE
+SET_CREATURE_TENDENCIES(PLAYER1, FLEE, 1)
+
+SET_GAME_RULE(BodyRemainsFor, 1000)
+
+REM CREATURES
+
+rem "Player get more Creatures for more Portals"
+IF(PLAYER0, ENTRANCE <= 9)
+    NEXT_COMMAND_REUSABLE
+    MAX_CREATURES(PLAYER0, 16)
+ENDIF
+IF(PLAYER0, ENTRANCE >= 10)
+    NEXT_COMMAND_REUSABLE
+    MAX_CREATURES(PLAYER0, 21)
+ENDIF
+MAX_CREATURES(PLAYER1, 21)
+MAX_CREATURES(PLAYER2, 21)
+
+ADD_CREATURE_TO_POOL(BUG, 15)
+ADD_CREATURE_TO_POOL(SPIDER, 20)
+ADD_CREATURE_TO_POOL(TROLL, 20)
+ADD_CREATURE_TO_POOL(DEMONSPAWN, 20)
+ADD_CREATURE_TO_POOL(HELL_HOUND, 5)
+ADD_CREATURE_TO_POOL(SORCEROR, 20)
+ADD_CREATURE_TO_POOL(DARK_MISTRESS, 10)
+ADD_CREATURE_TO_POOL(BILE_DEMON, 20)
+ADD_CREATURE_TO_POOL(DRAGON, 20)
+ADD_CREATURE_TO_POOL(HORNY, 1)
+ADD_CREATURE_TO_POOL(ORC, 40)
+ADD_CREATURE_TO_POOL(TENTACLE, 20)
+
+CREATURE_AVAILABLE(ALL_PLAYERS, SPIDER, 1, 0)
+CREATURE_AVAILABLE(ALL_PLAYERS, DEMONSPAWN, 1, 0)
+CREATURE_AVAILABLE(ALL_PLAYERS, HELL_HOUND, 1, 0)
+
+CREATURE_AVAILABLE(PLAYER0, BUG, 1, 0)
+CREATURE_AVAILABLE(PLAYER0, TROLL, 1, 0)
+CREATURE_AVAILABLE(PLAYER0, SORCEROR, 1, 0)
+CREATURE_AVAILABLE(PLAYER0, DARK_MISTRESS, 1, 0)
+CREATURE_AVAILABLE(PLAYER0, BILE_DEMON, 1, 0)
+CREATURE_AVAILABLE(PLAYER0, ORC, 1, 0)
+CREATURE_AVAILABLE(PLAYER0, TENTACLE, 1, 0)
+
+CREATURE_AVAILABLE(PLAYER1, ORC, 1, 0)
+CREATURE_AVAILABLE(PLAYER1, SORCEROR, 1, 3)
+CREATURE_AVAILABLE(PLAYER1, HORNY, 1, 100)
+CREATURE_AVAILABLE(PLAYER1, DRAGON, 1, 2)
+
+CREATURE_AVAILABLE(PLAYER2, BILE_DEMON, 1, 2)
+CREATURE_AVAILABLE(PLAYER2, TROLL, 1, 3)
+CREATURE_AVAILABLE(PLAYER2, DARK_MISTRESS, 1, 1)
+CREATURE_AVAILABLE(PLAYER2, TENTACLE, 1, 1)
+
+SET_CREATURE_MAX_LEVEL(ALL_PLAYERS, WISP, 9)
+SET_CREATURE_PROPERTY(TROLL, IMMUNE_TO_GAS, 1)
+SET_CREATURE_PROPERTY(Tentacle, IMMUNE_TO_GAS, 1)
+IF(PLAYER0, TEMPLE > 9)
+    CREATURE_AVAILABLE(PLAYER0, DRAGON, 1, 0)
+ENDIF
+
+REM Room_Availability
+
+REM	-------------------------------------------------
+ROOM_AVAILABLE(ALL_PLAYERS, TREASURE, 1, 1)
+ROOM_AVAILABLE(ALL_PLAYERS, LAIR, 1, 1)
+ROOM_AVAILABLE(ALL_PLAYERS, GARDEN, 1, 1)
+ROOM_AVAILABLE(ALL_PLAYERS, TRAINING, 1, 1)
+ROOM_AVAILABLE(ALL_PLAYERS, RESEARCH, 1, 1)
+REM	------------------------------------------------
+ROOM_AVAILABLE(PLAYER2, WORKSHOP, 1, 1)
+ROOM_AVAILABLE(ALL_PLAYERS, WORKSHOP, 1, 0)
+ROOM_AVAILABLE(ALL_PLAYERS, GUARD_POST, 1, 0)
+ROOM_AVAILABLE(ALL_PLAYERS, BARRACKS, 1, 0)
+rem	ROOM_AVAILABLE(PLAYER0,PRISON,1,0)
+rem	ROOM_AVAILABLE(ALL_PLAYERS,TORTURE,1,0)
+ROOM_AVAILABLE(PLAYER0, TEMPLE, 1, 0)
+rem	ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,0)
+
+REM Spells
+
+RESEARCH(ALL_PLAYERS, MAGIC, POWER_SIGHT, 500)
+REM	--------------------------------------------------
+NEXT_COMMAND_REUSABLE
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_HAND, 1, 1)
+MAGIC_AVAILABLE(PLAYER0, POWER_IMP, 1, 1)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_SLAP, 1, 1)
+REM	--------------------------------------------------
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_SIGHT, 1, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_SPEED, 1, 0)
+MAGIC_AVAILABLE(PLAYER2, POWER_SPEED, 0, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_CONCEAL, 1, 0)
+MAGIC_AVAILABLE(PLAYER0, POWER_CALL_TO_ARMS, 1, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_HOLD_AUDIENCE, 1, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_HEAL_CREATURE, 1, 0)
+MAGIC_AVAILABLE(PLAYER1, POWER_HEAL_CREATURE, 1, 1)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_PROTECT, 1, 0)
+MAGIC_AVAILABLE(PLAYER1, POWER_PROTECT, 0, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_CHICKEN, 1, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_CAVE_IN, 1, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_DESTROY_WALLS, 1, 0)
+
+NEXT_COMMAND_REUSABLE
+MAGIC_AVAILABLE(PLAYER1, POWER_IMP, 0, 0)
+NEXT_COMMAND_REUSABLE
+MAGIC_AVAILABLE(PLAYER2, POWER_IMP, 0, 0)
+
+rem " AI shouldn't waste time and money with CTA"
+IF(PLAYER0, GAME_TURN >= 12000)
+    SET_TIMER(PLAYER3, TIMER0)
+ENDIF
+IF(PLAYER3, TIMER0 >= 600)
+    NEXT_COMMAND_REUSABLE
+    MAGIC_AVAILABLE(PLAYER1, POWER_CALL_TO_ARMS, 0, 0)
+    NEXT_COMMAND_REUSABLE
+    MAGIC_AVAILABLE(PLAYER1, POWER_CALL_TO_ARMS, 1, 1)
+    NEXT_COMMAND_REUSABLE
+    MAGIC_AVAILABLE(PLAYER2, POWER_CALL_TO_ARMS, 0, 0)
+    NEXT_COMMAND_REUSABLE
+    MAGIC_AVAILABLE(PLAYER2, POWER_CALL_TO_ARMS, 1, 1)
+    NEXT_COMMAND_REUSABLE
+    SET_TIMER(PLAYER3, TIMER0)
+ENDIF
+
+REM  doors & traps
+
+DOOR_AVAILABLE(PLAYER0, WOOD, 1, 0)
+DOOR_AVAILABLE(PLAYER2, MAGIC, 1, 0)
+TRAP_AVAILABLE(PLAYER0, ALARM, 1, 0)
+DOOR_AVAILABLE(ALL_PLAYERS, STEEL, 1, 0)
+TRAP_AVAILABLE(PLAYER0, BOULDER, 1, 0)
+TRAP_AVAILABLE(ALL_PLAYERS, LIGHTNING, 1, 0)
+TRAP_AVAILABLE(ALL_PLAYERS, SLOWVEIL, 1, 0)
+TRAP_AVAILABLE(PLAYER2, CANNON, 1, 0)
+TRAP_AVAILABLE(PLAYER2, POISON_GAS, 1, 0)
+
+IF_AVAILABLE(PLAYER0, SLOWVEIL >= 1)
+    DISPLAY_INFORMATION(30, PLAYER0)
+ENDIF
+
+rem---------------------------------------------------"Party's"---------------------------------------------------		
+
+CREATE_PARTY(HERO)
+ADD_TO_PARTY(HERO, ARCHER, 3, 0, ATTACK_DUNGEON_HEART, 0)
+ADD_TO_PARTY(HERO, ARCHER, 3, 0, ATTACK_DUNGEON_HEART, 0)
+ADD_TO_PARTY(HERO, THIEF, 3, 0, ATTACK_DUNGEON_HEART, 0)
+ADD_TO_PARTY(HERO, DWARFA, 3, 250, ATTACK_DUNGEON_HEART, 0)
+
+CREATE_PARTY(HORNY1)
+ADD_TO_PARTY(HORNY1, HORNY, 3, 0, DEFEND_ROOMS, 0)
+CREATE_PARTY(HORNY2)
+ADD_TO_PARTY(HORNY2, HORNY, 5, 0, DEFEND_ROOMS, 0)
+CREATE_PARTY(HORNY3)
+ADD_TO_PARTY(HORNY3, HORNY, 8, 0, DEFEND_ROOMS, 0)
+
+IF(PLAYER0, FLAG7 == 6)
+    DELETE_FROM_PARTY(HERO, ARCHER, 3)
+    ADD_TO_PARTY(HERO, WIZARD, 6, 0, ATTACK_DUNGEON_HEART, 0)
+    DELETE_FROM_PARTY(HERO, ARCHER, 3)
+    ADD_TO_PARTY(HERO, FAIRY, 6, 0, ATTACK_DUNGEON_HEART, 0)
+    DELETE_FROM_PARTY(HERO, THIEF, 3)
+    ADD_TO_PARTY(HERO, GIANT, 6, 500, ATTACK_DUNGEON_HEART, 0)
+    DELETE_FROM_PARTY(HERO, DWARFA, 3)
+    ADD_TO_PARTY(HERO, DWARFA, 8, 0, ATTACK_DUNGEON_HEART, 0)
+    ADD_TO_PARTY(HERO, DWARFA, 8, 0, ATTACK_DUNGEON_HEART, 0)
+ENDIF
+
+IF(PLAYER0, FLAG7 == 14)
+    DELETE_FROM_PARTY(HERO, WIZARD, 6)
+    ADD_TO_PARTY(HERO, WIZARD, 9, 0, ATTACK_DUNGEON_HEART, 0)
+    DELETE_FROM_PARTY(HERO, FAIRY, 6)
+    ADD_TO_PARTY(HERO, WITCH, 10, 0, ATTACK_DUNGEON_HEART, 0)
+    DELETE_FROM_PARTY(HERO, GIANT, 6)
+    ADD_TO_PARTY(HERO, SAMURAI, 8, 1000, ATTACK_DUNGEON_HEART, 0)
+    DELETE_FROM_PARTY(HERO, DWARFA, 8)
+    ADD_TO_PARTY(HERO, BARBARIAN, 8, 0, ATTACK_DUNGEON_HEART, 0)
+    DELETE_FROM_PARTY(HERO, DWARFA, 8)
+    ADD_TO_PARTY(HERO, DWARFA, 8, 0, ATTACK_DUNGEON_HEART, 0)
+ENDIF
+
+rem ---------------------------------------------------------------"Intro"---------------------------------------------------------------
+
+DISPLAY_OBJECTIVE(25, PLAYER0)
+PLAY_MESSAGE(PLAYER0, SOUND, 777)
+
+rem---------------------------------------------------------------------------------------------------------------------
+rem "Enemys are hindered to go to the temple to early, by a slab that looks like a wall but is a path, so he won't try to dig to the temple"
+rem" Let the Enemys find the door to the Temple"
+
+IF(PLAYER2, GAME_TURN >= DRAWFROM(9000 ~ 13000))
+    CHANGE_SLAB_TYPE(62, 45, PRETTY_PATH)
+    ADD_CREATURE_TO_LEVEL(PLAYER2, Imp, 28, 1, 1, 0)
+ENDIF
+IF_ACTION_POINT(28, PLAYER2)
+    CHANGE_SLAB_TYPE(40, 22, PRETTY_PATH)
+    ADD_CREATURE_TO_LEVEL(PLAYER1, Imp, 29, 1, 1, 0)
+ENDIF
+
+IF(PLAYER0, GAME_TURN > 11000)
+    SET_FLAG(PLAYER1, FLAG7, 1)
+    DOOR_AVAILABLE(PLAYER0, WOOD, 1, 3)
+    TUTORIAL_FLASH_BUTTON(58, -1)
+    USE_POWER_AT_LOCATION(PLAYER0, 22, POWER_CAVE_IN, 9, 1)
+    DISPLAY_INFORMATION(26, 30)
+    CHANGE_SLAB_TYPE(19, 61, PRETTY_PATH)
+    CHANGE_SLAB_TYPE(20, 62, PRETTY_PATH)
+ENDIF
+
+
+rem ----------------------------------------------------------------"Wisp respawn"-----------------------------------------------
+CREATE_EFFECTS_LINE(PLAYER0, PLAYER0, 0, 0, 0, 48)
+ADD_CREATURE_TO_LEVEL(PLAYER0, WISP, PLAYER0, 1, 1, 0)
+rem "PLAYER0"
+IF(PLAYER0, WISP == 0)
+    IF(PLAYER3, FLAG3 == 0)
+        NEXT_COMMAND_REUSABLE
+        PLAY_MESSAGE(PLAYER0, SOUND, 778)
+        NEXT_COMMAND_REUSABLE
+        SET_FLAG(PLAYER3, FLAG3, 1)
+        NEXT_COMMAND_REUSABLE
+        SET_TIMER(PLAYER2, TIMER1)
+    ENDIF
+    IF(PLAYER2, TIMER1 >= 300)
+        IF(PLAYER3, FLAG3 == 1)
+            NEXT_COMMAND_REUSABLE
+            CREATE_EFFECTS_LINE(PLAYER0, PLAYER0, 0, 0, 0, 48)
+            NEXT_COMMAND_REUSABLE
+            ADD_CREATURE_TO_LEVEL(PLAYER0, WISP, PLAYER0, 1, 1, 0)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER3, FLAG3, 0)
+        ENDIF
+    ENDIF
+ENDIF
+
+rem "COMPUTER PLAYER1"
+IF(PLAYER1, WISP == 1)
+    NEXT_COMMAND_REUSABLE
+    SET_TIMER(PLAYER3, TIMER1)
+ENDIF
+IF(PLAYER1, WISP == 0)
+    IF(PLAYER3, TIMER1 >= 500)
+        NEXT_COMMAND_REUSABLE
+        ADD_CREATURE_TO_LEVEL(PLAYER1, WISP, PLAYER1, 1, 1, 0)
+    ENDIF
+ENDIF
+
+rem "COMPUTER PLAYER2"
+IF(PLAYER2, WISP == 1)
+    NEXT_COMMAND_REUSABLE
+    SET_TIMER(PLAYER3, TIMER2)
+ENDIF
+IF(PLAYER2, WISP == 0)
+    IF(PLAYER3, TIMER2 >= 500)
+        NEXT_COMMAND_REUSABLE
+        ADD_CREATURE_TO_LEVEL(PLAYER2, WISP, PLAYER2, 1, 1, 0)
+    ENDIF
+ENDIF
+
+
+rem ---------------------------------------------------------------------"Horny handling"----------------------------------------
+rem "Computer Hornys are always happy"
+NEXT_COMMAND_REUSABLE
+CHANGE_CREATURES_ANNOYANCE(PLAYER1, HORNY, set, 0)
+NEXT_COMMAND_REUSABLE
+CHANGE_CREATURES_ANNOYANCE(PLAYER2, HORNY, set, 0)
+
+IF(PLAYER0, HORNY == 1)
+    PLAY_MESSAGE(PLAYER0, SOUND, 777)
+    DISPLAY_INFORMATION(27, ALL_PLAYERS)
+ENDIF
+
+rem "if player has more than 2 to they going postal..."
+IF(PLAYER0, HORNY > 2)
+    NEXT_COMMAND_REUSABLE
+    CHANGE_CREATURES_ANNOYANCE(PLAYER0, HORNY, set, 5000)
+ENDIF
+rem "... and can never have more than 4"
+IF(PLAYER0, HORNY > 4)
+    NEXT_COMMAND_REUSABLE
+    KILL_CREATURE(PLAYER0, HORNY, LEAST_EXPERIENCED, 1)
+ENDIF
+
+rem "Computer could only get 1"
+IF(PLAYER2, HORNY > 1)
+    NEXT_COMMAND_REUSABLE
+    KILL_CREATURE(PLAYER2, HORNY, LEAST_EXPERIENCED, 1)
+ENDIF
+IF(PLAYER1, HORNY > 1)
+    NEXT_COMMAND_REUSABLE
+    KILL_CREATURE(PLAYER1, HORNY, LEAST_EXPERIENCED, 1)
+ENDIF
+rem-------------------------------------------------------------"Decoration"-----------------------------------------------------
+rem "because of bigger Heart Room needs bigger Dungeon Hearts"
+SET_OBJECT_CONFIGURATION(SOUL_CONTAINER, Size_XY, 250)
+SET_OBJECT_CONFIGURATION(SOUL_CONTAINER, Size_YZ, 250)
+SET_OBJECT_CONFIGURATION(SOUL_CONTAINER, MaximumSize, 250)
+rem "more Tentacle variations"
+SET_OBJECT_CONFIGURATION(SPIDER, AnimationID, TENTACLE)
+SET_OBJECT_CONFIGURATION(SPIDER, MaximumSize, 600)
+SET_OBJECT_CONFIGURATION(SPIDER, AnimationSpeed, 125)
+SET_OBJECT_CONFIGURATION(SPIDER, Size_YZ, 800)
+SET_OBJECT_CONFIGURATION(WRKBOX_WRDOFPW, AnimationID, TENTACLE)
+SET_OBJECT_CONFIGURATION(WRKBOX_WRDOFPW, MaximumSize, 450)
+SET_OBJECT_CONFIGURATION(WRKBOX_WRDOFPW, AnimationSpeed, 135)
+SET_OBJECT_CONFIGURATION(WRKBOX_WRDOFPW, Genre, DECORATION)
+rem "more EYE Tentacle variations"
+SET_OBJECT_CONFIGURATION(SCAVENGE_EYE, AnimationSpeed, 140)
+SET_OBJECT_CONFIGURATION(WRKBOX_LAVA, AnimationSpeed, 110)
+SET_OBJECT_CONFIGURATION(WRKBOX_LAVA, AnimationID, 130)
+SET_OBJECT_CONFIGURATION(WRKBOX_LAVA, MaximumSize, 400)
+SET_OBJECT_CONFIGURATION(WRKBOX_LAVA, Genre, DECORATION)
+rem "more EYEslab variations"
+SET_OBJECT_CONFIGURATION(POTION_PURPLE, AnimationSpeed, 150)
+SET_OBJECT_CONFIGURATION(POTION_PURPLE, AnimationID, EYESLAB)
+SET_OBJECT_CONFIGURATION(POTION_PURPLE, MaximumSize, 235)
+rem "Fire variants"
+SET_OBJECT_CONFIGURATION(POTION_BLUE, AnimationID, 970)
+SET_OBJECT_CONFIGURATION(POTION_BLUE, AnimationSpeed, 200)
+SET_OBJECT_CONFIGURATION(POTION_BLUE, MaximumSize, 450)
+SET_OBJECT_CONFIGURATION(POTION_GREEN, AnimationID, 970)
+SET_OBJECT_CONFIGURATION(POTION_GREEN, MaximumSize, 300)
+rem "TempleFlame should stay after changed ownship"
+SET_OBJECT_CONFIGURATION(HEARTFLAME_BLUE, Properties, 8)
+
+rem---------------------------------------------------"HEROES"---------------------------------------------------------
+rem "Heroes first time attack messages"
+IF_ACTION_POINT(24, PLAYER_GOOD)
+    SET_FLAG(PLAYER0, FLAG0, 1)
+ENDIF
+IF_ACTION_POINT(27, PLAYER_GOOD)
+    SET_FLAG(PLAYER0, FLAG0, 1)
+ENDIF
+IF(PLAYER0, FLAG0 == 1)
+    DISPLAY_INFORMATION(28, ALL_PLAYERS)
+    PLAY_MESSAGE(PLAYER0, SOUND, 777)
+ENDIF
+
+rem -------------------"PLAYER0 will be regulary attacked by Heroes"-------------------------
+
+rem "PLAYER can conquer their Fortress if reach the Hero Temple, will also disable hero spawn here"
+IF(PLAYER3, FLAG6 > 0)
+NEXT_COMMAND_REUSABLE
+COUNT_CREATURES_AT_ACTION_POINT(17, PLAYER_GOOD, ANY_CREATURE, PLAYER3, FLAG6)
+ENDIF
+
+IF(PLAYER3, FLAG6 == 0)
+    CHANGE_SLAB_TYPE(2, 33, PRETTY_PATH)
+    DISPLAY_INFORMATION(40, 1)
+    HIDE_HERO_GATE(-1, 1)
+	ADD_TO_FLAG(PLAYER0,BOX4_ACTIVATED,1)
+ENDIF
+
+IF(PLAYER3, FLAG5 > 0)
+NEXT_COMMAND_REUSABLE
+COUNT_CREATURES_AT_ACTION_POINT(17, PLAYER_GOOD, ANY_CREATURE, PLAYER3, FLAG5)
+ENDIF
+
+IF(PLAYER3, FLAG5 == 0)
+    CHANGE_SLAB_TYPE(48, 83, PRETTY_PATH)
+    DISPLAY_INFORMATION(40, 7)
+	HIDE_HERO_GATE(-2, 1)
+	ADD_TO_FLAG(PLAYER0,BOX4_ACTIVATED,2)
+ENDIF
+
+rem "Heroes attack PLAYER0 from North or East and will get stronger"
+IF(PLAYER0, FLAG1 == 0)
+    IF_CONTROLS(PLAYER_GOOD, TUNNELLER == 0)
+        NEXT_COMMAND_REUSABLE
+        SET_TIMER(PLAYER3, TIMER4)
+        NEXT_COMMAND_REUSABLE
+        SET_FLAG(PLAYER2, FLAG5, 0)
+        NEXT_COMMAND_REUSABLE
+        SET_FLAG(PLAYER0, FLAG1, 1)
+    ENDIF
+ENDIF
+IF(PLAYER0, FLAG1 == 1)
+    IF(PLAYER2, FLAG5 == 0)
+        IF(PLAYER3, TIMER4 >= 2500)
+            NEXT_COMMAND_REUSABLE
+            RANDOMISE_FLAG(PLAYER2, FLAG5, 2)
+        ENDIF
+    ENDIF
+    IF(PLAYER2, FLAG5 == 1)
+        IF(PLAYER_GOOD, FLAG2 == 0)
+			IF(PLAYER0,BOX4_ACTIVATED == 0)
+            NEXT_COMMAND_REUSABLE
+            ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER_GOOD, HERO, -1, DUNGEON_HEART, 0, 3, 1000)
+            NEXT_COMMAND_REUSABLE
+            ADD_TO_FLAG(PLAYER0, FLAG7, 1)
+			ENDIF
+			IF(PLAYER0,BOX4_ACTIVATED == 1)
+			NEXT_COMMAND_REUSABLE
+			SET_FLAG(PLAYER2, FLAG5, 2)
+			ENDIF
+        ENDIF
+    ENDIF
+
+    IF(PLAYER2, FLAG5 == 2)
+        IF(PLAYER1, FLAG5 == 0)
+			IF(PLAYER0,BOX4_ACTIVATED == 0)
+            NEXT_COMMAND_REUSABLE
+            ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER_GOOD, HERO, -2, DUNGEON_HEART, 0, 3, 1000)
+            NEXT_COMMAND_REUSABLE
+            ADD_TO_FLAG(PLAYER0, FLAG7, 1)
+			ENDIF
+			IF(PLAYER0,BOX4_ACTIVATED == 2)
+			NEXT_COMMAND_REUSABLE
+			SET_FLAG(PLAYER2, FLAG5, 1)
+			ENDIF
+        ENDIF
+    ENDIF
+ENDIF
+rem "disable hero spawn"
+IF(PLAYER0,BOX4_ACTIVATED == 3)
+        NEXT_COMMAND_REUSABLE
+        SET_TIMER(PLAYER3, TIMER4)
+ENDIF
+
+IF(PLAYER2, FLAG5 != 0)
+    NEXT_COMMAND_REUSABLE
+    SET_FLAG(PLAYER0, FLAG1, 0)
+ENDIF
+
+rem--------------------------------------------------------"COMPUTER"----------------------------------------------------------
+rem "Computer Tweaks"
+
+rem this flag makes the AI spawn infinite creatures
+rem It seems that repetitive script values that are to be temporary changed in IF-condition MUST be placed in the script before that If-condition.
+NEXT_COMMAND_REUSABLE
+SET_FLAG(PLAYER2, FLAG4, 0)
+NEXT_COMMAND_REUSABLE
+SET_FLAG(PLAYER3, FLAG4, 0)
+
+SET_TIMER(PLAYER2, TIMER5)
+SET_TIMER(PLAYER3, TIMER5)
+SET_TIMER(PLAYER_GOOD, TIMER5)
+
+rem "never run out of Imps"
+IF(PLAYER2, TIMER5 >= 1200)
+    IF(PLAYER1, IMP < 15)
+        NEXT_COMMAND_REUSABLE
+        MAGIC_AVAILABLE(PLAYER1, POWER_IMP, 1, 1)
+    ENDIF
+    IF(PLAYER2, IMP < 15)
+        NEXT_COMMAND_REUSABLE
+        MAGIC_AVAILABLE(PLAYER2, POWER_IMP, 1, 1)
+    ENDIF
+ENDIF
+IF(PLAYER0, KEEPERS_DESTROYED == 0)
+    IF(PLAYER2, TIMER5 >= 2400)
+        IF(PLAYER2, IMP < 15)
+            NEXT_COMMAND_REUSABLE
+            USE_POWER_AT_LOCATION(PLAYER2, 5, POWER_IMP, 1, 0)
+        ENDIF
+        NEXT_COMMAND_REUSABLE
+        SET_TIMER(PLAYER2, TIMER5)
+    ENDIF
+ENDIF
+
+
+rem "COMPUTER_PLAYER1 Help"
+rem" never run out of money if he have a tresureroom"
+IF(PLAYER2, FLAG4 == 0)
+    IF(PLAYER1, TREASURE >= 25)
+        IF(PLAYER1, MONEY <= 4000)
+            NEXT_COMMAND_REUSABLE
+            ADD_GOLD_TO_PLAYER(PLAYER1, 20000)
+        ENDIF
+    ENDIF
+	rem "turn off prison so you don't get too mutch creatures"
+    IF(PLAYER1, GAME_TURN >= 12000)
+        IF_CONTROLS(PLAYER2, TOTAL_CREATURES <= 19)
+            NEXT_COMMAND_REUSABLE
+            SET_CREATURE_TENDENCIES(PLAYER1, IMPRISON, 0)
+        ENDIF
+		rem "respawn your creatures in short intervalls"
+        IF(PLAYER1, FLAG0 == 0)
+            IF(PLAYER3, TIMER5 >= 1650)
+                IF_CONTROLS(PLAYER1, TOTAL_CREATURES <= 20)
+                    NEXT_COMMAND_REUSABLE
+                    RANDOMISE_FLAG(PLAYER0, FLAG4, 3)
+                    IF(PLAYER0, FLAG4 == 1)
+                        NEXT_COMMAND_REUSABLE
+                        ADD_CREATURE_TO_LEVEL(PLAYER1, ORC, PLAYER1, 1, 5, 0)
+                    ENDIF
+                    IF(PLAYER0, FLAG4 == 2)
+                        NEXT_COMMAND_REUSABLE
+                        ADD_CREATURE_TO_LEVEL(PLAYER1, SORCEROR, PLAYER1, 1, 6, 0)
+                    ENDIF
+                    IF(PLAYER0, FLAG4 == 3)
+                        NEXT_COMMAND_REUSABLE
+                        ADD_CREATURE_TO_LEVEL(PLAYER1, DRAGON, PLAYER1, 1, 5, 0)
+                    ENDIF
+                ENDIF
+            ENDIF
+            IF(PLAYER3, TIMER5 >= 4800)
+                NEXT_COMMAND_REUSABLE
+                SET_TIMER(PLAYER3, TIMER5)
+            ENDIF
+        ENDIF
+    ENDIF
+ENDIF
+REM "prevent that Player2 kill Player1"
+If(PLAYER1, DUNGEON_DESTROYED == 0)
+    IF_ACTION_POINT(10, PLAYER2)
+        NEXT_COMMAND_REUSABLE
+        USE_POWER(PLAYER2, POWER_HOLD_AUDIENCE, 1)
+        NEXT_COMMAND_REUSABLE
+        RESET_ACTION_POINT(10)
+    ENDIF
+    NEXT_COMMAND_REUSABLE
+    KILL_CREATURE(PLAYER2, IMP, AT_ACTION_POINT[25], 5)
+ENDIF
+REM "prevent that Hero Hornys kills PLayer1"
+NEXT_COMMAND_REUSABLE
+KILL_CREATURE(PLAYER_GOOD, HORNY, AT_ACTION_POINT[10], 1)
+
+rem"COMPUTER_PLAYER2 Help"
+IF(PLAYER3, FLAG4 == 0)
+REM "never run out of money if he have a Tresureroom"
+    IF(PLAYER2, TREASURE >= 25)
+        IF(PLAYER2, MONEY <= 4000)
+            NEXT_COMMAND_REUSABLE
+            ADD_GOLD_TO_PLAYER(PLAYER1, 20000)
+        ENDIF
+    ENDIF
+	rem "turn off prison so you don't get too mutch creatures"
+    IF_CONTROLS(PLAYER1, TOTAL_CREATURES <= 19)
+        NEXT_COMMAND_REUSABLE
+        SET_CREATURE_TENDENCIES(PLAYER2, IMPRISON, 0)
+    ENDIF
+	rem "respawn your creatures in short intervalls"
+    IF(PLAYER2, GAME_TURN >= 12000)
+        IF(PLAYER2, FLAG0 == 0)
+            IF(PLAYER_GOOD, TIMER5 >= 1650)
+                IF(PLAYER0, KEEPERS_DESTROYED == 0)
+				REM "Always have at least 2 Dark_Mistress"
+                    IF(PLAYER2, DARK_MISTRESS == 0)
+                        NEXT_COMMAND_REUSABLE
+                        ADD_CREATURE_TO_LEVEL(PLAYER2, DARK_MISTRESS, PLAYER2, 2, 7, 0)
+                    ENDIF
+                ENDIF
+				rem "respawn your creatures in short intervalls"
+                IF_CONTROLS(PLAYER2, TOTAL_CREATURES <= 20)
+                    NEXT_COMMAND_REUSABLE
+                    RANDOMISE_FLAG(PLAYER1, FLAG4, 3)
+                    IF(PLAYER1, FLAG4 == 1)
+                        NEXT_COMMAND_REUSABLE
+                        ADD_CREATURE_TO_LEVEL(PLAYER2, TROLL, PLAYER2, 1, 7, 0)
+                    ENDIF
+                    IF(PLAYER1, FLAG4 == 2)
+                        NEXT_COMMAND_REUSABLE
+                        ADD_CREATURE_TO_LEVEL(PLAYER2, BILE_DEMON, PLAYER2, 1, 5, 0)
+                    ENDIF
+                    IF(PLAYER1, FLAG4 == 3)
+                        NEXT_COMMAND_REUSABLE
+                        ADD_CREATURE_TO_LEVEL(PLAYER2, TENTACLE, PLAYER2, 1, 5, 0)
+                    ENDIF
+                ENDIF
+            ENDIF
+            IF(PLAYER_GOOD, TIMER5 >= 4800)
+                NEXT_COMMAND_REUSABLE
+                SET_TIMER(PLAYER_GOOD, TIMER5)
+            ENDIF
+        ENDIF
+    ENDIF
+ENDIF
+REM "prevent Player1 to kill Player2"
+If(PLAYER2, DUNGEON_DESTROYED == 0)
+    IF_ACTION_POINT(5, PLAYER1)
+        NEXT_COMMAND_REUSABLE
+        USE_POWER(PLAYER1, POWER_HOLD_AUDIENCE, 1)
+        NEXT_COMMAND_REUSABLE
+        RESET_ACTION_POINT(5)
+    ENDIF
+    NEXT_COMMAND_REUSABLE
+    KILL_CREATURE(PLAYER1, IMP, AT_ACTION_POINT[26], 5)
+ENDIF
+REM "prevent hero Horny to kill Player2"
+NEXT_COMMAND_REUSABLE
+KILL_CREATURE(PLAYER_GOOD, HORNY, AT_ACTION_POINT[5], 1)
+
+
+rem------------------------------------------mystery-box-------------------------
+rem Hero Portal Crystal"
+SET_BOX_TOOLTIP_ID(2, 43)
+SET_BOX_TOOLTIP_ID(3, 43)
+rem ("Hero Portal Crystal: its destruction will be devastating and disrupt the magic of this realm")
+
+SET_OBJECT_CONFIGURATION(SPECBOX_CUSTOM, AnimationID, CRYSTAL)
+SET_OBJECT_CONFIGURATION(SPECBOX_CUSTOM, MaximumSize, 200)
+SET_OBJECT_CONFIGURATION(SPECBOX_CUSTOM, AnimationSpeed, 135)
+
+IF(PLAYER0, BOX2_ACTIVATED == 1)
+    USE_POWER_AT_LOCATION(PLAYER1, 21, POWER_LIGHTNING, 9, 1)
+    USE_POWER_AT_LOCATION(PLAYER0, 13, POWER_CAVE_IN, 9, 1)
+    CHANGE_SLAB_TYPE(14, 15, PATH)
+    SET_TIMER(PLAYER0, TIMER6)
+ENDIF
+IF(PLAYER0, BOX3_ACTIVATED == 1)
+    USE_POWER_AT_LOCATION(PLAYER2, 23, POWER_LIGHTNING, 9, 1)
+    USE_POWER_AT_LOCATION(PLAYER0, 11, POWER_CAVE_IN, 9, 1)
+    CHANGE_SLAB_TYPE(64, 70, PATH)
+    SET_TIMER(PLAYER1, TIMER6)
+ENDIF
+IF(PLAYER1, TIMER6 > 1)
+    IF(PLAYER0, TIMER6 < 1)
+        DISPLAY_INFORMATION(29, ALL_PLAYERS)
+        PLAY_MESSAGE(PLAYER0, SOUND, 775)
+    ENDIF
+ENDIF
+IF(PLAYER0, TIMER6 > 1)
+    IF(PLAYER1, TIMER6 < 1)
+        DISPLAY_INFORMATION(29, ALL_PLAYERS)
+        PLAY_MESSAGE(PLAYER0, SOUND, 775)
+    ENDIF
+ENDIF
+
+rem ---------------"If Hero Crystal is destroyd, it weaks the enemys"-----------------
+REM "Player1"
+IF(PLAYER0, TIMER6 >= 1)
+    IF(PLAYER0, TIMER6 <= 1500)
+        IF(PLAYER0, KEEPERS_DESTROYED == 0)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER2, FLAG4, 1)
+            NEXT_COMMAND_REUSABLE
+            ALLY_PLAYERS(PLAYER1, PLAYER2, 1)
+        ENDIF
+    ENDIF
+    IF(PLAYER0, TIMER6 >= 100)
+        IF(PLAYER0, TIMER6 >= 1500)
+            NEXT_COMMAND_REUSABLE
+			REM "slow all Creatures"
+            SET_FLAG(PLAYER1, SACRIFICED[DEMONSPAWN], 2)
+        ENDIF
+    ENDIF
+    IF(PLAYER0, TIMER6 >= 3000)
+        NEXT_COMMAND_REUSABLE
+        SET_TIMER(PLAYER0, TIMER6)
+    ENDIF
+ENDIF
+REM "Player2"
+IF(PLAYER1, TIMER6 >= 1)
+    IF(PLAYER1, TIMER6 <= 1500)
+        IF(PLAYER0, KEEPERS_DESTROYED == 0)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER3, FLAG4, 1)
+            NEXT_COMMAND_REUSABLE
+            ALLY_PLAYERS(PLAYER2, PLAYER1, 1)
+        ENDIF
+    ENDIF
+    IF(PLAYER1, TIMER6 >= 100)
+        IF(PLAYER1, TIMER6 >= 1500)
+            NEXT_COMMAND_REUSABLE
+			REM "slow all Creatures"
+            SET_FLAG(PLAYER1, SACRIFICED[DEMONSPAWN], 2)
+        ENDIF
+    ENDIF
+    IF(PLAYER1, TIMER6 >= 3000)
+        NEXT_COMMAND_REUSABLE
+        SET_TIMER(PLAYER1, TIMER6)
+    ENDIF
+ENDIF
+
+rem ----------------------------------------------------"SECRETS"------------------------------------------------------------
+rem "Cannon Secret"
+IF_ACTION_POINT(4, PLAYER0)
+    DISPLAY_INFORMATION(31, 4)
+    IF_CONTROLS(PLAYER_GOOD, TROLL == 0)
+        TRAP_AVAILABLE(PLAYER0, CANNON, 1, 3)
+        CHANGE_SLAB_OWNER(73, 12, PLAYER0)
+    ENDIF
+ENDIF
+
+rem "If a Player go to the Skeleton Ground and kill it he get the Special
+
+IF_ACTION_POINT(16, PLAYER0)
+    DISPLAY_INFORMATION(32, 16)
+    IF_CONTROLS(PLAYER_GOOD, SKELETON == 0)
+        CHANGE_SLAB_OWNER(7, 28, PLAYER0)
+    ENDIF
+ENDIF
+
+rem "SKELETON healing"
+
+SET_TIMER(PLAYER_GOOD, TIMER4)
+IF(PLAYER_GOOD, TIMER4 >= 1000)
+    NEXT_COMMAND_REUSABLE
+    SET_FLAG(PLAYER2, SACRIFICED[FLY], 2)
+    NEXT_COMMAND_REUSABLE
+    USE_SPELL_ON_CREATURE(PLAYER_GOOD, SKELETON, ON_ENEMY_GROUND, SPELL_HEAL, 9)
+    NEXT_COMMAND_REUSABLE
+    USE_SPELL_ON_CREATURE(PLAYER_GOOD, TROLL, ON_ENEMY_GROUND, SPELL_HEAL, 9)
+    NEXT_COMMAND_REUSABLE
+    SET_TIMER(PLAYER_GOOD, TIMER4)
+ENDIF
+
+rem "If a Player go to the Library and kill the SORCEROR he get the Room"
+
+IF_ACTION_POINT(15, PLAYER0)
+    DISPLAY_INFORMATION(33, 15)
+    IF_CONTROLS(PLAYER_GOOD, SORCEROR == 0)
+        CHANGE_SLAB_OWNER(53, 80, PLAYER0)
+    ENDIF
+ENDIF
+
+rem -------------------------------------------------------------"Temple Settings"-----------------------------------------------
+
+rem "central reset"
+ADD_PARTY_TO_LEVEL(PLAYER_GOOD, HORNY1, 3, 1)
+ADD_PARTY_TO_LEVEL(PLAYER_GOOD, HORNY1, 9, 1)
+ADD_PARTY_TO_LEVEL(PLAYER_GOOD, HORNY1, 20, 1)
+SET_TIMER(PLAYER_GOOD, TIMER0)
+SET_TIMER(PLAYER2, TIMER4)
+
+rem ----------------------------------------------------------------"cycle"	----------------------------------------------	
+rem 
+rem "-weaker last Keeper-"
+IF(PLAYER_GOOD, TIMER0 >= 4000)
+    IF(PLAYER0, KEEPERS_DESTROYED == 1)
+        NEXT_COMMAND_REUSABLE
+        MAGIC_AVAILABLE(ALL_PLAYERS, POWER_HAND, 0, 0)
+        NEXT_COMMAND_REUSABLE
+        MAGIC_AVAILABLE(PLAYER0, POWER_HAND, 1, 1)
+    ENDIF
+ENDIF
+
+IF(PLAYER0, TIMER3 <= 10)
+    IF(PLAYER2, FLAG1 == 1)
+        rem Prayer Sound
+        IF(PLAYER2, TIMER6 >= 120)
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, 155)
+            NEXT_COMMAND_REUSABLE
+            SET_TIMER(PLAYER2, TIMER6)
+        ENDIF
+    ENDIF
+    IF(PLAYER_GOOD, TIMER0 <= 6600)
+        IF_ACTION_POINT(18, PLAYER0)
+            DISPLAY_OBJECTIVE(34, 22)
+            PLAY_MESSAGE(PLAYER0, SOUND, 785)
+            REVEAL_MAP_LOCATION(PLAYER0, 22, 80)
+            IF(PLAYER0, FLAG6 == 1)
+                DISPLAY_INFORMATION(36, 9)
+                PLAY_MESSAGE(PLAYER0, SOUND, 785)
+            ENDIF
+        ENDIF
+        IF(PLAYER_GOOD, FLAG6 == 0)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER_GOOD, FLAG6, 1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER_GOOD, FLAG7, 0)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER0, FLAG6, 0)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER0, FLAG5, 0)
+        ENDIF
+    ENDIF
+
+    IF(PLAYER_GOOD, TIMER0 >= 6600)
+        IF(PLAYER_GOOD, FLAG7 == 0)
+            IF(PLAYER2, FLAG1 != 1)
+                IF(PLAYER1, FLAG6 < 3)
+                    IF(PLAYER1, FLAG6 < 7)
+                        IF_CONTROLS(PLAYER_GOOD, HORNY < 1)
+                            NEXT_COMMAND_REUSABLE
+                            ADD_PARTY_TO_LEVEL(PLAYER_GOOD, HORNY1, 20, 1)
+                            NEXT_COMMAND_REUSABLE
+                            ADD_PARTY_TO_LEVEL(PLAYER_GOOD, HORNY1, 3, 1)
+                            NEXT_COMMAND_REUSABLE
+                            ADD_PARTY_TO_LEVEL(PLAYER_GOOD, HORNY1, 9, 1)
+                            NEXT_COMMAND_REUSABLE
+                            SET_FLAG(PLAYER_GOOD, FLAG7, 1)
+                        ENDIF
+                    ENDIF
+                ENDIF
+                IF(PLAYER1, FLAG6 > 3)
+                    IF(PLAYER1, FLAG6 < 7)
+                        IF_CONTROLS(PLAYER_GOOD, HORNY < 1)
+                            NEXT_COMMAND_REUSABLE
+                            ADD_PARTY_TO_LEVEL(PLAYER_GOOD, HORNY2, 3, 1)
+                            NEXT_COMMAND_REUSABLE
+                            ADD_PARTY_TO_LEVEL(PLAYER_GOOD, HORNY2, 9, 1)
+                            NEXT_COMMAND_REUSABLE
+                            ADD_PARTY_TO_LEVEL(PLAYER_GOOD, HORNY2, 20, 1)
+                            NEXT_COMMAND_REUSABLE
+                            SET_FLAG(PLAYER_GOOD, FLAG7, 1)
+                        ENDIF
+                    ENDIF
+                ENDIF
+                IF(PLAYER1, FLAG6 > 7)
+                    IF_CONTROLS(PLAYER_GOOD, HORNY < 1)
+                        NEXT_COMMAND_REUSABLE
+                        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, HORNY3, 9, 1)
+                        NEXT_COMMAND_REUSABLE
+                        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, HORNY3, 3, 1)
+                        NEXT_COMMAND_REUSABLE
+                        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, HORNY3, 20, 1)
+                        NEXT_COMMAND_REUSABLE
+                        SET_FLAG(PLAYER_GOOD, FLAG7, 1)
+                    ENDIF
+                ENDIF
+            ENDIF
+        ENDIF
+		rem "change Temple Ownship to Good"
+        IF(PLAYER0, FLAG6 == 0)
+			rem "but stop after Player has all of them"
+            IF(PLAYER2, FLAG1 != 1)
+                NEXT_COMMAND_REUSABLE
+                CHANGE_SLAB_OWNER(32, 52, PLAYER_GOOD)
+                NEXT_COMMAND_REUSABLE
+                CHANGE_SLAB_OWNER(35, 36, PLAYER_GOOD)
+                NEXT_COMMAND_REUSABLE
+                CHANGE_SLAB_OWNER(48, 49, PLAYER_GOOD)
+
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER3, FLAG7, 0)
+                rem" Temple level up reset"
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER_GOOD, FLAG0, 0)
+            ENDIF
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER0, FLAG6, 1)
+        ENDIF
+
+        IF(PLAYER_GOOD, FLAG6 == 1)
+            IF(PLAYER0, FLAG5 == 0)
+                NEXT_COMMAND_REUSABLE
+                USE_POWER_AT_LOCATION(PLAYER0, 22, POWER_CAVE_IN, 9, 1)
+                NEXT_COMMAND_REUSABLE
+                ADD_TO_FLAG(PLAYER0, FLAG5, 1)
+                NEXT_COMMAND_REUSABLE
+                ADD_TO_FLAG(PLAYER1, FLAG6, 1)
+                NEXT_COMMAND_REUSABLE
+                SET_TIMER(PLAYER1, TIMER4)
+            ENDIF
+
+            IF(PLAYER1, TIMER4 >= 150)
+                IF(PLAYER0, FLAG5 == 1)
+                    NEXT_COMMAND_REUSABLE
+                    USE_POWER_AT_LOCATION(PLAYER0, 22, POWER_CAVE_IN, 9, 1)
+                    NEXT_COMMAND_REUSABLE
+                    ADD_TO_FLAG(PLAYER0, FLAG5, 1)
+                    NEXT_COMMAND_REUSABLE
+                    SET_FLAG(PLAYER_GOOD, FLAG6, 0)
+                    NEXT_COMMAND_REUSABLE
+                    SET_TIMER(PLAYER_GOOD, TIMER0)
+                ENDIF
+            ENDIF
+        ENDIF
+    ENDIF
+ENDIF
+rem ---------------------------------------------------------------"Is the Temple "Complete"?"----------------------------------------
+
+NEXT_COMMAND_REUSABLE
+SET_FLAG(PLAYER_GOOD, FLAG3, 0)
+IF_SLAB_TYPE(31, 52, TEMPLE_POOL)
+    IF_SLAB_TYPE(31, 53, TEMPLE_POOL)
+        IF_SLAB_TYPE(32, 52, TEMPLE_POOL)
+            IF_SLAB_TYPE(32, 53, TEMPLE_POOL)
+                IF_SLAB_TYPE(34, 35, TEMPLE_POOL)
+                    IF_SLAB_TYPE(34, 36, TEMPLE_POOL)
+                        IF_SLAB_TYPE(35, 35, TEMPLE_POOL)
+                            IF_SLAB_TYPE(35, 36, TEMPLE_POOL)
+                                NEXT_COMMAND_REUSABLE
+                                SET_FLAG(PLAYER_GOOD, FLAG3, 1)
+                            ENDIF
+                        ENDIF
+                    ENDIF
+                ENDIF
+            ENDIF
+        ENDIF
+    ENDIF
+ENDIF
+
+NEXT_COMMAND_REUSABLE
+SET_FLAG(PLAYER_GOOD, FLAG4, 0)
+IF_SLAB_TYPE(49, 49, TEMPLE_POOL)
+    IF_SLAB_TYPE(48, 49, TEMPLE_POOL)
+        IF_SLAB_TYPE(48, 50, TEMPLE_POOL)
+            IF_SLAB_TYPE(49, 50, TEMPLE_POOL)
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER_GOOD, FLAG4, 1)
+            ENDIF
+        ENDIF
+    ENDIF
+ENDIF
+
+NEXT_COMMAND_REUSABLE
+SET_FLAG(PLAYER1, FLAG1, 0)
+IF(PLAYER_GOOD, FLAG4 == 1)
+    IF(PLAYER_GOOD, FLAG3 == 1)
+        NEXT_COMMAND_REUSABLE
+        SET_FLAG(PLAYER1, FLAG1, 1)
+    ENDIF
+ENDIF
+
+rem --------------------------------------------------------------"if not..."---------------------------------------------
+SET_TIMER(PLAYER2, TIMER2)
+IF(PLAYER1, GAME_TURN >= 100) rem "let the game time for a first script loop"
+    IF(PLAYER1, FLAG1 == 0)
+        rem "Angry Chicken..."
+        DISPLAY_INFORMATION(10, 15)
+        PLAY_MESSAGE(PLAYER0, SOUND, 112)
+        SET_TIMER(PLAYER1, TIMER2)
+        IF(PLAYER1, FLAG3 <= 2)
+            IF(PLAYER1, TIMER2 >= 40)
+                NEXT_COMMAND_REUSABLE
+                PLAY_MESSAGE(PLAYER0, SOUND, 113)
+                NEXT_COMMAND_REUSABLE
+                ADD_TO_FLAG(PLAYER1, FLAG3, 1)
+            ENDIF
+        ENDIF
+        rem "Punishment for destroyed Temples"
+        IF(PLAYER2, TIMER2 >= 360)
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, 113)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER0, SACRIFICED[HORNY], 1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER0, SACRIFICED[BILE_DEMON], 2)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER1, SACRIFICED[HORNY], 1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER1, SACRIFICED[BILE_DEMON], 2)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER2, SACRIFICED[HORNY], 1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER2, SACRIFICED[BILE_DEMON], 2)
+            NEXT_COMMAND_REUSABLE
+            SET_TIMER(PLAYER2, TIMER2)
+        ENDIF
+    ENDIF
+ENDIF
+
+rem --------------------------------------------------------------"Temple Ownship "--------------------------------------
+rem -----------------------------------------------------"own PLAYER0 the building?----------------------------
+rem "Prayer sound Timer"
+SET_TIMER(PLAYER2, TIMER6)
+
+NEXT_COMMAND_REUSABLE
+SET_FLAG(PLAYER2, FLAG1, 0)
+
+SET_TIMER(PLAYER1, TIMER1)
+
+rem Flags:
+rem PLAYER2,FLAG1 does Player own all temple parts
+
+rem "does Player own all temple parts?"
+rem "Top left"
+IF_SLAB_OWNER(35, 36, PLAYER0)
+    rem "rem "Bottom right"
+    IF_SLAB_OWNER(48, 49, PLAYER0)
+        rem "Bottom left"
+        IF_SLAB_OWNER(32, 52, PLAYER0)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER2, FLAG1, 1)
+			DISPLAY_OBJECTIVE(56,ALL_PLAYERS)
+        ENDIF
+    ENDIF
+ENDIF
+
+rem "Top left"
+IF_SLAB_OWNER(35, 36, PLAYER0)
+    rem "rem "Bottom right"
+    IF_SLAB_OWNER(48, 49, PLAYER0)
+        NEXT_COMMAND_REUSABLE
+        CREATURE_ENTRANCE_LEVEL(PLAYER0, 4)
+        IF(PLAYER_GOOD, FLAG0 == 0)
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SPEECH, 83)
+            NEXT_COMMAND_REUSABLE
+            USE_SPECIAL_INCREASE_LEVEL(PLAYER0, 1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER_GOOD, FLAG0, 1)
+        ENDIF
+    ENDIF
+ENDIF
+
+rem "Top left"
+IF_SLAB_OWNER(35, 36, PLAYER0)
+    rem "Bottom left"
+    IF_SLAB_OWNER(32, 52, PLAYER0)
+        NEXT_COMMAND_REUSABLE
+        CREATURE_ENTRANCE_LEVEL(PLAYER0, 4)
+        IF(PLAYER_GOOD, FLAG0 == 0)
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SPEECH, 83)
+            NEXT_COMMAND_REUSABLE
+            USE_SPECIAL_INCREASE_LEVEL(PLAYER0, 1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER_GOOD, FLAG0, 1)
+        ENDIF
+    ENDIF
+ENDIF
+
+rem "rem "Bottom right"
+IF_SLAB_OWNER(48, 49, PLAYER0)
+    rem "Bottom left"
+    IF_SLAB_OWNER(32, 52, PLAYER0)
+        NEXT_COMMAND_REUSABLE
+        CREATURE_ENTRANCE_LEVEL(PLAYER0, 4)
+        IF(PLAYER_GOOD, FLAG0 == 0)
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SPEECH, 83)
+            NEXT_COMMAND_REUSABLE
+            USE_SPECIAL_INCREASE_LEVEL(PLAYER0, 1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER_GOOD, FLAG0, 1)
+        ENDIF
+    ENDIF
+ENDIF
+
+rem "Player get LEVEL_UP per Temple 1"
+NEXT_COMMAND_REUSABLE
+rem "Top left"
+IF_SLAB_OWNER(35, 36, PLAYER0)
+    NEXT_COMMAND_REUSABLE
+    CREATURE_ENTRANCE_LEVEL(PLAYER0, 2)
+    IF(PLAYER3, FLAG7 == 0)
+        NEXT_COMMAND_REUSABLE
+        PLAY_MESSAGE(PLAYER0, SPEECH, 83)
+        NEXT_COMMAND_REUSABLE
+        USE_SPECIAL_INCREASE_LEVEL(PLAYER0, 1)
+        NEXT_COMMAND_REUSABLE
+        SET_FLAG(PLAYER3, FLAG7, 1)
+    ENDIF
+ENDIF
+rem "rem "Bottom right"
+IF_SLAB_OWNER(48, 49, PLAYER0)
+    NEXT_COMMAND_REUSABLE
+    CREATURE_ENTRANCE_LEVEL(PLAYER0, 2)
+    IF(PLAYER3, FLAG7 == 0)
+        NEXT_COMMAND_REUSABLE
+        PLAY_MESSAGE(PLAYER0, SPEECH, 83)
+        NEXT_COMMAND_REUSABLE
+        USE_SPECIAL_INCREASE_LEVEL(PLAYER0, 1)
+        NEXT_COMMAND_REUSABLE
+        SET_FLAG(PLAYER3, FLAG7, 1)
+    ENDIF
+ENDIF
+rem "Bottom left"
+IF_SLAB_OWNER(32, 52, PLAYER0)
+    NEXT_COMMAND_REUSABLE
+    CREATURE_ENTRANCE_LEVEL(PLAYER0, 2)
+    IF(PLAYER3, FLAG7 == 0)
+        NEXT_COMMAND_REUSABLE
+        PLAY_MESSAGE(PLAYER0, SPEECH, 83)
+        NEXT_COMMAND_REUSABLE
+        USE_SPECIAL_INCREASE_LEVEL(PLAYER0, 1)
+        NEXT_COMMAND_REUSABLE
+        SET_FLAG(PLAYER3, FLAG7, 1)
+    ENDIF
+ENDIF
+
+IF(PLAYER3, FLAG7 == 1)
+    DISPLAY_INFORMATION(35, 22)
+    PLAY_MESSAGE(PLAYER0, SOUND, 785)
+ENDIF
+
+rem ---------------------------------------"Player get Random blessings from his Gods"-------------------------------------
+IF(PLAYER2, FLAG1 == 0)
+NEXT_COMMAND_REUSABLE
+SET_TEXTURE(PLAYER1, LAVA_CAVERN)
+NEXT_COMMAND_REUSABLE
+SET_TEXTURE(PLAYER2, SWAMP_SERPENT)
+ENDIF
+IF(PLAYER2, FLAG1 == 1)
+    IF(PLAYER1, FLAG1 == 1)
+        rem change Computer Texture
+        NEXT_COMMAND_REUSABLE
+        SET_TEXTURE(PLAYER1, SNAKE_KEY)
+        NEXT_COMMAND_REUSABLE
+        SET_TEXTURE(PLAYER2, SNAKE_KEY)
+		rem "no more endless respawning enemy creatures"
+        NEXT_COMMAND_REUSABLE
+        SET_FLAG(PLAYER2, FLAG4, 1)
+        NEXT_COMMAND_REUSABLE
+        SET_FLAG(PLAYER3, FLAG4, 1)
+		rem "new entrance creatures for player are stronger, for enemys weaker"
+        NEXT_COMMAND_REUSABLE
+        CREATURE_ENTRANCE_LEVEL(PLAYER0, 6)
+        NEXT_COMMAND_REUSABLE
+        CREATURE_ENTRANCE_LEVEL(PLAYER1, 1)
+        NEXT_COMMAND_REUSABLE
+        CREATURE_ENTRANCE_LEVEL(PLAYER2, 1)
+		rem "disable Keeper Powers for enemys"
+        NEXT_COMMAND_REUSABLE
+        MAGIC_AVAILABLE(PLAYER1, POWER_SPEED, 0, 0)
+        NEXT_COMMAND_REUSABLE
+        MAGIC_AVAILABLE(PLAYER2, POWER_SPEED, 0, 0)
+        NEXT_COMMAND_REUSABLE
+        MAGIC_AVAILABLE(PLAYER1, POWER_PROTECT, 0, 0)
+        NEXT_COMMAND_REUSABLE
+        MAGIC_AVAILABLE(PLAYER2, POWER_PROTECT, 0, 0)
+        IF(PLAYER1, TIMER1 >= 500)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER3, FLAG2, 6)
+            rem "Heal"
+            IF(PLAYER3, FLAG2 == 6)
+                NEXT_COMMAND_REUSABLE
+                USE_SPECIAL_INCREASE_LEVEL(PLAYER0,1)
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[ORC], 1)
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[SPIDER], 1)
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[ORC], 1)
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[SPIDER], 1)
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[ORC], 1)
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[SPIDER], 1)
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[ORC], 1)
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[SPIDER], 1)
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[ORC], 1)
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[SPIDER], 1)
+                rem "Speed"
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[Fly], 1)
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[HELL_HOUND], 1)
+                rem "Invisibilty"
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[TROLL], 1)
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[FLY], 1)
+                rem "Rebound"
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[DARK_MISTRESS], 1)
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[BUG], 1)
+                rem "Armor"
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[BILE_DEMON], 1)
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[BUG], 1)
+                rem "Flight"
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[DEMONSPAWN], 1)
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0, SACRIFICED[FLY], 1)
+            ENDIF
+            NEXT_COMMAND_REUSABLE
+            SET_TIMER(PLAYER1, TIMER1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER2, FLAG1, 0)
+        ENDIF
+    ENDIF
+ENDIF
+
+rem -------------------------------------------------------"or own PLAYER1 the  building?-----------------------------------------
+IF_SLAB_OWNER(35, 36, PLAYER1)
+    rem "rem "Bottom right"
+    IF_SLAB_OWNER(48, 49, PLAYER1)
+        rem "Bottom left"
+        IF_SLAB_OWNER(32, 52, PLAYER1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER3, FLAG1, 1)
+        ENDIF
+    ENDIF
+ENDIF
+
+rem ----------------------------------------------"PLAYER1 get regulary heals and speed from his God"------------------------------------
+SET_TIMER(PLAYER0, TIMER1)
+IF(PLAYER3, FLAG1 == 1)
+    IF(PLAYER1, FLAG1 == 1)
+        rem Prayer Sound
+        IF(PLAYER2, TIMER6 >= 120)
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, 155)
+            NEXT_COMMAND_REUSABLE
+            SET_TIMER(PLAYER2, TIMER6)
+        ENDIF
+        IF(PLAYER0, TIMER1 >= 400)
+            rem"3xHeal"
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER1, SACRIFICED[ORC], 1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER1, SACRIFICED[SPIDER], 1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER1, SACRIFICED[ORC], 1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER1, SACRIFICED[SPIDER], 1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER1, SACRIFICED[ORC], 1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER1, SACRIFICED[SPIDER], 1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER1, SACRIFICED[ORC], 1)
+            rem"speed"
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER1, SACRIFICED[SPIDER], 1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER1, SACRIFICED[Fly], 1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER1, SACRIFICED[HELL_HOUND], 1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER3, FLAG1, 0)
+            NEXT_COMMAND_REUSABLE
+            SET_TIMER(PLAYER0, TIMER1)
+        ENDIF
+    ENDIF
+ENDIF
+
+rem ----------------------------------------------------------"or own PLAYER2 the  building?----------------------------------------
+
+rem "Bottom left"
+IF_SLAB_OWNER(35, 36, PLAYER2)
+    rem "rem "Bottom right"
+    IF_SLAB_OWNER(48, 49, PLAYER2)
+        rem "Bottom left"
+        IF_SLAB_OWNER(32, 52, PLAYER2)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER2, FLAG2, 1)
+        ENDIF
+    ENDIF
+ENDIF
+
+rem ---------------------------------------------------"PLAYER2 get regulary armors from his God"-------------------------------
+SET_TIMER(PLAYER3, TIMER0)
+IF(PLAYER2, FLAG2 == 1)
+    IF(PLAYER1, FLAG1 == 1)
+        rem Prayer Sound
+        IF(PLAYER2, TIMER6 >= 120)
+            NEXT_COMMAND_REUSABLE
+            PLAY_MESSAGE(PLAYER0, SOUND, 155)
+            NEXT_COMMAND_REUSABLE
+            SET_TIMER(PLAYER2, TIMER6)
+        ENDIF
+        IF(PLAYER3, TIMER0 >= 350)
+            rem "Armor"
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER2, SACRIFICED[BILE_DEMON], 1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER2, SACRIFICED[BUG], 1)
+            rem "Rebound"
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER2, SACRIFICED[DARK_MISTRESS], 1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER2, SACRIFICED[BUG], 1)
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER2, FLAG2, 0)
+            NEXT_COMMAND_REUSABLE
+            SET_TIMER(PLAYER3, TIMER0)
+        ENDIF
+    ENDIF
+ENDIF
+rem----------------------------------------------------------------"Fog of War settings"----------------------------------------------------
+rem "Conceal the complete Map for Player"
+CONCEAL_MAP_RECT(PLAYER0, 127, 127, 248, 248, 1)
+
+rem "left Heart"
+REVEAL_MAP_RECT(PLAYER0, 34, 180, 60, 146)
+CONCEAL_MAP_RECT(PLAYER0, 34, 180, 60, 146, 0)
+rem "left Hero"
+REVEAL_MAP_RECT(PLAYER0, 25, 109, 43, 18)
+CONCEAL_MAP_RECT(PLAYER0, 25, 109, 43, 18, 0)
+rem " bottom Heart"
+REVEAL_MAP_RECT(PLAYER0, 81, 219, 93, 61)
+CONCEAL_MAP_RECT(PLAYER0, 81, 219, 93, 61, 0)
+rem "bottom Step"
+REVEAL_MAP_RECT(PLAYER0, 129, 228, 9, 49)
+CONCEAL_MAP_RECT(PLAYER0, 129, 228, 9, 49, 0)
+rem "bottom Hero2"
+REVEAL_MAP_RECT(PLAYER0, 136, 240, 21, 21)
+CONCEAL_MAP_RECT(PLAYER0, 136, 240, 21, 21, 0)
+
+rem---------------------------------------------------------------"Victory Condition"------------------------------------------
+RUN_AFTER_VICTORY(1)
+
+IF(PLAYER0, KEEPERS_DESTROYED == 1)
+    DISPLAY_INFORMATION(37, ALL_PLAYERS)
+    PLAY_MESSAGE(PLAYER0, SOUND, 777)
+ENDIF
+
+IF(PLAYER0, ALL_DUNGEONS_DESTROYED == 1)
+    ROOM_AVAILABLE(ALL_PLAYERS, BRIDGE, 1, 1)
+    DISPLAY_OBJECTIVE(38, ALL_PLAYERS)
+    PLAY_MESSAGE(PLAYER0, SOUND, 777)
+    WIN_GAME
+    SET_TIMER(PLAYER0, TIMER3)
+ENDIF
+
+rem-----------------------------------------------------------"Epilog"-------------------------------------------------------------
+IF(PLAYER0, TIMER3 >= 500)
+    SET_TIMER(PLAYER3, TIMER6)
+ENDIF
+IF(PLAYER3, TIMER6 >= 120)
+    DISPLAY_OBJECTIVE(39, ALL_PLAYERS)
+    NEXT_COMMAND_REUSABLE
+    PLAY_MESSAGE(PLAYER0, SOUND, 156)
+    NEXT_COMMAND_REUSABLE
+    SET_TIMER(PLAYER3, TIMER6)
+ENDIF

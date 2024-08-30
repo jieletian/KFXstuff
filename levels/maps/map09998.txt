@@ -1,0 +1,92 @@
+REM ****************************************************************************
+REM  即时战略游戏《地下城守护者1》复刻版整合项目的战役
+REM ***************************************************************************
+REM  战役名: 更深的地下城
+REM  作者：基于牛蛙脚本
+REM  地下城守护者爱好者 CCP 团队
+REM  版权:
+REM   此脚本是免费的；你可以重新发布和/或修改它， 根据自由软件基金会公布的GNU
+REM   通用公共许可证条款；许可证的版本2，或由你选择的任何后期版本。
+REM ****************************************************************************
+REM  更深地下城之脚本，地图名：传送专用地图
+REM  日期: 
+REM ****************************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、地下城守护者FX 0.49版（2020年12月25日）by 田杰乐
+REM 2、可传送怪物的地图。
+REM 3、游戏交流请加群：1128460424。
+REM 4、 。
+REM 5、 。
+REM ****************************************************************************
+
+REM ****************************胜利/失败条件**********************************
+
+           REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+           START_MONEY(PLAYER0,2020122549)
+
+            ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+            ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+            ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+            ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+            ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+            ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+            ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+            ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+            ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+            ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+            ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+            ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+            ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+            ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+            
+            MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+            MAGIC_AVAILABLE(PLAYER0,POWER_SIGHT,1,1)
+            MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1)
+            MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+            MAGIC_AVAILABLE(PLAYER0,POWER_OBEY,1,1)
+            MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+            MAGIC_AVAILABLE(PLAYER0,POWER_CONCEAL,1,1)
+            MAGIC_AVAILABLE(PLAYER0,POWER_HOLD_AUDIENCE,1,1)
+            MAGIC_AVAILABLE(PLAYER0,POWER_CAVE_IN,1,1)
+            MAGIC_AVAILABLE(PLAYER0,POWER_LIGHTNING,1,1)
+            MAGIC_AVAILABLE(PLAYER0,POWER_CHICKEN,1,1)
+            MAGIC_AVAILABLE(PLAYER0,POWER_PROTECT,1,1)
+            MAGIC_AVAILABLE(PLAYER0,POWER_DISEASE,1,1)
+            MAGIC_AVAILABLE(PLAYER0,POWER_ARMAGEDDON,1,1)
+            MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+            DOOR_AVAILABLE(PLAYER0,WOOD,1,0)
+            DOOR_AVAILABLE(PLAYER0,BRACED,1,0)
+            DOOR_AVAILABLE(PLAYER0,STEEL,1,0)
+            DOOR_AVAILABLE(PLAYER0,MAGIC,1,0)
+            TRAP_AVAILABLE(PLAYER0,ALARM,1,0)
+            TRAP_AVAILABLE(PLAYER0,POISON_GAS,1,0)
+            TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+            TRAP_AVAILABLE(PLAYER0,LAVA,1,0)
+            TRAP_AVAILABLE(PLAYER0,WORD_OF_POWER,1,0)
+            TRAP_AVAILABLE(PLAYER0,BOULDER,1,0)
+
+	  SET_CREATURE_HEALTH(BILE_DEMON,4000)
+	SET_CREATURE_STRENGTH(BILE_DEMON,130)
+	SET_CREATURE_ARMOUR(BILE_DEMON,130)
+
+	SET_CREATURE_HEALTH(AVATAR,9999)
+	SET_CREATURE_ARMOUR(AVATAR,255)
+
+IF(PLAYER0,DUNGEON_DESTROYED == 1)
+    LOSE_GAME
+ENDIF
+
+IF(PLAYER0,GAME_TURN >= 10000)
+	WIN_GAME
+ENDIF
+
+REM ****************************参考提示信息**********************************
+
+QUICK_OBJECTIVE(1,"地下城守护者FX 0.49版 （2020年12月25日）by 田杰乐；游戏交流请加群：1128460424；从这里传送一只怪物到下一个王国吧！",PLAYER0)  
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00222
+REM Automatically generated on 06 Sep 2009, 03:44:53
+
+LEVEL_VERSION(0,1,0)
+LEVEL_TIMESTAMP(1252141926,1252201493)
+USER_COMMANDS_COUNT(0,0,0,0)
+LEVEL_DESCRIPTION("Enemy Shogun is at hand. You must seek him out and eliminate. Do not disapoint your master.")
+LEVEL_AUTHORS("Joachim Zielinski","")

@@ -1,0 +1,14 @@
+Name: Watergate 1.1.0
+Author: Anonymous, Created on 05 Nov 2001
+Keepers: Red, Blue, Green, Yellow, White
+Pool: Wizard, Barbarian, Archer, Monk, Dwarf, Knight
+  Avatar, Tunneller, Witch, Giant, Fairy, Thief, Samurai
+  Horned Reaper, Skeleton, Troll, Dragon, Demon Spawn
+  Fly, Dark Mistress, Warlock, Bile Demon, Beetle, Vampire
+  Spider, Hell Hound, Ghost, Tentacle, Orc
+Objects on map:
+Creatures: 120, Traps: 7, Doors: 12, Items: 343
+Dungeon hearts: 5, Hero gates: 0, Special Boxes: 7
+Description:
+  4 Enemies, mostly ai fighting. Published by
+  Oetelaer.

@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00240
+REM Automatically generated on 19 Aug 2008, 08:06:44
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(888176884,1219126004)
+USER_COMMANDS_COUNT(457,10,0,4)
+LEVEL_DESCRIPTION("1-player level for Dungeon Keeper (to be played as a 1-player multiplayer level) made using UnDed. Build a dungeon, and defeat the enemy!")
+LEVEL_AUTHORS("Dayo Kay","")

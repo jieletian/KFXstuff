@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00805
+REM Automatically generated on 22 Aug 2008, 05:53:25
+
+LEVEL_VERSION(1,0,2)
+LEVEL_TIMESTAMP(899321872,1219377205)
+USER_COMMANDS_COUNT(18,2,0,0)
+LEVEL_DESCRIPTION("The Dwarven gold mines of the Farl Thorga Mountains have for many centuries provided the land above with riches beyond belief. Those riches could be yours master, that is if you can exterminate the dwarven infestation.")
+LEVEL_AUTHORS("Steve Tupper","")

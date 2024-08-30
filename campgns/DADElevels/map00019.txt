@@ -1,0 +1,270 @@
+rem 19 level/Portal
+
+if(player0,game_turn >= 10)
+ quick_objective(1,"马德尔已经逃往另一个世界，但他的传送门仍然处于活动状态。任务很（不）简单，在马德尔关闭传送门之前占领传送门，不要失去我们的盟友，包括那只青蛙。请记住，你只有相当于10个发薪日的时间。",player0)
+ magic_available(player4,power_imp,0,0)
+endif
+
+computer_player(player4,10)
+computer_player(player5,10)
+
+ally_players(player0,player4)
+ally_players(player0,player5)
+ally_players(player4,player5)
+
+set_generate_speed(100)
+rem Jaba
+set_creature_armour(demonspawn,150)
+set_creature_strength(demonspawn,150)
+set_creature_health(demonspawn,2500)
+set_creature_max_level(player0,demonspawn,10)
+rem Gardu
+set_creature_armour(knight,250)
+set_creature_strength(knight,200)
+set_creature_health(knight,3200)
+rem Mr. Purple
+set_creature_armour(avatar,250)
+set_creature_strength(avatar,200)
+set_creature_health(avatar,3200)
+
+set_creature_armour(troll,100)
+set_creature_strength(troll,120)
+set_creature_health(troll,2000)
+set_creature_armour(orc,100)
+set_creature_strength(orc,150)
+set_creature_health(orc,2000)
+set_creature_armour(vampire,100)
+set_creature_strength(vampire,100)
+set_creature_health(vampire,1200)
+set_creature_armour(horny,30)
+set_creature_strength(horny,200)
+set_creature_health(horny,1000)
+set_creature_armour(time_mage,100)
+set_creature_health(time_mage,800)
+set_creature_armour(hell_hound,30)
+set_creature_strength(hell_hound,120)
+set_creature_health(hell_hound,1400)
+set_creature_armour(giant,50)
+set_creature_strength(giant,180)
+set_creature_health(giant,2400)
+set_creature_armour(dragon,140)
+set_creature_strength(dragon,100)
+set_creature_health(dragon,2000)
+
+rem player5/Gardu
+start_money(player5,6000000)
+max_creatures(player5,20)
+add_creature_to_pool(samurai,10)
+add_creature_to_pool(archer,10)
+add_creature_to_pool(barbarian,10)
+add_creature_to_pool(monk,10)
+add_creature_to_pool(giant,10)
+creature_available(player5,samurai,1,1)
+set_creature_armour(samurai,50)
+set_creature_strength(samurai,180)
+set_creature_health(samurai,2400)
+creature_available(player5,archer,1,1)
+set_creature_armour(archer,50)
+set_creature_strength(archer,180)
+set_creature_health(archer,2400)
+creature_available(player5,barbarian,1,1)
+set_creature_armour(barbarian,50)
+set_creature_strength(barbarian,180)
+set_creature_health(barbarian,2400)
+creature_available(player5,monk,1,1)
+set_creature_armour(monk,50)
+set_creature_strength(monk,180)
+set_creature_health(monk,2400)
+creature_available(player5,giant,1,1)
+
+rem player4/Mr. Purple
+start_money(player4,6000000)
+max_creatures(player4,20)
+add_creature_to_pool(druid,30)
+add_creature_to_pool(skeleton,30)
+add_creature_to_pool(wizard,10)
+add_creature_to_pool(tunneller,10)
+creature_available(player4,druid,1,1)
+set_creature_armour(druid,50)
+set_creature_strength(druid,100)
+set_creature_health(druid,1000)
+creature_available(player4,skeleton,1,1)
+set_creature_armour(skeleton,50)
+set_creature_strength(skeleton,180)
+set_creature_health(skeleton,1000)
+creature_available(player4,wizard,1,1)
+set_creature_health(wizard,1000)
+creature_available(player4,tunneller,1,1)
+set_creature_armour(tunneller,50)
+set_creature_strength(tunneller,80)
+set_creature_health(tunneller,1000)
+
+rem player0
+start_money(player0,50000)
+max_creatures(player0,30)
+add_creature_to_pool(fly,15)
+add_creature_to_pool(tentacle,15)
+add_creature_to_pool(sorceror,15)
+add_creature_to_pool(dark_mistress,15)
+add_creature_to_pool(dwarfa,15)
+add_creature_to_pool(bile_demon,15)
+add_creature_to_pool(witch,15)
+add_creature_to_pool(fairy,15)
+creature_available(player0,fly,1,1)
+creature_available(player0,tentacle,1,1)
+creature_available(player0,sorceror,1,1)
+creature_available(player0,dark_mistress,1,1)
+creature_available(player0,dwarfa,1,1)
+creature_available(player0,bile_demon,1,1)
+creature_available(player0,druid,1,1)
+creature_available(player0,witch,1,1)
+creature_available(player0,fairy,1,1)
+
+room_available(all_players,treasure,1,1)
+room_available(all_players,lair,1,1)
+room_available(all_players,garden,1,1)
+room_available(all_players,training,1,1)
+room_available(all_players,research,1,1)
+room_available(all_players,guard_post,1,0)
+room_available(all_players,workshop,1,0)
+room_available(all_players,prison,1,0)
+room_available(all_players,torture,1,0)
+room_available(all_players,barracks,1,0)
+room_available(all_players,temple,1,0)
+room_available(all_players,graveyard,1,0)
+room_available(all_players,scavenger,1,0)
+
+magic_available(all_players,power_imp,1,1)
+magic_available(all_players,power_call_to_arms,1,0)
+magic_available(all_players,power_hold_audience,1,0)
+magic_available(all_players,power_cave_in,1,0)
+magic_available(all_players,power_protect,1,0)
+magic_available(all_players,power_chicken,1,0)
+magic_available(all_players,power_lightning,1,0)
+magic_available(all_players,power_disease,1,0)
+magic_available(all_players,power_heal_creature,1,0)
+magic_available(all_players,power_destroy_walls,1,0)
+magic_available(all_players,power_sight,1,0)
+magic_available(all_players,power_obey,1,0)
+magic_available(all_players,power_speed,1,0)
+magic_available(all_players,power_conceal,1,0)
+
+trap_available(all_players,boulder,1,0)
+trap_available(all_players,lava,1,0)
+trap_available(all_players,word_of_power,1,0)
+trap_available(all_players,lightning,1,0)
+door_available(all_players,magic,1,0)
+
+create_party(hor)
+	add_to_party(hor,horny,10,0,attack_enemies,0)
+	add_to_party(hor,horny,10,0,attack_enemies,0)
+	add_to_party(hor,horny,10,0,attack_enemies,0)
+	add_to_party(hor,horny,10,0,attack_enemies,0)
+	
+create_party(ligh)
+	add_to_party(ligh,time_mage,10,0,attack_enemies,0)
+	add_to_party(ligh,time_mage,10,0,attack_enemies,0)
+	add_to_party(ligh,time_mage,10,0,attack_enemies,0)
+	add_to_party(ligh,time_mage,10,0,attack_enemies,0)
+	add_to_party(ligh,time_mage,10,0,attack_enemies,0)
+	add_to_party(ligh,time_mage,10,0,attack_enemies,0)
+	
+create_party(lighst)
+	add_to_party(lighst,time_mage,10,0,steal_spells,0)
+	add_to_party(lighst,time_mage,10,0,steal_spells,0)
+	add_to_party(lighst,time_mage,10,0,steal_spells,0)
+	add_to_party(lighst,time_mage,10,0,steal_spells,0)
+	add_to_party(lighst,time_mage,10,0,steal_spells,0)
+	add_to_party(lighst,time_mage,10,0,steal_spells,0)
+	
+create_party(destr)
+	add_to_party(destr,troll,10,0,attack_rooms,0)
+	add_to_party(destr,troll,10,0,attack_rooms,0)
+	add_to_party(destr,troll,10,0,attack_rooms,0)
+	add_to_party(destr,troll,10,0,attack_rooms,0)
+	add_to_party(destr,giant,10,0,attack_rooms,0)
+	add_to_party(destr,giant,10,0,attack_rooms,0)
+	
+create_party(kilo)
+	add_to_party(kilo,horny,10,0,attack_enemies,0)
+	add_to_party(kilo,giant,10,0,attack_enemies,0)
+	add_to_party(kilo,giant,10,0,attack_enemies,0)
+	add_to_party(kilo,giant,10,0,attack_enemies,0)
+	add_to_party(kilo,giant,10,0,attack_enemies,0)
+	add_to_party(kilo,giant,10,0,attack_enemies,0)
+
+if(player_good,dungeon_destroyed == 1)
+ room_available(player0,bridge,1,1)
+ add_party_to_level(player_good,hor,1,1)
+ add_party_to_level(player_good,ligh,1,1)
+ add_party_to_level(player_good,kilo,1,1)
+endif
+
+if(player_good,entrance == 0)
+ add_party_to_level(player_good,hor,1,1)
+ add_party_to_level(player_good,hor,1,1)
+ add_party_to_level(player_good,kilo,1,1)
+endif
+
+if_action_point(1,player0)
+ add_party_to_level(player_good,ligh,1,1)
+ add_party_to_level(player_good,lighst,1,1)
+endif
+
+if(player_good,barracks == 0)
+ add_party_to_level(player_good,ligh,-4,1)
+ add_party_to_level(player_good,lighst,-3,1)
+ add_party_to_level(player_good,lighst,-2,1)
+ add_party_to_level(player_good,destr,-3,1)
+ add_party_to_level(player_good,destr,-2,1)
+ add_party_to_level(player_good,ligh,-1,1)
+endif
+
+if(player_good,scavenger == 0)
+ add_party_to_level(player_good,ligh,-4,1)
+ add_party_to_level(player_good,lighst,-3,1)
+ add_party_to_level(player_good,lighst,-2,1)
+ add_party_to_level(player_good,destr,-3,1)
+ add_party_to_level(player_good,destr,-2,1)
+ add_party_to_level(player_good,ligh,-1,1)
+endif
+
+if(player0,money >= 111111)
+ set_creature_armour(demonspawn,200)
+ set_creature_strength(demonspawn,200)
+ set_creature_health(demonspawn,3500)
+endif
+
+if(player_good,temple == 0)
+ if(player_good,entrance == 0)
+   win_game
+ endif
+endif
+
+if(player0,dungeon_destroyed == 1)
+ lose_game
+endif
+
+if(player0,demonspawn == 0)
+ lose_game
+endif
+
+if(player0,game_turn >= 100000)
+ lose_game
+endif
+
+if(player0,game_turn >= 50000)
+   quick_objective(2,"你的时间已经过去了一半。",1)
+endif
+
+if(player0,game_turn >= 90000)
+   quick_objective(3,"你快没有时间了！快一点吧！",1)
+endif
+
+if(player4,dungeon_destroyed == 1)
+ lose_game
+endif
+
+if(player5,dungeon_destroyed == 1)
+ lose_game
+endif

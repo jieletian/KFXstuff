@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00406
+REM Automatically generated on 21 Aug 2008, 04:19:36
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(977922868,1219285176)
+USER_COMMANDS_COUNT(23,2,0,0)
+LEVEL_DESCRIPTION("Find your rooms yourself. Treasure room will not be enough, to survive this realm. Don't worry, all rooms will become available, if you search well. You might have problems, making a start though.")
+LEVEL_AUTHORS("Oetelaer","")

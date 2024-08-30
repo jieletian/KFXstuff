@@ -1,0 +1,233 @@
+REM Level 15/Advisor
+
+set_generate_speed(150)
+
+set_creature_armour(samurai,180)
+set_creature_strength(samurai,220)
+set_creature_health(samurai,1500)
+
+set_creature_armour(time_mage,240)
+set_creature_strength(time_mage,200)
+set_creature_health(time_mage,4333)
+
+set_creature_strength(skeleton,150)
+
+max_creatures(player0,30)
+max_creatures(player3,10)
+max_creatures(player6,10)
+max_creatures(player4,30)
+
+computer_player(player3,8)
+computer_player(player6,9)
+computer_player(player4,10)
+
+ally_players(player0,player4)
+ally_players(player3,player6)
+ally_players(player3,player_good)
+ally_players(player6,player_good)
+
+start_money(player0,20000)
+start_money(player3,6000000)
+start_money(player6,6000000)
+start_money(player4,6000000)
+
+add_creature_to_pool(troll,16)
+add_creature_to_pool(orc,16)
+add_creature_to_pool(dwarfa,16)
+add_creature_to_pool(druid,12)
+creature_available(player6,troll,1,1)
+creature_available(player6,orc,1,1)
+creature_available(player6,druid,1,1)
+
+add_creature_to_pool(hell_hound,12)
+add_creature_to_pool(dragon,12)
+add_creature_to_pool(sorceror,12)
+add_creature_to_pool(bile_demon,12)
+add_creature_to_pool(troll,16)
+add_creature_to_pool(tentacle,12)
+creature_available(player0,hell_hound,1,1)
+creature_available(player0,dragon,1,1)
+creature_available(player0,sorceror,1,1)
+creature_available(player0,troll,1,1)
+creature_available(player0,orc,1,1)
+creature_available(player0,bile_demon,1,1)
+creature_available(player0,dwarfa,1,1)
+creature_available(player0,tentacle,1,1)
+
+add_creature_to_pool(vampire,12)
+add_creature_to_pool(dark_mistress,12)
+add_creature_to_pool(skeleton,12)
+creature_available(player3,vampire,1,1)
+creature_available(player3,dark_mistress,1,1)
+creature_available(player3,skeleton,1,1)
+
+add_creature_to_pool(samurai,1)
+add_creature_to_pool(tunneller,6)
+creature_available(player4,samurai,1,1)
+creature_available(player4,druid,1,1)
+creature_available(player4,tunneller,1,1)
+creature_available(player4,skeleton,1,1)
+
+room_available(player0,treasure,1,1)
+room_available(player0,lair,1,1)
+room_available(player0,garden,1,1)
+room_available(player0,training,1,1)
+room_available(player0,research,1,1)
+room_available(player0,guard_post,1,0)
+room_available(player0,workshop,1,0)
+room_available(player0,prison,1,0)
+room_available(player0,torture,1,0)
+room_available(player0,barracks,1,0)
+room_available(player0,temple,1,0)
+room_available(player0,graveyard,1,0)
+
+magic_available(player0,power_imp,1,1)
+magic_available(player0,power_call_to_arms,1,0)
+magic_available(player0,power_hold_audience,1,0)
+magic_available(player0,power_cave_in,1,0)
+magic_available(player0,power_heal_creature,1,0)
+magic_available(all_players,power_protect,1,0)
+magic_available(player3,power_chicken,1,0)
+magic_available(player6,power_lightning,1,0)
+magic_available(player4,power_lightning,1,0)
+
+trap_available(all_players,word_of_power,1,0)
+trap_available(all_players,lightning,1,0)
+trap_available(all_players,boulder,1,0)
+door_available(all_players,steel,1,0)
+door_available(all_players,magic,1,0)
+
+create_party(kain)
+	add_to_party(kain,witch,10,0,attack_enemies,3000)
+	add_to_party(kain,witch,10,0,attack_enemies,3000)
+	add_to_party(kain,witch,10,0,attack_enemies,3000)
+	add_to_party(kain,witch,10,0,attack_enemies,3000)
+	add_to_party(kain,witch,10,0,attack_enemies,3000)
+	
+create_party(awwiwi)
+	add_to_party(awwiwi,avatar,9,0,steal_spells,3000)
+	add_to_party(awwiwi,witch,8,0,steal_spells,1000)
+	add_to_party(awwiwi,witch,8,0,steal_spells,1000)
+	add_to_party(awwiwi,witch,8,0,steal_spells,1000)
+	add_to_party(awwiwi,witch,8,0,steal_spells,1000)
+	
+create_party(gigi)
+	add_to_party(gigi,giant,9,0,attack_rooms,0)
+	add_to_party(gigi,giant,9,0,attack_rooms,0)
+	add_to_party(gigi,giant,9,0,attack_rooms,0)
+	add_to_party(gigi,giant,9,0,attack_rooms,0)
+	add_to_party(gigi,giant,9,0,attack_rooms,0)
+	add_to_party(gigi,giant,9,0,attack_rooms,0)
+	
+create_party(drudra)
+	add_to_party(drudra,druid,9,0,steal_spells,3000)
+	add_to_party(drudra,druid,9,0,steal_spells,3000)
+	add_to_party(drudra,dragon,10,0,steal_gold,0)
+	add_to_party(drudra,dragon,10,0,steal_gold,0)
+	add_to_party(drudra,dragon,10,0,steal_gold,0)
+	
+create_party(skel)
+	add_to_party(skel,skeleton,10,0,attack_enemies,0)
+	add_to_party(skel,skeleton,10,0,attack_enemies,0)
+	add_to_party(skel,skeleton,10,0,attack_enemies,0)
+	add_to_party(skel,skeleton,10,0,attack_enemies,0)
+	add_to_party(skel,skeleton,10,0,attack_enemies,0)
+	
+create_party(arthi)
+	add_to_party(arthi,thief,6,0,steal_gold,1000)
+	add_to_party(arthi,thief,6,0,steal_gold,1000)
+	add_to_party(arthi,thief,6,0,steal_gold,1000)
+	add_to_party(arthi,archer,7,0,attack_enemies,500)
+	add_to_party(arthi,archer,7,0,attack_enemies,500)	
+	add_to_party(arthi,archer,7,0,attack_enemies,500)	
+	
+create_party(gibarb)
+	add_to_party(gibarb,giant,8,0,attack_rooms,0)
+	add_to_party(gibarb,giant,8,0,attack_rooms,0)
+	add_to_party(gibarb,giant,8,0,attack_rooms,0)
+	add_to_party(gibarb,barbarian,9,0,attack_rooms,1200)
+	add_to_party(gibarb,barbarian,9,0,attack_rooms,1200)
+	add_to_party(gibarb,barbarian,9,0,attack_rooms,1200)
+
+create_party(conc)
+	add_to_party(conc,wizard,9,0,steal_spells,0)
+	add_to_party(conc,wizard,9,0,steal_spells,0)
+	add_to_party(conc,sorceror,9,0,steal_spells,0)
+	add_to_party(conc,sorceror,9,0,steal_spells,0)
+	add_to_party(conc,fairy,10,0,steal_spells,0)
+	add_to_party(conc,fairy,10,0,steal_spells,0)
+	
+create_party(kniny)
+	add_to_party(kniny,knight,9,0,attack_enemies,30000)
+	add_to_party(kniny,knight,9,0,attack_enemies,30000)
+	add_to_party(kniny,knight,9,0,attack_enemies,30000)
+	add_to_party(kniny,horny,10,0,attack_enemies,10000)
+	add_to_party(kniny,horny,10,0,attack_enemies,10000)
+	add_to_party(kniny,horny,10,0,attack_enemies,10000)
+	
+create_party(pesda)
+	add_to_party(pesda,hell_hound,7,0,attack_enemies,0)
+	add_to_party(pesda,hell_hound,7,0,attack_enemies,0)
+	add_to_party(pesda,hell_hound,7,0,attack_enemies,0)
+	add_to_party(pesda,hell_hound,7,0,attack_enemies,0)
+	
+if_action_point(1,player0)
+ quick_information(1,"你的伙伴已经试图杀死凯恩的追随者。你暂时不必帮助他，但不要让他死。")
+ add_party_to_level(player_good,arthi,2,1)
+ add_party_to_level(player_good,arthi,2,1)
+ add_party_to_level(player_good,arthi,2,1)
+ add_party_to_level(player_good,arthi,2,1)
+ add_party_to_level(player_good,gibarb,3,1)
+ add_party_to_level(player_good,pesda,4,1)
+ add_party_to_level(player_good,pesda,4,1)
+ add_party_to_level(player_good,pesda,4,1)
+ add_party_to_level(player_good,conc,-6,1)
+ add_party_to_level(player_good,conc,-6,1)
+endif
+
+if_action_point(4,player0)
+ quick_objective(2,"凯恩就躲在这附近的某个地方。他用尽最后一丝力量来保护自己。",4)
+ add_party_to_level(player_good,gigi,-2,1)
+ add_party_to_level(player_good,skel,-3,1)
+ add_party_to_level(player_good,skel,-3,1)
+ add_party_to_level(player_good,drudra,-4,1)
+ add_party_to_level(player_good,drudra,-4,1)
+ add_party_to_level(player_good,kain,-5,1)
+ add_party_to_level(player_good,awwiwi,-5,1)
+ add_party_to_level(player_good,awwiwi,-5,1)
+ add_party_to_level(player_good,awwiwi,-5,1)
+ add_party_to_level(player_good,awwiwi,-5,1)
+endif
+
+if_action_point(5,player0)
+ quick_information(3,"凯恩的金库就在这里。我想现在金库就是你的了，只要除掉守卫就行了。")
+ add_party_to_level(player_good,kniny,5,1)
+endif
+
+if(player0,game_turn >= 10)
+ quick_objective(4,"马德尔最亲密的顾问凯恩在这片土地上避难。他的两条忠实的狗帮助了他。在这场战斗中，你也会有一位盟友。不要让他离你而去！",player0)
+endif
+
+if(player_good,scavenger == 0)
+ room_available(player0,scavenger,1,1)
+endif
+	
+if(player3,dungeon_destroyed == 1)
+ if(player6,dungeon_destroyed == 1)
+  room_available(player0,bridge,1,1)
+  if_action_point(4,player0)
+   if(player_good,time_mage == 0)
+   quick_objective(5,"成功了，太棒了！",player0)
+   win_game
+   endif
+  endif
+ endif
+endif
+
+if(player0,dungeon_destroyed == 1)
+ lose_game
+endif
+
+if(player4,dungeon_destroyed == 1)
+ lose_game
+endif

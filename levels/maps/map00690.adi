@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00321
+REM Automatically generated on 19 Aug 2008, 21:14:31
+
+LEVEL_VERSION(1,2,2)
+LEVEL_TIMESTAMP(896716096,1219173271)
+USER_COMMANDS_COUNT(116,4,0,0)
+LEVEL_DESCRIPTION("My Second Level for DK. I've managed to do some intresting things. I can't really go into Detail coz I'll ruin some of the surprises.")
+LEVEL_AUTHORS("Mark Nash","")

@@ -1,0 +1,202 @@
+REM **************************************************************************************
+REM
+REM Script for Rangex Level (easier version) - by Rangex :-)        10.01.2004
+REM
+REM **************************************************************************************
+
+
+SET_GENERATE_SPEED(500)
+MAX_CREATURES(PLAYER0,15)
+MAX_CREATURES(PLAYER1,50)
+START_MONEY(PLAYER0,20000)
+START_MONEY(PLAYER1,40000)
+
+ADD_CREATURE_TO_POOL(SORCEROR,30)
+ADD_CREATURE_TO_POOL(BILE_DEMON,30)
+ADD_CREATURE_TO_POOL(DARK_MISTRESS,30)
+ADD_CREATURE_TO_POOL(TROLL,20)
+ADD_CREATURE_TO_POOL(BUG,20)
+ADD_CREATURE_TO_POOL(SPIDER,20)
+ADD_CREATURE_TO_POOL(FLY,20)
+ADD_CREATURE_TO_POOL(ORC,20)
+ADD_CREATURE_TO_POOL(DRAGON,30)
+
+CREATURE_AVAILABLE(ALL_PLAYERS,TROLL,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,DARK_MISTRESS,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,SORCEROR,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,BILE_DEMON,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,DRAGON,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,VAMPIRE,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,ORC,1,1)
+CREATURE_AVAILABLE(PLAYER0,BUG,1,1)
+CREATURE_AVAILABLE(PLAYER0,SPIDER,1,1)
+CREATURE_AVAILABLE(PLAYER0,FLY,1,1)
+
+ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,WORKSHOP,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,BARRACKS,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,BRIDGE,1,0)
+ROOM_AVAILABLE(PLAYER1,PRISON,1,0)
+ROOM_AVAILABLE(PLAYER1,TORTURE,1,0)
+ROOM_AVAILABLE(PLAYER1,TEMPLE,1,0)
+ROOM_AVAILABLE(PLAYER1,GRAVEYARD,1,0)
+
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+MAGIC_AVAILABLE(PLAYER1,POWER_SIGHT,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CALL_TO_ARMS,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_HEAL_CREATURE,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_SPEED,1,1)
+MAGIC_AVAILABLE(PLAYER1,POWER_LIGHTNING,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_PROTECT,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CONCEAL,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_DISEASE,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_CAVE_IN,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_CHICKEN,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HOLD_AUDIENCE,1,0)
+
+DOOR_AVAILABLE(ALL_PLAYERS,WOOD,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,BRACED,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,STEEL,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,MAGIC,1,0)
+
+TRAP_AVAILABLE(ALL_PLAYERS,POISON_GAS,1,0)
+TRAP_AVAILABLE(ALL_PLAYERS,ALARM,1,0)
+TRAP_AVAILABLE(ALL_PLAYERS,LIGHTNING,1,0)
+TRAP_AVAILABLE(ALL_PLAYERS,WORD_OF_POWER,1,0)
+
+
+
+CREATE_PARTY(PARTY1)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY1,FLY,10,0,ATTACK_ENEMIES,0)
+
+CREATE_PARTY(PARTY2)
+    ADD_TO_PARTY(PARTY2,KNIGHT,5,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY2,KNIGHT,5,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY2,KNIGHT,5,0,ATTACK_ENEMIES,0)
+
+CREATE_PARTY(PARTY3)
+    ADD_TO_PARTY(PARTY3,KNIGHT,7,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY3,KNIGHT,7,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY3,KNIGHT,7,0,ATTACK_ENEMIES,0)
+
+CREATE_PARTY(PARTY4)
+    ADD_TO_PARTY(PARTY4,AVATAR,5,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY4,AVATAR,7,0,ATTACK_ENEMIES,0)
+
+CREATE_PARTY(PARTY5)
+    ADD_TO_PARTY(PARTY5,KNIGHT,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY5,KNIGHT,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY5,KNIGHT,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY5,KNIGHT,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY5,KNIGHT,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY5,KNIGHT,10,0,ATTACK_ENEMIES,0)
+
+CREATE_PARTY(PARTY6)
+    ADD_TO_PARTY(PARTY6,HORNY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY6,HORNY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY6,HORNY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY6,HORNY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY6,HORNY,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY6,HORNY,10,0,ATTACK_ENEMIES,0)
+
+CREATE_PARTY(PARTY7)
+    ADD_TO_PARTY(PARTY7,AVATAR,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY7,AVATAR,10,0,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(PARTY7,AVATAR,10,0,ATTACK_ENEMIES,0)
+
+
+
+IF_ACTION_POINT(1,PLAYER0)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,2,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,3,1)
+QUICK_INFORMATION(11,"Trafiles do gniazda olbrzymich, krwiozerczych much! To z pewnoscia mutanty, natchnione diabelska magia Rangexa. Nie lekcewaz czarnoksieskiej potegi swego oponenta! Kto wie, co jeszcze ma w zanadrzu?")
+ENDIF
+
+IF_ACTION_POINT(4,PLAYER0)
+QUICK_INFORMATION(2,"Miej sie na bacznosci, Strazniku! Najpotezniejszego, pradawnego zaklecia, ktore wspaniale wzmocni Twoja armie, strzega mocarni wartownicy - paladyni z Zakonu Swietlistego Ostrza. Przygotuj sie dobrze na walke z nimi!")
+ENDIF
+
+IF_ACTION_POINT(8,PLAYER0)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY2,6,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY3,7,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY4,5,1)
+ENDIF
+
+IF_ACTION_POINT(9,PLAYER0)
+QUICK_INFORMATION(3,"Nareszcie udalo Ci sie odnalezc oslawiona Biblioteke Nostradamusa, miejsce przesycone ogromna moca magiczna. Odszukaj w niej prastary artefakt, zdolny podwoic szeregi Twojej armii; zanim jednak go uzyjesz, postaraj sie zebrac pod swym sztandarem jak najwieksza liczbe slug. Plotka glosi, ze w okolicznych bastionach bohaterowie przetrzymuja 10 wiezniow, ktorzy, uwolnieni, z checia przystali by do Ciebie.")
+ENDIF
+
+IF_ACTION_POINT(10,PLAYER0)
+QUICK_INFORMATION(4,"Wyglada na to, ze udalo Ci sie odnalezc prastary smoczy skarbiec. Za jego wrotami spoczywaja znaczne bogactwa, licz sie jednak z ewentualnoscia, ze ich dotychczasowi wlasciciele nie zgotuja Ci serdecznego powitania.")
+ENDIF
+
+IF_ACTION_POINT(11,PLAYER0)
+QUICK_INFORMATION(5,"Tajemnymi korytarzami Chwalogrodu, zrujnowanej fortecy bohaterow, udalo Ci sie dotrzec na tyly lochu Rangexa. Byc moze uznasz atak z tej pozycji za madrzejszy i bardziej obiecujacy.")
+ENDIF
+
+IF_ACTION_POINT(12,PLAYER0)
+QUICK_INFORMATION(6,"Dotarles do starej, niszczejacej twierdzy bohaterow. Nie zapuszczaj sie na wschod od tego punktu - byc moze Rangex wciaz toczy tam boje z niedobitkami armii wojownikow dobra. Mozesz za to poszukac szczescia na zachodzie.")
+ENDIF
+
+
+IF_ACTION_POINT(18,PLAYER0)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,18,2)
+ENDIF
+
+IF_ACTION_POINT(19,PLAYER0)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY5,20,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY6,21,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY7,22,1)
+QUICK_OBJECTIVE(8,"Pora na ostateczna rozgrywke! Rangex rzucil przeciw Tobie swa osobista gwardie, zlozona z najwysmienitszych wojownikow Podziemia. Nie okazuj litosci - tylko jeden Straznik godzien jest wladzy nad swiatem... i musisz nim byc Ty!",PLAYER0)
+ENDIF
+
+
+
+COMPUTER_PLAYER(PLAYER1,1)
+
+QUICK_OBJECTIVE(1,"Arcystraznik Rangex niepodzielnie rzadzi ta kraina. Rzuciles wyzwanie najpotezniejszemu, wiedz zatem, ze nie zdolasz pokonac go konwencjonalnymi metodami. Zamiast tego musisz uciec sie do podstepu. Przeszukuj otaczajace korytarze - drzemie w nich potezna magia, zdolna przechylic szale zwyciestwa na Twoja strone.",PLAYER0)
+
+
+IF(PLAYER0,GAME_TURN >= 500)
+    QUICK_INFORMATION(13,"Ten poziom nie nalezy do latwych. Zapisuj czesto stan gry, a unikniesz nieprzyjemnych niespodzianek.")
+ENDIF
+
+IF(PLAYER0,GAME_TURN >= 2500)
+QUICK_INFORMATION(7,"Pobliski portal nie przyciagnie zbyt wielu slug, Ty zas dysponujesz tylko planami podstawowych komnat i nielicznymi zakleciami. Tak bywa, gdy probuje sie zasiedlic kraine, wyeksploatowana juz przez kogos innego. Nie trac jednak nadziei - w okolicy znajduja sie bastiony bohaterow, tworzacych ruch oporu przeciw wladzy Rangexa. Spladruj je, a urosniesz w sile.")
+ENDIF
+
+IF(PLAYER0,GAME_TURN >= 10000)
+QUICK_INFORMATION(9,"W koncu zdolales odkryc nature poteznej magii na zachodzie. Jej zrodlem sa czarodziejskie zasoby zgromadzone w legendarnej Bibliotece Nostradamusa. Madrym krokiem byloby ruszenie na zachod i zajecie owej biblioteki wraz z jej skarbami; miej sie jednak na bacznosci - rezyduja w niej najpotezniejsi magowie Podziemia, ktorzy z pewnoscia nie oddadza swych bogactw po dobroci.")
+ENDIF
+
+
+IF(PLAYER1,DUNGEON_DESTROYED == 1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+QUICK_INFORMATION(10,"Zniszczyles Serce Lochu Rangexa, jednakze jego duch zdolal umknac na polnoc, do specjalnie zaprojektowanej kryjowki. Na szczescie odebrales mu magiczna umiejetnosc burzenia umocnionych murow, wiec teraz zadna przeszkoda nie jest w stanie Cie powstrzymac. Siegnij po zwyciestwo, gdy tylko bedziesz gotowy, nie zapominaj jednak, ze bestia zapedzona do rogu walczy wyjatkowo zajadle.")
+ENDIF
+
+IF(PLAYER0,ALL_DUNGEONS_DESTROYED == 1)
+QUICK_OBJECTIVE(12,"Ostatecznie pokonales swego nieprzyjaciela i wygnales jego dusze w Niebyt. Teraz jestes absolutnym wladca Podziemia, a demony z najglebszych kregow piekielnych czcza Twa niegodziwosc, same zdajac sie byc przy Tobie zastepami swietych. Gratulacje, Panie! Wytyczasz kanony bycia Zlym! Przyszle pokolenia z luboscia beda wyczytywac Twe imie z kart podrecznikow historii.",PLAYER0)
+    WIN_GAME
+ENDIF
+
+IF(PLAYER0,DUNGEON_DESTROYED == 1)
+    LOSE_GAME
+ENDIF

@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00019
+REM Automatically generated on 26 Aug 2008, 11:24:47
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(874803782,1219742687)
+USER_COMMANDS_COUNT(3131,40,468,106)
+LEVEL_DESCRIPTION("Evil Keeper campaign")
+LEVEL_AUTHORS("Bernd Degen","")

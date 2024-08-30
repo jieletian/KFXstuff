@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00216
+REM Automatically generated on 19 Aug 2008, 05:56:28
+
+LEVEL_VERSION(1,0,0)
+LEVEL_TIMESTAMP(1203550952,1219118188)
+USER_COMMANDS_COUNT(8,2,0,0)
+LEVEL_DESCRIPTION("A land full of gold, which you precisely lack early in the game, forcing you to conquer the heroes basements to maintain your dungeon healthy. Comes in two versions; this is easier one.")
+LEVEL_AUTHORS("Stanza","")

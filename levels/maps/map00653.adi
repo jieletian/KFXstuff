@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00410
+REM Automatically generated on 04 Nov 2008, 17:33:34
+
+LEVEL_VERSION(1,1,2)
+LEVEL_TIMESTAMP(1213366436,1225816414)
+USER_COMMANDS_COUNT(1083,67,2,6)
+LEVEL_DESCRIPTION("Multiplayer Dungeon Keeper level based on the first level of Ultima Underworld. Much of the level is impenetrable rock, so it requires well managing the space for rooms.")
+LEVEL_AUTHORS("Zen","")

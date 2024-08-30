@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map01007
+REM Automatically generated on 22 Aug 2008, 17:25:54
+
+LEVEL_VERSION(1,2,0)
+LEVEL_TIMESTAMP(1055624032,1219418754)
+USER_COMMANDS_COUNT(53,3,0,0)
+LEVEL_DESCRIPTION("A blue keeper has become powerful, building his dungeon on corpses of everyone he met. Only one imp has managed to survive a decent fighting and has come to help you. Heroes just realized they won't survive much longer, and are willing to make an alliance with everyone who could help... even with you.")
+LEVEL_AUTHORS("","")

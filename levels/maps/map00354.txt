@@ -1,0 +1,106 @@
+REM ***********************************************************************
+REM   Script for Level  354(054).Distroy Magic
+REM ***********************************************************************
+REM 
+REM 
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+COMPUTER_PLAYER(PLAYER1,10)
+COMPUTER_PLAYER(PLAYER2,10)
+COMPUTER_PLAYER(PLAYER3,10)
+
+START_MONEY(ALL_PLAYERS,5000)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_OBEY,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,1)
+MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_CAVE_IN,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+DOOR_AVAILABLE(ALL_PLAYERS,BRACED,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定陷阱*********************************
+REM  (玩家,陷阱名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+TRAP_AVAILABLE(ALL_PLAYERS,ALARM,1,0)
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+RESEARCH(PLAYER1,MAGIC,POWER_DESTROY_WALLS,50000)
+
+IF(PLAYER0,BRIDGE > 0)
+    ROOM_AVAILABLE(PLAYER0,BRIDGE,1,0)
+    QUICK_INFORMATION(5,"建座桥，让一个敌人通过，然后把桥卖了，就可以达到分隔开敌人的目的，逐个击破。",PLAYER0)   
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER0,ALL_DUNGEONS_DESTROYED == 1)
+    IF(PLAYER_GOOD,TOTAL_CREATURES < 1)
+
+        REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+        LEVEL_VERSION(1)
+        REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+        ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+        ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+        ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+        ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+        ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+        ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+        ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+        ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+        ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+        ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+        
+        MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+        MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+        DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+        TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+        TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+        QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+        WIN_GAME
+
+    ENDIF
+ENDIF
+
+REM ****************************提示信息**********************************
+QUICK_OBJECTIVE(1,"参考提示：1、传说有的墙是可以挖的，有的不可以挖，只能用破墙魔法来解决；2、先升级谁后升级谁，效果不完全一样的；3、他山之石可以攻土；4、敌人强大的时候，应该逐个击破。",PLAYER0)  
+IF(PLAYER0,GAME_TURN > 1500)
+    QUICK_INFORMATION(2,"传说没有连着敌人阵地的墙是可以挖得开的，你可以附身小鬼去验证一下；那些连着敌人阵地的墙是挖不开的，只能用破墙魔法才能解决的",PLAYER0) 
+ENDIF
+IF(PLAYER0,WORKSHOP > 1)
+    QUICK_INFORMATION(3,"先训练精灵，它会帮你做更多陷阱或赚更多钱；如果先训练巫师，会让你的工资支出提前透支",PLAYER0)   
+ENDIF
+IF(PLAYER0,RESEARCH > 1)
+    QUICK_INFORMATION(4,"是时候研究破墙术了，那些挖不开的墙，是阻碍你进攻敌人的绊脚石。",PLAYER0)   
+ENDIF
+
+
+
+
+
+
+
+

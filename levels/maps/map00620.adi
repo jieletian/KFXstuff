@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00810
+REM Automatically generated on 22 Aug 2008, 06:15:49
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(987239074,1219378549)
+USER_COMMANDS_COUNT(8,2,0,0)
+LEVEL_DESCRIPTION("The Fairy Godmother has retired to her home in the Fairy Gold Dust Mines of Parther. However, since she turned in her wand, the mines have been plagued by robbers and theives and just recently a Dungeon Keeper has moved into the vacinity.")
+LEVEL_AUTHORS("Steve Tupper","")

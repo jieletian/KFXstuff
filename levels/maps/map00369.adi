@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map01011
+REM Automatically generated on 22 Aug 2008, 17:33:52
+
+LEVEL_VERSION(1,0,0)
+LEVEL_TIMESTAMP(1104536200,1219419232)
+USER_COMMANDS_COUNT(5,1,0,0)
+LEVEL_DESCRIPTION("This kingdom is planning a large-scale attack. The keepers fron here know about it, and both have intention to use that moment to dispel the other. There are human holy places in the region, where some useful relics and equipment could be found. The heroes want to send a small reconnaissance unit to check the relics and equipment. Then, after fourth or fifth payday, they are willing to come armed witrh their main force.")
+LEVEL_AUTHORS("","")

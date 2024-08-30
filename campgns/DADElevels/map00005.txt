@@ -1,0 +1,129 @@
+REM Level 5/Path of sand
+
+set_generate_speed(200)
+
+computer_player(player1,1)
+computer_player(player2,2)
+computer_player(player4,3)
+
+max_creatures(player0,15)
+max_creatures(player1,35)
+max_creatures(player2,35)
+max_creatures(player4,20)
+
+start_money(player0,12000)
+start_money(player1,8250000)
+start_money(player2,8250000)
+start_money(player4,8250000)
+
+ally_players(player0,player4)
+
+set_creature_max_level(player4,demonspawn,10)
+set_creature_strength(demonspawn,77)
+set_creature_health(demonspawn,777)
+set_creature_strength(hell_hound,99)
+set_creature_health(hell_hound,999)
+set_creature_health(sorceror,666)
+
+add_creature_to_pool(spider,40)
+add_creature_to_pool(demonspawn,7)
+add_creature_to_pool(bug,40)
+add_creature_to_pool(troll,20)
+add_creature_to_pool(orc,20)
+add_creature_to_pool(archer,5)
+add_creature_to_pool(wizard,5)
+add_creature_to_pool(barbarian,5)
+add_creature_to_pool(hell_hound,8)
+add_creature_to_pool(sorceror,8)
+add_creature_to_pool(time_mage,8)
+add_creature_to_pool(bile_demon,20) 
+add_creature_to_pool(dragon,20)
+add_creature_to_pool(witch,4)
+
+creature_available(player1,spider,1,1)
+creature_available(player3,demonspawn,1,1)
+creature_available(player2,bug,1,1)
+creature_available(all_players,troll,1,1)
+creature_available(all_players,orc,1,1)
+creature_available(player0,archer,1,1)
+creature_available(player0,wizard,1,1)
+creature_available(player0,time_mage,1,1)
+creature_available(player0,barbarian,1,1)
+creature_available(player1,witch,1,1)
+creature_available(player1,hell_hound,1,1)
+creature_available(player2,sorceror,1,1)
+creature_available(player2,bile_demon,1,1)
+creature_available(player2,dragon,1,1)
+
+room_available(all_players,treasure,1,1)
+room_available(all_players,lair,1,1)
+room_available(all_players,garden,1,1)
+room_available(all_players,training,1,1)
+room_available(all_players,research,1,1)
+room_available(player0,bridge,1,1)
+room_available(all_players,graveyard,1,0)
+room_available(all_players,workshop,1,0)
+room_available(all_players,prison,1,0)
+room_available(all_players,barracks,1,0)
+room_available(all_players,torture,1,0)
+room_available(all_players,temple,1,0)
+room_available(all_players,guard_post,1,0)
+room_available(all_players,scavenger,1,0)
+
+magic_available(all_players,power_imp,1,1)
+magic_available(all_players,power_sight,1,0)
+magic_available(all_players,power_obey,1,0)
+magic_available(all_players,power_speed,1,0)
+magic_available(all_players,power_call_to_arms,1,0)
+magic_available(all_players,power_cave_in,1,0)
+magic_available(all_players,power_heal_creature,1,0)
+magic_available(all_players,power_protect,1,0)
+magic_available(all_players,power_conceal,1,0)
+magic_available(all_players,power_hold_audience,1,0)
+magic_available(all_players,power_chicken,1,0)
+magic_available(all_players,power_lightning,1,0)
+magic_available(all_players,power_disease,1,0)
+
+trap_available(all_players,word_of_power,1,0)
+trap_available(all_players,lightning,1,0)
+door_available(all_players,braced,1,0)
+door_available(all_players,steel,1,0)
+door_available(all_players,magic,1,0)
+
+if(player0,game_turn >= 10)
+ quick_objective(1,"在西部，有两个腐败的马德尔手下的守护者，他们之间甚至争斗不休。他们似乎并不珍惜自己的土地。",player0)
+ add_creature_to_level(player1,witch,player1,1,10,0)
+endif
+
+if(player1,dungeon_destroyed == 1)
+ if(player2,dungeon_destroyed == 0)
+  quick_objective(2,"现在“绿辣椒”已经进入戒备状态，要小心了。",player0)
+  add_creature_to_level(player2,sorceror,player2,5,10,0)
+ endif
+endif
+
+if(player2,dungeon_destroyed == 1)
+ if(player1,dungeon_destroyed == 0)
+  quick_objective(3,"更准确的说，“蓝朋友”现在会加强防御。",player0)
+  add_creature_to_level(player1,hell_hound,player1,5,10,0)
+ endif
+endif
+
+if(player1,dungeon_destroyed == 1)
+ if(player2,dungeon_destroyed == 1)
+   win_game
+ endif
+endif
+
+if(player_good,dungeon_destroyed == 1)
+ magic_available(player0,power_destroy_walls,1,1)
+ quick_information(5,"如果敌人修墙把自己围了起来，这个魔法将会很有用。")
+endif
+
+if(player0,dungeon_destroyed == 1)
+ lose_game
+endif
+
+if(player4,dungeon_destroyed == 1)
+ lose_game
+endif

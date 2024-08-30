@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00209
+REM Automatically generated on 29 Aug 2008, 15:15:06
+
+LEVEL_VERSION(1,0,0)
+LEVEL_TIMESTAMP(899332488,1220015706)
+USER_COMMANDS_COUNT(4,1,0,0)
+LEVEL_DESCRIPTION("So, the little buggers managed something as pitifully easy as raising the dead. This may cause some inconvinience to you but you should overcome it easily. Proceed to Castle Hangdamien, where the first experiment to try and coax our demons out of the dimensional void is taking place. Kill them all and make sure they stay dead.")
+LEVEL_AUTHORS("Grinic","")

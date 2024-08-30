@@ -1,0 +1,32 @@
+REM Brainman's First
+
+REM ******* Basic settings *******
+
+
+MAX_CREATURES(PLAYER0,1)
+START_MONEY(PLAYER0,10000)
+
+
+REM ********** Available rooms **********
+
+ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+
+REM ********** Available spells **********
+
+MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+REM ********** settings **********
+
+BONUS_LEVEL_TIME(5000)
+
+IF(PLAYER0,DUNGEON_DESTROYED == 1)
+    LOSE_GAME
+ENDIF
+
+IF(PLAYER_GOOD,TOTAL_CREATURES == 0)
+    WIN_GAME
+ENDIF
+
+REM ***** End *****

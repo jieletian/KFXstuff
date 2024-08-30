@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00804
+REM Automatically generated on 22 Aug 2008, 05:50:43
+
+LEVEL_VERSION(1,0,2)
+LEVEL_TIMESTAMP(898711402,1219377043)
+USER_COMMANDS_COUNT(8,2,0,0)
+LEVEL_DESCRIPTION("Rubidia is ruled over by five great Dragon Lords, each with his own powerful dragon mount and special abilities and expertise. You are one of these powerful Lords and find yourself suddenly transported here. Gather your wits together my Lord I sense danger and foul play.")
+LEVEL_AUTHORS("Steve Tupper","")

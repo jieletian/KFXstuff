@@ -1,0 +1,266 @@
+[common]
+LightsCount = 33
+
+[light0]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 5327
+SubtileX = [172, 0]
+SubtileY = [185, 0]
+SubtileZ = [2, 64]
+
+[light1]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 5047
+SubtileX = [95, 64]
+SubtileY = [178, 0]
+SubtileZ = [2, 64]
+
+[light2]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 4445
+SubtileX = [76, 64]
+SubtileY = [159, 64]
+SubtileZ = [2, 64]
+
+[light3]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 4697
+SubtileX = [69, 128]
+SubtileY = [166, 64]
+SubtileZ = [2, 64]
+
+[light4]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 5299
+SubtileX = [88, 128]
+SubtileY = [185, 128]
+SubtileZ = [2, 64]
+
+[light5]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 5132
+SubtileX = [95, 64]
+SubtileY = [181, 0]
+SubtileZ = [2, 64]
+
+[light6]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 5326
+SubtileX = [169, 0]
+SubtileY = [185, 0]
+SubtileZ = [2, 64]
+
+[light7]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 5328
+SubtileX = [175, 0]
+SubtileY = [185, 0]
+SubtileZ = [2, 64]
+
+[light8]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 4248
+SubtileX = [248, 64]
+SubtileY = [148, 0]
+SubtileZ = [2, 64]
+
+[light9]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 5329
+SubtileX = [178, 0]
+SubtileY = [185, 0]
+SubtileZ = [2, 64]
+
+[light10]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 3993
+SubtileX = [248, 64]
+SubtileY = [139, 0]
+SubtileZ = [2, 64]
+
+[light11]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 4163
+SubtileX = [248, 64]
+SubtileY = [145, 0]
+SubtileZ = [2, 64]
+
+[light12]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 4078
+SubtileX = [248, 64]
+SubtileY = [142, 0]
+SubtileZ = [2, 64]
+
+[light13]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 4333
+SubtileX = [248, 64]
+SubtileY = [151, 0]
+SubtileZ = [2, 64]
+
+[light14]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 5330
+SubtileX = [181, 0]
+SubtileY = [185, 0]
+SubtileZ = [2, 64]
+
+[light15]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 3908
+SubtileX = [248, 64]
+SubtileY = [136, 0]
+SubtileZ = [2, 64]
+
+[light16]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 3823
+SubtileX = [248, 64]
+SubtileY = [133, 0]
+SubtileZ = [2, 64]
+
+[light17]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 3651
+SubtileX = [244, 64]
+SubtileY = [129, 64]
+SubtileZ = [2, 64]
+
+[light18]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 4501
+SubtileX = [244, 128]
+SubtileY = [155, 128]
+SubtileZ = [2, 64]
+
+[light19]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 4706
+SubtileX = [92, 64]
+SubtileY = [166, 0]
+SubtileZ = [2, 64]
+
+[light20]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 4534
+SubtileX = [88, 64]
+SubtileY = [162, 64]
+SubtileZ = [2, 64]
+
+[light21]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 5300
+SubtileX = [91, 128]
+SubtileY = [185, 128]
+SubtileZ = [2, 64]
+
+[light22]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 4612
+SubtileX = [69, 128]
+SubtileY = [163, 64]
+SubtileZ = [2, 64]
+
+[light23]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 4444
+SubtileX = [73, 64]
+SubtileY = [159, 64]
+SubtileZ = [2, 64]
+
+[light24]
+LightIntensity = 32
+LightRange = [11, 0]
+ParentTile = 6852
+SubtileX = [155, 64]
+SubtileY = [239, 128]
+SubtileZ = [3, 192]
+
+[light25]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 7019
+SubtileX = [148, 0]
+SubtileY = [245, 0]
+SubtileZ = [2, 64]
+
+[light26]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 6846
+SubtileX = [141, 192]
+SubtileY = [241, 0]
+SubtileZ = [2, 64]
+
+[light27]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 7018
+SubtileX = [145, 0]
+SubtileY = [245, 0]
+SubtileZ = [2, 64]
+
+[light28]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 6852
+SubtileX = [155, 128]
+SubtileY = [241, 192]
+SubtileZ = [2, 64]
+
+[light29]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 7020
+SubtileX = [151, 0]
+SubtileY = [245, 0]
+SubtileZ = [2, 64]
+
+[light30]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 6174
+SubtileX = [163, 64]
+SubtileY = [219, 64]
+SubtileZ = [2, 64]
+
+[light31]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 6175
+SubtileX = [166, 64]
+SubtileY = [219, 64]
+SubtileZ = [2, 64]
+
+[light32]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 6176
+SubtileX = [169, 64]
+SubtileY = [219, 64]
+SubtileZ = [2, 64]

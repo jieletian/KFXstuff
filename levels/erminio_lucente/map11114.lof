@@ -1,0 +1,15 @@
+; KeeperFX Level Overview File (LOF)
+MAP_FORMAT_VERSION = 1.05
+NAME_TEXT = Arena (1.3.1)
+NAME_ID = 
+KIND = FREE
+ENSIGN_POS = 
+ENSIGN_ZOOM = 
+PLAYERS = 1
+OPTIONS = 
+SPEECH = 
+LAND_VIEW = 
+AUTHOR = Erminio Lucente
+DESCRIPTION = Arena (1.3)
+DATE = 2024-3-4
+MAPSIZE = 21 21

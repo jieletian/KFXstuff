@@ -1,0 +1,156 @@
+rem level 3/Sand wall
+
+set_generate_speed(300)
+
+set_creature_max_level(player0,bile_demon,9)
+set_creature_max_level(player0,dragon,9)
+set_creature_max_level(player0,troll,9)
+set_creature_max_level(player0,orc,9)
+set_creature_max_level(player0,sorceror,9)
+set_creature_max_level(player0,druid,9)
+set_creature_max_level(player0,dark_mistress,9)
+set_creature_max_level(player0,tentacle,9)
+set_creature_max_level(player0,skeleton,9)
+set_creature_max_level(player0,ghost,9)
+
+set_creature_max_level(player0,archer,8)
+set_creature_max_level(player0,thief,8)
+set_creature_max_level(player0,monk,8)
+set_creature_max_level(player0,wizard,8)
+set_creature_max_level(player0,barbarian,8)
+set_creature_max_level(player0,giant,8)
+set_creature_max_level(player0,dwarfa,8)
+set_creature_max_level(player0,knight,8)
+set_creature_max_level(player0,avatar,8)
+set_creature_max_level(player0,fairy,8)
+set_creature_max_level(player0,witch,8)
+set_creature_max_level(player0,tunneller,8)
+set_creature_max_level(player0,samurai,8)
+
+ set_creature_strength(avatar,150)
+ set_creature_health(avatar,1500)
+max_creatures(player0,40)
+
+if(player0,game_turn >= 10)
+quick_objective(1,"你面前是这个王国的人们建造的一座堡垒。虽然它看似坚不可摧，但还不足以阻挡你！小心，过一段时间他们就会得到增援。做好准备。",player0)
+endif
+
+start_money(player0,20000)
+
+add_creature_to_pool(bile_demon,20)
+add_creature_to_pool(dragon,20)
+add_creature_to_pool(troll,20)
+add_creature_to_pool(orc,20)
+add_creature_to_pool(sorceror,20)
+add_creature_to_pool(druid,20)
+add_creature_to_pool(dark_mistress,20)
+add_creature_to_pool(tentacle,20)
+
+creature_available(player0,bile_demon,1,1)
+creature_available(player0,dragon,1,1)
+creature_available(player0,troll,1,1)
+creature_available(player0,orc,1,1)
+creature_available(player0,sorceror,1,1)
+creature_available(player0,druid,1,1)
+creature_available(player0,dark_mistress,1,1)
+creature_available(player0,tentacle,1,1)
+
+room_available(player0,treasure,1,1)
+room_available(player0,lair,1,1)
+room_available(player0,garden,1,1)
+room_available(player0,training,1,1)
+room_available(player0,research,1,1)
+room_available(player0,bridge,1,0)
+room_available(player0,guard_post,1,0)
+room_available(player0,workshop,1,0)
+room_available(player0,prison,1,0)
+room_available(player0,barracks,1,0)
+room_available(player0,torture,1,0)
+room_available(player0,temple,1,0)
+
+magic_available(player0,power_hand,1,1)
+magic_available(player0,power_imp,1,0)
+magic_available(player0,power_sight,1,0)
+magic_available(player0,power_obey,1,0)
+magic_available(player0,power_speed,1,0)
+magic_available(player0,power_call_to_arms,1,0)
+magic_available(player0,power_cave_in,1,0)
+magic_available(player0,power_heal_creature,1,0)
+magic_available(player0,power_protect,1,0)
+magic_available(player0,power_conceal,1,0)
+
+trap_available(player0,word_of_power,1,0)
+trap_available(player0,lightning,1,0)
+door_available(player0,braced,1,0)
+door_available(player0,steel,1,0)
+
+create_party(odin)
+	add_to_party(odin,knight,8,3000,defend_party,0)
+	add_to_party(odin,barbarian,7,1500,attack_rooms,0)
+	add_to_party(odin,giant,8,1500,attack_rooms,0)
+	add_to_party(odin,dwarfa,7,1500,attack_rooms,0)
+	add_to_party(odin,barbarian,8,1500,attack_enemies,0)
+	add_to_party(odin,giant,7,1500,attack_enemies,0)
+
+create_party(dva)
+	add_to_party(dva,knight,7,1000,defend_party,0)
+	add_to_party(dva,barbarian,8,400,attack_rooms,0)
+	add_to_party(dva,giant,7,400,attack_rooms,0)
+	add_to_party(dva,dwarfa,8,400,attack_rooms,0)
+	add_to_party(dva,barbarian,7,400,attack_enemies,0)
+	add_to_party(dva,giant,8,400,attack_enemies,0)
+
+create_party(tri)
+	add_to_party(tri,knight,8,3000,defend_party,0)
+	add_to_party(tri,barbarian,7,1500,attack_rooms,0)
+	add_to_party(tri,giant,8,1500,attack_rooms,0)
+	add_to_party(tri,dwarfa,7,1500,attack_rooms,0)
+	add_to_party(tri,barbarian,8,1500,attack_enemies,0)
+	add_to_party(tri,giant,7,1500,attack_enemies,0)
+
+create_party(chet)
+	add_to_party(chet,knight,8,3000,defend_party,0)
+	add_to_party(chet,monk,7,1500,attack_enemies,0)
+	add_to_party(chet,monk,8,1500,attack_enemies,0)
+	add_to_party(chet,monk,7,1500,attack_enemies,0)
+	add_to_party(chet,monk,8,1500,attack_enemies,0)
+	add_to_party(chet,monk,7,1500,attack_enemies,0)
+
+create_party(pat)
+	add_to_party(pat,knight,8,3000,defend_party,0)
+	add_to_party(pat,monk,7,1500,attack_enemies,0)
+	add_to_party(pat,monk,8,1500,attack_enemies,0)
+	add_to_party(pat,monk,7,1500,attack_enemies,0)
+	add_to_party(pat,monk,8,1500,attack_enemies,0)
+	add_to_party(pat,monk,7,1500,attack_enemies,0)
+
+create_party(shes)
+	add_to_party(shes,avatar,6,3000,defend_party,0)
+	add_to_party(shes,archer,7,1500,attack_enemies,0)
+	add_to_party(shes,archer,8,1500,attack_enemies,0)
+	add_to_party(shes,wizard,7,1500,attack_enemies,0)
+	add_to_party(shes,wizard,8,1500,attack_enemies,0)
+	add_to_party(shes,wizard,7,1500,attack_enemies,0)
+
+
+if(player0,game_turn >= 50000)
+ quick_objective(2,"人类的增援已经抵达！",player0)
+ add_tunneller_party_to_level(player_good,odin,1,dungeon,player0,6,111)
+ add_tunneller_party_to_level(player_good,dva,2,dungeon,player0,6,222)
+ add_tunneller_party_to_level(player_good,tri,3,dungeon,player0,6,333)
+ add_tunneller_party_to_level(player_good,chet,1,dungeon,player0,6,444)
+ add_tunneller_party_to_level(player_good,pat,2,dungeon,player0,6,555)
+ add_tunneller_party_to_level(player_good,shes,3,dungeon,player0,6,666)
+endif
+
+if(player_good,dungeon_destroyed == 1)
+ if(player_good,total_creatures == 0)
+  if(player0,game_turn >= 51000)
+   win_game
+  endif
+ endif
+endif
+
+if(player0,dungeon_destroyed == 1)
+ lose_game
+endif

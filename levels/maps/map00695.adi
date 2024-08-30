@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00351
+REM Automatically generated on 20 Aug 2008, 02:42:56
+
+LEVEL_VERSION(1,0,0)
+LEVEL_TIMESTAMP(918851590,1219192976)
+USER_COMMANDS_COUNT(19,2,0,0)
+LEVEL_DESCRIPTION("On this level, you start with only two vampires and no Portal. Keep your vamps happy and alive... you're going to need them.")
+LEVEL_AUTHORS("","")

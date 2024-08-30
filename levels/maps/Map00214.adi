@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00363
+REM Automatically generated on 20 Aug 2008, 05:11:49
+
+LEVEL_VERSION(1,2,2)
+LEVEL_TIMESTAMP(931824112,1219201909)
+USER_COMMANDS_COUNT(812,28,118,6)
+LEVEL_DESCRIPTION("Wizards are dead, but their magic persists. There is the edge of its effect - the castle defense isn't working because they can't pass the hoards of gold!")
+LEVEL_AUTHORS("","")

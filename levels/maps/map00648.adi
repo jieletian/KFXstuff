@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00808
+REM Automatically generated on 22 Aug 2008, 06:10:10
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(900259962,1219378210)
+USER_COMMANDS_COUNT(43,2,0,1)
+LEVEL_DESCRIPTION("Dark times have come to the lands of the Knights, an unusually dark, long winter grips the land and now scouts from the North have brought you disturbing news. A strange structure has appeared from nowhere at the ancient Standing Stones of Aberfras, spitting the land asunder. Fearing an attack your superiors have sent you to investigate.")
+LEVEL_AUTHORS("Steve Tupper","")

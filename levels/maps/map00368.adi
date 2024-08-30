@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map01010
+REM Automatically generated on 22 Aug 2008, 17:31:43
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(1104259860,1219419103)
+USER_COMMANDS_COUNT(26,2,0,0)
+LEVEL_DESCRIPTION("This area has traditionally been dominated by elite keeper. However, Yufin came from other region, and the Daikessen is not the only force here now. As the keepers expand their influencem, area of Euphine was left without management, with lots of criminals fighting to contol it. Now, a new bud of evil has finally awakened. That's you, keeper.")
+LEVEL_AUTHORS("","")

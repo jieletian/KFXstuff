@@ -1,0 +1,194 @@
+REM ***********************************************************************
+REM     Script for Level    357(057).Goki 高崎 
+REM ***********************************************************************
+REM A版（原版基本上添加了一些信息）
+REM 
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+START_MONEY(PLAYER0,10000)
+
+REM 虽然没有入口，有招募室可以招募怪物池中的怪。
+ADD_CREATURE_TO_POOL(SORCEROR,5)
+ADD_CREATURE_TO_POOL(ORC,5)
+ADD_CREATURE_TO_POOL(TROLL,5)
+ADD_CREATURE_TO_POOL(DARK_MISTRESS,5)
+
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+REM 如果捡到一个小鬼，就有制造小鬼的魔法
+IF (PLAYER0 , TOTAL_IMPS > 0)
+    MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+    QUICK_INFORMATION(6,"虽然你暂时还不能建基地，不过有现成的，占过来就可以！",PLAYER0) 
+ENDIF
+
+REM 到达各触发点（地标）开启不同级别、数量的刷怪，并发出提示。
+IF_ACTION_POINT(1,PLAYER0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,1,7,1,0)
+    SET_FLAG(PLAYER0,FLAG0,1)
+    QUICK_INFORMATION(9,"你进入了新的蟑螂的领地，被触怒的它们会对你发起进攻！",PLAYER0) 
+ENDIF
+IF_ACTION_POINT(2,PLAYER0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,2,7,2,0)
+    SET_FLAG(PLAYER0,FLAG0,2)
+    QUICK_INFORMATION(9,"你进入了新的蟑螂的领地，被触怒的它们会对你发起进攻！",PLAYER0) 
+ENDIF
+IF_ACTION_POINT(3,PLAYER0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,3,7,5,0)
+    SET_FLAG(PLAYER0,FLAG0,3)
+    QUICK_INFORMATION(9,"你进入了新的蟑螂的领地，被触怒的它们会对你发起进攻！",PLAYER0) 
+ENDIF
+IF_ACTION_POINT(4,PLAYER0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,4,7,7,0)
+    SET_FLAG(PLAYER0,FLAG0,4)
+    QUICK_INFORMATION(9,"你进入了新的蟑螂的领地，被触怒的它们会对你发起进攻！",PLAYER0) 
+ENDIF
+REM 地标5
+IF_ACTION_POINT(5,PLAYER0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,5,7,8,0)
+    SET_FLAG(PLAYER0,FLAG0,5)
+    QUICK_INFORMATION(9,"你进入了新的蟑螂的领地，被触怒的它们会对你发起进攻！",PLAYER0) 
+ENDIF
+IF_ACTION_POINT(6,PLAYER0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,6,7,10,0)
+    SET_FLAG(PLAYER0,FLAG0,6)
+    QUICK_INFORMATION(9,"你进入了新的蟑螂的领地，被触怒的它们会对你发起进攻！",PLAYER0) 
+ENDIF
+
+REM ***********************************************************************
+REM 在各地标上无限循环的刷怪（刷怪强度是根据前面开启FLAG0值而定），直到胜利为止。
+IF(PLAYER_GOOD,TOTAL_CREATURES < 5)
+    IF (PLAYER0,FLAG0 > 0)
+        NEXT_COMMAND_REUSABLE
+        ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,1,2,2,0)
+    ENDIF
+    IF (PLAYER0,FLAG0 > 1)
+        NEXT_COMMAND_REUSABLE
+        ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,2,2,4,0)
+    ENDIF
+    IF (PLAYER0,FLAG0 > 2)
+        NEXT_COMMAND_REUSABLE
+        ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,3,2,6,0)
+    ENDIF
+    IF (PLAYER0,FLAG0 > 3)
+        NEXT_COMMAND_REUSABLE
+        ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,4,2,8,0)
+    ENDIF
+    IF (PLAYER0,FLAG0 > 4)
+        NEXT_COMMAND_REUSABLE
+        ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,5,2,10,0)
+    ENDIF
+    IF (PLAYER0,FLAG0 > 5)
+        NEXT_COMMAND_REUSABLE
+        ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,6,5,4,0)
+    ENDIF
+    IF (PLAYER_GOOD,DUNGEON_DESTROYED == 1)
+        NEXT_COMMAND_REUSABLE
+        ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,7,8,4,0)
+        ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,1,8,4,0)
+    ENDIF
+ENDIF
+
+REM ***********************************************************************
+REM 杀蟑螂达到一定数量发奖品，并发出提示。
+REM 杀敌数超过20 钢门 无上权威
+IF (PLAYER_GOOD,BATTLES_LOST>20)
+    MAGIC_AVAILABLE(PLAYER0,POWER_OBEY,1,0)
+    DOOR_AVAILABLE(PLAYER0,STEEL,1,0)
+    TUTORIAL_FLASH_BUTTON(4,-1)
+    QUICK_INFORMATION(10,"你已经杀死了20只蟑螂，注意领取奖品！",PLAYER0) 
+ENDIF
+REM 杀敌数超过50 闪电陷阱 加速魔法
+IF (PLAYER_GOOD,BATTLES_LOST>50)
+    TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+    MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,0)
+    TUTORIAL_FLASH_BUTTON(3,-1)
+    QUICK_INFORMATION(11,"你已经杀死了50只蟑螂，注意领取奖品！",PLAYER0) 
+ENDIF
+REM 杀敌数超过100 治疗魔法 魔法门
+IF (PLAYER_GOOD,BATTLES_LOST>100)
+    MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,0)
+    DOOR_AVAILABLE(PLAYER0,MAGIC,1,0)
+    TUTORIAL_FLASH_BUTTON(4,-1)
+    QUICK_INFORMATION(12,"你已经杀死了100只蟑螂，注意领取奖品！",PLAYER0) 
+ENDIF
+REM 杀敌数超过200 孵化室 巢穴
+IF (PLAYER_GOOD,BATTLES_LOST>200)
+    ROOM_AVAILABLE(PLAYER0,GARDEN,1,0)
+    ROOM_AVAILABLE(PLAYER0,LAIR,1,0)
+    TUTORIAL_FLASH_BUTTON(2,-1)
+    QUICK_INFORMATION(13,"你已经杀死了200只蟑螂，注意领取奖品！",PLAYER0) 
+ENDIF
+REM 杀敌数超过500 塌方术 滚石陷阱
+IF (PLAYER_GOOD,BATTLES_LOST>500)
+    MAGIC_AVAILABLE(PLAYER0,POWER_CAVE_IN,1,0)
+    TRAP_AVAILABLE(PLAYER0,BOULDER,1,0)
+    TUTORIAL_FLASH_BUTTON(4,-1)
+    QUICK_INFORMATION(16,"你已经杀死了500只蟑螂，注意领取奖品！",PLAYER0) 
+ENDIF
+
+REM ***********************************************************************
+REM 提示就快要过关（新增上去的）
+IF (PLAYER_GOOD,BATTLES_LOST>950)
+  QUICK_INFORMATION(17,"你已经杀死了950只蟑螂！",PLAYER0) 
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+REM 杀敌数超过1000 胜利
+IF (PLAYER_GOOD,BATTLES_LOST>1000)
+
+   REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+    LEVEL_VERSION(1)
+    REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+    ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+    ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,BRIDGE,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,WORKSHOP,1, 1)
+    ROOM_AVAILABLE(ALL_PLAYERS,BARRACKS,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,TORTURE, 1, 1)
+    ROOM_AVAILABLE(ALL_PLAYERS,TEMPLE,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,SCAVENGER, 1, 0)
+    ROOM_AVAILABLE(ALL_PLAYERS,PRISON,1, 0)
+    QUICK_INFORMATION(6,"修改了游戏，增加胜利后可以建设一下，让你回味一下胜利的喜悦！！",PLAYER0) 
+
+    WIN_GAME
+ENDIF
+
+REM ****************************提示信息**********************************
+QUICK_OBJECTIVE(1,"参考提示：1、没小鬼是过不了关的；2、没有基地也是过不了关的；3、没有入口，你要想办法招人；4、解决经济问题才可以做其它事。",PLAYER0)    
+IF(PLAYER0,GAME_TURN > 500)
+        QUICK_INFORMATION(2,"小鬼在野外，冲出去把它找回来，有些事只能是它们做的！",PLAYER0) 
+ENDIF
+IF(PLAYER0,GAME_TURN > 1500)
+        QUICK_INFORMATION(3,"敌人不断来骚扰，造工厂赚钱解决经济问题不是好办法，听说北面有个破墙魔法，找到它那就可以挖大金矿了！",PLAYER0) 
+ENDIF
+IF(PLAYER0,GAME_TURN > 2500)
+        QUICK_INFORMATION(4,"这里不能正常途径招人，得要想个办法解决这个问题！",PLAYER0) 
+ENDIF
+IF(PLAYER0,GAME_TURN > 3500)
+        QUICK_INFORMATION(5,"地图东面，图书馆的南面有个陵墓，也许对你有帮助！",PLAYER0) 
+ENDIF
+
+
+
+
+
+
+
+
+
+
+
+
+

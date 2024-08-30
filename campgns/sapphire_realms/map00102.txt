@@ -1,0 +1,197 @@
+REM Basics
+
+    LEVEL_VERSION(1)
+    RUN_AFTER_VICTORY(1)
+    SET_GENERATE_SPEED(400)
+    START_MONEY(ALL_PLAYERS,0)
+    MAX_CREATURES(ALL_PLAYERS,25)
+
+    SET_PLAYER_COLOR(PLAYER0, BLUE)
+
+    COMPUTER_PLAYER(PLAYER5,ROAMING)
+
+    SET_MUSIC("campaign_music/amala_theme.mp3")
+
+    SET_TIMER(PLAYER0, TIMER0)
+    REM Flag checks if the player has beat the knight
+    SET_FLAG(PLAYER0, FLAG1, 0)
+
+REM Availability
+
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_POSSESS,1,1)
+
+REM Level script
+        
+    QUICK_OBJECTIVE(1, "两条路。北方或南方。玛瑙盗贼或钻石英雄。明智地选择你的敌人，因为另一方可能会成为你的盟友，即使只是短暂的。但是，一个特殊的仙女会陪伴你。利用她的反弹能力，直到她强大到可以为自己而战。")
+
+REM Prevent the fairy from wanting pay
+
+    SET_CREATURE_CONFIGURATION(FAIRY,Pay,0)
+
+REM Levelling up the player's fairy when you hit a certain point in the level
+
+    IF_ACTION_POINT(1, PLAYER0)
+        QUICK_MESSAGE(16, "充分利用她的新力量。", SPELL_FLIGHT)
+        QUICK_MESSAGE(15, "你的仙女的力量已经增强。", SPELL_FLIGHT)
+        PLAY_MESSAGE(PLAYER0, SPEECH, 83)
+        LEVEL_UP_CREATURE(PLAYER0, ANY_CREATURE, LEAST_EXPERIENCED, 4)
+    ENDIF
+
+    IF_ACTION_POINT(2, PLAYER0)
+        QUICK_MESSAGE(18, "你的仙女也学会了陨石术。", SPELL_FLIGHT)
+        LEVEL_UP_CREATURE(PLAYER0, ANY_CREATURE, LEAST_EXPERIENCED, 4)
+    ENDIF
+
+    IF_ACTION_POINT(8, PLAYER0)
+        QUICK_MESSAGE(20, "充分利用她的新力量。", SPELL_FLIGHT)
+        QUICK_MESSAGE(21, "你的仙女的力量已经增强。", SPELL_FLIGHT)
+        LEVEL_UP_CREATURE(PLAYER0, ANY_CREATURE, LEAST_EXPERIENCED, 4)
+    ENDIF
+
+    IF_ACTION_POINT(9, PLAYER0)
+        QUICK_MESSAGE(22, "你的仙女也学会了陨石术。", SPELL_FLIGHT)
+        LEVEL_UP_CREATURE(PLAYER0, ANY_CREATURE, LEAST_EXPERIENCED, 4)
+    ENDIF
+
+REM Logic for the special box
+
+    SET_BOX_TOOLTIP(1,"重置同盟关系")
+
+    REM This check makes sure that these messages don't show if the player is actually going through the dungeon properly.
+    REM This way they only show at the start of the level when the player has already set the flag
+    IF (PLAYER0, TIMER0 < 50)
+
+        IF (PLAYER0, CAMPAIGN_FLAG3 == 1)
+            REM Special box der Level hinzuf眉gen
+            QUICK_INFORMATION(14, "你已与另一位守护者结盟。如果你希望取消此结盟，请使用此地下城宝盒。", 7)
+            ADD_OBJECT_TO_LEVEL(SPECBOX_CUSTOM, 7, 1, PLAYER_NEUTRAL)
+        ENDIF
+
+        IF (PLAYER0, CAMPAIGN_FLAG3 == 2)
+            REM Special box der Level hinzuf眉gen
+            QUICK_MESSAGE(13, "你已与另一位守护者结盟。如果你希望取消此结盟，请使用此地下城宝盒。", 7)
+            ADD_OBJECT_TO_LEVEL(SPECBOX_CUSTOM, 7, 1, PLAYER_NEUTRAL)
+        ENDIF
+
+    ENDIF
+
+    IF (PLAYER0, BOX1_ACTIVATED == 1)
+        PLAY_MESSAGE(PLAYER0,SPEECH,80)
+        WIN_GAME
+        QUICK_MESSAGE(2, "您与玛瑙或钻石的联盟已失效。", SPELL_FLIGHT)
+        SET_FLAG(PLAYER0, CAMPAIGN_FLAG0, 0)
+    ENDIF
+
+REM Win condition
+
+    REM Flag3 - Whether the player is allied with black or white in level 10
+    REM 0 - Allied with neither
+    REM 1 - Allied with black
+    REM 2 - Allied with white
+
+    REM Set flag if white is destroyed
+    IF (PLAYER5, DUNGEON_DESTROYED == 1)
+        QUICK_MESSAGE(3, "让我们一起对抗玛瑙异教徒。", PLAYER_GOOD)
+        QUICK_MESSAGE(4, "你会非常后悔这个举动...", PLAYER5)
+        SET_FLAG(PLAYER0, CAMPAIGN_FLAG3, 2)
+        WIN_GAME
+    ENDIF
+
+    REM Set flag if white is destroyed
+    IF (PLAYER_GOOD, DUNGEON_DESTROYED == 1)
+        QUICK_MESSAGE(5, "你的傲慢将会受到惩罚！", PLAYER_GOOD)
+        QUICK_MESSAGE(6, "背叛他们，是吧？我们一起努力吧。", PLAYER5)
+        SET_FLAG(PLAYER0, CAMPAIGN_FLAG3, 1)
+        WIN_GAME
+    ENDIF
+
+REM Logic for locking the other path when the player has chosen one side
+
+    IF_ACTION_POINT(3, PLAYER0)
+        QUICK_MESSAGE(8, "你确定吗？", SPELL_FLIGHT)
+        QUICK_MESSAGE(7, "如果你继续的话，你会激怒钻石英雄的。", SPELL_FLIGHT)
+    ENDIF
+
+    IF_ACTION_POINT(4, PLAYER0)
+        QUICK_MESSAGE(9, "你这个傻瓜，这是你自己的选择！", PLAYER_GOOD)
+        CHANGE_SLAB_TYPE(41,45, PAIR_WALL, NONE)
+        CHANGE_SLAB_OWNER(41, 45, PLAYER0, NONE)
+    ENDIF
+
+    IF_ACTION_POINT(5, PLAYER0)
+        QUICK_MESSAGE(10, "你确定吗？", SPELL_FLIGHT)
+        QUICK_MESSAGE(11, "如果你继续前行，你将会激怒玛瑙盗贼。", SPELL_FLIGHT)
+    ENDIF
+
+    IF_ACTION_POINT(6, PLAYER0)
+        QUICK_MESSAGE(12, "你已经做出了选择，你会后悔的。", PLAYER5)
+        CHANGE_SLAB_TYPE(41,35, PAIR_WALL, NONE)
+        CHANGE_SLAB_OWNER(41, 35, PLAYER0, NONE)
+    ENDIF
+
+REM Victory conditions dependant on enemy having a specific unit
+
+    REM Black
+
+    IF (PLAYER5, BLACK_KNIGHT > 0)
+        SET_FLAG(PLAYER0, FLAG1, 1)
+    ENDIF
+
+    IF (PLAYER0, FLAG1 == 1)
+        IF (PLAYER5, BLACK_KNIGHT == 0)
+            SET_HEART_HEALTH(PLAYER5, 0)
+        ENDIF
+    ENDIF
+
+    REM White
+
+    IF (PLAYER_GOOD, KNIGHT > 0)
+        SET_FLAG(PLAYER0, FLAG1, 2)
+    ENDIF
+
+    IF (PLAYER0, FLAG1 == 2)
+        IF (PLAYER_GOOD, KNIGHT == 0)
+            SET_HEART_HEALTH(PLAYER_GOOD, 0)
+        ENDIF
+    ENDIF
+
+REM Loss condition
+
+    IF (PLAYER0, TOTAL_CREATURES == 0)
+        QUICK_OBJECTIVE(17, "你失去了你的仙女。下次要小心一点。")
+        LOSE_GAME
+    ENDIF
+
+REM Spawn enemy party - black
+
+    CREATE_PARTY(party_black)
+        ADD_TO_PARTY(party_black,BLACK_KNIGHT,8,0,ATTACK_DUNGEON_HEART,0)
+
+        ADD_TO_PARTY(party_black,SPIDER,2,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_black,SPIDER,2,0,ATTACK_DUNGEON_HEART,0)
+
+        ADD_TO_PARTY(party_black,SKELETON,4,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_black,SKELETON,4,0,ATTACK_DUNGEON_HEART,0)
+        
+    IF_ACTION_POINT(10, PLAYER0)
+        PLAY_MESSAGE(PLAYER0, SPEECH, 19)
+        ADD_PARTY_TO_LEVEL(PLAYER5, party_black, -2, 1)
+    ENDIF
+
+REM Spawn enemy party - white
+
+    CREATE_PARTY(party_white)
+        ADD_TO_PARTY(party_white,KNIGHT,8,0,ATTACK_DUNGEON_HEART,0)
+
+        ADD_TO_PARTY(party_white,TENTACLE,5,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_white,TENTACLE,5,0,ATTACK_DUNGEON_HEART,0)
+
+        ADD_TO_PARTY(party_white,BARBARIAN,3,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_white,BARBARIAN,3,0,ATTACK_DUNGEON_HEART,0) 
+
+    IF_ACTION_POINT(11, PLAYER0)
+        PLAY_MESSAGE(PLAYER0, SPEECH, 19)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, party_white, -1, 1)
+    ENDIF

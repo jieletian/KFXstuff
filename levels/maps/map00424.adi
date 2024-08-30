@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map01111
+REM Automatically generated on 17 Sep 2008, 01:45:40
+
+LEVEL_VERSION(1,2,0)
+LEVEL_TIMESTAMP(1220471090,1221608740)
+USER_COMMANDS_COUNT(2933,45,13,49)
+LEVEL_DESCRIPTION("Tunnels behind Portals of this land are so tight that only slimsy flies can enter. You have to control these little insects to defeat the 3 rivals engaging this narrow kingdom. Also, the Heroes who live underground will impede access to rivals, and various useful bonuses.")
+LEVEL_AUTHORS("Arko777","")

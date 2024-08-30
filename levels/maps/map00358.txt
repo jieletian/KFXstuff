@@ -1,0 +1,21 @@
+REM ********************************************
+REM
+REM Script for Level 232
+REM
+REM ********************************************
+START_MONEY(PLAYER0,10000)
+MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+
+QUICK_information(1,"你是否对厨房中的横行的蟑螂头疼不已呢？这些黑暗夫人的卓越表现会使人眼前一亮。你只要杀掉300只爬虫就能获胜。不要被虫子腿绊倒，守护者。——BadgerW")
+
+
+IF(PLAYER_GOOD,TOTAL_CREATURES < 1)
+    NEXT_COMMAND_REUSABLE
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,BUG,1,5,3,0)
+    IF(PLAYER_GOOD,BATTLES_LOST > 300)
+        WIN_GAME        
+    ENDIF
+ENDIF
+
+

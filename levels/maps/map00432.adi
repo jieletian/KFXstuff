@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00407
+REM Automatically generated on 21 Aug 2008, 04:29:35
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(977697796,1219285775)
+USER_COMMANDS_COUNT(22,2,0,0)
+LEVEL_DESCRIPTION("A realm with enough enemies to destroy. You might want to dig carefully, and start attacking when you have enough traps. Especially with Deeper Dungeons, this level gets realy hard, once you killed the thieves. If you don't believe me, just find out for yourself.")
+LEVEL_AUTHORS("Oetelaer","")

@@ -1,0 +1,23 @@
+First of all, I accept no responsibility for whatever may happen with use of these files!!
+DK has know problems, so if any map causes your system to crash, I am not responsible! All maps uploaded by me have been tested and worked just fine on our systems.
+That out of the way....
+
+
+INSTALLATION:
+
+First, you must have your levels dir copied onto your hard drive. ( I know you have already done this with other levels, patches and so forth, so I won't insult you with another "how-to.")
+
+The files here are all named as "level 60". That was for my convenience. You can name them any level that DK allows, altho if you want to just "unzip and play" then leave the names as they are, unzip them into your ./levels directory, and play it with the multiplayer set for ONE player.
+
+
+This level is setup for multiplayer (3 players).  If you play alone, I can't guarantee how "smart" the AI will be altho I have tried to "coach" it just a little! <g>
+Also, several spells that seem to be used a lot to "cheat and beat" will not be available! 
+
+
+
+Have fun!
+Suriana,
+Queen of Dungeons
+
+
+email comments to "wdesigns@nwwin.com"

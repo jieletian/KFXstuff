@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00293
+REM Automatically generated on 19 Aug 2008, 10:31:46
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(899389264,1219134706)
+USER_COMMANDS_COUNT(22,2,0,0)
+LEVEL_DESCRIPTION("Your brother, a rival keeper, has been remiss and left a dungeon relatively unattended while he ravages a nearby land. The locals sense his absence and are keen to destroy him. So are you, in the interests of brotherly love and all that.")
+LEVEL_AUTHORS("L.Pritchard","")

@@ -1,0 +1,121 @@
+REM Level 2/Two brothers
+
+set_generate_speed(300)
+
+if(player0,game_turn >= 10)
+quick_objective(1,"这片沿海地区的居民被两兄弟剥削。我们当然不在乎他们的不幸，但这对兄弟却为我们的死敌马德尔服务。",player0)
+endif
+
+if(player0,game_turn >= 30)
+quick_information(2,"小心水怪。")
+endif
+
+ set_creature_strength(avatar,140)
+ set_creature_health(avatar,1200)
+set_creature_max_level(player1,dwarfa,6)
+ set_creature_strength(samurai,190)
+ set_creature_health(samurai,1700)
+ set_creature_armour(samurai,150)
+set_creature_max_level(player2,samurai,6)
+ set_creature_strength(dwarfa,120)
+ set_creature_health(dwarfa,900)
+ set_creature_armour(dwarfa,150)
+set_creature_max_level(player0,bile_demon,7)
+set_creature_max_level(player0,dragon,7)
+set_creature_max_level(player0,troll,7)
+set_creature_max_level(player0,skeleton,7)
+set_creature_max_level(player0,orc,7)
+set_creature_max_level(player0,sorceror,7)
+set_creature_max_level(player0,tentacle,7)
+
+set_creature_max_level(player1,skeleton,6)
+set_creature_max_level(player1,orc,5)
+set_creature_max_level(player1,troll,6)
+set_creature_max_level(player1,tentacle,5)
+set_creature_max_level(player1,demonspawn,5)
+
+set_creature_max_level(player2,skeleton,6)
+set_creature_max_level(player2,demonspawn,5)
+set_creature_max_level(player2,spider,6)
+set_creature_max_level(player2,troll,6)
+set_creature_max_level(player2,tentacle,5)
+
+max_creatures(player0,30)
+max_creatures(player1,30)
+max_creatures(player2,30)
+
+computer_player(player1,0)
+computer_player(player2,0)
+
+ally_players(player1,player2)
+
+start_money(player0,12000)
+start_money(player1,8000000)
+start_money(player2,8000000)
+
+add_creature_to_pool(bile_demon,4)
+add_creature_to_pool(dragon,6)
+add_creature_to_pool(troll,8)
+add_creature_to_pool(sorceror,8)
+add_creature_to_pool(orc,8)
+add_creature_to_pool(spider,16)
+add_creature_to_pool(demonspawn,18)
+
+creature_available(player0,bile_demon,1,1)
+creature_available(player0,dragon,1,1)
+creature_available(all_players,troll,1,1)
+creature_available(player0,sorceror,1,1)
+creature_available(all_players,orc,1,1)
+creature_available(player2,spider,1,1)
+creature_available(player1,demonspawn,1,1)
+
+room_available(player0,treasure,1,1)
+room_available(player0,lair,1,1)
+room_available(player0,garden,1,1)
+room_available(player0,training,1,1)
+room_available(player0,research,1,1)
+room_available(player0,guard_post,1,0)
+room_available(player0,prison,1,0)
+room_available(player0,workshop,1,0)
+room_available(player0,barracks,1,0)
+
+magic_available(player0,power_hand,1,1)
+magic_available(player0,power_imp,1,0)
+magic_available(player0,power_sight,1,0)
+magic_available(player0,power_obey,1,0)
+magic_available(player0,power_call_to_arms,1,0)
+magic_available(player0,power_speed,1,0)
+
+trap_available(player0,word_of_power,1,0)
+door_available(all_players,wood,1,0)
+door_available(all_players,braced,1,0)
+door_available(player1,steel,1,0)
+door_available(player2,steel,1,0)
+
+create_party(volna)
+	add_to_party(volna,tentacle,5,0,attack_dungeon_heart,0)
+	add_to_party(volna,tentacle,6,0,attack_dungeon_heart,0)
+	add_to_party(volna,tentacle,4,0,attack_dungeon_heart,0)
+	add_to_party(volna,tentacle,7,0,attack_dungeon_heart,0)
+	add_to_party(volna,tentacle,5,0,attack_dungeon_heart,0)
+
+if(player_good,total_creatures < 1)
+ quick_objective(3,"你们的杀戮已经降临到这片土地上的人民身上。而新的占领者也想要取代你。水怪已经到来。",player0)
+ room_available(player0,bridge,1,1)
+ add_party_to_level(player_good,volna,1,1)
+ add_party_to_level(player_good,volna,2,1)
+ add_party_to_level(player_good,volna,3,1)
+ add_party_to_level(player_good,volna,4,1)
+ add_party_to_level(player_good,volna,5,1)
+ add_party_to_level(player_good,volna,6,1)
+endif
+
+if(player1,dungeon_destroyed == 1)
+	if(player2,dungeon_destroyed == 1)
+		win_game
+	endif
+endif
+
+if(player0,dungeon_destroyed == 1)
+	lose_game
+endif

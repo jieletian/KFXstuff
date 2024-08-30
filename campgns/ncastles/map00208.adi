@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00329
+REM Automatically generated on 19 Aug 2008, 21:55:05
+
+LEVEL_VERSION(1,0,2)
+LEVEL_TIMESTAMP(897765308,1219175705)
+USER_COMMANDS_COUNT(30,3,0,0)
+LEVEL_DESCRIPTION("Our target is the opposing Dungeon to the south. Unfortunately, the castle of the mad Knight Tagren lies between us. Deal with the knight, then drop in and say hello to the other Keeper.")
+LEVEL_AUTHORS("Nikolai Kingsley","")

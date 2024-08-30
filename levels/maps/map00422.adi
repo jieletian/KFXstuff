@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map01105
+REM Automatically generated on 03 Sep 2008, 12:49:51
+
+LEVEL_VERSION(1,2,0)
+LEVEL_TIMESTAMP(1080431512,1220438991)
+USER_COMMANDS_COUNT(61,3,0,0)
+LEVEL_DESCRIPTION("This region is an Arcadia of underground - full of wealth and vast spaces to manage. Unfortunately, bilious tribe of heroes under the leadership of Timothy Winesoaker have already weaven a nest in the north. What's worse, those penuries have been able to sense your presence, so their assault troops will soon arrive here. Therefore act quickly, Keeper, faster than lightning! The prize for the hurry will be authority on this fabulous land. English and Polish translations included.")
+LEVEL_AUTHORS("Rangex","")

@@ -1,0 +1,85 @@
+REM PAWELS 4 CASTLES LEVEL WITH ACTION POINTS & TEXT ADDED
+
+REM DD STYLE LEVEL
+
+START_MONEY(PLAYER0,10000)
+
+SET_FLAG(PLAYER0,FLAG0,0)
+
+QUICK_OBJECTIVE(1,"Behold, the abandoned realm of Salaar, one of the Great Ancient Keepers. Paranoid heroes guard this realm with care!",PLAYER0)
+
+ADD_CREATURE_TO_POOL(DRAGON,8)
+CREATURE_AVAILABLE(PLAYER0,DRAGON,1,1)
+
+MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+
+DOOR_AVAILABLE(PLAYER0,MAGIC,1,0)
+
+IF_ACTION_POINT(1,PLAYER0)
+    QUICK_OBJECTIVE(2,"Salaar was truly Evil! Discover and gaze in awe at His training room! Are you skillful enough to use it?",PLAYER0)
+ENDIF
+
+IF_ACTION_POINT(2,PLAYER0)
+    QUICK_OBJECTIVE(3,"Conquer the hero castles in this realm, and you will be a worthy successor to Salaar. Be bold for He is watching from below!",PLAYER0)
+ENDIF
+
+IF(PLAYER_GOOD,KNIGHT == 5)
+    SET_FLAG(PLAYER0,FLAG0,1)
+    QUICK_OBJECTIVE(4,"Salaar had a limit to the bridges he could own at one time. He sees no reason why you should have more!",PLAYER0)
+ENDIF
+
+IF(PLAYER0,DRAGON == 2)
+    SET_FLAG(PLAYER0,FLAG1,1)
+ENDIF
+
+IF(PLAYER0,FLAG1 == 1)
+    IF(PLAYER0,TOTAL_CREATURES < 1)
+        LOSE_GAME
+        QUICK_OBJECTIVE(5,"That noise is Salaar's mocking laugh! You have failed and you are dismissed!",PLAYER0)
+    ENDIF
+ENDIF
+
+IF(PLAYER0,FLAG0 == 1)
+    IF(PLAYER0,BRIDGE < 1)
+        NEXT_COMMAND_REUSABLE
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+    ENDIF
+ENDIF
+
+IF(PLAYER0,FLAG0 == 1)
+    IF(PLAYER0,BRIDGE > 0)
+        NEXT_COMMAND_REUSABLE
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,0,0)
+    ENDIF
+ENDIF
+
+IF(PLAYER_GOOD,KNIGHT == 3)
+    SET_FLAG(PLAYER0,FLAG0,2)
+ENDIF
+
+IF(PLAYER0,FLAG0 == 2)
+    IF(PLAYER0,BRIDGE < 2)
+        NEXT_COMMAND_REUSABLE
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+    ENDIF
+ENDIF
+
+IF(PLAYER0,FLAG0 == 2)
+    IF(PLAYER0,BRIDGE > 1)
+        NEXT_COMMAND_REUSABLE
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,0,0)
+    ENDIF
+ENDIF
+
+IF(PLAYER_GOOD,KNIGHT == 0)
+    SET_FLAG(PLAYER0,FLAG0,3)
+    ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+ENDIF
+
+IF(PLAYER_GOOD,TOTAL_CREATURES == 0)
+    WIN_GAME
+ENDIF
+
+IF(PLAYER0,DUNGEON_DESTROYED == 1)
+    LOSE_GAME
+ENDIF

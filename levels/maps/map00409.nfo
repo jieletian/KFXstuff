@@ -1,0 +1,16 @@
+Name: 2-Front War 1.1.0
+Author: DzjeeAr, Created on 18 Oct 2006
+Keepers: Red, Blue, Green, White
+Pool: Horned Reaper, Troll, Dragon, Demon Spawn, Fly
+  Dark Mistress, Warlock, Bile Demon, Beetle, Spider
+  Hell Hound, Tentacle, Orc
+Objects on map:
+Creatures: 93, Traps: 18, Doors: 10, Items: 105
+Dungeon hearts: 4, Hero gates: 0, Special Boxes: 0
+Description:
+  Required to be played with the updated
+  creatures.txt file within this file. You and a
+  weak ally (gror tribes) are being picked upon by
+  Metilians and Heroes from both sides. Destroy
+  both of them to win. Note, if your ally's heart
+  is destroyed, you lose as well.

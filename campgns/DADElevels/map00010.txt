@@ -1,0 +1,132 @@
+REM Level 10/Madr's Castle 1
+
+set_generate_speed(200)
+
+set_creature_armour(tunneller,170)
+set_creature_strength(tunneller,120)
+set_creature_health(tunneller,1500)
+
+max_creatures(player0,30)
+max_creatures(player1,1)
+
+start_money(player0,8000)
+start_money(player1,1)
+
+computer_player(player1,10)
+
+add_creature_to_pool(vampire,8)
+add_creature_to_pool(troll,8)
+add_creature_to_pool(tentacle,8)
+add_creature_to_pool(bile_demon,8)
+add_creature_to_pool(hell_hound,8)
+add_creature_to_pool(dark_mistress,8)
+add_creature_to_pool(sorceror,8)
+add_creature_to_pool(druid,8)
+add_creature_to_pool(skeleton,8)
+add_creature_to_pool(orc,8)
+add_creature_to_pool(dragon,8)
+
+creature_available(player0,dragon,1,1)
+creature_available(player0,vampire,1,1)
+creature_available(player0,troll,1,1)
+creature_available(player0,tentacle,1,1)
+creature_available(player0,bile_demon,1,1)
+creature_available(player0,hell_hound,1,1)
+creature_available(player0,dark_mistress,1,1)
+creature_available(player0,sorceror,1,1)
+creature_available(player0,druid,1,1)
+creature_available(player0,skeleton,1,1)
+creature_available(player0,orc,1,1)
+
+room_available(all_players,treasure,1,1)
+room_available(all_players,lair,1,1)
+room_available(all_players,garden,1,1)
+room_available(all_players,training,1,1)
+room_available(all_players,graveyard,1,0)
+room_available(all_players,workshop,1,0)
+room_available(all_players,prison,1,0)
+room_available(all_players,barracks,1,0)
+room_available(all_players,torture,1,0)
+room_available(all_players,temple,1,0)
+room_available(all_players,guard_post,1,0)
+room_available(all_players,scavenger,1,0)
+
+magic_available(player0,power_imp,1,1)
+magic_available(player0,power_sight,1,1)
+magic_available(player0,power_call_to_arms,1,1)
+
+trap_available(all_players,word_of_power,1,0)
+trap_available(all_players,lightning,1,0)
+trap_available(all_players,boulder,1,0)
+door_available(all_players,steel,1,0)
+door_available(all_players,magic,1,0)
+
+if(player0,game_turn >= 10)
+ quick_objective(1,"这里就是马德尔藏身的城堡。我敢肯定他不需要它，所以用武力或诡计夺取它，离击垮马德尔本人更近一步。",player0)
+endif
+
+create_party(nec)
+ add_to_party(nec,barbarian,6,1000,attack_enemies,0)
+ add_to_party(nec,barbarian,7,1000,attack_enemies,0)
+ add_to_party(nec,witch,7,1000,attack_enemies,0)
+ add_to_party(nec,witch,8,1000,attack_enemies,0)
+
+create_party(nad)
+ add_to_party(nad,giant,8,1000,attack_enemies,0)
+ add_to_party(nad,giant,8,1000,attack_enemies,0)
+ add_to_party(nad,samurai,8,1000,attack_enemies,0)
+ add_to_party(nad,samurai,8,1000,attack_enemies,0)
+ add_to_party(nad,knight,9,1000,attack_enemies,0)
+
+create_party(dd)
+ add_to_party(dd,dwarfa,10,444,attack_enemies,0)
+ add_to_party(dd,dwarfa,9,444,attack_enemies,0)
+ add_to_party(dd,dwarfa,8,444,attack_enemies,0)
+ add_to_party(dd,dwarfa,7,444,attack_enemies,0)
+ add_to_party(dd,dwarfa,6,444,attack_enemies,0)
+ 
+create_party(ddd)
+ add_to_party(ddd,tunneller,10,444,attack_enemies,0)
+ add_to_party(ddd,tunneller,9,444,attack_enemies,0)
+ add_to_party(ddd,tunneller,8,444,attack_enemies,0)
+ add_to_party(ddd,tunneller,7,444,attack_enemies,0)
+ add_to_party(ddd,tunneller,6,444,attack_enemies,0)
+
+if_action_point(1,player0)
+ add_party_to_level(player_good,nec,2,1)
+  add_party_to_level(player_good,nec,5,1)
+ add_party_to_level(player_good,nec,2,1)
+  add_party_to_level(player_good,nec,5,1)
+endif
+
+if(player0,research >= 10)
+ room_available(all_players,research,1,1)
+endif
+
+if_action_point(3,player0)
+ quick_objective(2,"你几乎摧毁了所有敌军驻地。击败城堡中最后的部队并准备击退反攻。",player_good)
+ add_party_to_level(player_good,ddd,4,1)
+ add_party_to_level(player_good,dd,4,1)
+ add_party_to_level(player_good,dd,4,1)
+ add_party_to_level(player_good,dd,4,1)
+ add_party_to_level(player_good,dd,4,1)
+endif
+
+if(player1,dungeon_destroyed == 1)
+ add_party_to_level(player_good,nad,6,1)
+ add_party_to_level(player_good,nad,6,1)
+ add_party_to_level(player_good,nad,6,1)
+ room_available(all_players,bridge,1,1)
+endif
+
+ if(player_good,dungeon_destroyed == 1)
+  if_action_point(3,player0)
+   if(player_good,total_creatures == 0)
+    win_game
+   endif
+  endif
+ endif
+
+if(player0,dungeon_destroyed == 1)
+ lose_game
+endif

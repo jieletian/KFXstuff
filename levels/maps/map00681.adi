@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00358
+REM Automatically generated on 20 Aug 2008, 03:34:15
+
+LEVEL_VERSION(1,0,2)
+LEVEL_TIMESTAMP(914084260,1219196055)
+USER_COMMANDS_COUNT(9,2,0,0)
+LEVEL_DESCRIPTION("I've included some doors that are available right away, but you can't make them in your workshops. So if you look at the workshop menu you won't see them...just click on the slot where that type of door is normally shown in order to access them.")
+LEVEL_AUTHORS("Kim","")

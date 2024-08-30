@@ -1,0 +1,20 @@
+[common]
+ActionPointsCount = 3
+
+[actionpoint0]
+PointNumber = 1
+PointRange = [5, 0]
+SubtileX = [55, 128]
+SubtileY = [203, 128]
+
+[actionpoint1]
+PointNumber = 2
+PointRange = [3, 0]
+SubtileX = [235, 128]
+SubtileY = [95, 128]
+
+[actionpoint2]
+PointNumber = 3
+PointRange = [8, 0]
+SubtileX = [136, 128]
+SubtileY = [112, 128]

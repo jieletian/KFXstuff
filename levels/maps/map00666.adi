@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00317
+REM Automatically generated on 19 Aug 2008, 20:25:46
+
+LEVEL_VERSION(1,1,2)
+LEVEL_TIMESTAMP(873869154,1219170346)
+USER_COMMANDS_COUNT(1567,22,4,43)
+LEVEL_DESCRIPTION("This level is setup for multiplayer (4 players).  If you play alone, I can't guarantee how 'smart' the AI will be. Several spells that seem to be used a lot to 'cheat and beat' will not be available!")
+LEVEL_AUTHORS("Suriana","")

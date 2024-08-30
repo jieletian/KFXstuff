@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map01110
+REM Automatically generated on 03 Sep 2008, 12:27:18
+
+LEVEL_VERSION(1,4,0)
+LEVEL_TIMESTAMP(1220185734,1220437638)
+USER_COMMANDS_COUNT(2335,71,3,91)
+LEVEL_DESCRIPTION("This land was beautiful, before the outbreak of the local volcano transformed it into lava-filled desert. After the cataclism and destruction of your dungeon, you're taking a position near its ruins, situated on the sea of lava. That's very convenient position, and any keeper would like to take it, so two enemy keepers and the Lord of the Land won't stop in their attempts to take over your empire. Original polish title of this map is 'Goracy Straznik'. It's made using UnDed.")
+LEVEL_AUTHORS("Arko777","")

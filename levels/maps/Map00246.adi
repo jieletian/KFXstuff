@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00288
+REM Automatically generated on 19 Aug 2008, 10:56:23
+
+LEVEL_VERSION(1,0,0)
+LEVEL_TIMESTAMP(913515920,1219136183)
+USER_COMMANDS_COUNT(5,1,0,0)
+LEVEL_DESCRIPTION("Good news: Your rivals are at war. Bad news: both can regenerate creatures. There's powerful help to the North, but you'll have to enter the battle to acquire it...watch out for nosy heroes.")
+LEVEL_AUTHORS("K. Bennett","")

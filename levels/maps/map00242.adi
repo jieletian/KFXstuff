@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00242
+REM Automatically generated on 19 Aug 2008, 08:22:42
+
+LEVEL_VERSION(1,2,0)
+LEVEL_TIMESTAMP(889047460,1219126962)
+USER_COMMANDS_COUNT(325,14,0,3)
+LEVEL_DESCRIPTION("1-player level for DK made in UnDed; includes replacement for text.dat. You are imprisoned in the land of the flies. The king of your imps has been imprisoned by the heroes to your south. His son is at your side. Enlist the flies to re-unite your imps, and wreak your revenge!")
+LEVEL_AUTHORS("Dayo Kay","")

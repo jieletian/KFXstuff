@@ -1,0 +1,129 @@
+REM ***********************************************************************
+REM   Script for Level 332(032).Tuppers Arena
+REM ***********************************************************************
+REM 多人对战地图
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+REM 228,4,600,650,Tuppers Arena
+REM    :   : :   :   :
+REM    :   : :   :   Name of map
+REM    :   : :   Y coordinate of flag on Levels Map
+REM    :   : X coordinate of flag on Levels Map
+REM    :   Number of players
+REM    Level number (change this if you change the level number)
+REM    This is a deeper dungeons level
+
+COMPUTER_PLAYER(PLAYER1,10)
+COMPUTER_PLAYER(PLAYER2,10)
+COMPUTER_PLAYER(PLAYER3,10)
+
+SET_GENERATE_SPEED(700)
+MAX_CREATURES(ALL_PLAYERS, 20)
+START_MONEY(ALL_PLAYERS,10000)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+ADD_CREATURE_TO_POOL(BILE_DEMON,4)
+ADD_CREATURE_TO_POOL(DARK_MISTRESS,8)
+ADD_CREATURE_TO_POOL(SORCEROR,40)
+ADD_CREATURE_TO_POOL(SPIDER, 4)
+ADD_CREATURE_TO_POOL(WIZARD, 30)
+ADD_CREATURE_TO_POOL(ARCHER, 60)
+ADD_CREATURE_TO_POOL(MONK, 8)
+ADD_CREATURE_TO_POOL(SAMURAI,8)
+ADD_CREATURE_TO_POOL(SKELETON, 8)
+ADD_CREATURE_TO_POOL(VAMPIRE,  10)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+
+CREATURE_AVAILABLE(ALL_PLAYERS,DARK_MISTRESS,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,BILE_DEMON,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,SPIDER,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,SORCEROR,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,SKELETON, 1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,VAMPIRE,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,WIZARD,     1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,ARCHER,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,MONK,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,SAMURAI,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,AVATAR,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE,TREASURE,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,WORKSHOP,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,GRAVEYARD,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,TORTURE,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,BARRACKS,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,TEMPLE,1,0)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_OBEY,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SIGHT,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CALL_TO_ARMS,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CAVE_IN,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HEAL_CREATURE,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HOLD_AUDIENCE,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CHICKEN,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SPEED,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_LIGHTNING,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CONCEAL,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_PROTECT,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_DESTROY_WALLS,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_ARMAGEDDON,1,1)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+DOOR_AVAILABLE(ALL_PLAYERS,MAGIC,1,1)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定陷阱*********************************
+REM  (玩家,陷阱名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+TRAP_AVAILABLE(ALL_PLAYERS,LIGHTNING,1,0)
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER0,ALL_DUNGEONS_DESTROYED==1)
+    WIN_GAME
+ENDIF
+IF(PLAYER1,ALL_DUNGEONS_DESTROYED==1)
+    WIN_GAME
+ENDIF
+IF(PLAYER2,ALL_DUNGEONS_DESTROYED==1)
+    WIN_GAME
+ENDIF
+IF(PLAYER3,ALL_DUNGEONS_DESTROYED==1)
+    WIN_GAME
+ENDIF
+
+
+REM ****************************提示信息**********************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

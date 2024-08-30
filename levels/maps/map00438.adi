@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00414
+REM Automatically generated on 21 Aug 2008, 04:56:17
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(966704982,1219287377)
+USER_COMMANDS_COUNT(11,2,0,0)
+LEVEL_DESCRIPTION("Just another Keeper to kill. The first level I uploaded - not perfect, but has some nice surprises. There is a bug: The enemy keeper might get killed. No problem, but if that happens, you will have won the game, and the scripts to get creatures into the level won't work anymore.")
+LEVEL_AUTHORS("Oetelaer","")

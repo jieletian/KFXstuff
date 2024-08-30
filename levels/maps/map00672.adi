@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00647
+REM Automatically generated on 19 Aug 2008, 13:57:58
+
+LEVEL_VERSION(1,1,2)
+LEVEL_TIMESTAMP(882186820,1219147078)
+USER_COMMANDS_COUNT(753,5,0,3)
+LEVEL_DESCRIPTION("4-player Multiplayer level for DK. Don't knock out any plugs of dirt until you're prepared, except of course to open out your Dungeon heart; there are heroes trapped around the map.")
+LEVEL_AUTHORS("Brett Flannigan","")

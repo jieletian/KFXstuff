@@ -1,0 +1,190 @@
+REM Level 12/Madr's Castle 3
+
+set_generate_speed(200)
+
+max_creatures(player0,30)
+
+start_money(player0,30000)
+
+add_creature_to_pool(vampire,8)
+add_creature_to_pool(troll,8)
+add_creature_to_pool(tentacle,8)
+add_creature_to_pool(bile_demon,8)
+add_creature_to_pool(hell_hound,8)
+add_creature_to_pool(dark_mistress,8)
+add_creature_to_pool(sorceror,8)
+add_creature_to_pool(skeleton,8)
+add_creature_to_pool(orc,8)
+add_creature_to_pool(dragon,8)
+add_creature_to_pool(druid,8)
+
+creature_available(player0,dragon,1,1)
+creature_available(player0,vampire,1,1)
+creature_available(player0,troll,1,1)
+creature_available(player0,tentacle,1,1)
+creature_available(player0,bile_demon,1,1)
+creature_available(player0,hell_hound,1,1)
+creature_available(player0,dark_mistress,1,1)
+creature_available(player0,sorceror,1,1)
+creature_available(player0,skeleton,1,1)
+creature_available(player0,orc,1,1)
+creature_available(player0,druid,1,1)
+
+room_available(player0,treasure,1,1)
+room_available(player0,lair,1,1)
+room_available(player0,garden,1,1)
+room_available(player0,training,1,1)
+room_available(player0,research,1,1)
+room_available(player0,bridge,1,1)
+room_available(player0,graveyard,1,1)
+room_available(player0,workshop,1,1)
+room_available(player0,prison,1,1)
+room_available(player0,barracks,1,1)
+room_available(player0,torture,1,1)
+room_available(player0,temple,1,1)
+room_available(player0,guard_post,1,1)
+room_available(player0,scavenger,1,1)
+
+magic_available(player0,power_imp,1,1)
+magic_available(player0,power_sight,1,1)
+magic_available(player0,power_obey,1,1)
+magic_available(player0,power_speed,1,1)
+magic_available(player0,power_call_to_arms,1,1)
+magic_available(player0,power_cave_in,1,1)
+magic_available(player0,power_heal_creature,1,1)
+magic_available(player0,power_protect,1,1)
+magic_available(player0,power_conceal,1,1)
+magic_available(player0,power_hold_audience,1,1)
+magic_available(player0,power_chicken,1,1)
+magic_available(player0,power_lightning,1,1)
+magic_available(player0,power_disease,1,1)
+magic_available(player0,power_destroy_walls,1,1)
+
+trap_available(all_players,word_of_power,1,0)
+trap_available(all_players,lightning,1,0)
+trap_available(all_players,boulder,1,0)
+door_available(all_players,steel,1,0)
+door_available(all_players,magic,1,0)
+
+if(player0,game_turn >= 10)
+ quick_objective(1,"虽然指挥官已被击败，但仍然可以前往马德尔并消灭其余军队。马德尔很近，但军队更近。做好准备。",player0)
+endif
+
+create_party(oda)
+ add_to_party(oda,archer,8,800,attack_enemies,0)
+ add_to_party(oda,archer,8,800,attack_enemies,0)
+ add_to_party(oda,archer,8,800,attack_enemies,0)
+ add_to_party(oda,archer,8,800,attack_enemies,0)
+ add_to_party(oda,archer,8,800,attack_enemies,0)
+ add_to_party(oda,archer,8,800,attack_enemies,0)
+
+create_party(dva)
+ add_to_party(dva,dwarfa,10,800,attack_enemies,0)
+ add_to_party(dva,dwarfa,10,800,attack_enemies,0)
+ add_to_party(dva,dwarfa,10,800,attack_enemies,0)
+ add_to_party(dva,dwarfa,10,800,attack_enemies,0)
+ add_to_party(dva,dwarfa,10,800,attack_enemies,0)
+ add_to_party(dva,dwarfa,10,800,attack_enemies,0)
+
+create_party(tri)
+ add_to_party(tri,witch,8,800,attack_enemies,0)
+ add_to_party(tri,witch,8,800,attack_enemies,0)
+ add_to_party(tri,wizard,9,800,attack_enemies,0)
+ add_to_party(tri,wizard,9,800,attack_enemies,0)
+ add_to_party(tri,wizard,9,800,attack_enemies,0)
+ add_to_party(tri,wizard,9,800,attack_enemies,0)
+ 
+create_party(che)
+ add_to_party(che,giant,8,800,attack_enemies,0)
+ add_to_party(che,giant,8,800,attack_enemies,0)
+ add_to_party(che,giant,8,800,attack_enemies,0)
+ add_to_party(che,giant,8,800,attack_enemies,0)
+ add_to_party(che,giant,8,800,attack_enemies,0)
+ add_to_party(che,giant,8,800,attack_enemies,0)
+
+create_party(pit)
+ add_to_party(pit,barbarian,8,800,attack_enemies,0)
+ add_to_party(pit,barbarian,8,800,attack_enemies,0)
+ add_to_party(pit,hell_hound,9,0,attack_enemies,0)
+ add_to_party(pit,hell_hound,9,0,attack_enemies,0)
+ add_to_party(pit,hell_hound,9,0,attack_enemies,0)
+ add_to_party(pit,hell_hound,9,0,attack_enemies,0)
+
+create_party(ses)
+ add_to_party(ses,knight,9,30000,attack_enemies,0)
+ add_to_party(ses,knight,9,30000,attack_enemies,0)
+ add_to_party(ses,monk,10,1000,attack_enemies,0)
+ add_to_party(ses,monk,10,1000,attack_enemies,0)
+ add_to_party(ses,monk,10,1000,attack_enemies,0)
+ add_to_party(ses,monk,10,1000,attack_enemies,0)
+
+create_party(semp)
+ add_to_party(semp,samurai,7,1000,attack_enemies,0)
+ add_to_party(semp,samurai,7,1000,attack_enemies,0)
+ add_to_party(semp,samurai,7,1000,attack_enemies,0)
+ add_to_party(semp,samurai,7,1000,attack_enemies,0)
+ add_to_party(semp,samurai,7,1000,attack_enemies,0)
+ add_to_party(semp,samurai,7,1000,attack_enemies,0)
+
+create_party(ej)
+ add_to_party(ej,thief,6,1000,attack_enemies,0)
+ add_to_party(ej,thief,4,1000,attack_enemies,0)
+ add_to_party(ej,archer,6,1000,attack_enemies,0)
+ add_to_party(ej,archer,4,1000,attack_enemies,0)
+ add_to_party(ej,wizard,6,1000,attack_enemies,0)
+ add_to_party(ej,wizard,4,1000,attack_enemies,0)
+
+  if(player0,game_turn >= 45000)
+   if(player_good,total_creatures == 0)
+    win_game
+   endif
+  endif
+
+if(player0,game_turn >= 5000)
+add_party_to_level(player_good,ej,1,1)
+endif
+
+if(player0,game_turn >= 15000)
+add_party_to_level(player_good,ej,1,1)
+add_party_to_level(player_good,ej,1,1)
+endif
+
+if(player0,game_turn >= 25000)
+add_party_to_level(player_good,ej,1,1)
+add_party_to_level(player_good,ej,1,1)
+add_party_to_level(player_good,ej,1,1)
+endif
+
+if(player0,game_turn >= 35000)
+add_party_to_level(player_good,ej,1,1)
+add_party_to_level(player_good,ej,1,1)
+add_party_to_level(player_good,ej,1,1)
+add_party_to_level(player_good,ej,1,1)
+endif
+
+if(player0,game_turn >= 40000)
+quick_objective(2,"敌人的最后一支队伍来了。杀死所有敌人！",3)
+add_party_to_level(player_good,oda,1,1)
+add_party_to_level(player_good,dva,2,1)
+add_party_to_level(player_good,tri,3,1)
+add_party_to_level(player_good,che,1,1)
+add_party_to_level(player_good,pit,2,1)
+add_party_to_level(player_good,ses,3,1)
+add_party_to_level(player_good,semp,3,1)
+endif
+
+if(player0,game_turn >= 41000)
+add_party_to_level(player_good,oda,1,1)
+add_party_to_level(player_good,semp,3,1)
+add_party_to_level(player_good,pit,2,1)
+endif
+
+if(player0,game_turn >= 42000)
+add_party_to_level(player_good,oda,1,1)
+add_party_to_level(player_good,semp,3,1)
+add_party_to_level(player_good,pit,2,1)
+endif
+
+if(player0,dungeon_destroyed == 1)
+ lose_game
+endif

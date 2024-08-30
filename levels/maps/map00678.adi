@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00582
+REM Automatically generated on 21 Aug 2008, 08:45:29
+
+LEVEL_VERSION(1,0,0)
+LEVEL_TIMESTAMP(1160295592,1219301129)
+USER_COMMANDS_COUNT(23,3,0,0)
+LEVEL_DESCRIPTION("The heroes have opened a new base and are trying to keep the gems of this kingdom and the riches that are hidden. Build your dungeon and cross the lava to reduce the basis heroes crumbs! Level comes from France.")
+LEVEL_AUTHORS("Yohabro","")

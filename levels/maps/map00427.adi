@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map01117
+REM Automatically generated on 04 Sep 2008, 11:16:20
+
+LEVEL_VERSION(1,0,2)
+LEVEL_TIMESTAMP(1205970774,1220519780)
+USER_COMMANDS_COUNT(48,4,0,0)
+LEVEL_DESCRIPTION("You'll be in the heart of a small chateau human, its inhabitants which need to be killed are just for one thing. Do not forget your main objective, the destruction of their Dungeon Heart. Tip: Make sure you do not move too fast, but do not be too slow either. In addition, take good room at the right time. Last thing: Make sure the good health of your imp - it's the only one you have.")
+LEVEL_AUTHORS("Blacklord59","")

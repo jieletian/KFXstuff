@@ -1,0 +1,391 @@
+REM ********** 此文件用于方便地图制作，可直接修改。
+
+REM ***** 入口速度。 *****
+SET_GENERATE_SPEED(200)
+
+
+REM ***** 设置能够从入口得到的最大怪物数         *****
+REM		玩家		最大怪物数
+MAX_CREATURES(	PLAYER0,	55)
+
+
+
+REM 限制某些怪物等级
+SET_CREATURE_MAX_LEVEL(PLAYER0,DEMONSPAWN,10)
+SET_CREATURE_MAX_LEVEL(PLAYER0,DARK_MISTRESS,9)
+SET_CREATURE_MAX_LEVEL(PLAYER0,FLY,9)
+SET_CREATURE_MAX_LEVEL(PLAYER0,ORC,9)
+SET_CREATURE_MAX_LEVEL(PLAYER0,HELL_HOUND,9)
+SET_CREATURE_MAX_LEVEL(PLAYER0,THIEF,9)
+SET_CREATURE_MAX_LEVEL(PLAYER0,SAMURAI,9)
+SET_CREATURE_MAX_LEVEL(PLAYER0,ARCHER,9)
+SET_CREATURE_MAX_LEVEL(PLAYER0,HORNY,9)
+
+REM ***** 开始金钱      *****
+START_MONEY(	PLAYER0,	30000)
+
+
+
+REM ***** 设置入口能出现多少个怪物      *****
+REM			生物名称	生物数量
+
+ADD_CREATURE_TO_POOL(	SORCEROR,	4)
+ADD_CREATURE_TO_POOL(	DRAGON,		20)
+ADD_CREATURE_TO_POOL(	ORC,		20)
+ADD_CREATURE_TO_POOL(	HELL_HOUND,	20)
+ADD_CREATURE_TO_POOL(	DARK_MISTRESS,	20)
+ADD_CREATURE_TO_POOL(	BILE_DEMON,	20)
+ADD_CREATURE_TO_POOL(	HORNY,		5)
+ADD_CREATURE_TO_POOL(	TENTACLE,       15)
+ADD_CREATURE_TO_POOL(	SKELETON,	10)
+
+REM ***** 设置玩家们能够从入口里得到什么怪物           *****
+REM	所有玩家（可换成PLAYER0,1,2,3）	怪物名       是否开启	        是否激活（见指令手册）
+
+CREATURE_AVAILABLE(	ALL_PLAYERS,	SORCEROR,	1,			1)
+CREATURE_AVAILABLE(	ALL_PLAYERS,	DRAGON,		1,			1)
+CREATURE_AVAILABLE(	ALL_PLAYERS,	ORC,		1,			1)
+CREATURE_AVAILABLE(	ALL_PLAYERS,	HELL_HOUND,	1,			1)
+CREATURE_AVAILABLE(	ALL_PLAYERS,	DARK_MISTRESS,	1,			1)
+CREATURE_AVAILABLE(	ALL_PLAYERS,	BILE_DEMON,	1,			1)
+CREATURE_AVAILABLE(	ALL_PLAYERS,	TENTACLE,	1,			1)
+CREATURE_AVAILABLE(	ALL_PLAYERS,	HORNY,		1,			1)
+CREATURE_AVAILABLE(	ALL_PLAYERS,	SKELETON,	1,			1)
+
+
+REM ***** 设置玩家可造什么房间          *****
+REM 			玩家		房屋种类	是否能研究	        已研究
+REM 储金室
+ROOM_AVAILABLE(		ALL_PLAYERS,	TREASURE,	1,			0)
+REM 巢穴
+ROOM_AVAILABLE(		ALL_PLAYERS,	LAIR,		1,			0)
+REM 孵化室
+ROOM_AVAILABLE(		ALL_PLAYERS,	GARDEN,		1,			0)
+REM 训练室
+ROOM_AVAILABLE(		ALL_PLAYERS,	TRAINING,	1,			0)
+REM 图书馆
+ROOM_AVAILABLE(		ALL_PLAYERS,	RESEARCH,	1,			0)
+REM 工厂
+ROOM_AVAILABLE(		ALL_PLAYERS,	WORKSHOP,	1,			0)
+REM 警戒哨所
+ROOM_AVAILABLE(		ALL_PLAYERS,	GUARD_POST,	1,			0)
+REM 监狱
+ROOM_AVAILABLE(		ALL_PLAYERS,	PRISON,		0,			0)
+REM 审讯室
+ROOM_AVAILABLE(		ALL_PLAYERS,	TORTURE,	1,			0)
+REM 兵营
+ROOM_AVAILABLE(		ALL_PLAYERS,	BARRACKS,	1,			0)
+REM 寺庙
+ROOM_AVAILABLE(		ALL_PLAYERS,	TEMPLE,		1,			0)
+REM 陵墓
+ROOM_AVAILABLE(		ALL_PLAYERS,	GRAVEYARD,	1,			0)
+
+
+
+REM ***** 设置玩家可造什么门  *****
+REM 			玩家		门种类		        是否能研究	        手头已有一个（只能是1）
+DOOR_AVAILABLE(		ALL_PLAYERS,	MAGIC,			1,			0)
+
+
+REM ***** 设置玩家可造什么陷阱  *****
+REM 			玩家		机关种类	        是否能研究	        手头已有一个（只能是1）
+
+
+REM 毒气陷阱
+TRAP_AVAILABLE(		ALL_PLAYERS,	POISON_GAS,		1,			0)
+REM 闪电陷阱
+TRAP_AVAILABLE(		ALL_PLAYERS,	LIGHTNING,		1,			0)
+REM 强力咒语陷阱
+TRAP_AVAILABLE(		ALL_PLAYERS,	WORD_OF_POWER,		1,			0)
+
+
+
+REM ***** 设置玩家有什么魔法 （控制魔法每一关必有）              *****
+REM 			玩家		魔法种类	        是否能研究	        已研究
+REM 造小鬼
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_IMP,		1,			0)
+REM 无上权威
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_OBEY,		1,			1)
+REM 集合部队
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_CALL_TO_ARMS,	1,			0)
+REM 治疗术
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_HEAL_CREATURE,	1,			0)
+REM 召唤到心脏
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_HOLD_AUDIENCE,	1,			0)
+REM 速度术
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_SPEED,		1,			0)
+REM 防御术
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_PROTECT,		1,			0)
+REM 隐形术
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_CONCEAL,		1,			0)
+REM 疾病术
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_DISEASE,		1,			0)
+REM 小鸡术
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_CHICKEN,		1,			0)
+REM 破墙术
+MAGIC_AVAILABLE(	ALL_PLAYERS,	POWER_DESTROY_WALLS,	1,			0)
+
+
+
+REM ***** 设置魔法与房间的研究顺序与速度              *****
+RESEARCH(	ALL_PLAYERS,	MAGIC,		 POWER_IMP,	          4000)
+RESEARCH(	ALL_PLAYERS,	ROOM,		 TREASURE,	          4000)
+RESEARCH(	ALL_PLAYERS,	ROOM,		 Lair,	                  4000)
+RESEARCH(	ALL_PLAYERS,	MAGIC,		 POWER_SPEED,	          4000)
+RESEARCH(	ALL_PLAYERS,	ROOM,		 TRAINING,	          4000)
+RESEARCH(	ALL_PLAYERS,	ROOM,		 GARDEN,	          4000)
+RESEARCH(	ALL_PLAYERS,	MAGIC,		 POWER_CALL_TO_ARMS,	  4000)
+RESEARCH(	ALL_PLAYERS,	MAGIC,		 POWER_CONCEAL,	          4000)
+RESEARCH(	ALL_PLAYERS,	ROOM,		 RESEARCH,	          4000)
+RESEARCH(	ALL_PLAYERS,	MAGIC,		 POWER_HEAL_CREATURE,	  6000)
+RESEARCH(	ALL_PLAYERS,	MAGIC,		 POWER_HOLD_AUDIENCE,	  6000)
+RESEARCH(	ALL_PLAYERS,	ROOM,		 GUARD_POST,	          6000)
+RESEARCH(	ALL_PLAYERS,	ROOM,		 WORKSHOP,	          6000)
+RESEARCH(	ALL_PLAYERS,	MAGIC,		 POWER_PROTECT,	          8000)
+RESEARCH(	ALL_PLAYERS,	ROOM,		 BARRACKS,	          8000)
+RESEARCH(	ALL_PLAYERS,	ROOM,		 PRISON,	          8000)
+RESEARCH(	ALL_PLAYERS,	ROOM,		 TORTURE,	          8000)
+RESEARCH(	ALL_PLAYERS,	ROOM,		 TEMPLE,	          20000)
+RESEARCH(	ALL_PLAYERS,	MAGIC,		 POWER_CHICKEN,	          20000)
+RESEARCH(	ALL_PLAYERS,	MAGIC,		 POWER_DISEASE,	          20000)
+RESEARCH(	ALL_PLAYERS,	ROOM,		 GRAVEYARD,	          20000)
+RESEARCH(	ALL_PLAYERS,	MAGIC,		 POWER_DESTROY_WALLS,	  100000)
+
+
+REM 永久信息
+QUICK_OBJECTIVE(1,"百度{地下城守护者}吧 吧主[地下城统治者]倾情奉献 地图名称: 誓死抵抗defend 版本号:v.1.05 地图类型: 防守 难度系数：难 作者:地下城统治者 ",PLAYER0)
+
+REM 设置计时器
+SET_TIMER(PLAYER0,TIMER0)
+
+IF(PLAYER0,TIMER0>=10)
+QUICK_INFORMATION(2,"敌人的疯狂进攻使你不得不退守到了最后一块根据地，誓死守住阵地，守护者，不然你将会在这个世界上消失.如果你遇到了巡逻的敌人，千万不要留活口，不然你的行踪将暴露.",PLAYER0)
+ENDIF
+
+
+IF(PLAYER0,TIMER0>=8300)
+QUICK_INFORMATION(3,"不好，你的位置被一个人类巡逻兵发现了，我想很快就会有敌人蜂拥而至.hurry up，守护者，别说我没提醒你.",PLAYER0)
+ENDIF
+
+IF(PLAYER0,TIMER0>=10000)
+QUICK_INFORMATION(4,"他们来了，圣者派了一群老弱残兵来对付你，这似乎是对你的轻视.干掉他们，守护者，向敌人证明你的实力.",PLAYER0)
+ENDIF
+
+IF(PLAYER0,TIMER0>=20000)
+QUICK_INFORMATION(5,"看来胜者吸取了教训，这回的敌人是一群入伍几个月的新兵，但你对付起他们还绰绰有余.",PLAYER0)
+ENDIF
+IF(PLAYER0,TIMER0>=30000)
+QUICK_INFORMATION(6,"你的胜利让圣者愤怒了，这回的敌人训练有素，希望你能认真对待他们.",PLAYER0)
+ENDIF
+IF(PLAYER0,TIMER0>=40000)
+QUICK_INFORMATION(7,"圣者终于动用了他的王牌军.这支军队曾打败了无数个守护者，但他们这回遇到对手了.备战吧，守护者，我能听到他们的铠甲与兵器的碰撞声音.",PLAYER0)
+ENDIF
+IF(PLAYER0,TIMER0>=45000)
+QUICK_INFORMATION(8,"啊，圣者总算亲自出马了，他带着他的私人侍卫进入了你的地下城.可他不知道你已经准备好送他去地狱了，不是吗？",PLAYER0)
+ENDIF
+IF(PLAYER0,TIMER1>=100)
+     IF(PLAYER_GOOD,AVATAR==0)
+QUICK_INFORMATION(9,"坏消息，守护者.圣者并没有死亡，他和他的侍卫正在地狱里徘徊，伺机冲出地狱，获得重生.",PLAYER0)
+     ENDIF
+ENDIF
+IF(PLAYER0,TIMER1>=5000)
+QUICK_INFORMATION(10,"圣者与他的侍卫重生了。他的侍卫变成了恶魔。守护者，我真替你担心，你一定要顶住，顶住！",PLAYER0)
+ENDIF
+
+IF(PLAYER_GOOD,HORNY>=1)
+SET_TIMER(PLAYER0,TIMER2)
+ENDIF
+
+IF(PLAYER0,TIMER2>=100)
+     IF(PLAYER_GOOD,AVATAR==0)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY9,         1,		             8)
+     ENDIF
+ENDIF
+
+IF(PLAYER0,TIMER2>=100)
+     IF(PLAYER_GOOD,AVATAR==0)
+QUICK_INFORMATION(11,"完了完了！圣者的死亡使地上所有的国家都注意到了你。所有国家的圣者都进入了地下城来绞杀你，我们抵挡不住的，赶快撤退吧！！！",PLAYER0)
+     ENDIF
+ENDIF
+
+IF(PLAYER0,TIMER2>=100)
+     IF(PLAYER_GOOD,AVATAR==0)
+SET_TIMER(PLAYER0,TIMER4)
+     ENDIF
+ENDIF
+
+
+
+REM 建立一个队伍
+CREATE_PARTY(PARTY1)
+CREATE_PARTY(PARTY2)
+CREATE_PARTY(PARTY3)
+CREATE_PARTY(PARTY4)
+CREATE_PARTY(PARTY5)
+CREATE_PARTY(PARTY6)
+CREATE_PARTY(PARTY7)
+CREATE_PARTY(PARTY8)
+CREATE_PARTY(PARTY9)
+CREATE_PARTY(PARTY10)
+CREATE_PARTY(PARTY11)
+CREATE_PARTY(PARTY12)
+CREATE_PARTY(PARTY13)
+CREATE_PARTY(PARTY14)
+CREATE_PARTY(PARTY15)
+CREATE_PARTY(PARTY16)
+
+REM 向队伍1加入队员
+REM                队伍名称     队员            等级    随身金钱     目标（此为进攻心藏或敌人） ？
+ADD_TO_PARTY(      PARTY1,	TUNNELLER,	10,   	10000,       ATTACK_DUNGEON_HEART,      0)
+
+ADD_TO_PARTY(      PARTY2,	DWARF,	        1,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY2,	THIEF,	        1,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY2,	BARBARIAN,      1,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY2,	GIANT,	        1,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY2,	SAMURAI,        1,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY2,	ARCHER,	        1,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY2,	ARCHER,	        1,   	   0,        ATTACK_DUNGEON_HEART,      0)
+
+ADD_TO_PARTY(      PARTY3,	FAIRY,	        1,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY3,	FAIRY,	        1,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY3,	WIZARD,	        1,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY3,	WIZARD,	        1,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY3,	MONK,	        1,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY3,	WITCH,	        1,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY3,	MONK,	        1,   	   0,        ATTACK_DUNGEON_HEART,      0)
+
+ADD_TO_PARTY(      PARTY4,	KNIGHT,	        1,   	9999,        ATTACK_DUNGEON_HEART,      0)
+
+
+
+ADD_TO_PARTY(      PARTY5,	DWARF,	        4,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY5,	THIEF,	        4,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY5,	BARBARIAN,      4,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY5,	GIANT,	        4,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY5,	SAMURAI,        4,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY5,	ARCHER,	        4,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY5,	ARCHER,	        4,   	   0,        ATTACK_DUNGEON_HEART,      0)
+
+ADD_TO_PARTY(      PARTY6,	FAIRY,	        4,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY6,	FAIRY,	        4,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY6,	WIZARD,	        4,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY6,	WIZARD,	        4,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY6,	MONK,	        4,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY6,	WITCH,	        4,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY6,	MONK,	        4,   	   0,        ATTACK_DUNGEON_HEART,      0)
+
+ADD_TO_PARTY(      PARTY7,	KNIGHT,	        4,   	9999,        ATTACK_DUNGEON_HEART,      0)
+
+
+
+ADD_TO_PARTY(      PARTY8,	DWARF,	        7,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY8,	THIEF,	        7,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY8,	BARBARIAN,      7,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY8,	GIANT,	        7,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY8,	SAMURAI,        7,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY8,	ARCHER,	        7,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY8,	ARCHER,	        7,   	   0,        ATTACK_DUNGEON_HEART,      0)
+
+ADD_TO_PARTY(      PARTY9,	FAIRY,	        7,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY9,	FAIRY,	        7,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY9,	WIZARD,	        7,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY9,	WIZARD,	        7,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY9,	MONK,	        7,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY9,	WITCH,	        7,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY9,	MONK,	        7,   	   0,        ATTACK_DUNGEON_HEART,      0)
+
+ADD_TO_PARTY(      PARTY10,	KNIGHT,	        7,   	9999,        ATTACK_DUNGEON_HEART,      0)
+
+
+
+ADD_TO_PARTY(      PARTY11,	DWARF,	        10,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY11,	THIEF,	        10,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY11,	BARBARIAN,      10,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY11,	GIANT,	        10,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY11,	SAMURAI,        10,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY11,	ARCHER,	        10,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY11,	ARCHER,	        10,   	   0,        ATTACK_DUNGEON_HEART,      0)
+
+ADD_TO_PARTY(      PARTY12,	FAIRY,	        10,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY12,	FAIRY,	        10,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY12,	WIZARD,	        10,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY12,	WIZARD,	        10,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY12,	MONK,	        10,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY12,	WITCH,	        10,   	   0,        ATTACK_DUNGEON_HEART,      0)
+ADD_TO_PARTY(      PARTY12,	MONK,	        10,   	   0,        ATTACK_DUNGEON_HEART,      0)
+
+ADD_TO_PARTY(      PARTY13,	KNIGHT,	        10,   	9999,        ATTACK_DUNGEON_HEART,      0)
+
+
+
+ADD_TO_PARTY(      PARTY14,	AVATAR,	        10,    99999,        ATTACK_DUNGEON_HEART,      0)
+
+
+
+ADD_TO_PARTY(      PARTY15,	HORNY,	        10,   	  0,         ATTACK_DUNGEON_HEART,     0)
+
+
+
+IF(PLAYER0,TIMER0>=8000)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY1,         1,		             1)
+ENDIF
+IF(PLAYER0,TIMER0>=10000)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY2,         1,		             6)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY3,         1,		             5)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY4,         1,		             12)
+ENDIF
+IF(PLAYER0,TIMER0>=20000)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY5,         1,		             6)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY6,         1,		             4)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY7,         1,		             12)
+ENDIF
+IF(PLAYER0,TIMER0>=30000)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY8,         1,		             6)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY9,         1,		             4)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY10,        1,		             15)
+ENDIF
+IF(PLAYER0,TIMER0>=40000)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY11,        1,		             6)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY12,        1,		             4)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY13,        1,		             15)
+ENDIF
+IF(PLAYER0,TIMER0>=45000)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY14,         1,		             1)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY13,         1,		             44)
+ENDIF
+
+IF(PLAYER_GOOD,AVATAR>=1)
+SET_TIMER(PLAYER0,TIMER1)
+ENDIF
+
+IF(PLAYER0,TIMER1>=5000)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY14,         1,		             1)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY15,         1,		             44)
+ENDIF
+IF(PLAYER0,TIMER1>=11000)
+ADD_PARTY_TO_LEVEL(       PLAYER_GOOD,          PARTY14,         1,		             25)
+ENDIF
+
+IF(PLAYER_GOOD,AVATAR>=10)
+SET_TIMER(PLAYER0,TIMER3)
+ENDIF
+
+IF(PLAYER0,TIMER3>=100)
+     IF(PLAYER_GOOD,AVATAR==0)
+          WIN_GAME
+     ENDIF
+ENDIF
+
+IF(PLAYER0,TIMER3>=100)
+     IF(PLAYER_GOOD,AVATAR==0)
+          QUICK_INFORMATION(12,"没的说了，老大，你真让我没法形容.这地下世界是你的了.不，整个世界都是你的了！",PLAYER0)
+     ENDIF
+ENDIF
+
+
+
+
+   
+
+REM ********** 指令完成   **********
+REM ********** 此文件可直接修改，成为你要的文件。

@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00358
+REM Automatically generated on 20 Aug 2008, 03:30:10
+
+LEVEL_VERSION(1,2,0)
+LEVEL_TIMESTAMP(897220950,1219195810)
+USER_COMMANDS_COUNT(28,5,0,0)
+LEVEL_DESCRIPTION("A single player map for DK and/or DD. Make use of your 'never-dying' imps! For contact, email udo.weiler[at]cyberfun.de.")
+LEVEL_AUTHORS("Udo Weiler","")

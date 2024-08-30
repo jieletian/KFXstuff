@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00390
+REM Automatically generated on 20 Aug 2008, 11:32:34
+
+LEVEL_VERSION(1,0,2)
+LEVEL_TIMESTAMP(1147806624,1219224754)
+USER_COMMANDS_COUNT(8,2,0,0)
+LEVEL_DESCRIPTION("A level made to defend those damned Dragons everybody critisizes. I hope everyone can appreciate the 'artwork' in this one. Although it isn't required, I would suggest making a backup of creatures.txt and copying the one in this file into your data folder. It doesn't change much but one thing, Dragons gain fireball at level 3 instead of their granade. I personally keep this change in every level. And if anything, this 'heats up' this level even more.")
+LEVEL_AUTHORS("DzjeeAr","")

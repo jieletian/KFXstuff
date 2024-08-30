@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00226
+REM Automatically generated on 19 Aug 2008, 07:15:12
+
+LEVEL_VERSION(1,0,0)
+LEVEL_TIMESTAMP(946209996,1219122912)
+USER_COMMANDS_COUNT(18,4,0,0)
+LEVEL_DESCRIPTION("Two evenly matched players.. which one is faster? Which one will survive?")
+LEVEL_AUTHORS("","")

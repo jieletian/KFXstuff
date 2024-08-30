@@ -1,0 +1,30 @@
+[effectGenerator2]
+Name = "EFFECTGENERATOR_DRIPPING_WATER"
+GenerationDelayMin = 1
+GenerationDelayMax = 2
+
+[effectElement30]
+Name = "EFFECTELEMENT_LAVA_FLAME_STATIONARY"
+AnimationId = 910
+SolidGroundEffmodel = 43
+SolidGroundSoundId = 0
+SolidGroundLoudness = 256
+WaterEffmodel = 43
+WaterSoundId = 0
+WaterLoudness = 256
+LavaEffmodel = 43
+LavaSoundId = 0
+LavaLoudness = 256
+
+[effectElement31]
+Name = "EFFECTELEMENT_WATERDROP"
+AnimationId = 910
+SolidGroundEffmodel = 23
+SolidGroundSoundId = 0
+SolidGroundLoudness = 256
+WaterEffmodel = 23
+WaterSoundId = 0
+WaterLoudness = 256
+LavaEffmodel = 23
+LavaSoundId = 0
+LavaLoudness = 256

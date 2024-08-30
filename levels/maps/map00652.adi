@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00402
+REM Automatically generated on 20 Aug 2008, 13:59:08
+
+LEVEL_VERSION(1,0,2)
+LEVEL_TIMESTAMP(1159708710,1219233548)
+USER_COMMANDS_COUNT(23,2,0,0)
+LEVEL_DESCRIPTION("Prepare yourself for this level, Keeper! The heroes who had nothing to do with their day have decided to attack you, so decorate your claimed ground with their internal organs, and show them that you're a time killer only in direct understanding! Original french name is 'Avalanche Noire'.")
+LEVEL_AUTHORS("Santo","")

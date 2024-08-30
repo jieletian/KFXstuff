@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00435
+REM Automatically generated on 21 Aug 2008, 09:15:05
+
+LEVEL_VERSION(1,1,2)
+LEVEL_TIMESTAMP(1008785008,1219302905)
+USER_COMMANDS_COUNT(165,4,0,4)
+LEVEL_DESCRIPTION("Level layout same as in WOP map, but...")
+LEVEL_AUTHORS("Tom","")

@@ -1,0 +1,101 @@
+REM ***********************************************************************
+REM   Script for Level 522.BETA Level 22
+REM ***********************************************************************
+REM 
+REM 
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+DISPLAY_OBJECTIVE(177,PLAYER0)
+BONUS_LEVEL_TIME(2000)
+
+SET_TIMER(PLAYER0,TIMER0)
+IF(PLAYER0,TIMER0 >= 1000)
+    IF(PLAYER0,FLAG1 == 0)
+        DISPLAY_OBJECTIVE(150,PLAYER0)
+    ENDIF
+ENDIF
+IF(PLAYER0,TIMER0 >= 2000)
+    IF(PLAYER0,FLAG1 == 0)
+        DISPLAY_OBJECTIVE(151,PLAYER0)
+    LOSE_GAME
+    ENDIF
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER0,TOTAL_CREATURES == 0)
+    SET_FLAG(PLAYER0,FLAG1,1)  
+    DISPLAY_OBJECTIVE(178,PLAYER0)
+    ADD_CREATURE_TO_LEVEL(PLAYER0,SKELETON,1,1,10,0)
+    REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+    LEVEL_VERSION(1)
+    REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+    ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+    ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+    ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+    ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+    ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+    ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+    ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+    ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+    ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+    ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+    ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+    ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+    ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+    ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+    ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+        
+    MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+    MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+    DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+    TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+    TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+    QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+    WIN_GAME
+ENDIF
+
+REM ****************************提示信息**********************************
+
+REM "YOUR OBJECTIVE ON THIS SPECIAL LEVEL IS TO CRUSH ALL OF THE BILE DEMONS IN YOUR DUNGEON WITH THE ENEMY BOLDERS THAT YOU WILL FIND AROUND THE PERIMETER. TIME IS LIMITED. GOOD LUCK."
+REM 你在这个特殊层次上的目标是用你将在周围发现的敌人的大胆者粉碎你地下城里所有的巨魔，时间有限，祝你好运。
+REM "HALF YOUR TIME IS GONE,YOU MUST BE DECISIVE IN YOUR USE OF THE BOULDERS.一半的时间过去了，你必须果断地使用巨石。"
+REM "TIME'S UP. YOU HAVE FAILED时间到了。你失败了"
+REM "WELL DONE. YOU HAVE EXCELLED IN YOUR USE OF BOULDERS.做得好。你在使用巨石方面很出色"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

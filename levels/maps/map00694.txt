@@ -1,0 +1,147 @@
+REM ***********************************************************************
+REM   Script for Level   694(194).Tea Time 喝茶时间
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+SET_GENERATE_SPEED(200)
+MAX_CREATURES(PLAYER0,12)
+START_MONEY(PLAYER0,50000)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+ADD_CREATURE_TO_POOL(BILE_DEMON,2)
+ADD_CREATURE_TO_POOL(DARK_MISTRESS,2)
+ADD_CREATURE_TO_POOL(DEMONSPAWN,3)
+ADD_CREATURE_TO_POOL(SORCEROR,3)
+ADD_CREATURE_TO_POOL(SPIDER,2)
+ADD_CREATURE_TO_POOL(ORC,5)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+
+CREATURE_AVAILABLE(ALL_PLAYERS,DEMONSPAWN,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,DARK_MISTRESS,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,SORCEROR,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,BILE_DEMON,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,SPIDER,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,ORC,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,WORKSHOP,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,TORTURE,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,BARRACKS,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,BRIDGE,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SPEED,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CONCEAL,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_PROTECT,1,0)
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+SET_TIMER(PLAYER0,TIMER0)
+
+IF(PLAYER0,TIMER0 >= 1)
+    REM QUICK_OBJECTIVE(1,"Here is a big problem, keeper. The spirit of the knight who keeps the land cursed you. You have about an hour to make a few prayers that you knew before trespassers will come. Of course, the solution REMains to kill the poor soul in order to avenge you.",PLAYER0)
+    QUICK_INFORMATION(2,"这里是个大问题，守护者。让大地诅咒你的骑士精神。你有大约一小时的时间去做一些祈祷，你以前认识的人会来。当然，解决方案是为了报仇，杀死你的可怜的灵魂.",PLAYER0)
+ENDIF
+IF(PLAYER0,TIMER0 >= 200)
+    REM QUICK_INFORMATION(2,"In his greater bliss, the lord of these grounds leaves you nice hourglass size in the bottom right. When the dwarves have reached the heart of your dungeon, something very unpleasant for us will happen... Of course, that you should not influence the course of time... Results would be unpredictable.")
+    QUICK_INFORMATION(3,"在他更大的幸福，这些理由的主让你很好的沙漏大小在底部的权利。当矮人已经达到你的地下城心，我们的事很不愉快的事情会发生…当然，你不应该影响时间的过程…结果将是不可预测的。")
+ENDIF
+IF(PLAYER0,SORCEROR == 2)
+    REM QUICK_INFORMATION(3,"Your Warlocks are formal. If you'll encounter the lord who cursed you, you will resemble a chicken after reincarnation.")
+    QUICK_INFORMATION(4,"我们的术士是正式的。如果你会遇到诅咒你的主，你会像一只鸡后转世..")
+ENDIF
+IF(PLAYER0,TIMER0 >= 2000)
+    REM QUICK_INFORMATION(4,"The grounds of the lords are in north. In its forterress of lava, it supervises the whole domain. Its citadel is impregnable, and you have only little time to try something. Best will be to take an small group with you and to seek for a poorly guarded passage.")
+    QUICK_INFORMATION(5,"主的土地在北方。在forterress熔岩，它监督整个域。它的城堡是坚不可摧的，你只有很少的时间去尝试。最好的将是带一个小团体和你一起去寻找一个守护着的通道。")
+ENDIF
+
+IF(PLAYER_GOOD,DWARFA == 0)
+    REM QUICK_INFORMATION(5,"I had warned you, Keeper; to break the course of time is not an easy thing...")
+    QUICK_INFORMATION(6,"我曾警告过你，守护者；要打破时间的过程不是一件容易的事。...")
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,GIANT,1,5,10,0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,AVATAR,1,1,10,0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,KNIGHT,1,5,10,0)
+ENDIF
+IF(PLAYER_GOOD,KNIGHT == 0)
+    REM QUICK_OBJECTIVE(6,"The lord is deposed and the curse is no more... Good work as always.",PLAYER0)
+    QUICK_INFORMATION(7,"主被废黜，诅咒是没有更多的…一如既往的好。",PLAYER0)
+ENDIF
+IF_ACTION_POINT(1,PLAYER_GOOD)
+    REM QUICK_OBJECTIVE(7,"Your time has expired, keeper... The curse will fall on you!",PLAYER0)
+    QUICK_OBJECTIVE(8,"您的时间已经过期，守护者…诅咒将落在你！",PLAYER0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,GIANT,1,5,10,0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,AVATAR,1,1,10,0)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,KNIGHT,1,5,10,0)
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER_GOOD,KNIGHT == 0)
+    
+        REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+        LEVEL_VERSION(1)
+        REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+        ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+        ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+        ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+        ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+        ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+        ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+        ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+        ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+        ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+        ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+        
+        MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+        MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+        DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+        TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+        TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+        QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+        WIN_GAME
+ENDIF
+IF(PLAYER0,DUNGEON_DESTROYED == 1)
+    LOSE_GAME
+ENDIF
+
+REM ****************************提示信息**********************************
+QUICK_OBJECTIVE(1,"参考提示：1、杀死那两个矮就会刷终极BOSS出来消灭你，但杀死一个就可以延长开战的时候；2、如果你把矮人吹到岛上，就等行控制了战争开关；3、熔岩、哨所、桥组合起来可以不打仗而烧死敌人;4、你选择了战争方式就要选择好相应的兵种。",PLAYER0)  
+
+
+
+
+
+
+
+
+
+

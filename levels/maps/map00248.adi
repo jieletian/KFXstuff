@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00248
+REM Automatically generated on 04 Oct 2008, 06:38:32
+
+LEVEL_VERSION(1,7,2)
+LEVEL_TIMESTAMP(887734610,1223095112)
+USER_COMMANDS_COUNT(4869,121,286,176)
+LEVEL_DESCRIPTION("You're favourite Horned Reaper has been captured, brainwashed and imprisoned. To finish this level, you'll have to set him free and kill all opponents in the process, thus making the world a better and more evil place (yeah!).")
+LEVEL_AUTHORS("Karsten Plesner","")

@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00005
+REM Automatically generated on 29 Aug 2008, 17:47:38
+
+LEVEL_VERSION(1,0,0)
+LEVEL_TIMESTAMP(1163357056,1220024858)
+USER_COMMANDS_COUNT(4,1,0,0)
+LEVEL_DESCRIPTION("Blasted heroes have managed to capture an allied band of Metilians, which are held prisoner. A full scale assault would only alert them, and that's not something we'd want... Infiltrate the region as quiet as possible, Keeper, and find a way to break the dam. This won't be easy. Note that it would only be a matter of time untill your Dungeon is discovered, and heroes will come to destroy it. Make haste!")
+LEVEL_AUTHORS("DzjeeAr","")

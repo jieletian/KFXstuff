@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00221
+REM Automatically generated on 06 Sep 2009, 03:44:49
+
+LEVEL_VERSION(0,1,0)
+LEVEL_TIMESTAMP(1252185970,1252201489)
+USER_COMMANDS_COUNT(0,0,0,0)
+LEVEL_DESCRIPTION("Ninja, seek our enemy in these inaccessible rocky regions, surely somewhere here he hides.")
+LEVEL_AUTHORS("Joachim Zielinski","")

@@ -1,0 +1,122 @@
+[common]
+LightsCount = 15
+
+[light0]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 4180
+SubtileX = [46, 0]
+SubtileY = [146, 0]
+SubtileZ = [2, 64]
+
+[light1]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 4348
+SubtileX = [42, 192]
+SubtileY = [154, 0]
+SubtileZ = [2, 64]
+
+[light2]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 4690
+SubtileX = [46, 0]
+SubtileY = [164, 0]
+SubtileZ = [2, 64]
+
+[light3]
+LightIntensity = 32
+LightRange = [11, 0]
+ParentTile = 5562
+SubtileX = [110, 64]
+SubtileY = [194, 128]
+SubtileZ = [3, 192]
+
+[light4]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 3923
+SubtileX = [42, 192]
+SubtileY = [139, 0]
+SubtileZ = [2, 64]
+
+[light5]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 4008
+SubtileX = [42, 192]
+SubtileY = [142, 0]
+SubtileZ = [2, 64]
+
+[light6]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 4433
+SubtileX = [42, 192]
+SubtileY = [157, 0]
+SubtileZ = [2, 64]
+
+[light7]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 4518
+SubtileX = [42, 192]
+SubtileY = [160, 0]
+SubtileZ = [2, 64]
+
+[light8]
+LightIntensity = 32
+LightRange = [16, 0]
+ParentTile = 4180
+SubtileX = [46, 193]
+SubtileY = [150, 169]
+SubtileZ = [2, 192]
+
+[light9]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 5556
+SubtileX = [96, 192]
+SubtileY = [196, 0]
+SubtileZ = [2, 64]
+
+[light10]
+LightIntensity = 32
+LightRange = [16, 0]
+ParentTile = 5388
+SubtileX = [100, 193]
+SubtileY = [192, 169]
+SubtileZ = [2, 192]
+
+[light11]
+LightIntensity = 32
+LightRange = [16, 0]
+ParentTile = 5389
+SubtileX = [103, 193]
+SubtileY = [192, 169]
+SubtileZ = [2, 192]
+
+[light12]
+LightIntensity = 32
+LightRange = [16, 0]
+ParentTile = 5390
+SubtileX = [106, 193]
+SubtileY = [192, 169]
+SubtileZ = [2, 192]
+
+[light13]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 5562
+SubtileX = [110, 128]
+SubtileY = [196, 192]
+SubtileZ = [2, 64]
+
+[light14]
+LightIntensity = 32
+LightRange = [16, 0]
+ParentTile = 6654
+SubtileX = [73, 193]
+SubtileY = [237, 169]
+SubtileZ = [2, 192]

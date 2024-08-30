@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00430
+REM Automatically generated on 21 Aug 2008, 07:44:35
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(1011462884,1219297475)
+USER_COMMANDS_COUNT(8,2,0,0)
+LEVEL_DESCRIPTION("You've come here with little assistance keeper. The battle has already begun, so destroy all enemies, but be careful - avatars may appear. English and french translations included.")
+LEVEL_AUTHORS("Mike Short","")

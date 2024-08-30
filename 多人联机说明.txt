@@ -1,0 +1,96 @@
+地下城守护者FX 中的多人联机游戏说明
+------------------------------
+
+KeeperFX 支持通过 TCP/IP 或 ENET/UDP 进行多人游戏。不支持串行、调制解调器和 IPX。
+不支持。1Player 允许您单独练习多人游戏地图。
+
+KeeperFX 和《地下城守护者》一样，需要低延迟连接才能正常运行。
+在很远的距离上进行游戏时，延迟总是很高，因此与附近的人一起玩 
+附近的人一起玩效果最好。当您的距离超过几百公里时，多人游戏将开始变得无法进行。
+
+* 高延迟连接会让两个游戏都运行得很慢。
+* 仅限两名玩家。
+* 可能会出现不同步和崩溃现象，报告问题后可能会得到修复。
+
+通过 ENET/UDP 进行多人游戏
+------------------------------
+
+托管 ENET/UDP 游戏：
+确保 5556 端口对流量开放，并转发到您电脑上的 5556 端口。
+端口。开始游戏后，单击多人游戏 -> ENET/UDP -> 创建游戏。
+创建游戏。
+
+加入 ENET/UDP 游戏：
+启动游戏时指定命令行选项 -sessions [ip_address]:5556 。
+例如，如果主机的 IP 地址是 55.83.54.187，则相应的命令行选项为
+行选项为 -sessions 55.83.54.187:5556
+可以使用启动器来设置。
+
+通过在每个额外地址前加上分号，可以在命令行中添加多个会话。
+例如：-sessions 55.83.54.187:5555;214.43.45.67:5556
+
+启动游戏后，单击多人游戏 -> ENET/UDP -> [在列表中选择 IP 地址] -> 加入游戏。
+地址] -> 加入游戏。
+
+通过 TCP/IP 进行多人游戏
+------------------------------
+
+通过 TCP/IP 主持或加入游戏的工作原理与通过 ENET/UDP 主持或加入游戏的工作原理相同，但有一个主要区别
+关键区别。打开端口 5555，并从多人游戏菜单中选择 TCP/IP。
+菜单中选择 TCP/IP。
+
+作为一种协议，TCP/IP 不太适合多人游戏，而且没有已知的 
+使用该协议比使用 ENET/UDP 要慢得多。
+不过，这种协议存在的时间较长，而且已不再被开发或测试，因此没有必要使用。
+开发或测试，因此 ENET/UDP 上的新错误有可能没有在此协议中出现。
+有可能没有在此协议中出现。
+---------------
+*以上文本为翻译，以下为英文原文
+
+Multiplayer in KeeperFX
+------------------------------
+
+KeeperFX supports multiplayer over TCP/IP or ENET/UDP. Serial, Modem and IPX are
+not supported. 1Player allows you to practice multiplayer maps alone.
+
+KeeperFX, like Dungeon Keeper, requires a low latency connection to work properly.
+Latency is always high when playing over very high distances, so playing with 
+people near you will work best. Multiplayer will start to become unplayable when 
+you are over a couple hundred kilometer away from each other.
+
+* High-latency connections will make both games run very slow.
+* Limited to two players.
+* Desyncs and crashes are very possible, report issues and they may be fixed.
+
+Multiplayer over ENET/UDP
+------------------------------
+
+To host a ENET/UDP game:
+Make sure the port 5556 is open for traffic and is forwarded to port 5556 on
+your computer. When you have started the game, click Multiplayer -> ENET/UDP ->
+Create Game.
+
+To join a ENET/UDP game:
+Specify a command line option -sessions [ip_address]:5556 when starting game.
+For instance, if the host's IP address is 55.83.54.187, the appropriate command
+line option is -sessions 55.83.54.187:5556
+The launcher can be used to set this.
+
+Several sessions can be added to command line by prepending a semicolon before
+each extra address, e.g. -sessions 55.83.54.187:5555;214.43.45.67:5556
+
+When you have started the game, click Multiplayer -> ENET/UDP -> [select IP
+address in list] -> Join Game.
+
+Multiplayer over TCP/IP
+------------------------------
+
+Hosting or joining a game over TCP/IP works the same as over ENET/UDP, with a
+key difference. Open port 5555 instead and select TCP/IP from the multiplayer
+menu.
+
+TCP/IP is less suitable for multiplayer as a protocol, and there's no known 
+reason to use this over ENET/UDP as you will have significantly more lag.
+However, this protocal has been around for longer and is no longer being 
+developed or tested on, there's a chance that new bugs on ENET/UDP have
+not ended up in this protocol.

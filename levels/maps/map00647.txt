@@ -1,0 +1,173 @@
+REM ***********************************************************************
+REM   Script for Level   647(147).Razons Library Razon(理性)的图书馆
+REM Steve Tupper
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+SET_GENERATE_SPEED(100)
+START_MONEY(PLAYER0, 100000)
+MAX_CREATURES(PLAYER0, 30)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+ADD_CREATURE_TO_POOL(TROLL,        5)
+ADD_CREATURE_TO_POOL(DRAGON,       4)
+ADD_CREATURE_TO_POOL(DEMONSPAWN,   20)
+ADD_CREATURE_TO_POOL(FLY,          20)
+ADD_CREATURE_TO_POOL(DARK_MISTRESS,4)
+ADD_CREATURE_TO_POOL(SORCEROR,     50)
+ADD_CREATURE_TO_POOL(BILE_DEMON,   4)
+ADD_CREATURE_TO_POOL(BUG,          20)
+ADD_CREATURE_TO_POOL(HELL_HOUND,   15)
+ADD_CREATURE_TO_POOL(ORC,          10)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+
+CREATURE_AVAILABLE(PLAYER0,TROLL,        1, 1)
+CREATURE_AVAILABLE(PLAYER0,DRAGON,       1, 1)
+CREATURE_AVAILABLE(PLAYER0,DEMONSPAWN,   1, 1)
+CREATURE_AVAILABLE(PLAYER0,FLY,          1, 1)
+CREATURE_AVAILABLE(PLAYER0,DARK_MISTRESS,1, 1)
+CREATURE_AVAILABLE(PLAYER0,SORCEROR,     1, 1)
+CREATURE_AVAILABLE(PLAYER0,BILE_DEMON,   1, 1)
+CREATURE_AVAILABLE(PLAYER0,BUG,          1, 1)
+CREATURE_AVAILABLE(PLAYER0,HELL_HOUND,   1, 1)
+CREATURE_AVAILABLE(PLAYER0,ORC,          1, 1)
+
+CREATURE_AVAILABLE(PLAYER0,SKELETON,     1, 0)
+CREATURE_AVAILABLE(PLAYER0,VAMPIRE,      1, 0)
+CREATURE_AVAILABLE(PLAYER0,GHOST,        1, 0)
+CREATURE_AVAILABLE(PLAYER0,HORNY,        1, 0)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE(PLAYER0, BRIDGE,    1, 1)
+ROOM_AVAILABLE(PLAYER0, GUARD_POST,1, 0)
+ROOM_AVAILABLE(PLAYER0, TREASURE,  1, 0)
+ROOM_AVAILABLE(PLAYER0, RESEARCH,  1, 0)
+ROOM_AVAILABLE(PLAYER0, PRISON,    1, 0)
+ROOM_AVAILABLE(PLAYER0, TORTURE,   1, 0)
+ROOM_AVAILABLE(PLAYER0, TRAINING,  1, 0)
+ROOM_AVAILABLE(PLAYER0, WORKSHOP,  1, 0)
+ROOM_AVAILABLE(PLAYER0, SCAVENGER, 1, 0)
+ROOM_AVAILABLE(PLAYER0, TEMPLE,    1, 0)
+ROOM_AVAILABLE(PLAYER0, GRAVEYARD, 1, 0)
+ROOM_AVAILABLE(PLAYER0, BARRACKS,  1, 0)
+ROOM_AVAILABLE(PLAYER0, GARDEN,    1, 0)
+ROOM_AVAILABLE(PLAYER0, LAIR,      1, 0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+DOOR_AVAILABLE(PLAYER0, BRACED,1,0)
+DOOR_AVAILABLE(PLAYER0, STEEL, 1,0)
+DOOR_AVAILABLE(PLAYER0, MAGIC, 1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定陷阱*********************************
+REM  (玩家,陷阱名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+TRAP_AVAILABLE(PLAYER0, POISON_GAS,   1,0)
+TRAP_AVAILABLE(PLAYER0, LIGHTNING,    1,0)
+TRAP_AVAILABLE(PLAYER0, WORD_OF_POWER,1,0)
+TRAP_AVAILABLE(PLAYER0, LAVA,         1,0)
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+IF_ACTION_POINT(1, PLAYER0)
+  SET_TIMER(PLAYER0, TIMER1)
+  SET_TIMER(PLAYER0, TIMER2)
+ENDIF
+
+NEXT_COMMAND_REUSABLE
+IF(PLAYER0, TIMER1 > 2500)
+   NEXT_COMMAND_REUSABLE
+   IF(PLAYER0, TIMER2 < 50000)
+      NEXT_COMMAND_REUSABLE
+      SET_TIMER(PLAYER0, TIMER1)
+      NEXT_COMMAND_REUSABLE
+      ADD_CREATURE_TO_LEVEL(PLAYER_GOOD, KNIGHT,   -1, 1, 10, 1000)
+      NEXT_COMMAND_REUSABLE
+      ADD_CREATURE_TO_LEVEL(PLAYER_GOOD, ARCHER,   -2, 5, 10, 400)
+      NEXT_COMMAND_REUSABLE
+      ADD_CREATURE_TO_LEVEL(PLAYER_GOOD, WIZARD,   -3, 1, 10, 2000)
+      NEXT_COMMAND_REUSABLE
+      ADD_CREATURE_TO_LEVEL(PLAYER_GOOD, BARBARIAN,-4, 2, 10, 100)
+      NEXT_COMMAND_REUSABLE
+      ADD_CREATURE_TO_LEVEL(PLAYER_GOOD, MONK,     -5, 3, 10, 3000)
+   ENDIF
+ENDIF
+
+REM QUICK_OBJECTIVE(1, "The legend goes thus: Razon was the most powerful of your kind to ever roam the world, so powerful was he that all the good forces in all the lands were forced to unite against him. However he was not easy to find. Razon saught shelter in the greatest dungeon ever created and it is there that he built his legendary library.", PLAYER0)
+QUICK_OBJECTIVE(1, "传说是这样的：Razon(理性)是最强大的，如此强大的他，在所有地方的所有好的部队被迫团结起来反对他。然而他不容易找到。在地下城里所创造的最大的理性都住在那里建造了他的传奇图书馆。", PLAYER0)
+
+IF(PLAYER0, GAME_TURN > 50)
+  REM QUICK_INFORMATION(2, "Razon was finally betrayed by an evil sorceror, bribed by the kings of the world to reveal Razon's hiding place. Razon was attacked by the good armies and for many days the battle was faught. Eventually, seeing defeat was near Razon hatched one final plan.")
+  QUICK_INFORMATION(2, "Razon(理性)终于被一个邪恶的巫师背叛，贿赂的世界的国王揭示理性的藏身之处。理性受到良好的军队攻击了许多天。最终，看到失败接近理性，孵化最后一个计划")
+ENDIF
+IF(PLAYER0, GAME_TURN > 100)
+  REM QUICK_INFORMATION(3, "After hiding many of his spells and treasures, Razon sealed his library with four great doors of gold and then cast one final mighty spell. The land itself came alive and consumed the dungeon and buried the armies in millions of tons of solid rock.")
+  QUICK_INFORMATION(3, "隐藏他的许多法术和宝物后，理性封住了他的图书馆黄金四大门再投最后一个强大的咒语。这土地本身是活的，消耗的地牢和埋在数百万吨的固体岩石的军队。")
+ENDIF
+IF(PLAYER0, GAME_TURN > 150)
+  QUICK_INFORMATION(4, "And what of Razon and his betrayer? Razon was never heard of again, maybe he escaped, maybe he was destroyed by his own magic, no one knows. The evil sorceror's fate was not so mysterious - sealed in the library he was doomed to haunt it's halls for eternity.")
+  REM QUICK_INFORMATION(4, "与理性和背叛者是什么？再没有传闻，也许他逃脱了，也许他被自己的魔法摧毁，没有人知道。邪恶的巫师的命运并不是那么神秘的密封在图书馆，他注定要在它的大厅为永恒。")
+ENDIF
+IF(PLAYER0, GAME_TURN > 300)
+  REM QUICK_INFORMATION(5, "The where-abouts of Razon's Library is lost in time but you master believe you know where it may be. For centuries the heroes of this land have performed an unusual ritual, its meaning lost even to them. Their strongest warriors take turns in guarding a block of gold! The fools have no idea.")
+  QUICK_INFORMATION(5, "理性的图书馆在哪里丢失的时间里，你却总相信你知道它。几个世纪以来，这片土地上的英雄都有一个不寻常的仪式，它的意义甚至消失了。他们最强壮的战士轮流守卫一块金子！愚人不知道。")
+ENDIF
+IF(PLAYER0, GAME_TURN > 350)
+  REM QUICK_INFORMATION(6, "Find Razon's Library master and you will gain the power to destroy the heroes in this country. There are obstacles however. The caverns are said to be the home of spiders and the magic in the area has been sapped - a good omen perhaps?")
+  QUICK_INFORMATION(6, "找到理性的库掌管者，你将获得力量去摧毁这个国家的英雄。然而有障碍。洞穴被称为蜘蛛的家和地区的魔法已经耗尽--也许是一个好兆头")
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER0, TIMER2 > 50000)
+   IF(PLAYER_GOOD, TOTAL_CREATURES == 0)
+      
+        REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+        LEVEL_VERSION(1)
+        REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+        ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+        ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+        ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+        ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+        ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+        ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+        ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+        ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+        ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+        ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+        
+        MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+        MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+        DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+        TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+        TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+        QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+        WIN_GAME
+   ENDIF
+ENDIF
+
+REM ****************************提示信息**********************************
+
+
+
+
+
+

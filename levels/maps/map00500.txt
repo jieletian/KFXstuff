@@ -1,0 +1,298 @@
+REM ***********************************************************************
+REM   Script for Level 500.DEMO Level
+REM ***********************************************************************
+REM 
+REM 
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+SET_GENERATE_SPEED(400)
+MAX_CREATURES(PLAYER0,12)
+START_MONEY(PLAYER0,5000)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+ADD_CREATURE_TO_POOL(FLY,4)
+ADD_CREATURE_TO_POOL(BUG,7)
+ADD_CREATURE_TO_POOL(SPIDER,3)
+ADD_CREATURE_TO_POOL(TROLL,5)
+ADD_CREATURE_TO_POOL(BILE_DEMON,3)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+CREATURE_AVAILABLE(PLAYER0,FLY,1,0)
+CREATURE_AVAILABLE(PLAYER0,BUG,1,0)
+CREATURE_AVAILABLE(PLAYER0,SPIDER,1,0)
+CREATURE_AVAILABLE(PLAYER0,TROLL,1,0)
+CREATURE_AVAILABLE(PLAYER0,BILE_DEMON,1,0)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])**********
+ROOM_AVAILABLE(PLAYER0,TREASURE,1,0)
+ROOM_AVAILABLE(PLAYER0,GARDEN,1,0)
+ROOM_AVAILABLE(PLAYER0,LAIR,1,0)
+ROOM_AVAILABLE(PLAYER0,TRAINING,1,0)
+ROOM_AVAILABLE(PLAYER0,BRIDGE,1,0)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(PLAYER0,POWER_HAND,1,1)
+MAGIC_AVAILABLE(PLAYER0,POWER_SLAP,1,1)
+MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,0)
+MAGIC_AVAILABLE(PLAYER0,POWER_heal_creature,1,0)
+
+REM 7增援部队添加
+REM ****************************增援部队**********************************
+REM CREATE_PARTY =>组建队伍                (队伍名称)   
+REM ADD_TO_PARTY=>添加生物到队伍中   (队伍名称,生物名称,生物等级,携带金钱数量,任务,延时)
+CREATE_PARTY(ONE)
+    ADD_TO_PARTY(ONE,THIEF,1,300,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(ONE,THIEF,1,300,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(ONE,THIEF,1,300,ATTACK_ENEMIES,0)
+CREATE_PARTY(VICTOR)
+    ADD_TO_PARTY(VICTOR,ARCHER,2,600,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(VICTOR,ARCHER,1,400,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(VICTOR,ARCHER,1,400,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(VICTOR,WIZARD,2,800,ATTACK_ENEMIES,0)
+CREATE_PARTY(FINAL)
+    ADD_TO_PARTY(FINAL,WIZARD,2,800,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(FINAL,ARCHER,2,500,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(FINAL,ARCHER,2,500,ATTACK_ENEMIES,0)
+    ADD_TO_PARTY(FINAL,KNIGHT,3,2000,ATTACK_ENEMIES,0)
+
+
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+IF(PLAYER0,GAME_TURN >= 40)
+    REM QUICK_OBJECTIVE(1,"Money sits at the root of all Evil,and so it is appropriate that you start your Empire by building a Treasure Room. Select the Treasure Room Icon with the Left Mouse Button (LMB) and build a 3X3 Treasure Room in an empty space in your Dungeon.",PLAYER0)
+    QUICK_OBJECTIVE(1,"金钱是万恶之源，所以你可以通过建造一个宝库来开启你的帝国。用鼠标左键（lmb）选择“宝藏室”图标，并在地牢的空白空间中建立一个3x3的宝藏室。",PLAYER0)
+    ROOM_AVAILABLE(PLAYER0,TREASUER,1,1)
+    TUTORIAL_BUTTON(6,-1)
+ENDIF
+
+IF(PLAYER0,GAME_TURN >= 100)
+    DISPLAY_INFORMATION(1,PLAYER0)
+ENDIF
+
+IF(PLAYER0,GAME_TURN >= 450)
+    REM QUICK_INFORMATION(33,"You may see a map of the entire realm by pressing 'M' or clicking on the scroll at the top-left of your panel.")
+    QUICK_INFORMATION(33,"您可以通过按“M”或单击面板左上角的滚动条来查看整个领域的地图。")
+ENDIF
+
+IF(PLAYER0,TREASURE >= 1)
+    REM QUICK_INFORMATION(30,"A Treasure Room is used to store any gold mined by your imps.")
+    QUICK_INFORMATION(30,"金库是用来储存你的小鬼们开采的任何黄金的。")
+    IF(PLAYER0,MONEY <= 1000)
+        REM QUICK_INFORMATION(2,"Your gold reserves are running low. Tag the gold seam to the South. Your imps will mine it out and replenish your coffers.")
+        QUICK_INFORMATION(2,"你的黄金储备正在减少。把金缝贴在南边。你的小鬼会把它挖出来，补充你的金库。")
+    ENDIF
+ENDIF
+
+IF(PLAYER0,TREASURE >= 9)
+    REM QUICK_OBJECTIVE(3,"Click with the right mouse button to stop building rooms. Now tunnel to the Portal in the East by tagging the rock with your left mouse button. Your Imps will then claim it for you.",PLAYER0)
+    QUICK_OBJECTIVE(3,"用鼠标右键单击可停止创建房间。现在，用鼠标左键标记岩石，通过隧道到达东部的入口。你的小鬼会为你认领。",PLAYER0)
+    SET_TIMER(PLAYER2,TIMER0)
+    SET_FLAG(PLAYER0,FLAG4,1)
+    IF(PLAYER2,TIMER0 >= 275)
+        REM QUICK_INFORMATION(7,"Using the right mouse button (RMB),you may slap your creatures,thus making them work more quickly. Be careful not to beat them too frequently! This will make them angry,or at worst you will beat them to death!")
+        QUICK_INFORMATION(7,"使用鼠标右键（RMB），你可以拍打你的生物，从而使他们工作更快。小心别经常打他们！这会让他们生气，或者最坏的情况下你会把他们打死！")
+        IF(PLAYER2,TIMER0 >= 550)
+            REM QUICK_INFORMATION(8,"Clicking with the LMB whilst over a minion will pick that creature up. Any eight of the creatures you own can be carried in your hand like this. Use this method to place Imps next to the tasks that you wish them to carry out. Drop them on your own,or Neutral territory with the RMB.") 
+            QUICK_INFORMATION(8,"当超过一个小人的时候点击LMB会把那个生物带走,你所拥有的任何八种生物都可以像这样在你的手上携带。使用此方法将IMP放置在希望它们执行的任务旁边。把它们放在你自己的地方，或者用RMB放在中立的地区。") 
+        ENDIF
+    ENDIF
+ENDIF
+
+IF(PLAYER0,FLAG4 == 1)
+    IF(PLAYER0,ENTRANCE >= 1)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+        TUTORIAL_FLASH_BUTTON(8,-1)
+        REM QUICK_OBJECTIVE(19,"Now you have claimed a portal creatures will enter your dungeon seeking employment. You must build a 3X3 Lair to house your creatures. Larger Lairs hold more creatures.",player0)
+         QUICK_OBJECTIVE(19,"现在你已经占领了一个入口，生物将进入你的地下城寻找工作，你必须建造一个3x3以上的巢穴来容纳你的生物，更大的巢穴容纳更多的生物。",player0)
+   ENDIF
+ENDIF
+
+IF (PLAYER0,TOTAL_IMPS <= 3)
+    IF (PLAYER0,FLAG2 == 0)
+        REM QUICK_INFORMATION(39,"You may create more imps by choosing the Create Imp spell in the spell panel and then clicking with the left mouse button on a section of your dungeon floor.",PLAYER0)
+        QUICK_INFORMATION(39,"您可以通过在“法术”面板中选择“创建IMP”法术，然后用鼠标左键单击地牢地板的一部分来创建更多的IMP。",PLAYER0)
+        SET_FLAG(PLAYER0,FLAG2,1)
+    ENDIF
+ENDIF
+
+IF(PLAYER0,LAIR >= 9)
+    REM QUICK_OBJECTIVE(31,"Now you have built a small lair,await the arrival of your first minion.",PLAYER0)
+    QUICK_OBJECTIVE(31,"现在你已经建造了一个小巢穴，等待你的第一个仆人的到来。",PLAYER0)
+    SET_TIMER(PLAYER2,TIMER1)
+    IF(PLAYER2,TIMER1 >= 250)
+        REM QUICK_INFORMATION(20,"Rooms become more efficient as they increase in size. Build neat,rectangular rooms to ensure maximum efficiency.")
+        QUICK_INFORMATION(20,"房间的大小越大，效率就越高，建造整洁的矩形房间，以确保最大效率.")
+        CREATURE_AVAILABLE(PLAYER0,FLY,1,1)
+    ENDIF
+ENDIF
+
+IF(PLAYER0,FLY >= 1)
+    REM QUICK_OBJECTIVE(4,"A humble Fly has become the first of your troops. More powerful creatures require a source of sustenance. Build a 3X3 Hatchery to feed your creatures.",PLAYER0)
+    QUICK_OBJECTIVE(4,"一只卑微的苍蝇已成为你的第一支部队，更强大的生物需要食物来源，建造一个3x3孵化场来喂养你的生物。",PLAYER0)
+    ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+    TUTORIAL_FLASH_BUTTON(7,-1)
+ENDIF
+
+IF(PLAYER0,BUG >= 1)
+    REM QUICK_INFORMATION(5,"A Beetle has settled in your Lair. To make your dungeon more appealing to the creatures of this world you can build bigger rooms.")
+    QUICK_INFORMATION(5,"一只甲虫在你的巢穴里安顿下来了，了让你的地下城对这个世界上的生物更有吸引力，你可以建造更大的房间。")
+ENDIF
+
+IF(PLAYER0,GARDEN >= 9)
+    SET_TIMER(PLAYER0,TIMER1)
+    CREATURE_AVAILABLE(PLAYER0,BUG,1,1)
+    REM QUICK_OBJECTIVE(23,"While you are waiting for your ranks to grow,try possessing a creature. Select the icon from the spell menu and choose your creature,right clicking to release it from its bond.",player0)
+    QUICK_OBJECTIVE(23,"当你等待你的队伍成长时，试着拥有一个生物。从法术菜单中选择图标并选择你的生物，右击将其从绑定中释放。",player0)
+    TUTORIAL_FLASH_BUTTON(36,-1)
+ENDIF
+
+
+IF(PLAYER0,TOTAL_CREATURES >= 5)
+    REM QUICK_INFORMATION32,"Left Click on a creature in the creature panel to place it in your Hand of Evil. Clicking on the creature icon itself will select the most experienced specimen of the breed.")
+    QUICK_INFORMATION32,"左键单击生物面板中的某个生物，将其置于邪恶之手，点击生物图标本身将选择该品种最有经验的样本。")
+ENDIF
+IF(PLAYER0,TOTAL_CREATURES >= 7)
+    ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+    TUTORIAL_FLASH_BUTTON(10,-1)
+    CREATURE_AVAILABLE(PLAYER0,troll,1,1)
+    CREATURE_AVAILABLE(PLAYER0,spider,1,1)
+    CREATURE_AVAILABLE(PLAYER0,bile_demon,1,1)
+    REM QUICK_OBJECTIVE(6,"Now dig out a 3X3 area and,once your imps have claimed the floor,build a Training Room in the space you have excavated.",PLAYER0)
+    QUICK_OBJECTIVE(6,"现在挖一个3x3的区域，一旦你的小鬼们认领了地面，在你挖掘的地方建一个训练室。",PLAYER0)
+ENDIF
+
+
+IF(PLAYER0,TRAINING >= 1)
+    REM QUICK_INFORMATION(34,"Creatures in the training room will improve their fighting prowess.")
+    QUICK_INFORMATION(34,"训练室里的生物会提高他们的战斗力。")
+    IF(PLAYER0,TRAINING >= 9)
+        SET_TIMER(PLAYER0,TIMER2)
+        REM QUICK_OBJECTIVE(35,"Now that you have built the training room,you can tell your creatures to train by picking them up with the LMB and dropping them in it.",PLAYER0)
+        QUICK_OBJECTIVE(35,"现在你已经建立了训练室，你可以告诉你的生物训练，通过拿起他们与LMB和扔在它。",PLAYER0)
+        IF(PLAYER0,TIMER2 >= 800)
+            IF (PLAYER0,FLAG2 == 0)
+                REM QUICK_OBJECTIVE(18,"Your mission here is to use your power to rid this land of all good. Forge a path North!",PLAYER0)
+                QUICK_OBJECTIVE(18,"你在这里的任务是利用你的力量来消灭这片土地的一切，往北走！",PLAYER0)
+                SET_FLAG(PLAYER0,FLAG2,1)
+            ENDIF
+            TUTORIAL_FLASH_BUTTON(21,-1)
+            SET_FLAG(PLAYER_GOOD,FLAG0,1)
+            IF(PLAYER0,TIMER2 >= 1200)
+                REM QUICK_OBJECTIVE(9,"YOUR MISSION HERE IS TO USE YOUR POWER TO RID THIS LAND OF ALL GOOD. FORGE A PATH NORTH!",PLAYER0)
+                QUICK_OBJECTIVE(9,"你在这里的任务是利用你的力量来消灭这片土地的一切。往北走！",PLAYER0)
+            ENDIF
+         ENDIF
+     ENDIF
+ENDIF
+               
+IF_ACTION_POINT(1,PLAYER0)
+    REM QUICK_INFORMATION(10,"You have found a spell of acceleration. When cast on your creatures this will allow them to move at a greatly increased rate for a time. Holding down the LMB will increase the power and cost of the spell.")
+    QUICK_INFORMATION(10,"你找到了加速法术。当投射到你的生物上时，这将允许它们以极大的速度移动一段时间。按住lmb会增加法术的力量和成本。")
+    MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+ENDIF
+
+IF_ACTION_POINT(2,PLAYER0)
+    IF(PLAYER_GOOD,THIEF == 0)
+        REM QUICK_OBJECTIVE(11,"The Heroes' castle lies out of reach on the far bank of the lava flow. Use bridges to connect your land to the north bank and seek out this nest of virtue.",PLAYER0)
+        QUICK_OBJECTIVE(11,"英雄城堡位于熔岩流远岸，触手可及,用桥梁把你的土地连接到北岸，寻找这个美德的巢穴。",PLAYER0)
+        TUTORIAL_FLASH_BUTTON(18,-1)
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+        SET_TIMER(PLAYER_GOOD,TIMER1)
+    ENDIF
+ENDIF
+IF_ACTION_POINT(5,PLAYER0)
+    IF(PLAYER0,BRIDGE >= 3)
+        MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+        REM QUICK_INFORMATION(15,"You now have the ability to cast Heal on your creatures. Hold down the LMB for more power. The hero forces are sure to retaliate")
+        QUICK_INFORMATION(15,"你现在有能力对你的生物施放治疗,按住LMB以获得更大的功率,英雄部队一定要报复")
+    ENDIF
+ENDIF
+
+IF(PLAYER0,TROLL >= 1)
+    REM QUICK_INFORMATION(21,"A goblin has entered your dungeon. While not as intelligent as the average human,goblins make excellent soldiers.")
+    QUICK_INFORMATION(21,"一个精灵进入了你的地下城，虽然没有一般人聪明，但精灵是优秀的士兵。.")
+ENDIF
+IF(PLAYER0,BILE_DEMON >= 1)
+    REM QUICK_INFORMATION(22,"You have found a new Bile Demon ally. The aggression and tenacity of these beasts is matched only by their appetites")
+    QUICK_INFORMATION(22,"你找到了一个新的巨魔，这些野兽的侵略性和坚韧性只与它们的胃口相匹配。")
+ENDIF
+
+IF_ACTION_POINT(7,PLAYER0)
+    IF(PLAYER_GOOD,FLAG0 == 1)
+        REM QUICK_OBJECTIVE(26,"From the markings,you have broken into an old dungeon. Claim any assets remaining,but be on your guard!",PLAYER0)
+        QUICK_OBJECTIVE(26,"从标记上看，你已经闯入了一个古老的地下城，索要任何剩余资产，但要小心！",PLAYER0)
+        ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER_GOOD,ONE,-1,DUNGEON,0,2,600)
+    ENDIF
+ENDIF
+IF_ACTION_POINT(7,PLAYER0)
+    IF(PLAYER_GOOD,FLAG0 == 0)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD,VICTOR,7,1)
+        QUICK_INFORMATION(28,"danger! your untidy exploration of this realm has left you exposed to the lord's troops.")
+        QUICK_INFORMATION(28,"危险！你对这个领域的不整洁探索使你暴露在上帝的军队面前。")
+        SET_TIMER(PLAYER2,TIMER3)
+    ENDIF
+ENDIF
+IF(PLAYER2,TIMER3 >= 350)
+    IF(PLAYER_GOOD,FLAG0 == 0)
+        NEXT_COMMAND_REUSABLE
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD,VICTOR,7,1)
+        NEXT_COMMAND_REUSABLE
+        SET_TIMER(PLAYER2,TIMER3)
+    ENDIF
+ENDIF
+
+IF_ACTION_POINT(3,PLAYER0)
+    REM QUICK_OBJECTIVE(37,"You've discovered the Heroes' castle. Break down the doors and wreak havoc upon the enemy!",PLAYER0)
+    QUICK_OBJECTIVE(37,"你发现了英雄城堡。破门而入，破坏敌人！",PLAYER0)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,FINAL,PLAYER_GOOD,1)
+    SET_FLAG(PLAYER0,FLAG1,1)
+ENDIF
+
+
+IF_ACTION_POINT(5,PLAYER0)
+       ADD_PARTY_TO_LEVEL(PLAYER_GOOD,VICTOR,-4,1)
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER0,FLAG1 == 1)
+    IF(PLAYER_GOOD,KNIGHT == 0)
+         REM QUICK_OBJECTIVE(36,"Congratulations. You have defeated the Lord of the Land and completed the Dungeon Keeper demo..",PLAYER0)
+         QUICK_OBJECTIVE(36,"祝贺你，你打败了这土地领主，完成了地牢守护者的演练。",PLAYER0)
+        WIN_GAME
+    ENDIF
+ENDIF
+IF(PLAYER0,DUNGEON_DESTROYED == 1)
+    LOSE_GAME
+ENDIF
+
+REM ****************************提示信息**********************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

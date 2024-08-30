@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map01003
+REM Automatically generated on 22 Aug 2008, 15:59:29
+
+LEVEL_VERSION(1,2,0)
+LEVEL_TIMESTAMP(1055365290,1219413569)
+USER_COMMANDS_COUNT(577,15,0,5)
+LEVEL_DESCRIPTION("Stay sharp, and help the young hero to reach the Gate of Hell, and escape from the Underworld.")
+LEVEL_AUTHORS("","")

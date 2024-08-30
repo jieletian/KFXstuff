@@ -1,0 +1,203 @@
+REM Basic Settings
+    LEVEL_VERSION(1)
+    RUN_AFTER_VICTORY(1)
+
+    SET_GENERATE_SPEED(400)
+    START_MONEY(ALL_PLAYERS,0)
+    MAX_CREATURES(ALL_PLAYERS,25)
+    
+    SET_PLAYER_COLOR(PLAYER0, BLUE)
+
+    SET_MUSIC("campaign_music/nier_calm.mp3")
+
+REM Initialize campaign flags
+
+    REM Flag0 - Water level of Yellow for level 7
+    REM 0 is default - yellow has dry land
+    REM 1 is bonus - yellow gets flooded
+    REM SET_FLAG(PLAYER0, CAMPAIGN_FLAG0, 0)
+
+    REM Flag1 - Water level of Blue for level 7
+    REM 0 is default - blue has flooded land
+    REM 1 is bonus - blue has dry land
+    REM SET_FLAG(PLAYER0, CAMPAIGN_FLAG1, 0)
+
+    REM Flag2 - Whether the player is getting bonus creatures
+    REM Set in the horror level for level 3
+
+    REM Flag3 - Whether the player is allied with black or white in level 10
+    REM 0 - Allied with neither
+    REM 1 - Allied with black
+    REM 2 - Allied with white
+
+    REM Flag4 - Whether the player gets the secret reaper from the hub for the final level
+    REM 0 - Standard value, no reaper
+    REM 1 - Add reaper near the heart
+
+    REM Flag5 - NG+
+    REM 0 if regular mode
+    REM 1 if NG+
+
+    REM Flag6 - The amount of regular levels beaten (explicitly MUST be in order for it to work)
+    REM SET_FLAG(PLAYER0, CAMPAIGN_FLAG6, 0)
+
+    REM Flag7 - The amount of new game+ levels beaten (explicitly MUST be in order for it to work)
+    REM SET_FLAG(PLAYER0, CAMPAIGN_FLAG7, 0)
+
+REM Initialize special boxes
+    SET_BOX_TOOLTIP(1,"显示战役故事")
+    SET_BOX_TOOLTIP(2,"结束教学")
+    SET_BOX_TOOLTIP(3,"显示音频说明")
+
+REM Remove most abilities from player
+
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_POSSESS,1,1)
+    MAGIC_AVAILABLE(PLAYER0, POWER_IMP, 1,1)
+
+    TRAP_AVAILABLE(ALL_PLAYERS,POISON_GAS,1,0)
+    DOOR_AVAILABLE(ALL_PLAYERS,WOOD,1,0)
+
+REM Basic introduction
+
+    QUICK_OBJECTIVE(99, "欢迎来到蓝宝石王国战役。这个教学关卡包含一些游戏中的进阶知识，供新玩家使用。将您的黑暗女王放在每个房间的红色发光雕像上以获取教程说明。雕像旁边的小房间暗示了教程的内容。如果您想直接进入战役，请使用地下城心脏左侧的特殊框来显示故事并完成教程。离开教程后，您还将解锁一个中心区域。在地图上寻找新节点，最重要的是...玩得开心！")
+
+    REM Show story of the campign
+    IF(PLAYER0,BOX1_ACTIVATED == 1)
+        PLAY_MESSAGE(PLAYER0, SOUND, 41)
+        QUICK_OBJECTIVE(98, "您已抵达三体圣殿的浮岛附近。这里是灵魂宝石的熔炉，用来保存像您这样的地下城守护者的生命精华。现在是您，蓝色守护者“蓝宝石”，接管这个富饶岛屿的时候了。但是，要小心。许多其他人都想在这里宣示他们的主权，包括白钻石英雄公会、叛变的黑玛瑙团伙和竞争对手托帕兹（黄宝石）守护者。不要相信任何人，他们都可能会背叛你，把这片土地据为己有吧。")
+    ENDIF
+
+    REM Show story of the campign
+    IF(PLAYER0,BOX3_ACTIVATED == 1)
+        PLAY_MESSAGE(PLAYER0, SOUND, 41)
+        QUICK_OBJECTIVE(2, "此战役包含很多自定义配乐！如果您想使用自定义配乐，请参阅FX官网上的workshop中此战役页面上的下载链接。如果您更喜欢原版《地下城守护者》的配乐，您也可以按保持原样，但建议使用新配乐玩！")
+    ENDIF
+
+    REM End level when box is clicked and set the progression flags
+    IF(PLAYER0,BOX2_ACTIVATED == 1)
+        WIN_GAME
+        LOCATE_HIDDEN_WORLD
+        SET_FLAG(PLAYER0, CAMPAIGN_FLAG6, 1)
+        SET_FLAG(PLAYER0, CAMPAIGN_FLAG7, 1)
+    ENDIF
+
+REM Individual tutorials
+
+    IF_ACTION_POINT (1, PLAYER0)
+        QUICK_OBJECTIVE(1, "教程 1 - 工厂赚钱。如果您身处没有宝石矿的境地而缺钱，请不要忘记您可以制造​陷阱和门，然后出售它们来赚钱。此外，您可以建造什么取决于您的工厂的大小。只有当您的工厂面积达到 37格（或更大）时，才能建造魔法门等高级物品。")
+    ENDIF
+
+    IF_ACTION_POINT (2, PLAYER0)
+        QUICK_OBJECTIVE(3, "教程 2 - 房间效率。房间效率是经常被忽视的一点。请注意地下城中三个图书馆的标志。第一个红色条表示房间的血量。被敌人小鬼占领时，血量条会减少，耗尽时房间将被完全占领。第二个绿色条表示其容量，即可容纳多少单位。第三个灰色条表示房间效率。“高效”的房间也具有更大的容量，并且在其中完成的工作通常也完成得更快！效率很复杂，但要遵循的一条可靠规则是建造规矩的方形房间，并加固墙壁，如果您想快速完成其中的工作。请注意，所有 3 个图书馆都有相同数量的瓷砖，但它们的效率及其容量因相邻格子而异。所有图书馆都有 1 本书，但使用的容量不同。")
+    ENDIF
+
+    IF_ACTION_POINT (3, PLAYER0)
+        QUICK_OBJECTIVE(4, "教程 3 - 哨所封路。某些房间，即哨所和寺庙，是特殊的——它们的高度比正常地面更高。当它们被建造在水或岩浆旁边时，除了飞行怪物以外的怪物将无法跨越！这样，你的地下城就可以得到保护。在这个区域用小鬼和苍蝇试试。小鬼不能爬上寺庙/哨所顶部，但苍蝇可以飞过去。")
+    ENDIF
+
+    IF_ACTION_POINT (4, PLAYER0)
+        QUICK_OBJECTIVE(5, "教程 4 - 睡觉升级。一些怪物只需在巢穴内睡觉即可获得经验，前提是巢穴与特定种类的方格相邻。经验获取速度较慢，但​免了训练费用。招募这些怪物并将它们放置在相应的巢穴中，然后使用查询模式检查它们的经验获取。以下三种怪物满足条件组合：水怪-水、魔术师-金矿、龙-岩浆。")
+    ENDIF
+
+    IF_ACTION_POINT (5, PLAYER0)
+        QUICK_OBJECTIVE(6, "教程 5 - 审讯室。这里有两个关于审讯室的小技巧。首先，如果你缺钱但又需要治疗你的犯人，可以尝试在监狱附近建造一个孵化室。你可以给你的敌人喂鸡，所以试着把一些鸡扔进监狱来治疗你的囚犯。其次，拷打你自己的怪物有些时候是有用的。当一个怪物正在被拷打时，其他同类的怪物工作效率会提高，并且在发薪日领的薪水减半。观察你的黑暗女王；在拷打她之前和拷打她期间检查信息面板，看看她想要的薪水金额是如何变化的。")
+    ENDIF
+
+    IF_ACTION_POINT (6, PLAYER0)
+        QUICK_OBJECTIVE(7, "教程 6 - 寺庙。寺庙用途广泛得令人吃惊。最明显的用途是寺庙配方。有很多种，其中最常用的一种是献祭甲虫+蜘蛛来创造黑女。但是，也可以献祭小鬼，以降低未来小鬼的成本！尝试一下，观察法术菜单中制造小鬼成本的变化，并在缺钱的王国使用它。此外，在寺庙祈祷可以让怪物保持快乐，免疫被招募，清除负面状态，以及防止冥界使者发怒。")
+    ENDIF
+
+    IF_ACTION_POINT (7, PLAYER0)
+        QUICK_OBJECTIVE(8, "教程 7 - 墙壁缝隙。如果没有邪恶之眼，但您仍然想要视野？尝试加固墙壁，与您想要检查的方块相邻。如果该方块后面有东西，您会看到墙壁有2个边缘；如果后面什么都没有，那么方块面向地下城外部的一侧就没有墙。抓住小鬼并尝试一下。此外，当形成一个直角的两个泥土块与水相邻时，它们之间会打开一条缝隙。您可以穿过这个小角落，查看该区域的外侧。当这两个泥土块被加固后，这个开放的角落就会消失。您可以使用此技术暂时探索地下城外面，然后将其封闭。")
+    ENDIF
+
+    IF_ACTION_POINT(8, PLAYER0)
+        QUICK_OBJECTIVE(9, "教程 8 - 附身和技能。使用附身通常不是必需的，但可以带来一些强大的好处。有些技能，如手榴弹（例如巨魔拥有它），是怪物拥有的，但不会在战斗中使用。然而，在附身时你可以自己使用它。其他技能，如龙的喷火，在附身时会更快、更强。同样，一些怪物在发挥其优势时会变得更强大，比如巨魔的毒气。有时，像手榴弹这样的技能具有有趣的特性，比如能够击飞敌人和金袋等物体。在下面的物品和敌人上试试吧！")
+    ENDIF
+
+    IF_ACTION_POINT(9, PLAYER0)
+        QUICK_OBJECTIVE(10, "教程 9 - 人口上限。每个王国的入口吸引怪物都有数量上限。您可以通过检查“？”选项卡上怪物数量旁边的守护者图标是否闪烁来检查是否已达到人口上限。有时，将没什么用的怪物（如苍蝇或恶鬼）扔回入口是不错的选择，这样可以腾出人口数量，并有机会获得更厉害的怪物。")
+    ENDIF
+
+    IF_ACTION_POINT(10, PLAYER0)
+        QUICK_OBJECTIVE(11, "教程 10 - 扇耳光。不必多说，但要提醒大家一定要扇耳光！这并没有什么坏处，而且可以短时间内大大提高怪物的移动速度和工作效率，以及在战斗中增加攻击速度！当然，除非你扇的是像冥界使者这样的家伙，你可能需要谨慎考虑……但除此之外，永远不要忘记扇耳光。")
+    ENDIF
+
+    IF_ACTION_POINT(11, PLAYER0)
+        QUICK_OBJECTIVE(12, "这样，您就完成了教程！如果您还没有完成，请查看地下城中心附近的特殊内容，了解有关自定义配乐、其他关卡以及如何完成关卡的说明。否则，尽情享受战役吧！")
+    ENDIF
+
+REM For tutorial 8
+
+    CREATE_PARTY(bug_spam)
+        ADD_TO_PARTY(bug_spam, BUG, 5, 0, DEFEND_LOCATION, 0)
+
+    IF_ACTION_POINT(21, PLAYER0)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD, bug_spam, -1, 20)
+    ENDIF
+
+REM Auxiliary stuff - reveal enclosed rooms
+
+    REVEAL_MAP_LOCATION(PLAYER0, 2, -1)
+    REVEAL_MAP_LOCATION(PLAYER0, 3, -1)
+    REVEAL_MAP_LOCATION(PLAYER0, 16, -1)
+    REVEAL_MAP_LOCATION(PLAYER0, 17, -1)
+    REVEAL_MAP_LOCATION(PLAYER0, 18, -1)
+    REVEAL_MAP_LOCATION(PLAYER0, 19, -1)
+    REVEAL_MAP_LOCATION(PLAYER0, 7, -1)
+    REVEAL_MAP_LOCATION(PLAYER0, 20, -1)
+    REVEAL_MAP_LOCATION(PLAYER0, 21, -1)
+    REVEAL_MAP_LOCATION(PLAYER0, 12, -1)
+    REVEAL_MAP_LOCATION(PLAYER0, 13, -1)
+    REVEAL_MAP_LOCATION(PLAYER0, 14, -1)
+    REVEAL_MAP_LOCATION(PLAYER0, 15, -1)
+    REVEAL_MAP_LOCATION(PLAYER0, 22, -1)
+    REVEAL_MAP_LOCATION(PLAYER0, 23, -1)
+    REVEAL_MAP_LOCATION(PLAYER0, 24, -1)
+    REVEAL_MAP_LOCATION(PLAYER0, 25, -1)
+
+REM Just an infinite timer to make creatures happy
+
+    SET_TIMER(PLAYER0, TIMER0)
+    IF (PLAYER0, TIMER0 > 0)
+        CHANGE_CREATURES_ANNOYANCE(PLAYER0, ANY_CREATURE, DECREASE, 1000)
+    ENDIF
+
+REM Remove some needs from creatures
+
+    SET_CREATURE_CONFIGURATION(DARK_MISTRESS,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(DARK_MISTRESS,Pay,0)
+
+    SET_CREATURE_CONFIGURATION(TROLL,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(TROLL,Pay,0)
+
+    SET_CREATURE_CONFIGURATION(FLY,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(FLY,Pay,0)
+
+    SET_CREATURE_CONFIGURATION(BUG,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(BUG,Pay,0)
+
+    SET_CREATURE_CONFIGURATION(SPIDER,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(SPIDER,Pay,0)
+
+    SET_CREATURE_CONFIGURATION(BILE_DEMON,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(BILE_DEMON,Pay,0)
+
+    SET_CREATURE_CONFIGURATION(GHOST,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(GHOST,Pay,0)
+
+    SET_CREATURE_CONFIGURATION(DEMONSPAWN,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(DEMONSPAWN,Pay,0)
+
+    SET_CREATURE_CONFIGURATION(SORCEROR,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(SORCEROR,Pay,0)
+
+    SET_CREATURE_CONFIGURATION(TENTACLE,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(TENTACLE,Pay,0)
+
+    SET_CREATURE_CONFIGURATION(DRAGON,HungerRate,0)
+    SET_CREATURE_CONFIGURATION(DRAGON,Pay,0)
+
+    REM LairSize 0 would be good here but it's buggy

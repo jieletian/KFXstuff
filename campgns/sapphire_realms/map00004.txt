@@ -1,0 +1,480 @@
+REM Basic settings
+
+    LEVEL_VERSION(1)
+    SET_GENERATE_SPEED(500)
+    RUN_AFTER_VICTORY(1)
+
+    START_MONEY(ALL_PLAYERS,7500)
+
+    MAX_CREATURES(PLAYER0,25)
+    REM Test out giving yellow a few more creatures
+    MAX_CREATURES(PLAYER3,30)
+
+    REM Set player and enemy
+    SET_PLAYER_COLOR(PLAYER0, BLUE)
+    COMPUTER_PLAYER(PLAYER3,0)
+
+    REM For the hero invasion
+    ALLY_PLAYERS(PLAYER_GOOD, PLAYER2, 3)
+    SET_PLAYER_COLOR(PLAYER2, WHITE)
+    COMPUTER_PLAYER(PLAYER2, ROAMING)
+
+REM Availability rules
+
+    ADD_CREATURE_TO_POOL(DEMONSPAWN,20)
+    ADD_CREATURE_TO_POOL(SPIDER,20)
+    ADD_CREATURE_TO_POOL(HELL_HOUND,20)
+    ADD_CREATURE_TO_POOL(TENTACLE,20)
+    ADD_CREATURE_TO_POOL(SORCEROR,20)
+    ADD_CREATURE_TO_POOL(ORC,20)
+    ADD_CREATURE_TO_POOL(BILE_DEMON,20)
+    ADD_CREATURE_TO_POOL(DRAGON,20)
+    ADD_CREATURE_TO_POOL(DARK_MISTRESS,20)
+
+    CREATURE_AVAILABLE(ALL_PLAYERS,FLY,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,BUG,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,DEMONSPAWN,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,TROLL,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,SPIDER,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,HELL_HOUND,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,TENTACLE,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,SORCEROR,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,ORC,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,BILE_DEMON,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,DRAGON,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,DARK_MISTRESS,1,0)
+
+    ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,WORKSHOP,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,TORTURE,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,BARRACKS,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,TEMPLE,1,0)
+    rem ROOM_AVAILABLE(ALL_PLAYERS,GRAVEYARD,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,SCAVENGER,1,0)
+
+    REM Bridge is only available after claiming it in the middle
+    ROOM_AVAILABLE(ALL_PLAYERS,BRIDGE,3,0)
+
+    REM CPU Gets prison, player needs to claim it
+    ROOM_AVAILABLE(PLAYER0, PRISON, 3, 0)
+    ROOM_AVAILABLE(PLAYER3, PRISON, 1, 0)
+
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_POSSESS,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SIGHT,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SPEED,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_OBEY,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CALL_TO_ARMS,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CONCEAL,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HOLD_AUDIENCE,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CAVE_IN,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HEAL_CREATURE,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_LIGHTNING,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_PROTECT,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CHICKEN,1,0)
+
+    TRAP_AVAILABLE(ALL_PLAYERS,POISON_GAS,1,0)
+    TRAP_AVAILABLE(ALL_PLAYERS,LIGHTNING,1,0)
+    TRAP_AVAILABLE(ALL_PLAYERS,BOULDER,1,0)
+    TRAP_AVAILABLE(ALL_PLAYERS,WORD_OF_POWER,1,0)
+
+    DOOR_AVAILABLE(ALL_PLAYERS,WOOD,1,0)
+    DOOR_AVAILABLE(ALL_PLAYERS,STEEL,1,0)
+    DOOR_AVAILABLE(ALL_PLAYERS,MAGIC,1,0)
+
+REM Messages and action points
+
+    REM Intro message and show middle room
+    QUICK_OBJECTIVE(3,"钻石公会的一名骑士正在玩桥牌游戏，试图控制你和托帕兹。你知道该怎么做，让他知道他阻止你的企图是多么徒劳。试着抓住骑士，他可能还是有用的。", 2)
+    REVEAL_MAP_LOCATION(PLAYER0,-1,-1)
+
+    REM Show player that the bridge is available
+        IF(PLAYER0, BRIDGE > 0)
+            QUICK_OBJECTIVE(1,"干得好，看来你已经成功架起桥梁，切断了他们的增援，确保英雄们不再骚扰你。建造桥梁应该可以帮助你消灭剩下的敌人。", 2)
+            TUTORIAL_FLASH_BUTTON(18, -1)
+        ENDIF
+
+    REM Hidden passage
+    IF_ACTION_POINT(1, PLAYER0)
+        QUICK_INFORMATION(7,"不幸的是，这条隐藏通道太窄了，无法进入。你只能用其他方法探索它了。", 1)
+    ENDIF
+
+    REM Graveyard
+
+    IF_ACTION_POINT(5, PLAYER0)
+        QUICK_INFORMATION(8,"守护者，就连我也不建议你打扰埋葬在这里的英雄们的安宁。如果我是你，我会三思而后行。无论如何，一堵宝石墙似乎挡住了你的去路……也许献祭皇家骑士的鲜血可以打开它？", -2)
+    ENDIF
+
+    IF_ACTION_POINT(6, PLAYER0)
+        QUICK_OBJECTIVE(9,"希望这不是一个愚蠢的决定。祝你好运。", -2)
+        SET_FLAG(PLAYER0, FLAG0, 1)
+        SET_TIMER(PLAYER0,TIMER2)
+    ENDIF
+
+
+REM Declare parties for BLUE KEEPER
+
+    CREATE_PARTY(party_blue_1)
+        ADD_TO_PARTY(party_blue_1,DWARFA,2,300,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_1,THIEF,1,300,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_1,THIEF,1,300,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_1,THIEF,1,300,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_1,THIEF,1,300,ATTACK_DUNGEON_HEART,0)
+
+    CREATE_PARTY(party_blue_2)
+        ADD_TO_PARTY(party_blue_2,MONK,6,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_2,TENTACLE,4,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_2,TENTACLE,4,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_2,TENTACLE,4,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_2,TENTACLE,4,400,ATTACK_DUNGEON_HEART,0)
+
+    CREATE_PARTY(party_blue_3)
+        ADD_TO_PARTY(party_blue_3,MAIDEN,8,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_3,SPIDER,5,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_3,SPIDER,5,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_3,SPIDER,5,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_3,SPIDER,5,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_3,SPIDER,5,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_3,SPIDER,5,400,ATTACK_DUNGEON_HEART,0)
+
+    CREATE_PARTY(party_blue_4)
+        ADD_TO_PARTY(party_blue_4,THIEF,6,400,ATTACK_DUNGEON_HEART,0)
+
+    CREATE_PARTY(party_blue_5)
+        ADD_TO_PARTY(party_blue_5,WIZARD,10,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_5,MONK,10,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_5,GIANT,10,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_5,ARCHER,10,400,ATTACK_DUNGEON_HEART,0)
+
+    CREATE_PARTY(party_blue_6)
+        ADD_TO_PARTY(party_blue_6,SAMURAI,9,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_6,SAMURAI,9,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_6,BARBARIAN,7,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_blue_6,BARBARIAN,7,400,ATTACK_DUNGEON_HEART,0)
+
+REM Declare parties for the end sequence
+
+    CREATE_PARTY(hero_apocalypse_ghost)
+        ADD_TO_PARTY(hero_apocalypse_ghost,GHOST,10,0,ATTACK_DUNGEON_HEART,0)
+
+    CREATE_PARTY(hero_apocalypse_skeleton)
+        ADD_TO_PARTY(hero_apocalypse_skeleton,SKELETON,10,0,ATTACK_DUNGEON_HEART,0)
+
+    CREATE_PARTY(hero_apocalypse_avatar)
+        ADD_TO_PARTY(hero_apocalypse_avatar,AVATAR,10,20000,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(hero_apocalypse_avatar,WIZARD,10,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(hero_apocalypse_avatar,WIZARD,10,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(hero_apocalypse_avatar,WIZARD,10,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(hero_apocalypse_avatar,WIZARD,10,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(hero_apocalypse_avatar,SAMURAI,10,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(hero_apocalypse_avatar,SAMURAI,10,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(hero_apocalypse_avatar,SAMURAI,10,0,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(hero_apocalypse_avatar,SAMURAI,10,0,ATTACK_DUNGEON_HEART,0)
+
+REM Declare misc parties - tentacles in optional area
+
+    CREATE_PARTY(party_random_encounter)
+        ADD_TO_PARTY(party_random_encounter,SPIDER,6,400,ATTACK_ENEMIES,0)
+
+    IF_ACTION_POINT(3, PLAYER0)
+        ADD_PARTY_TO_LEVEL(PLAYER_GOOD,party_random_encounter,4,3)
+    ENDIF
+
+REM Handle timer to start the invasion when player meets the criteria
+
+    IF (PLAYER0, LAIR > 0)
+        IF (PLAYER0, ENTRANCE > 0)
+            IF(PLAYER0, RESEARCH > 0)
+                IF(PLAYER0, TOTAL_CREATURES > 2)
+                    SET_TIMER(PLAYER0,TIMER1)
+                ENDIF
+            ENDIF
+        ENDIF
+    ENDIF
+
+REM Handle hero apocalypse logic
+
+    REM Initialize flags for hero apocalypse
+    SET_FLAG(PLAYER0, FLAG0, 0)
+
+    REM Timer 2 - player has entered the graveyard. Spawn enemies
+
+    IF (PLAYER0, TIMER2 > 1)
+        REM Play armageddon sound
+        PLAY_MESSAGE(PLAYER0, SOUND, "180")
+    ENDIF
+
+    IF (PLAYER0, TIMER2 > 70)
+        REM Play heart death sound
+        PLAY_MESSAGE(PLAYER0, SOUND, "152")
+    ENDIF
+
+    REM Plus 10
+    IF (PLAYER0, TIMER2 > 70) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_ghost,-2,1)
+    ENDIF
+    IF (PLAYER0, TIMER2 > 90) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_skeleton,-2,1)
+    ENDIF
+
+    REM Plus 9
+    IF (PLAYER0, TIMER2 > 108) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_ghost,-2,1)
+    ENDIF
+    IF (PLAYER0, TIMER2 > 136) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_skeleton,-2,1)
+    ENDIF
+
+    REM Plus 8
+    IF (PLAYER0, TIMER2 > 152) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_ghost,-2,1)
+    ENDIF
+    IF (PLAYER0, TIMER2 > 168) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_skeleton,-2,1)
+    ENDIF
+
+    REM Plus 7
+    IF (PLAYER0, TIMER2 > 182) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_ghost,-2,1)
+    ENDIF
+    IF (PLAYER0, TIMER2 > 196) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_skeleton,-2,1)
+    ENDIF
+
+    REM Plus 6
+    IF (PLAYER0, TIMER2 > 208) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_ghost,-2,1)
+    ENDIF
+    IF (PLAYER0, TIMER2 > 220) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_skeleton,-2,1)
+    ENDIF
+
+    REM Plus 5
+    IF (PLAYER0, TIMER2 > 230) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_ghost,-2,1)
+    ENDIF
+    IF (PLAYER0, TIMER2 > 240) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_skeleton,-2,1)
+    ENDIF
+
+    REM Plus 4
+    IF (PLAYER0, TIMER2 > 248) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_ghost,-2,1)
+    ENDIF
+    IF (PLAYER0, TIMER2 > 256) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_skeleton,-2,1)
+    ENDIF
+
+    REM Plus 3
+    IF (PLAYER0, TIMER2 > 262) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_ghost,-2,1)
+    ENDIF
+    IF (PLAYER0, TIMER2 > 268) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_skeleton,-2,1)
+    ENDIF
+
+    REM Plus 2
+    IF (PLAYER0, TIMER2 > 272) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_ghost,-2,1)
+    ENDIF
+    IF (PLAYER0, TIMER2 > 276) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_skeleton,-2,1)
+    ENDIF
+
+    REM Plus 1
+    IF (PLAYER0, TIMER2 > 278) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_ghost,-2,1)
+    ENDIF
+    IF (PLAYER0, TIMER2 > 280) 
+        ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_skeleton,-2,1)
+    ENDIF
+
+    IF(PLAYER0,TIMER2 >= 281)
+        IF(PLAYER0,TIMER2 <= 301)
+            NEXT_COMMAND_REUSABLE
+		    ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_ghost,-2,1)
+        ENDIF
+	ENDIF
+
+    IF(PLAYER0,TIMER2 >= 302)
+        IF(PLAYER0,TIMER2 <= 322)
+            NEXT_COMMAND_REUSABLE
+		    ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_skeleton,-2,1)
+        ENDIF
+	ENDIF
+
+    IF(PLAYER0,TIMER2 >= 360)
+        PLAY_MESSAGE(PLAYER0, SOUND, "152")
+		ADD_PARTY_TO_LEVEL(PLAYER2,hero_apocalypse_avatar,-2,1)
+	ENDIF
+
+    IF (ALL_PLAYERS, SACRIFICED[KNIGHT] > 0)
+        QUICK_INFORMATION(13, "宝石封锁解除后，道路似乎畅通无阻。但你确定要这么做吗？", -2)
+        CHANGE_SLAB_TYPE(98, 7, DIRT)
+    ENDIF
+
+REM Handle the knight - if he's alive, spawn waves. If not, show message.
+
+    SET_FLAG(PLAYER0, FLAG2, 0)
+
+    IF (PLAYER0, BRIDGE > 0)
+        SET_FLAG(PLAYER0, FLAG2, 1)
+    ENDIF 
+
+    REM Old condition: IF (PLAYER_GOOD, KNIGHT > 0)
+
+    REM If player has occupied the bridge, stop spawns
+    IF (PLAYER0, FLAG2 == 0)
+
+        REM Dwarf and thieves
+        IF(PLAYER0,TIMER1 >= 7000)
+            QUICK_INFORMATION(6,"敌人已经察觉到你的存在，并会持续进攻，直到你占领他们的前哨。确保加速他们的灭亡。", -1)
+            PLAY_MESSAGE(PLAYER0, SOUND, "42")
+            ADD_PARTY_TO_LEVEL(PLAYER_GOOD,party_blue_1,-1,1)
+        ENDIF
+
+        REM Monk and tentacles
+        IF(PLAYER0,TIMER1 >= 15000)
+            PLAY_MESSAGE(PLAYER0, SOUND, "42")
+            ADD_PARTY_TO_LEVEL(PLAYER_GOOD,party_blue_2,-1,1)
+        ENDIF
+
+        REM Arachnomancer
+        IF(PLAYER0,TIMER1 >= 22000)
+            PLAY_MESSAGE(PLAYER0, SOUND, "42")
+            ADD_PARTY_TO_LEVEL(PLAYER_GOOD,party_blue_3,-1,1)
+        ENDIF
+
+        REM Big horde of thieves
+        IF(PLAYER0,TIMER1 >= 30000)
+            PLAY_MESSAGE(PLAYER0, SOUND, "42")
+            ADD_PARTY_TO_LEVEL(PLAYER_GOOD,party_blue_4,-1,12)
+        ENDIF
+
+        REM Light Party
+        IF(PLAYER0,TIMER1 >= 38000)
+            PLAY_MESSAGE(PLAYER0, SOUND, "42")
+            ADD_PARTY_TO_LEVEL(PLAYER_GOOD,party_blue_5,-1,1)
+        ENDIF
+
+        REM Light Party
+        IF(PLAYER0,TIMER1 >= 46000)
+            PLAY_MESSAGE(PLAYER0, SOUND, "42")
+            ADD_PARTY_TO_LEVEL(PLAYER_GOOD,party_blue_6,-1,1)
+        ENDIF
+
+        REM Full Party
+        IF(PLAYER0,TIMER1 >= 55000)
+            REM Two copies of party 5
+            PLAY_MESSAGE(PLAYER0, SOUND, "42")
+            ADD_PARTY_TO_LEVEL(PLAYER_GOOD,party_blue_5,-1,2)
+        ENDIF
+
+    ENDIF
+
+REM Win Condition
+
+IF (PLAYER3, DUNGEON_DESTROYED == 1)
+    REM If the player didn't trigger the hero invasion, win
+    IF (PLAYER0, FLAG0 == 0)
+
+        WIN_GAME
+
+        REM Count campaign flag up by one
+        IF(PLAYER0, CAMPAIGN_FLAG6 == 3)
+            SET_FLAG(PLAYER0, CAMPAIGN_FLAG6, 4)
+        ENDIF
+        
+        REM If player is in NG+, advance the state of that too
+        IF (PLAYER0, CAMPAIGN_FLAG5 == 1)
+            IF(PLAYER0, CAMPAIGN_FLAG7 == 3)
+                SET_FLAG(PLAYER0, CAMPAIGN_FLAG7, 4)
+            ENDIF
+        ENDIF
+
+    ENDIF
+    
+    REM If the player triggered the hero invasion, win when all heroes are dead
+    IF (PLAYER0, FLAG0 == 1)
+
+        IF (PLAYER2, TOTAL_CREATURES > 0)
+            QUICK_OBJECTIVE(25,"你可能已经消灭了对手，但你最好收拾残局。除非所有从墓地中出现的英雄都被打回属于他们的坟墓，否则你无法继续前进。", 9)
+        ENDIF
+
+        REM Changed from IF (PLAYER_GOOD, TOTAL_CREATURES == 0) to if_controls to handle imprisoned creatures
+        IF_CONTROLS(PLAYER2, TOTAL_CREATURES == 0)
+
+            WIN_GAME
+
+            REM Count campaign flag up by one
+            IF(PLAYER0, CAMPAIGN_FLAG6 == 3)
+                SET_FLAG(PLAYER0, CAMPAIGN_FLAG6, 4)
+            ENDIF
+            
+            REM If player is in NG+, advance the state of that too
+            IF (PLAYER0, CAMPAIGN_FLAG5 == 1)
+                IF(PLAYER0, CAMPAIGN_FLAG7 == 3)
+                    SET_FLAG(PLAYER0, CAMPAIGN_FLAG7, 4)
+                ENDIF
+            ENDIF
+
+        ENDIF
+
+    ENDIF    
+ENDIF
+
+REM Code that handles music playback
+
+    SET_MUSIC("campaign_music/deepspace_calm.mp3")
+    SET_FLAG(PLAYER0,FLAG5,2)
+
+    IF(PLAYER0,FLAG5 != 4)
+        REM Time battle music been playing
+        NEXT_COMMAND_REUSABLE
+        SET_TIMER(PLAYER0,TIMER7)
+    ENDIF
+    IF(PLAYER0,ACTIVE_BATTLES == 0)
+        REM Time battle has been going on
+        NEXT_COMMAND_REUSABLE
+        SET_TIMER(PLAYER0,TIMER6)
+    ENDIF
+    IF(PLAYER0,ACTIVE_BATTLES > 0)
+        REM Time no battle has been going on
+        NEXT_COMMAND_REUSABLE
+        SET_TIMER(PLAYER0,TIMER5)
+    ENDIF
+
+    REM Start battle music if battle has been going on for at least 60 gameturns (3 seconds) and is not already playing
+    IF(PLAYER0,TIMER6 > 60)
+        IF(PLAYER0,FLAG5 != 4)
+            NEXT_COMMAND_REUSABLE
+            SET_MUSIC("campaign_music/deepspace_battle.mp3")
+            NEXT_COMMAND_REUSABLE
+            SET_FLAG(PLAYER0,FLAG5,4)
+        ENDIF
+    ENDIF
+
+    REM Start regular music if battle music lasted at least 15 seconds and no fighting has occured for at least 5 seconds
+    IF(PLAYER0,TIMER7 > 300)
+        IF(PLAYER0,TIMER5 > 100)
+            IF(PLAYER0,FLAG5 != 2)
+                NEXT_COMMAND_REUSABLE
+                SET_MUSIC("campaign_music/deepspace_calm.mp3")
+                NEXT_COMMAND_REUSABLE
+                SET_FLAG(PLAYER0,FLAG5,2)
+            ENDIF
+        ENDIF
+    ENDIF
+
+REM WIP / TODO - Do new game+ conditions
+
+IF (PLAYER0, CAMPAIGN_FLAG5 == 1)
+    QUICK_INFORMATION(4, "增强难度已开启 - 目前尚未实现")
+ENDIF

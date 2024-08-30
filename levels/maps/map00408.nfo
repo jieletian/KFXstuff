@@ -1,0 +1,14 @@
+Name: Ancient Dungeons 1.0.0
+Author: DzjeeAr, Created on 17 Oct 2006
+Keepers: Red, Blue
+Pool: Horned Reaper, Troll, Dragon, Demon Spawn, Fly
+  Dark Mistress, Warlock, Bile Demon, Beetle, Spider
+  Hell Hound, Tentacle, Orc
+Objects on map:
+Creatures: 107, Traps: 0, Doors: 0, Items: 52
+Dungeon hearts: 2, Hero gates: 0, Special Boxes: 6
+Description:
+  This map has three variants - you can play
+  Metilians, Grors or Necromancers. There are
+  different script files for them. Level has also
+  replacement for CREATURE.TXT.

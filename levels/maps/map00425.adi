@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map01115
+REM Automatically generated on 04 Sep 2008, 00:08:47
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(1160327156,1220479727)
+USER_COMMANDS_COUNT(41,2,0,0)
+LEVEL_DESCRIPTION("The heroes ruling this kingdom have decided to to scatter, each of their side, four of the strongest spells: Destroy Walls, Armageddon, Disease and Chicken. You have only a few creatures, and valuable resources are quite rare here. Will you able to train your creatures? Or at least pay them? Heroes have some ancient items, which would help you, but they won't give them easily. Know where to explore, keeper.")
+LEVEL_AUTHORS("Yohabro","")

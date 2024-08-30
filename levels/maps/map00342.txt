@@ -1,0 +1,114 @@
+REM ***********************************************************************
+REM   Script for Level  342（042）. Crush Fighting 粉碎战争
+REM ***********************************************************************
+REM 
+REM 
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+MAX_CREATURES(PLAYER0,5)
+START_MONEY(PLAYER0,5000)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,WORKSHOP,1,0)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+MAGIC_AVAILABLE(PLAYER1,POWER_SIGHT,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HEAL_CREATURE,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SPEED,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_PROTECT,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CONCEAL,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+DOOR_AVAILABLE(ALL_PLAYERS,WOOD,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,STEEL,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,MAGIC,1,0)
+
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+IF(PLAYER0,TOTAL_CREATURES <= 1)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,HORNY,1,1,10,10000)
+    ADD_CREATURE_TO_LEVEL(PLAYER_GOOD,ORC,1,10,6,1000)
+ENDIF
+
+IF(PLAYER_GOOD,KNIGHT == 0)
+    ADD_CREATURE_TO_LEVEL(PLAYER0,HORNY,2,1,10,10000)
+    ADD_CREATURE_TO_LEVEL(PLAYER0,ORC,2,10,6,1000)
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER_GOOD,DUNGEON_DESTROYED == 1)
+    
+        REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+        LEVEL_VERSION(1)
+        REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+        ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+        ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+        ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+        ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+        ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+        ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+        ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+        ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+        ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+        ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+        
+        MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+        MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+        DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+        TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+        TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+        QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+        WIN_GAME
+ENDIF
+IF(PLAYER0,DUNGEON_DESTROYED == 1)
+    LOSE_GAME
+ENDIF
+
+REM ****************************提示信息**********************************
+IF(PLAYER0,GAME_TURN > 150)
+    QUICK_OBJECTIVE(1,"参考提示：1、没钱的时候杀敌能积经验升级，没敌人的话互欧也是可以的，不要丢了性命就行；2、没金矿的时候，利用工厂也能赚钱；3、善用桥，把敌人逐个攻破。",PLAYER0)   
+ENDIF
+IF(PLAYER0,GAME_TURN > 400)
+    QUICK_INFORMATION(2,"镰刀魔和骑士是你的敌人，要胜利，就必须管教好两个互为天敌的手下，让它们暂时放下敌意，一致对外！",PLAYER0)   
+ENDIF
+IF(PLAYER0,GAME_TURN > 800)
+    QUICK_INFORMATION(3,"无论你的黑暗女王和忍者谁死了，天将降神兵消灭你，好自为之！",PLAYER0)   
+ENDIF
+IF(PLAYER0,GAME_TURN > 1200)
+    QUICK_INFORMATION(4,"公平地，如果敌方的骑士被消灭了，天也将隆神兵消灭你的敌人，不过镰刀魔可能仍然会冲向你的心脏，好好享受！",PLAYER0)   
+ENDIF
+
+
+
+
+
+
+
+
+

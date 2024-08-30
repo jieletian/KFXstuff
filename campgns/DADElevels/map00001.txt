@@ -1,0 +1,121 @@
+REM Level 1/Evil Women
+
+if(player0,game_turn >= 10)
+ quick_objective(1,"这片土地上的王后就住在这里的某个地方。是时候有人来除掉她了。",player0)
+endif
+
+set_generate_speed(300)
+
+set_creature_max_level(player1,dark_mistress,6)
+set_creature_strength(dark_mistress,195)
+set_creature_health(dark_mistress,2067)
+set_creature_armour(dark_mistress,222)
+set_creature_max_level(player0,bile_demon,4)
+set_creature_max_level(player0,dragon,4)
+set_creature_max_level(player0,troll,4)
+set_creature_max_level(player0,bug,5)
+set_creature_max_level(player0,demonspawn,5)
+set_creature_max_level(player0,orc,4)
+set_creature_max_level(player0,hell_hound,5)
+set_creature_strength(avatar,80)
+set_creature_fear(avatar,240)
+set_creature_health(avatar,1240)
+
+max_creatures(player0,20)
+
+computer_player(player1,0)
+
+start_money(player0,3000)
+start_money(player1,8000000)
+
+add_creature_to_pool(bile_demon,8)
+add_creature_to_pool(dragon,4)
+add_creature_to_pool(troll,8)
+add_creature_to_pool(demonspawn,4)
+add_creature_to_pool(orc,8)
+add_creature_to_pool(bug,8)
+
+creature_available(player0,bile_demon,1,1)
+creature_available(player0,dragon,1,1)
+creature_available(player0,troll,1,1)
+creature_available(player0,demonspawn,1,1)
+creature_available(player0,orc,1,1)
+creature_available(player0,bug,1,1)
+
+room_available(player0,treasure,1,1)
+room_available(player0,lair,1,1)
+room_available(player0,garden,1,1)
+room_available(player0,training,1,1)
+room_available(player0,research,1,1)
+room_available(player0,guard_post,1,0)
+
+magic_available(player0,power_hand,1,1)
+magic_available(player0,power_imp,1,0)
+magic_available(player0,power_sight,1,0)
+magic_available(player0,power_obey,1,0)
+
+trap_available(player0,word_of_power,1,0)
+door_available(player0,wood,1,0)
+
+create_party(spy)
+	add_to_party(spy,dwarfa,1,50,attack_dungeon_heart,0)
+	add_to_party(spy,barbarian,2,50,attack_dungeon_heart,0)
+	add_to_party(spy,dwarfa,1,50,attack_dungeon_heart,0)
+	add_to_party(spy,witch,3,50,attack_dungeon_heart,0)
+
+create_party(king)
+	add_to_party(king,avatar,1,10000,defend_party,0)
+	add_to_party(king,giant,3,0,attack_rooms,0)
+	add_to_party(king,giant,4,0,attack_rooms,0)
+	add_to_party(king,giant,3,0,attack_rooms,0)
+	add_to_party(king,giant,4,0,attack_rooms,0)
+	add_to_party(king,giant,3,0,attack_rooms,0)
+	add_to_party(king,giant,4,0,attack_rooms,0)
+	add_to_party(king,giant,2,0,attack_rooms,0)
+
+create_party(kni)
+	add_to_party(kni,knight,2,3000,defend_party,0)
+	add_to_party(kni,witch,3,150,attack_enemies,0)
+	add_to_party(kni,witch,4,150,attack_enemies,0)
+	add_to_party(kni,witch,3,150,attack_enemies,0)
+	add_to_party(kni,witch,4,150,attack_enemies,0)
+	add_to_party(kni,witch,3,150,attack_enemies,0)
+	add_to_party(kni,witch,4,150,attack_enemies,0)
+	add_to_party(kni,witch,2,150,attack_enemies,0)
+
+if(player0,bridge >= 1)
+	room_available(player0,bridge,1,1)	
+endif
+
+if(player_good,workshop <= 1)
+	room_available(player0,workshop,1,1)
+	add_party_to_level(player_good,kni,2,1)
+	quick_objective(2,"一队国王的贴身卫兵赶来了。",player0)
+	if(player0,barracks >= 1)
+		set_timer(player0,timer2)
+	endif
+endif
+
+if(player0,timer2 >= 8000)
+ quick_objective(3,"而这位懦弱的国王，也许他不喜欢你在他的土地上抢劫。或者也许他最终决定除掉他心爱的人……",player0)
+ add_party_to_level(player_good,king,-2,1)
+endif
+
+if(player0,entrance >= 1)
+	set_timer(player0,timer1)
+endif
+
+if(player0,timer1 >= 5000)
+ add_tunneller_party_to_level(player_good,spy,-1,dungeon,player0,1,100)
+ quick_objective(4,"国王的侦察兵出现了。也许这个统治者更关心的是他的土地状况而不是他的王后。",player0)
+endif
+
+if(player1,dungeon_destroyed == 1)
+	if(player1,dark_mistress == 0)
+		win_game
+	endif
+endif
+
+if(player0,dungeon_destroyed == 1)
+	lose_game
+endif

@@ -1,0 +1,204 @@
+REM ***********************************************************************
+REM   Script for Level   644(144).Dragon Lords 龙主(龙领主)
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+SET_GENERATE_SPEED(720)
+REM *** 1=blue 2=green 3=yellow  ***
+COMPUTER_PLAYER(PLAYER1,5)
+COMPUTER_PLAYER(PLAYER2,4)
+COMPUTER_PLAYER(PLAYER3,10)
+
+START_MONEY(PLAYER0,10000)
+START_MONEY(PLAYER1,20000)
+START_MONEY(PLAYER2,5000)
+START_MONEY(PLAYER3,10000)
+
+MAX_CREATURES(PLAYER0,25)
+MAX_CREATURES(PLAYER1,20)
+MAX_CREATURES(PLAYER2,30)
+MAX_CREATURES(PLAYER3,25)
+
+ALLY_PLAYERS(PLAYER_GOOD,PLAYER2)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+ADD_CREATURE_TO_POOL(DEMONSPAWN,100)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+
+CREATURE_AVAILABLE(ALL_PLAYERS,DRAGON,1,0)
+CREATURE_AVAILABLE(ALL_PLAYERS,DEMONSPAWN,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,SORCEROR,1,0)
+CREATURE_AVAILABLE(ALL_PLAYERS,SKELETON,1,0)
+CREATURE_AVAILABLE(ALL_PLAYERS,VAMPIRE,1,0)
+CREATURE_AVAILABLE(ALL_PLAYERS,GHOST,1,0)
+CREATURE_AVAILABLE(ALL_PLAYERS,HORNY,1,0)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,BRIDGE,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,BARRACKS,1,0)
+
+ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,0)
+ROOM_AVAILABLE(PLAYER1,WORKSHOP,1,0)
+ROOM_AVAILABLE(PLAYER2,PRISON,1,0)
+ROOM_AVAILABLE(PLAYER3,TORTURE,1,0)
+REM *** White has a temple ***
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_OBEY,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SIGHT,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CALL_TO_ARMS,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CAVE_IN,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HEAL_CREATURE,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HOLD_AUDIENCE,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SPEED,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_ARMAGEDDON,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_PROTECT,1,1)
+MAGIC_AVAILABLE(PLAYER3,POWER_CONCEAL,1,1)
+MAGIC_AVAILABLE(PLAYER0,POWER_DISEASE,1,1)
+MAGIC_AVAILABLE(PLAYER2,POWER_CHICKEN,1,1)
+REM *** White has lightning ***
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+DOOR_AVAILABLE(ALL_PLAYERS,WOOD,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,BRACED,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,STEEL,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,MAGIC,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定陷阱*********************************
+REM  (玩家,陷阱名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+TRAP_AVAILABLE(ALL_PLAYERS,ALARM,1,0)
+TRAP_AVAILABLE(PLAYER1,POISON_GAS,1,0)
+TRAP_AVAILABLE(PLAYER0,WORD_OF_POWER,1,0)
+TRAP_AVAILABLE(PLAYER2,LAVA,1,0)
+
+REM ****************************增援部队**********************************
+REM CREATE_PARTY =>组建队伍                (队伍名称)   
+REM ADD_TO_PARTY=>添加生物到队伍中   (队伍名称,生物名称,生物等级,携带金钱数量,任务,延时)
+CREATE_PARTY(RED)
+    ADD_TO_PARTY(RED,VAMPIRE,5,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(RED,SKELETON,6,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(RED,GHOST,7,200,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(BLUE)
+    ADD_TO_PARTY(BLUE,BILE_DEMON,5,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(BLUE,ORC,6,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(BLUE,TROLL,7,200,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(GREEN)
+    ADD_TO_PARTY(GREEN,WITCH,5,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(GREEN,GIANT,6,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(GREEN,ARCHER,7,200,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(YELLOW)
+    ADD_TO_PARTY(YELLOW,BARBARIAN,5,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(YELLOW,SORCEROR,6,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(YELLOW,THIEF,7,200,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(WHITE)
+    ADD_TO_PARTY(WHITE,SAMURAI,5,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(WHITE,MONK,6,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(WHITE,FAIRY,7,200,ATTACK_DUNGEON_HEART,0)
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+SET_CREATURE_STRENGTH(DRAGON,150)
+SET_CREATURE_HEALTH(DRAGON,1000)
+SET_CREATURE_HEALTH(WIZARD,500)
+SET_CREATURE_ARMOUR(DRAGON,100)
+SET_CREATURE_ARMOUR(WIZARD,100)
+
+IF(PLAYER0,GAME_TURN > 21600)
+    ADD_PARTY_TO_LEVEL(PLAYER0,RED,1,3)
+    ADD_PARTY_TO_LEVEL(PLAYER1,BLUE,4,3)
+    ADD_PARTY_TO_LEVEL(PLAYER3,YELLOW,5,3)
+    ADD_PARTY_TO_LEVEL(PLAYER2,GREEN,2,3)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,WHITE,3,3)
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER0,ALL_DUNGEONS_DESTROYED == 1)
+    
+        REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+        LEVEL_VERSION(1)
+        REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+        ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+        ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+        ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+        ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+        ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+        ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+        ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+        ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+        ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+        ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+        
+        MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+        MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+        DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+        TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+        TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+        QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+        WIN_GAME
+ENDIF
+IF_AVAILABLE(PLAYER0,KNIGHT == 0)
+    LOSE_GAME
+ENDIF
+
+REM ****************************提示信息**********************************
+QUICK_OBJECTIVE(1,"参考提示：1、疾病魔法是个致命的东西，用得好的话事半功倍；2、用破墙魔法+附身远程兵，可以不用杀一个人都干掉敌人心脏；3、疾病魔法加破墙魔法的效果，你猜如何？",PLAYER0)  
+IF(PLAYER0,GAME_TURN < 50)
+    REM QUICK_OBJECTIVE(1,"Rubidia is ruled over by five great Dragon Lords, each with his own powerful dragon mount and special abilities and expertise. You are one of these powerful Lords and find yourself suddenly transported here. Gather your wits together my Lord I sense danger and foul play.",PLAYER0)
+    QUICK_OBJECTIVE(2,"Rubidia管辖五伟大的龙神，每个都有自己的强大的龙坐骑和特殊技能和专业知识。你是这些强大的领主之一，发现自己突然被运来了。聚集你的智慧我的主我感觉危险和邪恶的发挥。",PLAYER0)
+ENDIF
+IF(PLAYER0,GAME_TURN > 50)
+    REM QUICK_INFORMATION(2,"Above you lies Rubidia, now a desolate place due to the Dragon wars, it seems that you have been summoned here by a powerful mage to finally do battle with your counter parts and end the war once and for all")
+    REM QUICK_INFORMATION(3,"你对rubidia说谎，现在由于龙战荒凉的地方，似乎你被召唤来这里的一个强大的法师最后做你的反战，一劳永逸地结束这场战争")
+ENDIF
+IF(PLAYER0,GAME_TURN > 100)
+     REM QUICK_INFORMATION(3,"You are an evil lord and hold sway over the undead. You are quite wealthy and have mastered the art of pestilance. It would seem that some of your followers are here too, but your legions of dragons alas are not.")
+     QUICK_INFORMATION(4,"你是一个邪恶的主，并持有支配的不死军团。你很有钱，掌握了pestilance艺术。看来你的一些追随者也到这儿，但你的龙军团似乎没有。")
+ENDIF
+IF(PLAYER0,GAME_TURN > 3650)
+    REM QUICK_INFORMATION(5,"Blue is another evil lord, he is rich and values machines and steel, brute force is his game and has recruited trolls, orcs and demons to his side.")
+    QUICK_INFORMATION(6,"蓝色是另一个邪恶的主，他是富有价值的机器和钢，蛮力是他的游戏和招募巨魔，兽人和恶魔身边。")
+ENDIF
+IF(PLAYER0,GAME_TURN > 7200)
+    REM QUICK_INFORMATION(6,"White is the purest of the Lords, he is a fool, poor due to his gifts to the needy. He is however very strong and has been granted the power over lightning by his gods. He has recruited the honourable samurai and other pure races")
+    QUICK_INFORMATION(7,"白色是上主的最纯洁的，他是一个傻瓜，可怜的人，因为他的礼物给了穷人。然而，他是非常强大的，并已被授予的权力，上帝的闪电。他招募了这位光荣的武士和其他的纯种族")
+ENDIF
+IF(PLAYER0,GAME_TURN > 10800)
+    REM QUICK_INFORMATION(7,"Green is a nature worshipper, he has recruited the Elves and Giants of the forest of Gilthos to his side. He is poor but take care, he could easily forge an aliance with the other good force here.")
+    QUICK_INFORMATION(8,"绿色是大自然的崇拜者，他招募了精灵和巨人的gilthos森林到他身边。他很穷但是照顾，他可以很容易地伪造与其他好的力量联盟在这里。")
+ENDIF
+IF(PLAYER0,GAME_TURN > 14400)
+    REM QUICK_INFORMATION(8,"Finally the Yellow Lord is of neutral allegiance. He is of similar power to yourself and has mastered the art of illusion. He is also fond of torture!")
+    QUICK_INFORMATION(9,"最后，黄主是中立的忠诚。他对自己有同样的权力，并掌握了幻想的艺术。他也喜欢折磨！")
+ENDIF
+
+
+

@@ -1,0 +1,18 @@
+[common]
+LightsCount = 2
+
+[light0]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 2279
+SubtileX = [208, 64]
+SubtileY = [81, 64]
+SubtileZ = [2, 64]
+
+[light1]
+LightIntensity = 38
+LightRange = [9, 0]
+ParentTile = 2704
+SubtileX = [208, 128]
+SubtileY = [92, 128]
+SubtileZ = [2, 64]

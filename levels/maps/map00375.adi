@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map01019
+REM Automatically generated on 23 Aug 2008, 05:10:12
+
+LEVEL_VERSION(1,0,0)
+LEVEL_TIMESTAMP(1126892336,1219461012)
+USER_COMMANDS_COUNT(5,1,0,0)
+LEVEL_DESCRIPTION("The last trench of the hapless hero resistance still exists. But the future looks dark for the good. The power of Armageddon is hidden in this realm. You must recover it before the good are finished; otherwise, our cause is lost. Modification of the 'Second Armageddon' level.")
+LEVEL_AUTHORS("","")

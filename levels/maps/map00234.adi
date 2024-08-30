@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00234
+REM Automatically generated on 19 Aug 2008, 05:18:27
+
+LEVEL_VERSION(1,3,0)
+LEVEL_TIMESTAMP(895414840,1219115907)
+USER_COMMANDS_COUNT(5,1,0,0)
+LEVEL_DESCRIPTION("Another level by me. Pretty much the same as the first, but a different layout.  This is a REAL beginners level, as the enemy is very defensive and only builds small rooms.")
+LEVEL_AUTHORS("BlackDawn","")

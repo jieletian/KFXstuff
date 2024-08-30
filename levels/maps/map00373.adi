@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map01017
+REM Automatically generated on 23 Aug 2008, 04:46:50
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(1129494928,1219459610)
+USER_COMMANDS_COUNT(31,2,0,0)
+LEVEL_DESCRIPTION("Map where you can't get a Portal. At least not easily. Until then, you must manage having only a Witch. You will need a bridge to destroy the Heroes Heart (Danjonhato). Shortly after starting the map, you will see black eyes.")
+LEVEL_AUTHORS("","")

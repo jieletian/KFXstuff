@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00832
+REM Automatically generated on 22 Aug 2008, 08:44:52
+
+LEVEL_VERSION(1,0,0)
+LEVEL_TIMESTAMP(992370538,1219387492)
+USER_COMMANDS_COUNT(4,1,0,0)
+LEVEL_DESCRIPTION("Multiplayer map.")
+LEVEL_AUTHORS("Steve Tupper","")

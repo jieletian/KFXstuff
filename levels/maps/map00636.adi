@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00275
+REM Automatically generated on 21 Aug 2008, 03:40:46
+
+LEVEL_VERSION(2,1,0)
+LEVEL_TIMESTAMP(1011791684,1219281203)
+USER_COMMANDS_COUNT(5,1,0,0)
+LEVEL_DESCRIPTION("Your task, keeper, is a bit special this time. You have inherited a novice knight who has some unfinished bussiness with the local Grand Lord. Help this Chevalier to reach him and he will give you control of this kingdom. Originally published as 'Knight'. Added information messages by Yohabro. English and French language included.")
+LEVEL_AUTHORS("DzjeeAr","Yohabro")

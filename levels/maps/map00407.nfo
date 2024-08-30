@@ -1,0 +1,13 @@
+Name: Raven's Blood 1.5.0
+Author: Mark Nash, Created on 19 May 1998
+Keepers: Red, Blue, Green
+Pool: Troll, Dragon, Demon Spawn, Fly, Dark Mistress
+  Warlock, Bile Demon, Beetle, Spider, Hell Hound, Orc
+Objects on map:
+Creatures: 18, Traps: 2, Doors: 17, Items: 180
+Dungeon hearts: 3, Hero gates: 1, Special Boxes: 1
+Description:
+  This is My first Level with DK; I've added a few
+  nice touches by either borrowing or actually by
+  pain staking testing of my level. Includes
+  creatures.txt replacement.

@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00560
+REM Automatically generated on 21 Aug 2008, 08:19:39
+
+LEVEL_VERSION(1,0,0)
+LEVEL_TIMESTAMP(1175454134,1219299579)
+USER_COMMANDS_COUNT(23,2,0,0)
+LEVEL_DESCRIPTION("In this level, there is no land, only soil till loss of sight. You will need all that you acquired during your previous encounters with other keepers. Moreover, the hero at the centre will complicate your task greatly.")
+LEVEL_AUTHORS("Blackdemon","")

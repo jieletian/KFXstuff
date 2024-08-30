@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00920
+REM Automatically generated on 04 Sep 2008, 18:44:44
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(1185488354,1220546684)
+USER_COMMANDS_COUNT(199,16,4,0)
+LEVEL_DESCRIPTION("You're in Skybirds Trill again! But this time, the sides have changed. Prove that your victory versus the Avatar is unavoidable, no matter at which direction he is!")
+LEVEL_AUTHORS("Kief","")

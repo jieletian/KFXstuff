@@ -1,0 +1,15 @@
+#order of the map packs, packs not in the list will be at the bottom alphabetically
+deepdngn.cfg
+newmaps.cfg
+standard.cfg
+classic.cfg
+maps.cfg
+baidu46.cfg
+lostlvls.cfg
+Tempest Keeper.cfg
+The_Line.cfg
+krunk.cfg
+Undivine.cfg
+brorc.cfg
+personal.cfg
+legacy.cfg

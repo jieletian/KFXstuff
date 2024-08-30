@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00332
+REM Automatically generated on 19 Aug 2008, 22:06:29
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(899262916,1219176389)
+USER_COMMANDS_COUNT(13,3,0,0)
+LEVEL_DESCRIPTION("This castle was once a car-park for a suburban shopping mall, and is almost entirely without magic. Some of the rooms still have disgruntled shoppers trapped inside.")
+LEVEL_AUTHORS("Nikolai Kingsley","")

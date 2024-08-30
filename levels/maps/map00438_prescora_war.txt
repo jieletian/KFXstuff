@@ -1,0 +1,120 @@
+This level was made: 20th of august 2000
+
+     **************************************
+     *  War 2 ... Just building, fighting *
+     * Dungeon Keeper level By Oetelaer   *
+     * Build with the Level editor.       *
+     * Do not distribute without my per-  *
+     * mission <0etelaer@home.nl> or name.*
+     **************************************
+
+In order to play this level (and others), you must copy some 
+of the data of the cd-rom on your hard-disk.
+This level will only run with Dungeon Keeper, not with Dungeon Keeper 2 !
+
+
+INSTALLING DUNGEON KEEPER FOR THE EXTRA LEVELS
+==============================================
+
+First make sure that you have Dungeon Keeper installed on your machine. 
+If you do not, install it now, otherwise you will not be able to proceed.
+
+Once you have installed Dungeon Keeper, copy over the entire Levels, 
+Ldata and Data directories from your Dungeon Keeper CD to the Keeper 
+directory on your hard disk.
+
+Once all this is done, go to the Keeper directory on your hard disk. You 
+will see a file called keeper.cfg. Open this (notepad.exe) and find the line starting 
+with INSTALL_PATH=. This tells the computer where the Data and Levels 
+directories are on the CD. Now that you have copied them to your hard 
+disk, you will need to alter this line. Change it so that it points to 
+your Keeper directory e.g. INSTALL_PATH=c:\program files\bullfrog\keeper\
+
+
+INSTALLING & PLAYING DOWNLOADED LEVELS
+======================================
+
+DUNGEON KEEPER 
+To play your level in Dungeon Keeper, you will need to play it as a 
+multiplayer level by choosing the 1 player option from the Multiplayer Menu. 
+This is because there is no other way to play the level in Dungeon Keeper. If 
+you have the Deeper Dungeons data disk, always follow the procedure below
+which tells you how to play your level with Deeper Dungeons. 
+
+That method is much easier than the Dungeon Keeper method. 
+Go to the Levels directory of the Keeper directory on your hard disk. In there 
+you should find a file called levels.txt. Open this using Notepad. This file is 
+a list of all the multiplayer levels Dungeon Keeper. What you are going to do 
+is add your new level to this list. 
+
+If you have already added a multiplayer level to the multiplayer list before, 
+you will know what to do. The single player level script does not come with a 
+piece of text which you can just copy into the levels.txt file (like the 
+multiplayer level scripts do ),so you will have to write your own. This is very 
+easy as you have the levels already in the list to guide you. 
+Make a space at the bottom of the list and then look at the other lines in the 
+list. This is what the list probably looks like if you have never added any new 
+levels to it: 
+50,2,805,455,50(2 Player) 
+51,2,752,479,51(2 Player) 
+52,2,688,553,52(2 Player) 
+53,2,780,617,53(2 Player) 
+54,2,864,591,54(2 Player) 
+60,3,430,467,60(3 Player) 
+61,3,438,531,61(3 Player) 
+62,3,514,515,62(3 Player) 
+63,3,418,643,63(3 Player) 
+64,3,485,629,64(3 Player) 
+70,4,505,322,70(4 Player) 
+71,4,575,322,71(4 Player) 
+72,4,619,342,72(4 Player) 
+73,4,661,366,73(4 Player) 
+74,4,649,294,74(4 Player) 
+204,2,530,298,War_2(2 Player)
+
+So put in this last line on levels.txt in this directory and:
+--------------------------------------------------------------------
+Start>Run>"C:\Program Files\Bullfrog\Keeper\keeper95.exe" -1player
+
+Will let you play the level, if you choose 1 player in multiplayer!
+
+You will find the flag on top of the map.
+--------------------------------------------------------------------
+
+Clear?
+Ok, I'll explain it again;
+  
+Now you will need to run Dungeon Keeper so that you can play the level in 1 
+player mode. 
+If you are playing the MS-DOS version of Dungeon Keeper, go to the 
+Dungeon Keeper directory, e.g. c:\keeper. Then type the following: 
+keeper -1player 
+Then press Return to start Dungeon Keeper. 
+If you are playing the Windows 95 version of Dungeon Keeper, click on the 
+Start button on the taskbar and select the Run program on the menu. A 
+requester will appear. 
+Type in the name of the keeper directory and also add keeper95.exe on the 
+end, e.g. c:\program files\keeper\keeper95.exe. 
+Then, on the end of that, add the following text: 
+-1player 
+For example: 
+"c:\program files\keeper\keeper95.exe" -1player 
+Then press Return to start Dungeon Keeper. 
+
+When you reach the Dungeon Keeper Main Menu, click on the Multiplayer 
+button. At the bottom of the list of multiplayer options should be a new option 
+called 1 player. This option enables you to play any multiplayer map as a 
+single player with computer players taking the place of you absent human 
+opponents. Click on the option and you will be taken to the Multiplayer 
+Levels Map. Find the flag of your new level and click on it. You should now 
+be able to play that level. 
+
+DEEPER DUNGEONS 
+If you have the Deeper Dungeons installed on your machine, you should run 
+this instead of Dungeon Keeper to play your new levels. This is because it is 
+easier to play new levels in Deeper Dungeons than it is in Dungeon Keeper. 
+All you have to do is copy the level into the Levels directory and then start 
+Deeper Dungeons. When you reach the Main Menu, click on the Deeper 
+Dungeons option and in the list of levels will be the new level you placed in 
+the Levels directory. Click on the name to play. 
+

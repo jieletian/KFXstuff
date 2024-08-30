@@ -1,0 +1,206 @@
+REM ***********************************************************************
+REM   Script for Level 233. Trilliance 特里安
+REM ***********************************************************************
+REM 3v1
+REM 
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+SET_GENERATE_SPEED(650)
+
+ALLY_PLAYERS(PLAYER1,PLAYER2)
+ALLY_PLAYERS(PLAYER1,PLAYER3)
+ALLY_PLAYERS(PLAYER2,PLAYER3)
+
+COMPUTER_PLAYER(PLAYER1,10)
+COMPUTER_PLAYER(PLAYER2,10)
+COMPUTER_PLAYER(PLAYER3,10)
+
+MAX_CREATURES(PLAYER0,16)
+MAX_CREATURES(PLAYER1,20)
+MAX_CREATURES(PLAYER2,15)
+MAX_CREATURES(PLAYER3,15)
+
+START_MONEY(PLAYER0,8000)
+START_MONEY(PLAYER1,15000)
+START_MONEY(PLAYER2,15000)
+START_MONEY(PLAYER3,15000)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+ADD_CREATURE_TO_POOL(TROLL,40)
+ADD_CREATURE_TO_POOL(SORCEROR,15)
+ADD_CREATURE_TO_POOL(DARK_MISTRESS,40)
+ADD_CREATURE_TO_POOL(DRAGON,15)
+ADD_CREATURE_TO_POOL(HELL_HOUND,15)
+ADD_CREATURE_TO_POOL(VAMPIRE,5)
+ADD_CREATURE_TO_POOL(ORC,15)
+ADD_CREATURE_TO_POOL(FLY,15)
+ADD_CREATURE_TO_POOL(SPIDER,15)
+ADD_CREATURE_TO_POOL(BUG,15)
+ADD_CREATURE_TO_POOL(BILE_DEMON,40)
+ADD_CREATURE_TO_POOL(DEMONSPAWN,20)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+
+CREATURE_AVAILABLE(ALL_PLAYERS,TROLL,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,SORCEROR,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,DARK_MISTRESS,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,DRAGON,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,HELL_HOUND,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,VAMPIRE,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,ORC,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,FLY,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,BUG,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,SPIDER,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,BILE_DEMON,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,DEMONSPAWN,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,WORKSHOP,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,BARRACKS,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,BRIDGE,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,PRISON,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,TORTURE,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,SCAVENGER,0,0)
+ROOM_AVAILABLE(ALL_PLAYERS,TEMPLE,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,GRAVEYARD,1,0)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SIGHT,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CALL_TO_ARMS,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HEAL_CREATURE,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SPEED,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_LIGHTNING,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_PROTECT,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CONCEAL,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_DISEASE,0,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CAVE_IN,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CHICKEN,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_DESTROY_WALLS,0,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HOLD_AUDIENCE,1,0)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_ARMAGEDDON,0,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+DOOR_AVAILABLE(ALL_PLAYERS,WOOD,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,BRACED,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,STEEL,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定陷阱*********************************
+REM  (玩家,陷阱名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+TRAP_AVAILABLE(ALL_PLAYERS,ALARM,1,0)
+TRAP_AVAILABLE(ALL_PLAYERS,POISON_GAS,1,0)
+TRAP_AVAILABLE(PLAYER0,BOULDER,0,0)
+TRAP_AVAILABLE(ALL_PLAYERS,LIGHTNING,1,0)
+TRAP_AVAILABLE(ALL_PLAYERS,WORD_OF_POWER,1,0)
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+SET_TIMER(PLAYER0,TIMER0)
+IF(PLAYER0,TIMER0 >= 600)
+    REM QUICK_OBJECTIVE(4,"Now that the immediate threat is over, you need to consider the situation. The enemy, Azakrath, Jemizel and Krazkel are the best keepers I have ever seen, I have no idea how to defeat them, let alone with this army!",PLAYER0)
+    QUICK_INFORMATION(2,"现在的威胁已经结束了，你需要考虑的情况。敌人，azakrath，jemizel和krazkel是我见过的最强的守护者，我不知道如何击败他们，更别说这个军队！",PLAYER0)
+ENDIF
+IF(PLAYER0,TIMER0 >= 1000)
+    REM QUICK_INFORMATION(8,"You will need really strong creatures. If your bugs aren't dead already, kill them.")
+    QUICK_INFORMATION(3,"你需要非常强壮的生物。如果你的虫子还没有死，杀死他们。")
+ENDIF
+IF(PLAYER0,TIMER0 >= 2000)
+    REM QUICK_INFORMATION(5,"Wow. This is a tough situation. I have no idea how you're going to win, but i've heard that the disease spell is granted to anyone brave enough to posess 5 Horned Reapers. Just a rumour.")
+    QUICK_INFORMATION(4,"哗，真的这是一个艰难的处境。我不知道你会赢，但我听说疾病法术授予任何人勇敢的有5角的收割者-镰刀魔，只是谣言。")
+ENDIF
+
+IF(PLAYER0,HORNY >= 3)
+    REM QUICK_INFORMATION(6,"Hmm, I can feel the gods gaze upon us, they feel almost ready to grant something.")
+    QUICK_INFORMATION(5,"嗯，我可以感觉到神的目光注视着我们，他们几乎准备好给予一些东西。")
+ENDIF
+REM 镰刀魔达5个后得到疾病魔法
+IF(PLAYER0,HORNY >= 5)
+    REM QUICK_INFORMATION(7,"The disease spell has been granted! Combined with Lightning, this will be a deadly combination, but is it deadly enough? Only YOU can find out!")
+    QUICK_INFORMATION(6,"疾病的咒语已经被授予！结合闪电，这将是一个致命的组合，但它是致命的足够吗？只有你能找到！")
+    MAGIC_AVAILABLE(PLAYER0,POWER_DISEASE,1,1)
+ENDIF
+
+REM ****************************胜利条件 *******************************************
+REM 所有敌人心脏被打爆就胜利
+IF(PLAYER0,ALL_DUNGEONS_DESTROYED >= 1)
+    REM QUICK_INFORMATION(9,"Finally! With all your enemies sent back into void, you are the ruler of this realm. All hail to the most evil of all keepers!")
+    QUICK_INFORMATION(7,"最后！所有的仇敌都被送到虚空世界，你成了这王国的统治者，所有的人都向最邪恶的人致敬！")
+    
+        REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+        LEVEL_VERSION(1)
+        REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+        ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+        ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+        ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+        ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+        ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+        ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+        ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+        ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+        ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+        ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+        
+        MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+        MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+        DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+        TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+        TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+        QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+        WIN_GAME
+ENDIF
+
+REM ****************************提示信息**********************************
+QUICK_OBJECTIVE(0,"提示：1、敌人开始比你强大多了，把你的怪抓回来，尽快把桥占领卖了，并时刻提防重建；2、适当时候利用女巫的吹风技能；3、北面有个显示地图的宝物;4、当你有5个镰刀魔时得到疾病魔法。",PLAYER0)  
+
+REM QUICK_OBJECTIVE(0,"Quickly keeper, blow the enemy away, destroy the bridge and Stop them!",PLAYER0)
+QUICK_INFORMATION((1,"很快地守卫，把敌人吹走，把桥摧毁！",PLAYER0)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

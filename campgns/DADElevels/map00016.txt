@@ -1,0 +1,240 @@
+REM Level 16/Gardu
+
+set_generate_speed(150)
+
+set_creature_armour(knight,250)
+set_creature_strength(knight,200)
+set_creature_health(knight,4500)
+
+set_creature_armour(skeleton,150)
+set_creature_strength(skeleton,150)
+set_creature_health(skeleton,1800)
+set_creature_armour(bug,120)
+set_creature_strength(bug,135)
+set_creature_health(bug,2500)
+set_creature_armour(spider,110)
+set_creature_strength(spider,180)
+set_creature_health(spider,2200)
+set_creature_armour(hell_hound,90)
+set_creature_strength(hell_hound,160)
+set_creature_health(hell_hound,2000)
+set_creature_armour(ghost,190)
+set_creature_strength(ghost,160)
+set_creature_health(ghost,3000)
+
+max_creatures(player0,50)
+max_creatures(player1,15)
+max_creatures(player2,15)
+max_creatures(player3,15)
+max_creatures(player6,15)
+
+computer_player(player1,1)
+computer_player(player2,1)
+computer_player(player3,1)
+computer_player(player6,1)
+
+ally_players(player1,player2)
+ally_players(player1,player3)
+ally_players(player1,player6)
+ally_players(player1,player_good)
+ally_players(player2,player3)
+ally_players(player2,player6)
+ally_players(player2,player_good)
+ally_players(player3,player6)
+ally_players(player3,player_good)
+ally_players(player6,player_good)
+
+start_money(player0,50000)
+start_money(player1,6000000)
+start_money(player2,6000000)
+start_money(player3,6000000)
+start_money(player6,6000000)
+
+add_creature_to_pool(troll,20)
+add_creature_to_pool(orc,20)
+add_creature_to_pool(druid,20)
+add_creature_to_pool(vampire,20)
+add_creature_to_pool(bile_demon,20)
+add_creature_to_pool(time_mage,20)
+add_creature_to_pool(sorceror,20)
+add_creature_to_pool(tentacle,20)
+creature_available(player0,troll,1,1)
+creature_available(player0,orc,1,1)
+creature_available(player0,druid,1,1)
+creature_available(player0,vampire,1,1)
+creature_available(player0,bile_demon,1,1)
+creature_available(player0,time_mage,1,1)
+creature_available(player0,sorceror,1,1)
+creature_available(player0,tentacle,1,1)
+
+add_creature_to_pool(bug,40)
+add_creature_to_pool(skeleton,40)
+add_creature_to_pool(spider,40)
+creature_available(all_players,bug,1,1)
+creature_available(all_players,skeleton,1,1)
+creature_available(all_players,spider,1,1)
+
+room_available(player0,treasure,1,1)
+room_available(player0,lair,1,1)
+room_available(player0,garden,1,1)
+room_available(player0,training,1,1)
+room_available(player0,research,1,1)
+room_available(player0,guard_post,1,0)
+room_available(player0,workshop,1,0)
+room_available(player0,barracks,1,0)
+room_available(player0,temple,1,0)
+room_available(player0,graveyard,1,0)
+room_available(player0,scavenger,1,0)
+
+magic_available(player0,power_imp,1,1)
+magic_available(all_players,power_call_to_arms,1,0)
+magic_available(all_players,power_hold_audience,1,0)
+magic_available(all_players,power_cave_in,1,0)
+magic_available(all_players,power_protect,1,0)
+magic_available(all_players,power_chicken,1,0)
+magic_available(all_players,power_lightning,1,0)
+magic_available(all_players,power_disease,1,0)
+magic_available(all_players,power_heal_creature,1,0)
+magic_available(all_players,power_destroy_walls,1,0)
+magic_available(all_players,power_sight,1,0)
+magic_available(all_players,power_obey,1,0)
+magic_available(all_players,power_speed,1,0)
+magic_available(all_players,power_conceal,1,0)
+
+trap_available(all_players,word_of_power,1,0)
+trap_available(all_players,lightning,1,0)
+trap_available(all_players,boulder,1,0)
+trap_available(all_players,poison_gas,1,0)
+trap_available(all_players,lava,1,0)
+door_available(all_players,magic,1,0)
+
+if(player0,game_turn >= 10)
+ quick_objective(1,"现在是时候拯救你的第二个盟友 - 加尔杜了。他比你的紫色兄弟强大得多，也许这应该更早完成。马德尔把你的朋友藏在坟墓里。小心，守卫被赋予了强大的力量，击败他们会比平时更困难。",player0)
+ creature_available(player0,bug,0,0)
+ creature_available(player0,skeleton,0,0)
+ creature_available(player0,spider,0,0)
+endif
+
+create_party(ska)
+	add_to_party(ska,imp,5,0,attack_enemies,30000)
+	add_to_party(ska,monk,10,0,steal_spells,5000)
+	add_to_party(ska,monk,10,0,steal_spells,5000)
+	add_to_party(ska,skeleton,8,0,attack_enemies,0)
+	add_to_party(ska,skeleton,8,0,attack_enemies,0)
+	add_to_party(ska,skeleton,8,0,attack_enemies,0)
+	
+create_party(dux)
+	add_to_party(dux,imp,3,0,attack_enemies,30000)
+	add_to_party(dux,ghost,7,0,attack_enemies,0)
+	add_to_party(dux,ghost,7,0,attack_enemies,0)
+	add_to_party(dux,bug,9,0,attack_enemies,0)
+	add_to_party(dux,bug,9,0,attack_enemies,0)
+	add_to_party(dux,skeleton,10,0,attack_enemies,0)
+	
+create_party(bugi)
+	add_to_party(bugi,imp,8,0,attack_enemies,30000)
+	add_to_party(bugi,bug,7,0,attack_enemies,0)
+	add_to_party(bugi,bug,8,0,attack_enemies,0)
+	add_to_party(bugi,bug,9,0,attack_enemies,0)
+	add_to_party(bugi,bug,10,0,attack_enemies,0)
+	add_to_party(bugi,skeleton,6,0,attack_enemies,0)
+	
+create_party(pesda)
+	add_to_party(pesda,hell_hound,6,0,attack_enemies,0)
+	add_to_party(pesda,hell_hound,6,0,attack_enemies,0)
+	add_to_party(pesda,hell_hound,6,0,attack_enemies,0)
+	
+create_party(bones)
+	add_to_party(bones,hell_hound,9,0,attack_enemies,0)
+	add_to_party(bones,hell_hound,9,0,attack_enemies,0)
+	add_to_party(bones,hell_hound,9,0,attack_enemies,0)
+	add_to_party(bones,skeleton,8,0,attack_enemies,0)
+	add_to_party(bones,skeleton,8,0,attack_enemies,0)
+	add_to_party(bones,skeleton,8,0,attack_enemies,0)
+	
+create_party(doo)
+	add_to_party(doo,ghost,9,0,steal_spells,0)
+	add_to_party(doo,ghost,9,0,steal_spells,0)
+	add_to_party(doo,ghost,9,0,steal_spells,0)
+	add_to_party(doo,ghost,8,0,steal_spells,0)
+	add_to_party(doo,ghost,8,0,steal_spells,0)
+	add_to_party(doo,ghost,8,0,steal_spells,0)
+	
+if(player0,game_turn >= 30000)
+ add_party_to_level(player_good,dux,-1,1)
+endif
+
+if(player0,game_turn >= 50000)
+ add_party_to_level(player_good,ska,-3,1)
+ add_party_to_level(player_good,ska,-3,1)
+endif
+
+if(player0,game_turn >= 70000)
+ add_party_to_level(player_good,bugi,-2,1)
+ add_party_to_level(player_good,bugi,-2,1)
+ add_party_to_level(player_good,bugi,-2,1)
+endif
+
+if_action_point(2,player0)
+ add_party_to_level(player_good,pesda,2,1)
+endif
+
+if_action_point(3,player0)
+ add_party_to_level(player_good,pesda,3,1)
+ add_party_to_level(player_good,pesda,3,1)
+endif
+ 
+if_action_point(1,player0)
+ add_party_to_level(player_good,doo,1,1)
+ add_party_to_level(player_good,doo,1,1)
+endif
+
+if(player1,dungeon_destroyed == 1)
+ if(player2,dungeon_destroyed == 1)
+  if(player3,dungeon_destroyed == 1)
+   if(player6,dungeon_destroyed == 1)
+    room_available(player0,bridge,1,1)
+   endif
+  endif
+ endif
+endif
+
+if(player0,dungeon_destroyed == 1)
+ lose_game
+endif
+
+if(player1,knight == 1)
+ lose_game
+endif
+
+if(player2,knight == 1)
+ lose_game
+endif
+
+if(player3,knight == 1)
+ lose_game
+endif
+
+if(player6,knight == 1)
+ lose_game
+endif
+
+if(player_good,timer0 >= 100)
+ add_party_to_level(player_good,bones,1,1)
+ add_party_to_level(player_good,bones,1,1)
+ add_party_to_level(player_good,bones,1,1)
+ add_party_to_level(player_good,bones,1,1)
+ if(player0,knight == 0)
+  lose_game
+ endif
+endif
+
+if(player0,knight == 1)
+ quick_objective(2,"加尔杜自由了。除掉守卫，任务就完成了。",1)
+ set_timer(player_good,timer0)
+ if(player_good,total_creatures == 0)
+  if(player_good,timer0 >= 2000)
+   win_game
+  endif
+ endif
+endif

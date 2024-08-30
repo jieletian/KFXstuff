@@ -1,0 +1,17 @@
+Faq'huin The Game Master
+
+idea for a campaign, based on levels with a game theme.
+
+An arena map, where creatures are dropped in rounds to battle each other, policed by heroes. I have built the first version of this, but nowhere near complete. This is the first map of the campaign, and the idea is that you, a great and famous Keeper have been invited to Faqhuin's realm to watch and participate in his festival of Evil games, where conquered keepers have been assembled to battle for everyone else's amusement. However, quickly it becomes apparent that you are not a guest, but one of the captive participants. I need a cool way to transition from appearing to participate, to being imprisoned and made to take part in combat for Faqhuin's amusement.
+
+Another mode is 'assault' mode, a common FPS mode. I know YourMaster has talked of this recently also? I have made one pilot map, but it's an early attempt, and not very good yet. The idea is that you cannot actually win, but the idea is to survive as many waves as possible. Probably set a minimum number of waves to allow progressing to the next level. I wanted to have 3 consecutive levels, where the 'score' was kept via gold added to a 'null' player's account. Set a minimum to allow progression to the next level, along with a target that must bemet at the end of the 3rd level in otrder to win, using campaign flags. At the start of the 2nd and 3rd levels, the player will be told if they're on track or falling behind where they need to be. There will be a small number of boulder traps and 1 or 2 lava traps, to allow the waves to be guided, though it won't be possible to wall or lava them off.
+
+A map like a board game, where you make your way round the board, collecting particular imprisoned creatures. Maybe a set of creatures that, if you get to the end can be sacrificed in the temple to achieve victory? A 'snakes and ladders' aspect too, where you can be sent back to a previous stage if a circumstance is met. Nothing for this except an idea. It'd be cool if we could simulate a 'dice throw'? Incorporate a variable into an objective to tell the player what he threw?
+
+This map is obviously chess based. Creature choices are my first attempt, based solely on not using lava-tolerant creatures. Victory is solely based on defeat of the Avatar (The King), and I'm not sure that's optimal. Creatures are slapped across the board. There's no lair or hatchery, so time is obviously limited. I wondered about randomly adding bridges between squares as the fight goes on to mix it up? Priestesses wind spell is a 'randomizer', but not sure it works too well?
+
+The map as it stands simply has one round, but other possibilities are (i) using the mistresses to kill everyone at the end of each round, and re-adding creatures for a second round. (ii) I wondered if the surviving creatures after each round could be 'banked' for a final battle against another keeper 'hidden' within the rest of the map? (hence the prison?) (iii) a replica square alongside where 2 computer players battle each other? (iv) switch possession and power-hand on and off at intervals?
+
+anyway, if anyone fancies having a play with this, help yourself! All feedback welcome, and please post your efforts on the discord? Please change the level number, so it's easy to play any variants?
+
+dayokay (dayokay65@gmail.com)

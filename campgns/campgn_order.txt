@@ -1,0 +1,21 @@
+#order of the campaigns, campaigns not in the list will be at the bottom alphabetically
+keeporig.cfg
+origplus.cfg
+Tyraels_realms.cfg
+sapphire_realms.cfg
+custodian.cfg
+dade.cfg
+another.cfg
+hoh.cfg
+blue.cfg
+ami2019.cfg
+revlord.cfg
+ancntkpr.cfg
+burdnimp.cfg
+jdkmaps8.cfg
+dstninja.cfg
+lqizgood.cfg
+twinkprs.cfg
+postanck.cfg
+undedkpr.cfg
+pstunded.cfg

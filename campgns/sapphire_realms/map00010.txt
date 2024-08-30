@@ -1,0 +1,694 @@
+REM Basics
+
+    LEVEL_VERSION(1)
+    RUN_AFTER_VICTORY(1)
+    SET_GENERATE_SPEED(400)
+
+    START_MONEY(PLAYER0,7500)
+    START_MONEY(PLAYER5,100000)
+    START_MONEY(PLAYER_GOOD,100000)
+
+    SET_MUSIC("campaign_music/diablo_medley.mp3")
+
+    COMPUTER_PLAYER(PLAYER_GOOD,15)
+    COMPUTER_PLAYER(PLAYER5,15)
+
+    SET_PLAYER_COLOR(PLAYER0, BLUE)
+
+    REM Player colours for the supplemental keepers
+    REM White also has purple
+    REM Black also has green
+    SET_PLAYER_COLOR(PLAYER4, WHITE)
+    SET_PLAYER_COLOR(PLAYER2, BLACK)
+
+    REM Set ally status so creatures with roaming property can be spawnwed for this colour
+    ALLY_PLAYERS(PLAYER4, PLAYER_GOOD, 3)
+    ALLY_PLAYERS(PLAYER2, PLAYER5, 3)
+    COMPUTER_PLAYER(PLAYER2, ROAMING)
+    COMPUTER_PLAYER(PLAYER4, ROAMING)
+
+REM Creature pool
+
+    ADD_CREATURE_TO_POOL(DEMONSPAWN,20)
+    ADD_CREATURE_TO_POOL(TROLL,20)
+    ADD_CREATURE_TO_POOL(SPIDER,20)
+    ADD_CREATURE_TO_POOL(HELL_HOUND,20)
+    ADD_CREATURE_TO_POOL(TENTACLE,20)
+    ADD_CREATURE_TO_POOL(SORCEROR,20)
+    ADD_CREATURE_TO_POOL(ORC,20)
+    ADD_CREATURE_TO_POOL(BILE_DEMON,20)
+    ADD_CREATURE_TO_POOL(DRAGON,20)
+    ADD_CREATURE_TO_POOL(DARK_MISTRESS,20)
+    REM Heroes for the 2 other keepers
+    ADD_CREATURE_TO_POOL(THIEF,10)
+    ADD_CREATURE_TO_POOL(BARBARIAN,6)
+    ADD_CREATURE_TO_POOL(WITCH,6)
+    ADD_CREATURE_TO_POOL(ARCHER,6)
+    ADD_CREATURE_TO_POOL(GIANT,6)
+    ADD_CREATURE_TO_POOL(SAMURAI,6)
+    ADD_CREATURE_TO_POOL(FAIRY,6)
+
+REM Availability per player
+
+    REM Everyone has these
+    CREATURE_AVAILABLE(ALL_PLAYERS,DEMONSPAWN,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,TROLL,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,SPIDER,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,HELL_HOUND,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,TENTACLE,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,ORC,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,BILE_DEMON,1,0)
+    CREATURE_AVAILABLE(ALL_PLAYERS,DRAGON,1,0)
+
+    REM The player can have these
+    CREATURE_AVAILABLE(PLAYER0,DARK_MISTRESS,1,0)
+    CREATURE_AVAILABLE(PLAYER0,SORCEROR,1,0)
+
+    REM Creatures specific to black
+    CREATURE_AVAILABLE(PLAYER5,THIEF,1,0)
+    CREATURE_AVAILABLE(PLAYER5,SORCEROR,1,0)
+    CREATURE_AVAILABLE(PLAYER5,BARBARIAN,1,0)
+    CREATURE_AVAILABLE(PLAYER5,WITCH,1,0)
+    CREATURE_AVAILABLE(PLAYER5,DARK_MISTRESS,1,0)
+
+    REM Creatures specific to white
+    CREATURE_AVAILABLE(PLAYER_GOOD,ARCHER,1,0)
+    CREATURE_AVAILABLE(PLAYER_GOOD,WIZARD,1,0)
+    CREATURE_AVAILABLE(PLAYER_GOOD,GIANT,1,0)
+    CREATURE_AVAILABLE(PLAYER_GOOD,FAIRY,1,0)
+    CREATURE_AVAILABLE(PLAYER_GOOD,SAMURAI,1,0)
+
+REM Rooms
+
+    ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,TRAINING,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,1)
+    ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,PRISON,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,BARRACKS,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,TEMPLE,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,GRAVEYARD,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,SCAVENGER,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,TORTURE,1,0)
+    ROOM_AVAILABLE(ALL_PLAYERS,WORKSHOP,1,0)
+
+REM Magic
+
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_POSSESS,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,1)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SIGHT,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SPEED,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_OBEY,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CALL_TO_ARMS,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CONCEAL,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HOLD_AUDIENCE,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CAVE_IN,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HEAL_CREATURE,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_LIGHTNING,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_PROTECT,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CHICKEN,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_DISEASE,1,0)
+    MAGIC_AVAILABLE(ALL_PLAYERS,POWER_DESTROY_WALLS,1,0)
+
+REM Traps and doors
+
+    TRAP_AVAILABLE(ALL_PLAYERS,POISON_GAS,1,0)
+    TRAP_AVAILABLE(ALL_PLAYERS,LIGHTNING,1,0)
+    TRAP_AVAILABLE(ALL_PLAYERS,WORD_OF_POWER,1,0)
+
+    DOOR_AVAILABLE(ALL_PLAYERS,WOOD,1,0)
+    DOOR_AVAILABLE(ALL_PLAYERS,STEEL,1,0)
+    DOOR_AVAILABLE(ALL_PLAYERS,MAGIC,1,0)
+
+REM Starting conditions depending on the campaign flag
+
+    IF (PLAYER0, TIMER0 > 1)
+
+        REM 0 - Allied with neither
+
+        IF(PLAYER0, CAMPAIGN_FLAG3 == 0)
+            QUICK_OBJECTIVE(11, "守护者，我们离目的地越来越近了。我们距离需要寻找的宝石矿之间只隔着这一个王国了。玛瑙盗贼和钻石英雄似乎彼此敌对，当然对你也一样。给他们俩一个教训吧。")
+            
+            MAX_CREATURES(PLAYER0,20)
+            REM The CPUs get a few more creatures
+            MAX_CREATURES(PLAYER_GOOD,25)
+            MAX_CREATURES(PLAYER5,25)
+
+            ADD_CREATURE_TO_LEVEL(PLAYER_GOOD, KNIGHT, 3, 1, 1, 0)
+            ADD_CREATURE_TO_LEVEL(PLAYER5, BLACK_KNIGHT, 4, 1, 1, 0)
+
+        ENDIF
+
+        REM 1 - Allied with black
+
+        IF(PLAYER0, CAMPAIGN_FLAG3 == 1)
+            QUICK_OBJECTIVE(13, "守护者，我们离目的地越来越近了。我们距离需要寻找的宝石矿之间只隔着这一个王国了。看来你决定和玛瑙盗贼结盟了？与他们合作消灭钻石英雄吧，当然等我们完成任务后，也随时可以背刺他们。")
+
+            ALLY_PLAYERS(PLAYER0, PLAYER5, 3)
+            ALLY_PLAYERS(PLAYER0, PLAYER2, 3)
+
+            REM In this case, white gets more creatures since it's 2v1
+            MAX_CREATURES(PLAYER_GOOD,35)
+            MAX_CREATURES(PLAYER5,20)
+            MAX_CREATURES(PLAYER0,20)
+
+            ADD_CREATURE_TO_LEVEL(PLAYER_GOOD, KNIGHT, 3, 1, 1, 0)
+
+            REM The CPU that's at a disadvantage gets extra gems
+            CHANGE_SLAB_TYPE(4, 27, GEMS, NONE)
+            CHANGE_SLAB_TYPE(4, 29, GEMS, NONE)
+        ENDIF
+
+        REM 2 - Allied with white
+
+        IF(PLAYER0, CAMPAIGN_FLAG3 == 2)
+            QUICK_OBJECTIVE(12, "守护者，我们离目的地越来越近了。我们距离需要寻找的宝石矿之间只隔着这一个王国了。看来你很幸运，能与钻石英雄们结盟。一起摧毁玛瑙盗贼公会吧，但要小心……他们似乎有备而来。")
+
+            ALLY_PLAYERS(PLAYER0, PLAYER_GOOD, 3)
+            ALLY_PLAYERS(PLAYER0, PLAYER4, 3)
+
+            REM Black gets the most creatures
+            MAX_CREATURES(PLAYER_GOOD,20)
+            MAX_CREATURES(PLAYER5,35)
+            MAX_CREATURES(PLAYER0,20)
+
+            ADD_CREATURE_TO_LEVEL(PLAYER5, BLACK_KNIGHT, 4, 1, 1, 0)
+
+            REM The CPU that's at a disadvantage gets extra gems
+            CHANGE_SLAB_TYPE(95, 28, GEMS, NONE)
+            CHANGE_SLAB_TYPE(95, 29, GEMS, NONE)
+        ENDIF
+
+        REM Spawn some creatures for the enemy
+
+        REM 1 - NOT allied with black - black gets extra creatures to start with
+
+        IF(PLAYER0, CAMPAIGN_FLAG3 != 1)
+
+            ADD_CREATURE_TO_LEVEL(PLAYER5, THIEF, 4, 1, 1, 0)
+            ADD_CREATURE_TO_LEVEL(PLAYER5, SORCEROR, 4, 1, 1, 0)
+            ADD_CREATURE_TO_LEVEL(PLAYER5, BARBARIAN, 4, 1, 1, 0)
+            REM Removed for balancing reasons to make both keepers a bit easier
+            REM ADD_CREATURE_TO_LEVEL(PLAYER5, WITCH, 4, 1, 1, 0)
+            ADD_CREATURE_TO_LEVEL(PLAYER5, DARK_MISTRESS, 4, 1, 1, 0)
+
+        ENDIF
+
+        REM 2 - NOT Allied with white
+
+        IF(PLAYER0, CAMPAIGN_FLAG3 != 2)
+
+            ADD_CREATURE_TO_LEVEL(PLAYER_GOOD, ARCHER, 3, 1, 1, 0)
+            REM ADD_CREATURE_TO_LEVEL(PLAYER_GOOD, WIZARD, 3, 1, 1, 0)
+            REM ADD_CREATURE_TO_LEVEL(PLAYER_GOOD, GIANT, 3, 1, 1, 0)
+            REM ADD_CREATURE_TO_LEVEL(PLAYER_GOOD, FAIRY, 3, 1, 1, 0)
+            REM Taken out the balance white a little - especially white is too strong
+            REM ADD_CREATURE_TO_LEVEL(PLAYER_GOOD, SAMURAI, 3, 1, 1, 0)
+
+        ENDIF
+
+    ENDIF
+
+REM Config for the reinforcements being sent
+
+    CREATE_PARTY(party1)
+        ADD_TO_PARTY(party1,KNIGHT,1,400,ATTACK_DUNGEON_HEART,0)
+
+    CREATE_PARTY(party2)
+        ADD_TO_PARTY(party2,BLACK_KNIGHT,1,400,ATTACK_DUNGEON_HEART,0)
+
+    SET_TIMER(PLAYER0, TIMER0)
+
+    IF (PLAYER0, TIMER0 > 3000)
+        REM Black is ally
+        IF(PLAYER0, CAMPAIGN_FLAG3 == 1)
+            QUICK_INFORMATION(10, "守护者，玛瑙盗贼将派一名黑骑士来找你。一定要让他们进来。", -4)
+        ENDIF
+
+        REM White is ally
+        IF(PLAYER0, CAMPAIGN_FLAG3 == 2)
+            QUICK_INFORMATION(15, "守护者，钻石英雄将派一名骑士来找你。一定要让他们进来。", -3)
+        ENDIF
+    ENDIF
+
+REM Set this to be roughly 5 seconds / 100 ticks after the above timer - 1 second is 20 ticks
+
+    IF (PLAYER0, TIMER0 > 3100)
+
+        REM Send the allied Black party
+        IF(PLAYER0, CAMPAIGN_FLAG3 == 1)
+
+            ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER2, party2, -4, ACTION_POINT, 2, 1, 0)
+            
+            HIDE_HERO_GATE(4, 1)
+            CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_WHITE, 226, 169)
+
+            QUICK_MESSAGE(8, "我们一起消灭这些蠢货吧！", BLACK_KNIGHT)
+            QUICK_MESSAGE(7, "守护者，我们正在向你派遣增援！", PLAYER5)
+            
+            IF_ACTION_POINT(2, PLAYER2)
+                QUICK_INFORMATION(5, "玛瑙盗贼的精英黑骑士已加入你的阵营。如果加以训练，他在战斗中会成为一股令人生畏的力量，并且拥有独特的战斗技能。", 2)
+                CHANGE_CREATURE_OWNER(PLAYER2, BLACK_KNIGHT, ANYWHERE, PLAYER0)
+                CHANGE_CREATURE_OWNER(PLAYER2, TUNNELLER, AT_ACTION_POINT[2], PLAYER0)
+            ENDIF
+        ENDIF
+
+        REM Send the allied White party
+        IF(PLAYER0, CAMPAIGN_FLAG3 == 2)
+
+            ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER4, party1, -3, ACTION_POINT, 1, 1, 0)
+
+            HIDE_HERO_GATE(3, 1)
+            CREATE_EFFECT_AT_POS(EFFECT_SPANGLE_WHITE, 70, 169)
+
+            QUICK_MESSAGE(9, "我们将齐心协力打败这些异教徒！", KNIGHT)
+            QUICK_MESSAGE(14, "守护者，照顾好我们最强的骑士。", PLAYER_GOOD)
+
+            IF_ACTION_POINT(1, PLAYER4)
+                QUICK_INFORMATION(6, "钻石英雄派出了他们最强大的战士。一定要好好训练他，他可能会比你平常的骑士更强大，在战斗中会赢得尊重。", 1)
+                CHANGE_CREATURE_OWNER(PLAYER4, KNIGHT, ANYWHERE, PLAYER0)
+                CHANGE_CREATURE_OWNER(PLAYER4, TUNNELLER, AT_ACTION_POINT[1], PLAYER0)
+            ENDIF
+
+        ENDIF
+
+    ENDIF
+
+REM Groups that attack the player if the player isn't allied with white or black
+
+    CREATE_PARTY(party_black_right)
+        ADD_TO_PARTY(party_black_right,BARBARIAN,5,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_black_right,THIEF,4,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_black_right,SORCEROR,4,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_black_right,WITCH,4,400,ATTACK_DUNGEON_HEART,0)
+
+    CREATE_PARTY(party_white_left)
+        ADD_TO_PARTY(party_white_left,GIANT,6,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_white_left,ARCHER,4,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_white_left,WIZARD,4,400,ATTACK_DUNGEON_HEART,0)
+        ADD_TO_PARTY(party_white_left,FAIRY,4,400,ATTACK_DUNGEON_HEART,0)
+
+    REM black is weaker but sooner
+    IF (PLAYER0, TIMER0 > 10000)
+        REM Send black party if player is NOT allied
+        IF(PLAYER0, CAMPAIGN_FLAG3 != 1)
+            ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER2, party_black_right, -4, ACTION_POINT, 2, 1, 0)
+        ENDIF
+    ENDIF
+
+    REM Maybe white is stronger but later to prevent these overlapping
+    IF (PLAYER0, TIMER0 > 12000)
+        REM Send the white party if player is NOT allied
+        IF(PLAYER0, CAMPAIGN_FLAG3 != 2)
+            ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER4, party_white_left, -3, ACTION_POINT, 1, 1, 0)
+        ENDIF
+    ENDIF
+
+    REM A second wave
+
+    IF (PLAYER0, TIMER0 > 20000)
+        REM Send black party if player is NOT allied
+        IF(PLAYER0, CAMPAIGN_FLAG3 != 1)
+            ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER2, party_black_right, -4, ACTION_POINT, 2, 1, 0)
+        ENDIF
+    ENDIF
+
+    IF (PLAYER0, TIMER0 > 22000)
+        REM Send the white party if player is NOT allied
+        IF(PLAYER0, CAMPAIGN_FLAG3 != 2)
+            ADD_TUNNELLER_PARTY_TO_LEVEL(PLAYER4, party_white_left, -3, ACTION_POINT, 1, 1, 0)
+        ENDIF
+    ENDIF
+
+REM Win condition
+
+    REM Flag0 is whether the player has won, depends on the campaign flag!
+    SET_FLAG(PLAYER0, FLAG0, 0)
+
+    REM 0 - Allied with neither - both enemy keepers need to die to win
+    IF(PLAYER0, CAMPAIGN_FLAG3 == 0)
+        IF(PLAYER5, DUNGEON_DESTROYED == 1)
+            IF(PLAYER_GOOD, DUNGEON_DESTROYED == 1)
+                SET_FLAG(PLAYER0, FLAG0, 1)
+                QUICK_OBJECTIVE(1, "守护者，这真是邪恶之举。只有像你这样邪恶的人才能在无人帮助的情况下同时干掉他们两个。")
+            ENDIF
+        ENDIF
+    ENDIF
+
+    REM 1 - Allied with black
+    IF(PLAYER0, CAMPAIGN_FLAG3 == 1)
+        IF(PLAYER_GOOD, DUNGEON_DESTROYED == 1)
+            SET_FLAG(PLAYER0, FLAG0, 1)
+            QUICK_OBJECTIVE(2, "干得好，守护者。这就是你与玛瑙盗贼的盟约结束的地方。在下一个王国不要对他们仁慈，否则他们会给予你同样的“仁慈”。")
+        ENDIF
+    ENDIF
+
+    REM 2 - Allied with white
+    IF(PLAYER0, CAMPAIGN_FLAG3 == 2)
+        IF(PLAYER5, DUNGEON_DESTROYED == 1)
+            SET_FLAG(PLAYER0, FLAG0, 1)
+            QUICK_OBJECTIVE(3, "干得好，利用钻石英雄的帮助来获得优势，虽然你并不需要它。让我们进入最后的战斗并击败他们，无论他们是否之前联盟。")
+        ENDIF
+    ENDIF
+
+    IF (PLAYER0, FLAG0 == 1)
+
+        WIN_GAME
+
+        REM Count campaign flag up by one
+        IF(PLAYER0, CAMPAIGN_FLAG6 == 9)
+            SET_FLAG(PLAYER0, CAMPAIGN_FLAG6, 10)
+        ENDIF
+        
+        REM If player is in NG+, advance the state of that too
+        IF (PLAYER0, CAMPAIGN_FLAG5 == 1)
+            IF(PLAYER0, CAMPAIGN_FLAG7 == 9)
+                SET_FLAG(PLAYER0, CAMPAIGN_FLAG7, 10)
+            ENDIF
+        ENDIF
+
+    ENDIF
+        
+REM Starting conditions depending on campaign flag
+
+    REM Reveal the left room - White's hero portal room
+    IF(PLAYER0, CAMPAIGN_FLAG3 == 2)
+        REVEAL_MAP_LOCATION(PLAYER0,-3,-1)
+    ENDIF
+
+    REM Reveal the right room - Black's hero portal room
+    IF(PLAYER0, CAMPAIGN_FLAG3 == 1)
+        REVEAL_MAP_LOCATION(PLAYER0,-4,-1)
+    ENDIF
+
+REM Make the AI engage with each other / enter the middle after a certain amount of time
+
+    IF (PLAYER0, TIMER0 > 4000)
+        COMPUTER_DIG_TO_LOCATION(PLAYER_GOOD, PLAYER_GOOD, 11)
+        COMPUTER_DIG_TO_LOCATION(PLAYER5, PLAYER5, 12)
+    ENDIF
+
+    IF (PLAYER0, TIMER0 > 10000)
+        COMPUTER_DIG_TO_LOCATION(PLAYER_GOOD, 11, 9)
+        COMPUTER_DIG_TO_LOCATION(PLAYER5, 12, 13)
+    ENDIF
+
+    REM This one is deliberately relatively late so they don't engage each other super soon
+    IF (PLAYER0, TIMER0 > 25000)
+        COMPUTER_DIG_TO_LOCATION(PLAYER_GOOD, 9, 7)
+        COMPUTER_DIG_TO_LOCATION(PLAYER5, 13, 8)
+    ENDIF
+
+REM Finally, have either white or black attack directly
+
+    IF (PLAYER0, TIMER0 > 35000)
+        REM Allied with neither, whoever has more creatures attacks
+        IF(PLAYER0, CAMPAIGN_FLAG3 == 0)
+
+            REM White has more and attacks
+            IF (PLAYER_GOOD, TOTAL_CREATURES > PLAYER5, TOTAL_CREATURES)
+                COMPUTER_DIG_TO_LOCATION(PLAYER_GOOD, 7, 28)
+            ENDIF
+
+            REM Black has more and attacks
+            IF (PLAYER_GOOD, TOTAL_CREATURES < PLAYER5, TOTAL_CREATURES)
+                COMPUTER_DIG_TO_LOCATION(PLAYER5, 8, 28)
+            ENDIF
+        ENDIF
+
+        REM Allied with black, white attacks
+        IF(PLAYER0, CAMPAIGN_FLAG3 == 1)
+            COMPUTER_DIG_TO_LOCATION(PLAYER_GOOD, 7, 28)
+        ENDIF
+
+        REM allied with white, black attacks
+        IF(PLAYER0, CAMPAIGN_FLAG3 == 2)
+            COMPUTER_DIG_TO_LOCATION(PLAYER5, 8, 28)
+        ENDIF
+    ENDIF
+
+REM  increase enemy level after a certain amount of time has passed
+REM Removed for now because this is probably too strong
+
+REM    IF (PLAYER0, TIMER0 > 24000)
+REM        USE_SPECIAL_INCREASE_LEVEL(PLAYER_GOOD, 1)
+REM        USE_SPECIAL_INCREASE_LEVEL(PLAYER5, 1)
+REM    ENDIF
+
+REM Add bonuses depending on the campaign flag
+
+    IF (PLAYER0, TIMER0 > 3)
+
+        REM Allied with black - spawn a special box
+        IF(PLAYER0, CAMPAIGN_FLAG3 == 1)
+            ADD_OBJECT_TO_LEVEL(SPECBOX_INCLEV, 21, 0, PLAYER_NEUTRAL)
+            ADD_CREATURE_TO_LEVEL(PLAYER4, HORNY, 21, 1, 5, 0)
+        ENDIF
+        REM Not allied with black - spawn neutral creature
+        IF(PLAYER0, CAMPAIGN_FLAG3 != 1)
+            ADD_CREATURE_TO_LEVEL(PLAYER_NEUTRAL, MONK, 21, 1, 1, 0)
+        ENDIF
+
+        REM Allied with white - spawn a special box
+        IF(PLAYER0, CAMPAIGN_FLAG3 == 2)
+            ADD_OBJECT_TO_LEVEL(SPECBOX_RESURCT, 15, 0, PLAYER_NEUTRAL)
+            ADD_CREATURE_TO_LEVEL(PLAYER2, HORNY, 15, 1, 5, 0)
+        ENDIF
+        REM Not allied with white - spawn neutral creature
+        IF(PLAYER0, CAMPAIGN_FLAG3 != 2)
+            ADD_CREATURE_TO_LEVEL(PLAYER_NEUTRAL, DARK_MISTRESS, 15, 1, 1, 0)
+        ENDIF
+
+    ENDIF
+
+REM Change the ownership of the portal rooms depending on the campaign flag - they're neutral by default if the player is allied so the player can tunnel through them
+
+    IF (PLAYER0, TIMER0 > 5)
+
+        REM Not allied with black
+        IF(PLAYER0, CAMPAIGN_FLAG3 != 1)
+            REM The floor
+            CHANGE_SLAB_OWNER(73, 54, PLAYER5, MATCH)
+            REM The cross
+            CHANGE_SLAB_OWNER(75, 53, PLAYER5, MATCH)
+            CHANGE_SLAB_OWNER(75, 59, PLAYER5, MATCH)
+            CHANGE_SLAB_OWNER(72, 56, PLAYER5, MATCH)
+            CHANGE_SLAB_OWNER(78, 56, PLAYER5, MATCH)
+            REM The wall
+            CHANGE_SLAB_OWNER(76, 61, PLAYER5, MATCH)
+
+            ADD_EFFECT_GENERATOR_TO_LEVEL(EFFECTGENERATOR_ENTRANCE_ICE, -3, 2)
+
+            REM Since the above ones are set to match, change back this one tile to green
+            CHANGE_SLAB_OWNER(75, 61, PLAYER2, NONE)
+        ENDIF
+
+        REM Not allied with white
+        IF(PLAYER0, CAMPAIGN_FLAG3 != 2)
+            REM The floor
+            CHANGE_SLAB_OWNER(24, 57, PLAYER_GOOD, MATCH)
+            REM The cross
+            CHANGE_SLAB_OWNER(23, 53, PLAYER_GOOD, MATCH)
+            CHANGE_SLAB_OWNER(23, 59, PLAYER_GOOD, MATCH)
+            CHANGE_SLAB_OWNER(20, 56, PLAYER_GOOD, MATCH)
+            CHANGE_SLAB_OWNER(26, 56, PLAYER_GOOD, MATCH)
+            REM The wall
+            CHANGE_SLAB_OWNER(25, 59, PLAYER_GOOD, MATCH)
+
+            ADD_EFFECT_GENERATOR_TO_LEVEL(EFFECTGENERATOR_ENTRANCE_ICE, -4, 5)
+
+            REM Since the above ones are set to match, change back this one tile to purple
+            CHANGE_SLAB_OWNER(23, 61, PLAYER4, NONE)
+        ENDIF
+
+    ENDIF
+
+REM Spawn enemies in the two lava tunnels
+
+    IF (PLAYER0, TIMER0 > 7)
+
+        REM NOT Allied with black - spawn black enemies
+
+        IF(PLAYER0, CAMPAIGN_FLAG3 != 1)
+            ADD_CREATURE_TO_LEVEL(PLAYER2, ARCHER, 20, 1, 2, 0)
+            ADD_CREATURE_TO_LEVEL(PLAYER2, ARCHER, 26, 1, 4, 0)
+            ADD_CREATURE_TO_LEVEL(PLAYER2, WITCH, 22, 1, 6, 0)
+            ADD_CREATURE_TO_LEVEL(PLAYER2, DARK_MISTRESS, 23, 1, 6, 0)
+            ADD_CREATURE_TO_LEVEL(PLAYER2, BARBARIAN, 24, 1, 6, 0)
+            ADD_CREATURE_TO_LEVEL(PLAYER2, ARCHER, 25, 1, 6, 0)
+            ADD_CREATURE_TO_LEVEL(PLAYER2, THIEF, 27, 1, 6, 0)
+            ADD_CREATURE_TO_LEVEL(PLAYER2, BARBARIAN, 30, 1, 6, 0)
+        ENDIF
+
+        REM NOT Allied with white - spawn white enemies
+
+        IF(PLAYER0, CAMPAIGN_FLAG3 != 9)
+            REM The white creatures - these must be spawned as Player4 to be roaming!
+            ADD_CREATURE_TO_LEVEL(PLAYER4, ARCHER, 6, 1, 2, 0)
+            ADD_CREATURE_TO_LEVEL(PLAYER4, GIANT, 5, 1, 4, 0)
+            ADD_CREATURE_TO_LEVEL(PLAYER4, ARCHER, 29, 1, 4, 0)
+            ADD_CREATURE_TO_LEVEL(PLAYER4, GIANT, 16, 1, 6, 0)
+            ADD_CREATURE_TO_LEVEL(PLAYER4, ARCHER, 19, 1, 6, 0)
+            ADD_CREATURE_TO_LEVEL(PLAYER4, SAMURAI, 17, 1, 6, 0)
+            ADD_CREATURE_TO_LEVEL(PLAYER4, GIANT, 18, 1, 6, 0)
+        ENDIF
+
+    ENDIF
+
+REM Remove some of the bridges for areas where the player is allied with the computer, and remove the guard posts in the lava
+
+    IF (PLAYER0, TIMER0 > 11)
+
+        REM 1 - Allied with black, remove stuff on the right
+
+        IF(PLAYER0, CAMPAIGN_FLAG3 == 1)
+            CHANGE_SLAB_TYPE(74,87, LAVA, NONE)
+            CHANGE_SLAB_TYPE(80,89, LAVA, NONE)
+            CHANGE_SLAB_TYPE(79,89, LAVA, MATCH)
+            CHANGE_SLAB_TYPE(87,91, LAVA, NONE)
+            CHANGE_SLAB_TYPE(88,78, LAVA, NONE)
+        ENDIF
+
+        REM 2 - Allied with white, remove stuff on the left
+
+        IF(PLAYER0, CAMPAIGN_FLAG3 == 2)
+            CHANGE_SLAB_TYPE(18,93, LAVA, NONE)
+            CHANGE_SLAB_TYPE(18,94, LAVA, NONE)
+            CHANGE_SLAB_TYPE(22,88, LAVA, NONE)
+            CHANGE_SLAB_TYPE(15,88, LAVA, NONE)
+            CHANGE_SLAB_TYPE(5,78, LAVA, NONE)
+        ENDIF
+    ENDIF
+
+REM Add some land bridges near the portal room when the player is allied
+
+    IF (PLAYER0, TIMER0 > 12)
+
+        REM 1 - Allied with black
+
+        IF(PLAYER0, CAMPAIGN_FLAG3 == 1)
+            CHANGE_SLAB_TYPE(72,50, DIRT, NONE)
+            CHANGE_SLAB_TYPE(72,51, DIRT, NONE)
+            CHANGE_SLAB_TYPE(72,52, DIRT, NONE)
+            CHANGE_SLAB_TYPE(73,50, DIRT, NONE)
+            CHANGE_SLAB_TYPE(74,50, DIRT, NONE)
+            CHANGE_SLAB_TYPE(78,51, DIRT, NONE)
+            CHANGE_SLAB_TYPE(79,51, DIRT, NONE)
+            CHANGE_SLAB_TYPE(78,52, DIRT, NONE)
+            CHANGE_SLAB_TYPE(79,52, DIRT, NONE)
+            CHANGE_SLAB_TYPE(79,53, DIRT, NONE)
+        ENDIF
+
+        REM 2 - Allied with white, remove stuff on the left
+
+        IF(PLAYER0, CAMPAIGN_FLAG3 == 2)
+            CHANGE_SLAB_TYPE(20,50, DIRT, NONE)
+            CHANGE_SLAB_TYPE(21,50, DIRT, NONE)
+            CHANGE_SLAB_TYPE(20,51, DIRT, NONE)
+            CHANGE_SLAB_TYPE(20,52, DIRT, NONE)
+            CHANGE_SLAB_TYPE(22,50, DIRT, NONE)
+        ENDIF
+
+    ENDIF
+
+REM change terrain ownership
+
+    IF (PLAYER0, TIMER0 > 13)
+
+        REM 1 - Allied with black
+
+        IF(PLAYER0, CAMPAIGN_FLAG3 == 1)
+
+            CHANGE_SLAB_OWNER(88,67,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(91,73,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(90,77,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(92,77,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(90,79,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(92,79,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(91,82,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(88,82,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(92,82,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(91,83,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(84,83,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(85,83,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(85,84,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(85,87,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(85,88,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(81,91,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(80,91,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(80,92,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(85,82,PLAYER_NEUTRAL, MATCH)
+
+        ENDIF
+
+        REM 2 - Allied with white
+
+        IF(PLAYER0, CAMPAIGN_FLAG3 == 2)
+
+            CHANGE_SLAB_OWNER(5,64,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(6,63,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(8,63,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(6,65,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(8,65,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(4,75,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(7,74,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(9,74,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(7,76,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(9,76,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(8,74,PLAYER_NEUTRAL, MATCH)
+
+            REM Doors
+            CHANGE_SLAB_OWNER(7,75,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(8,76,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(8,77,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(7,81,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(9,81,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(11,81,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(15,81,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(13,80,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(11,83,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(15,83,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(13,84,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(13,81,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(15,82,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(17,81,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(17,82,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(17,83,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(17,90,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(18,90,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(19,90,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(19,91,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(17,92,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(18,92,PLAYER_NEUTRAL, MATCH)
+
+            CHANGE_SLAB_OWNER(9,92,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(10,92,PLAYER_NEUTRAL, MATCH)
+            CHANGE_SLAB_OWNER(10,93,PLAYER_NEUTRAL, MATCH)
+
+        ENDIF
+
+    ENDIF
+

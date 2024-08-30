@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00220
+REM Automatically generated on 19 Aug 2008, 07:08:27
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(1008783236,1219122507)
+USER_COMMANDS_COUNT(622,10,0,10)
+LEVEL_DESCRIPTION("There's no Portal - you will have to use the WOP traps as your advantage during fights.")
+LEVEL_AUTHORS("Tom","")

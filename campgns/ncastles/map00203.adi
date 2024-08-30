@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00325
+REM Automatically generated on 19 Aug 2008, 21:34:40
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(896972496,1219174480)
+USER_COMMANDS_COUNT(186,11,1,4)
+LEVEL_DESCRIPTION("Legends tell of a castle full of deranged Knights wearing funny hats. This must be the place. Perhaps you should have a word with them about their fashion sense. It would probably be a good idea to raise a small army, first.")
+LEVEL_AUTHORS("Nikolai Kingsley","")

@@ -1,0 +1,280 @@
+REM ***********************************************************************
+REM   Script for Level   423.Xegnar
+REM ***********************************************************************
+REM     by Rangex        07.04.2004
+REM 
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+SET_GENERATE_SPEED(300)
+MAX_CREATURES(PLAYER0,15)
+MAX_CREATURES(PLAYER1,25)
+START_MONEY(PLAYER0,20000)
+START_MONEY(PLAYER1,100000)
+
+COMPUTER_PLAYER(PLAYER1,0)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+ADD_CREATURE_TO_POOL(SORCEROR,20)
+ADD_CREATURE_TO_POOL(BILE_DEMON,30)
+ADD_CREATURE_TO_POOL(DARK_MISTRESS,30)
+ADD_CREATURE_TO_POOL(TROLL,10)
+ADD_CREATURE_TO_POOL(ORC,10)
+ADD_CREATURE_TO_POOL(DRAGON,20)
+ADD_CREATURE_TO_POOL(SPIDER,10)
+ADD_CREATURE_TO_POOL(BUG,10)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+CREATURE_AVAILABLE(PLAYER0,TROLL,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,DARK_MISTRESS,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,SORCEROR,1,1)
+CREATURE_AVAILABLE(ALL_PLAYERS,BILE_DEMON,1,1)
+CREATURE_AVAILABLE(PLAYER1,DRAGON,1,1)
+CREATURE_AVAILABLE(PLAYER0,ORC,1,1)
+CREATURE_AVAILABLE(PLAYER0,BUG,1,1)
+CREATURE_AVAILABLE(PLAYER0,SPIDER,1,1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE(ALL_PLAYERS,TREASURE,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,LAIR,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,GARDEN,1,1)
+ROOM_AVAILABLE(PLAYER1,TRAINING,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,RESEARCH,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,BARRACKS,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,GUARD_POST,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,TEMPLE,1,0)
+ROOM_AVAILABLE(ALL_PLAYERS,WORKSHOP,1,0)
+ROOM_AVAILABLE(PLAYER1,GRAVEYARD,1,1)
+ROOM_AVAILABLE(PLAYER1,PRISON,1,1)
+ROOM_AVAILABLE(ALL_PLAYERS,TORTURE,1,0)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HAND,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_IMP,1,1)
+MAGIC_AVAILABLE(ALL_PLAYERS,POWER_SLAP,1,1)
+MAGIC_AVAILABLE(PLAYER1,POWER_OBEY,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_SIGHT,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_CALL_TO_ARMS,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_HEAL_CREATURE,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_SPEED,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_LIGHTNING,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_PROTECT,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_CONCEAL,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_DISEASE,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_CAVE_IN,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_CHICKEN,1,0)
+MAGIC_AVAILABLE(PLAYER1,POWER_HOLD_AUDIENCE,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+DOOR_AVAILABLE(ALL_PLAYERS,WOOD,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,BRACED,1,0)
+DOOR_AVAILABLE(ALL_PLAYERS,STEEL,1,0)
+DOOR_AVAILABLE(PLAYER1,MAGIC,1,0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定陷阱*********************************
+REM  (玩家,陷阱名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+TRAP_AVAILABLE(ALL_PLAYERS,POISON_GAS,1,0)
+TRAP_AVAILABLE(ALL_PLAYERS,ALARM,1,0)
+TRAP_AVAILABLE(ALL_PLAYERS,LIGHTNING,1,0)
+TRAP_AVAILABLE(PLAYER1,WORD_OF_POWER,1,0)
+
+REM CREATE_PARTY =>组建队伍                (队伍名称)   
+REM ADD_TO_PARTY=>添加生物到队伍中   (队伍名称,生物名称,生物等级,携带金钱数量,任务,延时)
+CREATE_PARTY(PARTY1)
+    ADD_TO_PARTY(PARTY1,FAIRY,9,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY1,FAIRY,9,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY1,FAIRY,9,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY1,DARK_MISTRESS,7,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY1,DARK_MISTRESS,7,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY1,DARK_MISTRESS,7,200,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTY2)
+    ADD_TO_PARTY(PARTY2,FLY,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY2,FLY,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY2,FLY,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY2,FLY,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY2,FLY,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY2,FLY,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY2,FLY,10,0,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTY3)
+    ADD_TO_PARTY(PARTY3,BUG,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY3,BUG,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY3,BUG,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY3,BUG,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY3,BUG,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY3,BUG,10,0,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTY4)
+    ADD_TO_PARTY(PARTY4,KNIGHT,7,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY4,KNIGHT,7,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY4,KNIGHT,7,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY4,WIZARD,9,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY4,WIZARD,9,200,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY4,WIZARD,9,200,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTY5)
+    ADD_TO_PARTY(PARTY5,DRAGON,7,350,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY5,DRAGON,8,350,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY5,DRAGON,9,350,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY5,DRAGON,10,340,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY5,DRAGON,8,350,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY5,DRAGON,7,350,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTY6)
+    ADD_TO_PARTY(PARTY6,HORNY,10,0,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTY7)
+    ADD_TO_PARTY(PARTY7,FAIRY,10,500,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY7,FAIRY,10,250,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY7,FAIRY,10,250,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY7,WITCH,10,250,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY7,WITCH,10,250,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY7,WITCH,10,250,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY7,WITCH,10,250,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTY8)
+    ADD_TO_PARTY(PARTY8,FAIRY,10,0,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTY9)
+    ADD_TO_PARTY(PARTY9,DRAGON,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY9,DRAGON,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY9,DRAGON,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY9,DRAGON,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY9,DRAGON,10,0,ATTACK_DUNGEON_HEART,0)
+    ADD_TO_PARTY(PARTY9,DRAGON,10,0,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTY10)
+    ADD_TO_PARTY(PARTY10,GIANT,10,0,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTY11)
+    ADD_TO_PARTY(PARTY11,KNIGHT,10,0,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTY12)
+    ADD_TO_PARTY(PARTY12,VAMPIRE,10,0,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTY13)
+    ADD_TO_PARTY(PARTY13,WIZARD,10,0,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTY14)
+    ADD_TO_PARTY(PARTY14,BARBARIAN,10,0,ATTACK_DUNGEON_HEART,0)
+CREATE_PARTY(PARTY15)
+    ADD_TO_PARTY(PARTY15,ARCHER,10,0,ATTACK_DUNGEON_HEART,0)
+
+
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+REM QUICK_OBJECTIVE(1,"You have reached Ximdia,the great and ancient kingdom,the origin of most knights of good and righteousness. In the very heart of this majestic land,your opponent have thorned in - the keeper Xegnar. As it was easy to predict,the dumb people of Ximdia proved to be completely powerless against Xegnar's dark power and are not able to smoke him out - therefore,all hope in you. Change this place into largest toast in history.",PLAYER0)
+QUICK_OBJECTIVE(1,"你已经到达西米迪亚，伟大和古老的王国，大多数善良和正义骑士的起源。在这片雄伟的土地上，你的对手刺进了守护者西格纳。很容易预测，西米迪亚的哑巴们对Xenar的黑暗力量完全无能为力，无法把他抽出来——因此，所有的希望都在你身上。把这个地方变成历史上最大的土司。",PLAYER0)
+
+IF_ACTION_POINT(1,PLAYER0)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY1,2,2)
+ENDIF
+IF_ACTION_POINT(3,PLAYER0)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY2,5,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY2,6,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY2,8,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY2,9,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY3,4,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY3,7,1)
+ENDIF
+IF_ACTION_POINT(11,PLAYER0)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY4,10,2)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY15,10,3)
+    REM QUICK_INFORMATION(5,"Before you stands the Guardtower Of Every Righteousness. Inside,a powerful branch of Ximdia's heroes has gathered,wishing to stop the evil invasion of their sacred lands for any price. Be careful,as you've stepped into areas where your expansion may encounter serious obstacles.")
+    QUICK_INFORMATION(5,"在你站在每一个正义的守护塔之前。在里面，西米迪的一个强大的分支已经聚集，希望阻止他们的神圣土地任何代价的邪恶入侵。小心，因为你已经进入了你的扩张可能遇到严重障碍的区域。")
+ENDIF
+IF_ACTION_POINT(12,PLAYER0)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY5,13,1)
+ENDIF
+IF_ACTION_POINT(14,PLAYER0)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY6,15,1)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY6,16,1)
+ENDIF
+IF_ACTION_POINT(17,PLAYER0)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY7,18,1)
+ENDIF
+
+IF_ACTION_POINT(19,PLAYER0)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY8,20,7)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY13,20,7)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY14,20,3)
+ENDIF
+IF_ACTION_POINT(21,PLAYER0)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY9,22,1)
+ENDIF
+IF_ACTION_POINT(23,PLAYER0)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY8,24,3)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY10,25,3)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY11,26,3)
+    ADD_PARTY_TO_LEVEL(PLAYER_GOOD,PARTY12,27,3)
+    REM QUICK_INFORMATION(6,"It looks like into the Xegnar's den you'll have to step on dead bodies of these pathetic heroes. The King of Ximdia has decided to stand at the head of his elite troops and clamp down your inhuman actions. Now it is time to give him lesson ... of good manners ;-)")
+    QUICK_INFORMATION(6,"它看起来像在Xenar的巢穴里，你必须踩在这些可怜的英雄的尸体上。西米迪之王决定站在他精英部队的头上，镇压你的非人行为。现在是给他上课的时候了…有礼貌；-)")
+ENDIF
+IF_ACTION_POINT(28,PLAYER0)
+    REM QUICK_INFORMATION(3,"Stay focused,Keeper! Enemies lurking behind the next door are too powerful to defeat in conventional ways. You must resort to deception. Small hint: Ongoing stone won't grow with mess...")
+    QUICK_INFORMATION(3,"小心，守护者！潜伏在隔壁背后的敌人太强大，无法用传统的方式打败。你必须采取欺骗手段。小提示：正在进行的石头不会随着混乱而增长…")
+ENDIF
+IF_ACTION_POINT(29,PLAYER0)
+    REM QUICK_INFORMATION(4,"Carefully,Keeper. The doors on the east lead to a Guard Post occupied by powerful enemies. Do not search to quarrel them until your creatures have scouted all corners of the maze in search of strengthening artifacts.")
+    QUICK_INFORMATION(4,"小心，守护者，东面的门通向一个被强大敌人占领的哨所。不要搜索它们，直到你的生物探测迷宫的各个角落来寻找强化的史前古器。")
+ENDIF
+
+IF(PLAYER0,GAME_TURN >= 1500)
+    REM QUICK_INFORMATION(2,"The Curse of Iimbecilism,which Xegnar casted on the whole kingdom,prevents your creatures from developing any new spells and acquiring combat skills. You'll need to search this land and find the necessary spells,as well as ancient artifacts of Ximdian,which are able to increase the capacity of your servants.")
+    QUICK_INFORMATION(2,"Ximnar在整个王国上的诅咒，阻止你的生物发展任何新的法术并获得战斗技能。你需要搜索这片土地，找到必要的咒语，以及西门町的古代文物，这可以增加你的仆人的能力。")
+ENDIF
+
+IF(PLAYER_GOOD,DUNGEON_DESTROYED == 1)
+    REM QUICK_INFORMATION(7,"Once the Heart of Ximdii Kingdom has scattered as tiny poppy,the abyss has opened before you,leading into the depths of the dark cave. It is Xegnar challenging you,hoping to deal with as equal to equal. Show him that some are more equal than the others!")
+    QUICK_INFORMATION(7,"一旦西迪迪王国的心被分散成微小的罂粟花，深渊在你面前打开，通向黑暗洞穴深处。这是XEGNAR挑战你，希望处理平等。告诉他有些比其他人更平等！")
+ENDIF
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER0,ALL_DUNGEONS_DESTROYED == 1)
+    REM QUICK_OBJECTIVE(8,"Frequency of your stunning triumphs seems to have no end. Xegnar has been expelled into Nonbeing,and the whole Ximdia belongs to you! On the ruins of once powerful heroes fort,you'll be able to build a truly luciferic shrine of wickedness and cruelty. But now have a breather and make yourself a delightful bath in the still warm blood of your enemies.",PLAYER0)
+    QUICK_OBJECTIVE(8,"你惊人的胜利的频率似乎没有尽头。XEGNAR已经被驱逐为非存在，整个西米迪属于你！在曾经强大的英雄堡垒的废墟上，你将能够建立一个真正邪恶和残忍的富贵神殿。但现在呼吸一下，让自己沐浴在敌人温暖的血液里。",PLAYER0)
+    REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+    LEVEL_VERSION(1)
+    REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+    ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+    ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+    ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+    ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+    ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+    ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+    ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+    ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+    ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+    ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+    ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+    ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+    ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+    ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+    ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+    
+    MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+    MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+    MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+    DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+    TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+    TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+    QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+    WIN_GAME
+ENDIF
+IF(PLAYER0,DUNGEON_DESTROYED == 1)
+    LOSE_GAME
+ENDIF
+
+REM ****************************提示信息**********************************
+
+
+
+
+
+
+
+

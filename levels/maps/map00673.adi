@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00250
+REM Automatically generated on 19 Aug 2008, 05:39:22
+
+LEVEL_VERSION(1,0,0)
+LEVEL_TIMESTAMP(1218977260,1219117162)
+USER_COMMANDS_COUNT(1,0,0,0)
+LEVEL_DESCRIPTION("The 4 keepers are being seperated from each other by a huge river of lava. Furthermore, every keeper has a huge area of dirt to dig & build their dungeon. In the middle of the map (the hero area) they will be able to get 1 secret creature to their course and a secret item, you can almost say its a race of might. Be warned that every hero in this map is level 10, only wizards & archers. People complain about wasting their time searching for gold, I decided to leave this out and make gems instead.")
+LEVEL_AUTHORS("HellreapeR","")

@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00215
+REM Automatically generated on 06 Sep 2009, 03:12:13
+
+LEVEL_VERSION(0,1,0)
+LEVEL_TIMESTAMP(1252184176,1252199533)
+USER_COMMANDS_COUNT(0,0,0,0)
+LEVEL_DESCRIPTION("Enemy Shogun, hinders our return to the province Iga. Kill him!")
+LEVEL_AUTHORS("Joachim Zielinski","")

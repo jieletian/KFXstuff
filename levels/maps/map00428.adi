@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map01119
+REM Automatically generated on 04 Sep 2008, 12:07:09
+
+LEVEL_VERSION(1,1,0)
+LEVEL_TIMESTAMP(1156810132,1220522829)
+USER_COMMANDS_COUNT(36,2,0,0)
+LEVEL_DESCRIPTION("In the depths of underground lakes stands a big old castle, it is said that these ruins were one of the first doors between the world of top and bottom. Since they are abandoned, some architects and sorcerers have studied these. Your mission, if you accept it, will be to drill these ruins and find a sacred relic guarded by a Dragon. But (un)fortunately you are not alone in your interest... English and French translations.")
+LEVEL_AUTHORS("CyberSympa","")

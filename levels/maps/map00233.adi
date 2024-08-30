@@ -1,0 +1,8 @@
+REM ADiKtEd script file for map00233
+REM Automatically generated on 28 Sep 2008, 06:10:32
+
+LEVEL_VERSION(1,2,2)
+LEVEL_TIMESTAMP(1206570020,1222575032)
+USER_COMMANDS_COUNT(1325,30,0,12)
+LEVEL_DESCRIPTION("You are under siege from the Trilliance, an all powerful aliance between 3 other keepers. Defeat their fortress, and take them out to win. Beware: Very hard, there is no backdoor in, you just need cunning, skill, and good awareness. Not for the faint hearted!")
+LEVEL_AUTHORS("Lquiz","")

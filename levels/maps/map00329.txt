@@ -1,0 +1,165 @@
+REM ***********************************************************************
+REM   Script for Level  329(029). Numptys Anus
+REM ***********************************************************************
+REM   James Tupper
+REM 
+REM ***********************************************************************
+REM 地图的大概情况与参考建议：
+REM 1、 。
+REM 2、 。
+REM 3、 。
+REM 4、 。
+REM 5、 。
+REM ***********************************************************************
+REM ***************************各种基本设置 *****************************
+SET_GENERATE_SPEED(720)
+START_MONEY(PLAYER0, 25000)
+MAX_CREATURES(PLAYER0, 35)
+
+REM *******************************添加怪物到入口 *********************************
+REM   (添加到入口的生物名字,数量)
+ADD_CREATURE_TO_POOL(TROLL, 10)
+ADD_CREATURE_TO_POOL(DARK_MISTRESS, 8)
+ADD_CREATURE_TO_POOL(SORCEROR, 15)
+ADD_CREATURE_TO_POOL(SPIDER, 25)
+ADD_CREATURE_TO_POOL(HELL_HOUND, 10)
+ADD_CREATURE_TO_POOL(ORC, 25)
+ADD_CREATURE_TO_POOL(SAMURAI, 3)
+ADD_CREATURE_TO_POOL(FLY, 25)
+ADD_CREATURE_TO_POOL(BUG, 25)
+ADD_CREATURE_TO_POOL(BILE_DEMON, 10)
+ADD_CREATURE_TO_POOL(DRAGON, 5)
+ADD_CREATURE_TO_POOL(DEMONSPAWN    30)
+
+REM *******************************指定阵营（玩家）允许/禁止从入口（怪物池）中招指定生物*********************************
+REM  (玩家,生物名称,1（只能是1）,[1允许招募/0禁止招募])
+
+CREATURE_AVAILABLE(PLAYER0,TROLL, 1, 1)
+CREATURE_AVAILABLE(PLAYER0,DRAGON, 1, 1)
+CREATURE_AVAILABLE(PLAYER0,DEMONSPAWN, 1, 1)
+CREATURE_AVAILABLE(PLAYER0,FLY, 1, 1)
+CREATURE_AVAILABLE(PLAYER0,DARK_MISTRESS,1, 1)
+CREATURE_AVAILABLE(PLAYER0,SORCEROR, 1, 1)
+CREATURE_AVAILABLE(PLAYER0,BILE_DEMON, 1, 1)
+CREATURE_AVAILABLE(PLAYER0,BUG, 1, 1)
+CREATURE_AVAILABLE(PLAYER0,SPIDER, 1, 1)
+CREATURE_AVAILABLE(PLAYER0,HELL_HOUND, 1, 1)
+CREATURE_AVAILABLE(PLAYER0,ORC, 1, 1)
+CREATURE_AVAILABLE(PLAYER0,WIZARD, 1, 1)
+CREATURE_AVAILABLE(PLAYER0,SAMURAI, 1, 1)
+
+REM ********************指定阵营（玩家）允许/禁止研究和建造指定房子（建筑）**********************************
+REM  (玩家,房子名称,是否可研究或建造[1是允许；0是禁止],是否已经可建造[1已经可建/0待研究])
+ROOM_AVAILABLE(PLAYER0, TREASURE, 0, 0)
+ROOM_AVAILABLE(PLAYER0, RESEARCH, 1, 1)
+ROOM_AVAILABLE(PLAYER0, PRISON, 0, 0)
+ROOM_AVAILABLE(PLAYER0, TORTURE, 0, 0)
+ROOM_AVAILABLE(PLAYER0, TRAINING, 1, 1)
+ROOM_AVAILABLE(PLAYER0, WORKSHOP, 1, 0)
+ROOM_AVAILABLE(PLAYER0, SCAVENGER, 0, 0)
+ROOM_AVAILABLE(PLAYER0, TEMPLE, 1, 0)
+ROOM_AVAILABLE(PLAYER0, GRAVEYARD, 0, 0)
+ROOM_AVAILABLE(PLAYER0, BARRACKS, 0, 0)
+ROOM_AVAILABLE(PLAYER0, GARDEN, 1, 1)
+ROOM_AVAILABLE(PLAYER0, LAIR, 1, 1)
+ROOM_AVAILABLE(PLAYER0, BRIDGE, 0, 0)
+ROOM_AVAILABLE(PLAYER0, GUARD_POST,1, 0)
+
+REM ********************指定阵营（玩家）允许/禁止研究和使用指定魔法**********************************
+REM  (玩家,魔法名称,是否可研究或使用[1是允许；0是禁止],是否已经可使用[1已经可建/0待研究])
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_IMP, 1, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_OBEY, 0, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_SIGHT, 0, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_CALL_TO_ARMS, 0, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_CAVE_IN, 1, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_HEAL_CREATURE,1, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_HOLD_AUDIENCE,0, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_SPEED, 1, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_ARMAGEDDON, 0, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_LIGHTNING, 1, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_PROTECT, 1, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_CONCEAL, 0, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_DISEASE, 0, 0)
+MAGIC_AVAILABLE(ALL_PLAYERS, POWER_CHICKEN, 1, 0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定的门*********************************
+REM  (玩家,门的名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+DOOR_AVAILABLE(ALL_PLAYERS, WOOD, 1, 0)
+DOOR_AVAILABLE(ALL_PLAYERS, BRACED,1, 0)
+DOOR_AVAILABLE(ALL_PLAYERS, STEEL, 1, 0)
+DOOR_AVAILABLE(ALL_PLAYERS, MAGIC, 1, 0)
+
+REM *********************指定阵营（玩家）允许/禁止制造指定陷阱*********************************
+REM  (玩家,陷阱名称,[1是允许；0是禁止],1[0是允许；数字是已经制造出来/赠送的数量]
+TRAP_AVAILABLE(ALL_PLAYERS, ALARM, 1, 0)
+TRAP_AVAILABLE(ALL_PLAYERS, POISON_GAS, 1, 0)
+TRAP_AVAILABLE(ALL_PLAYERS, WORD_OF_POWER,1, 0)
+TRAP_AVAILABLE(ALL_PLAYERS, LAVA, 1, 0)
+
+REM ****************************脚本主体(主要内容、核心内容）**********************************
+REM *** Might require this to be in an IF statement, also needs to be less than certain number of characters to appear ? = 1 - 30. Cannot use ALL_PLAYERS ***
+    REM QUICK_OBJECTIVE(1, "Numpty the Dwarf is back...again! This time he has sworn not to be defeated! It will take an army of great strength and wisdom to defeat him this time. The rains have fallen heavily in certain parts of the realm, so make sure you take your umbrella! On the east side a volcano has spilt lava into Numptys domain...unfortunatly this has made the poison dwarf stronger....approach with caution keeper!", PLAYER0)
+    QUICK_OBJECTIVE(1, "蜡笔小矮人回来再…！这一次他发誓不被击败！要打败他，就要有一支强大的力量和智慧的军队。在这个领域的某些部分，雨水已经降下了很大的，所以一定要带上雨伞！一个在东边的火山熔岩为撒了蜡笔域……不幸这使毒矮人更强壮的！不幸的是，这使得毒矮强的…谨慎处理，守护者！", PLAYER0)
+
+
+REM ****************************胜利/失败条件**********************************
+IF(PLAYER0, ALL_DUNGEONS_DESTROYED == 1)
+   
+        REM 以下修改游戏，增加胜利后可以建造其它房子，让你回味一下胜利的喜悦！
+        LEVEL_VERSION(1)
+        REVEAL_MAP_RECT(PLAYER0,127,127,254,254)
+        ADD_GOLD_TO_PLAYER (PLAYER0,9999999)
+
+        ROOM_AVAILABLE(PLAYER0,TREASURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GARDEN,1,1)
+        ROOM_AVAILABLE(PLAYER0,LAIR,1,1)
+        ROOM_AVAILABLE(PLAYER0,RESEARCH,1,1)
+        ROOM_AVAILABLE(PLAYER0,TRAINING,1,1)
+        ROOM_AVAILABLE(PLAYER0,BRIDGE,1,1)
+        ROOM_AVAILABLE(PLAYER0,GUARD_POST,1,1)
+        ROOM_AVAILABLE(PLAYER0,WORKSHOP,1,1)
+        ROOM_AVAILABLE(PLAYER0,BARRACKS,1,1)
+        ROOM_AVAILABLE(PLAYER0,TEMPLE,1,1)
+        ROOM_AVAILABLE(PLAYER0,PRISON,1,1)
+        ROOM_AVAILABLE(PLAYER0,TORTURE,1,1)
+        ROOM_AVAILABLE(PLAYER0,SCAVENGER,1,1)
+        ROOM_AVAILABLE(PLAYER0,GRAVEYARD,1,1)
+        
+        MAGIC_AVAILABLE(PLAYER0,POWER_IMP,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_CALL_TO_ARMS,1,1
+        MAGIC_AVAILABLE(PLAYER0,POWER_SPEED,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_HEAL_CREATURE,1,1)
+        MAGIC_AVAILABLE(PLAYER0,POWER_DESTROY_WALLS,1,1)
+
+        DOOR_AVAILABLE(PLAYER0,MAGIC,1,200)
+        TRAP_AVAILABLE(PLAYER0,LIGHTNING,1,0)
+        TRAP_AVAILABLE(PLAYER0,BOULDER,1,200)
+        QUICK_INFORMATION(15,"送钱亮图，让你回味一下胜利的喜悦！",PLAYER0)
+
+        WIN_GAME
+ENDIF
+
+REM ************************************************
+REM 本小段修改：敌人心脏被打爆后可建桥
+IF(PLAYER0, ALL_DUNGEONS_DESTROYED == 1)
+   ROOM_AVAILABLE(PLAYER0, BRIDGE, 1, 1)
+ENDIF
+
+
+REM ****************************提示信息**********************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

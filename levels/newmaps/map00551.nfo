@@ -1,0 +1,12 @@
+Name: Waterlogged 1.0.0
+Author: Spatulade, Created on 06 Jan 2022
+Keepers: Red, Blue
+Pool: Troll, Demon Spawn, Dark Mistress, Warlock, Bile Demon
+  Beetle, Spider, Hell Hound, Tentacle, Orc
+Objects on map:
+Creatures: 138, Traps: 0, Doors: 22, Items: 450
+Dungeon hearts: 2, Hero gates: 0, Special Boxes: 4
+Description:
+  A multiplayer-style map with restricted building space that shows off some new KeeperFX features.
+  
+Required version: KeeperFX 0.4.9
