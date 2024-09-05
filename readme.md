@@ -1,1 +1,2 @@
-地下城守护者FX版补丁，包含战役地图汉化，自制地图整合等
+# kfxstuff
+Saves update files for chinese translation
