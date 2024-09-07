@@ -3,6 +3,7 @@ keeporig.cfg
 origplus.cfg
 Tyraels_realms.cfg
 sapphire_realms.cfg
+necro.cfg
 custodian.cfg
 dade.cfg
 another.cfg

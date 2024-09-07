@@ -1,0 +1,326 @@
+##########################################################################################################################################################
+##########################################################################################################################################################
+##########################################################################################################################################################
+##########################################################################################################################################################
+##########################################################################################################################################################
+##########################################################################################################################################################
+#: guitext:1100
+msgctxt "Creature name"
+msgid "Slave"
+msgstr ""
+#################################
+#: guitext:1101
+msgctxt "Creature name"
+msgid "Grimalkin"
+msgstr ""
+#################################
+#: guitext:1102
+msgctxt "Creature name"
+msgid "Assassin"
+msgstr ""
+#################################
+#: guitext:1103
+msgctxt "Creature name"
+msgid "Acolyte"
+msgstr ""
+#################################
+#: guitext:1104
+msgctxt "Creature name"
+msgid "Mercenary"
+msgstr ""
+#################################
+#: guitext:1105
+msgctxt "Creature name"
+msgid "Necromancer"
+msgstr ""
+#################################
+#: guitext:1106
+msgctxt "Creature name"
+msgid "Executioner"
+msgstr ""
+#################################
+#: guitext:1107
+msgctxt "Creature name"
+msgid "Zombie"
+msgstr ""
+#################################
+#: guitext:1108
+msgctxt "Creature name"
+msgid "Plague Doctor"
+msgstr ""
+#################################
+#: guitext:1109
+msgctxt "Creature name"
+msgid "Servant"
+msgstr ""
+#################################
+#: guitext:1110
+msgctxt "Creature name"
+msgid "Tyrant"
+msgstr ""
+#################################
+#: guitext:1111
+msgctxt "Creature name"
+msgid "Vixen"
+msgstr ""
+#################################
+#: guitext:1112
+msgctxt "Creature name"
+msgid "Warlock"
+msgstr ""
+#################################
+#: guitext:1113
+msgctxt "Creature name"
+msgid "Witch"
+msgstr ""
+##########################################################################################################################################################
+##########################################################################################################################################################
+##########################################################################################################################################################
+##########################################################################################################################################################
+##########################################################################################################################################################
+##########################################################################################################################################################
+##########################################################################################################################################################
+#: guitext:1200
+msgctxt "In-game message"
+msgid ""
+"WEAK STRIKE: Fast melee strike with low damage. Can rally troops."
+msgstr ""
+#############################################################
+#: guitext:1201
+msgctxt "In-game message"
+msgid ""
+"REGULAR STRIKE: Melee strike with average damage. Can rally troops."
+msgstr ""
+#############################################################
+#: guitext:1202
+msgctxt "In-game message"
+msgid ""
+"HEAVY STRIKE: Slow melee strike with high damage. Can rally troops."
+msgstr ""
+#############################################################
+#: guitext:1203
+msgctxt "In-game message"
+msgid ""
+"SUPER STRIKE: Very slow melee strike with high damage and AOE. Can rally troops."
+msgstr ""
+#############################################################
+#: guitext:1204
+msgctxt "In-game message"
+msgid ""
+"WEAK STEALTH STRIKE: Undetectable fast melee strike with low damage. Can rally troops."
+msgstr ""
+#############################################################
+#: guitext:1205
+msgctxt "In-game message"
+msgid ""
+"REGULAR STEALTH STRIKE: Undetectable melee strike with average damage. Can rally troops."
+msgstr ""
+#############################################################
+#: guitext:1206
+msgctxt "In-game message"
+msgid ""
+"HEAVY STEALTH STRIKE: Undetectable slow melee strike with high damage. Can rally troops."
+msgstr ""
+#############################################################
+#: guitext:1207
+msgctxt "In-game message"
+msgid ""
+"SUPER STEALTH STRIKE: Undetectable very slow melee strike with high damage and AOE. Can rally troops."
+msgstr ""
+#############################################################
+#: guitext:1208
+msgctxt "In-game message"
+msgid ""
+"CRITICAL STRIKE: Powerful strike with very high damage."
+msgstr ""
+#############################################################
+#: guitext:1209
+msgctxt "In-game message"
+msgid ""
+"CRITICAL STEALTH STRIKE: Undetectable powerful strike with very high damage."
+msgstr ""
+#############################################################
+#: guitext:1210
+msgctxt "In-game message"
+msgid ""
+"POISON STRIKE: Deals damage over time. Stackable."
+msgstr ""
+#############################################################
+#: guitext:1211
+msgctxt "In-game message"
+msgid ""
+"POISON STEALTH STRIKE: Undetectable strike that deals damage over time."
+msgstr ""
+#############################################################
+#: guitext:1212
+msgctxt "In-game message"
+msgid ""
+"SMALL BOMB: Explosive with average AOE damage."
+msgstr ""
+#############################################################
+#: guitext:1213
+msgctxt "In-game message"
+msgid ""
+"SCATTER BOMB: Mini Explosives with low AOE damage."
+msgstr ""
+#############################################################
+#: guitext:1214
+msgctxt "In-game message"
+msgid ""
+"SNIPER: Fast projectile with very high damage."
+msgstr ""
+#############################################################
+#: guitext:1215
+msgctxt "In-game message"
+msgid ""
+"CROW: A crow that attacks target persisitently."
+msgstr ""
+#############################################################
+#: guitext:1216
+msgctxt "In-game message"
+msgid ""
+"CROW VOLLEY: A wave of crows that penetrate through all targets."
+msgstr ""
+#############################################################
+#: guitext:1217
+msgctxt "In-game message"
+msgid ""
+"BOLT: A long range streak of magical energy."
+msgstr ""
+#############################################################
+#: guitext:1218
+msgctxt "In-game message"
+msgid ""
+"SMALL HEALTH POTION"
+msgstr ""
+#############################################################
+#: guitext:1219
+msgctxt "In-game message"
+msgid ""
+"LARGE HEALTH POTION"
+msgstr ""
+#############################################################
+#: guitext:1220
+msgctxt "In-game message"
+msgid ""
+"LARGE HEALTH POTION"
+msgstr ""
+#############################################################
+#: guitext:1221
+msgctxt "In-game message"
+msgid ""
+"FIREBALL: Low damage projectile."
+msgstr ""
+#############################################################
+#: guitext:1222
+msgctxt "In-game message"
+msgid ""
+"METEOR: High damage projectile."
+msgstr ""
+#############################################################
+#: guitext:1223
+msgctxt "In-game message"
+msgid ""
+"MAGIC SNAKE: A erratic projectile that pursue their targets."
+msgstr ""
+#############################################################
+#: guitext:1224
+msgctxt "In-game message"
+msgid ""
+"BOMBARDMENT: A continuous barrage of high damage AOE explosions."
+msgstr ""
+#############################################################
+#: guitext:1225
+msgctxt "In-game message"
+msgid ""
+"NUKE: A massive high risk high damage attack with massive AOE damage."
+msgstr ""
+#############################################################
+#: guitext:1226
+msgctxt "In-game message"
+msgid ""
+"SLAM: A high damage AOE melee attack."
+msgstr ""
+#############################################################
+#: guitext:1227
+msgctxt "In-game message"
+msgid ""
+"PULL: Pulls target towards caster."
+msgstr ""
+#############################################################
+#: guitext:1228
+msgctxt "In-game message"
+msgid ""
+"PUSH: Push target away."
+msgstr ""
+#############################################################
+#: guitext:1229
+msgctxt "In-game message"
+msgid ""
+"ACID: Thrown acid particles in a wide radius."
+msgstr ""
+#############################################################
+#: guitext:1230
+msgctxt "In-game message"
+msgid ""
+"GAS BOMB: A gas bomb that emits gas dealing damage over time."
+msgstr ""
+#############################################################
+#: guitext:1231
+msgctxt "In-game message"
+msgid ""
+"ROCK THROW: Throw plenty of rocks with minor damage."
+msgstr ""
+#############################################################
+#: guitext:1232
+msgctxt "In-game message"
+msgid ""
+"DEADLY MIST: A large radius of mist that deals damage over time."
+msgstr ""
+#############################################################
+#: guitext:1233
+msgctxt "In-game message"
+msgid ""
+"SUMMON: Summons familiar."
+msgstr ""
+#############################################################
+#: guitext:1234
+msgctxt "In-game message"
+msgid ""
+"FIREBALL VOLLEY: Launch a series of fireballs."
+msgstr ""
+#############################################################
+#: guitext:1235
+msgctxt "In-game message"
+msgid ""
+"METEOR VOLLEY: Launch a series of Meteors."
+msgstr ""
+#############################################################
+#: guitext:1236
+msgctxt "In-game message"
+msgid ""
+"FLAMETHROWER: Rapid fire flame attack with low damage."
+msgstr ""
+#############################################################
+#: guitext:1237
+msgctxt "In-game message"
+msgid ""
+"GOLDEN ROCK THROW: Throw plenty of gold rocks with minor damage."
+msgstr ""
+#############################################################
+#: guitext:1238
+msgctxt "In-game message"
+msgid ""
+"FLY: Enable temporary flight."
+msgstr ""
+##########################################################################################################################################################
+##########################################################################################################################################################
+##########################################################################################################################################################
+##########################################################################################################################################################
+##########################################################################################################################################################
+##########################################################################################################################################################
+#: guitext:1500
+msgctxt "In-game message"
+msgid ""
+"SILVER: Low valuable resource."
+msgstr ""
