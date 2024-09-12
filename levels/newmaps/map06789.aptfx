@@ -1,0 +1,440 @@
+[common]
+ActionPointsCount = 73
+
+[actionpoint0]
+PointNumber = 1
+PointRange = [5, 0]
+SubtileX = [314, 128]
+SubtileY = [254, 128]
+
+[actionpoint1]
+PointNumber = 2
+PointRange = [5, 0]
+SubtileX = [177, 128]
+SubtileY = [334, 128]
+
+[actionpoint2]
+PointNumber = 3
+PointRange = [0, 0]
+SubtileX = [187, 128]
+SubtileY = [241, 128]
+
+[actionpoint3]
+PointNumber = 4
+PointRange = [0, 0]
+SubtileX = [193, 128]
+SubtileY = [241, 128]
+
+[actionpoint4]
+PointNumber = 5
+PointRange = [0, 0]
+SubtileX = [187, 128]
+SubtileY = [247, 128]
+
+[actionpoint5]
+PointNumber = 6
+PointRange = [0, 0]
+SubtileX = [193, 128]
+SubtileY = [247, 128]
+
+[actionpoint6]
+PointNumber = 7
+PointRange = [3, 0]
+SubtileX = [256, 128]
+SubtileY = [321, 128]
+
+[actionpoint7]
+PointNumber = 8
+PointRange = [5, 0]
+SubtileX = [256, 128]
+SubtileY = [317, 128]
+
+[actionpoint8]
+PointNumber = 9
+PointRange = [0, 0]
+SubtileX = [74, 128]
+SubtileY = [93, 128]
+
+[actionpoint9]
+PointNumber = 10
+PointRange = [0, 0]
+SubtileX = [87, 128]
+SubtileY = [80, 128]
+
+[actionpoint10]
+PointNumber = 11
+PointRange = [5, 0]
+SubtileX = [76, 128]
+SubtileY = [82, 128]
+
+[actionpoint11]
+PointNumber = 12
+PointRange = [5, 0]
+SubtileX = [355, 128]
+SubtileY = [244, 128]
+
+[actionpoint12]
+PointNumber = 13
+PointRange = [1, 0]
+SubtileX = [328, 128]
+SubtileY = [217, 128]
+
+[actionpoint13]
+PointNumber = 14
+PointRange = [7, 0]
+SubtileX = [82, 128]
+SubtileY = [88, 128]
+
+[actionpoint14]
+PointNumber = 15
+PointRange = [2, 0]
+SubtileX = [366, 128]
+SubtileY = [91, 128]
+
+[actionpoint15]
+PointNumber = 16
+PointRange = [3, 0]
+SubtileX = [340, 128]
+SubtileY = [69, 128]
+
+[actionpoint16]
+PointNumber = 17
+PointRange = [1, 0]
+SubtileX = [334, 128]
+SubtileY = [55, 128]
+
+[actionpoint17]
+PointNumber = 18
+PointRange = [1, 0]
+SubtileX = [334, 128]
+SubtileY = [64, 128]
+
+[actionpoint18]
+PointNumber = 19
+PointRange = [1, 0]
+SubtileX = [292, 128]
+SubtileY = [100, 128]
+
+[actionpoint19]
+PointNumber = 20
+PointRange = [1, 0]
+SubtileX = [280, 128]
+SubtileY = [88, 128]
+
+[actionpoint20]
+PointNumber = 21
+PointRange = [5, 0]
+SubtileX = [31, 128]
+SubtileY = [38, 128]
+
+[actionpoint21]
+PointNumber = 22
+PointRange = [1, 0]
+SubtileX = [19, 128]
+SubtileY = [37, 128]
+
+[actionpoint22]
+PointNumber = 23
+PointRange = [1, 0]
+SubtileX = [31, 128]
+SubtileY = [25, 128]
+
+[actionpoint23]
+PointNumber = 24
+PointRange = [1, 0]
+SubtileX = [43, 128]
+SubtileY = [37, 128]
+
+[actionpoint24]
+PointNumber = 25
+PointRange = [5, 0]
+SubtileX = [43, 128]
+SubtileY = [334, 128]
+
+[actionpoint25]
+PointNumber = 26
+PointRange = [9, 0]
+SubtileX = [143, 128]
+SubtileY = [157, 128]
+
+[actionpoint26]
+PointNumber = 27
+PointRange = [8, 0]
+SubtileX = [237, 128]
+SubtileY = [154, 128]
+
+[actionpoint27]
+PointNumber = 28
+PointRange = [5, 0]
+SubtileX = [190, 128]
+SubtileY = [172, 128]
+
+[actionpoint28]
+PointNumber = 29
+PointRange = [0, 0]
+SubtileX = [184, 128]
+SubtileY = [160, 128]
+
+[actionpoint29]
+PointNumber = 30
+PointRange = [0, 0]
+SubtileX = [190, 128]
+SubtileY = [154, 128]
+
+[actionpoint30]
+PointNumber = 31
+PointRange = [0, 0]
+SubtileX = [196, 128]
+SubtileY = [160, 128]
+
+[actionpoint31]
+PointNumber = 34
+PointRange = [1, 0]
+SubtileX = [112, 128]
+SubtileY = [40, 128]
+
+[actionpoint32]
+PointNumber = 35
+PointRange = [5, 0]
+SubtileX = [192, 128]
+SubtileY = [49, 128]
+
+[actionpoint33]
+PointNumber = 36
+PointRange = [1, 0]
+SubtileX = [205, 128]
+SubtileY = [46, 128]
+
+[actionpoint34]
+PointNumber = 37
+PointRange = [7, 0]
+SubtileX = [325, 128]
+SubtileY = [138, 128]
+
+[actionpoint35]
+PointNumber = 38
+PointRange = [1, 0]
+SubtileX = [334, 128]
+SubtileY = [82, 128]
+
+[actionpoint36]
+PointNumber = 39
+PointRange = [1, 0]
+SubtileX = [286, 128]
+SubtileY = [154, 128]
+
+[actionpoint37]
+PointNumber = 40
+PointRange = [3, 0]
+SubtileX = [254, 128]
+SubtileY = [121, 128]
+
+[actionpoint38]
+PointNumber = 41
+PointRange = [1, 0]
+SubtileX = [25, 128]
+SubtileY = [121, 128]
+
+[actionpoint39]
+PointNumber = 42
+PointRange = [0, 0]
+SubtileX = [191, 128]
+SubtileY = [55, 128]
+
+[actionpoint40]
+PointNumber = 43
+PointRange = [1, 0]
+SubtileX = [205, 128]
+SubtileY = [145, 128]
+
+[actionpoint41]
+PointNumber = 44
+PointRange = [3, 0]
+SubtileX = [295, 128]
+SubtileY = [286, 128]
+
+[actionpoint42]
+PointNumber = 45
+PointRange = [1, 0]
+SubtileX = [317, 128]
+SubtileY = [291, 128]
+
+[actionpoint43]
+PointNumber = 46
+PointRange = [1, 0]
+SubtileX = [342, 128]
+SubtileY = [309, 128]
+
+[actionpoint44]
+PointNumber = 47
+PointRange = [1, 0]
+SubtileX = [322, 128]
+SubtileY = [327, 128]
+
+[actionpoint45]
+PointNumber = 48
+PointRange = [5, 0]
+SubtileX = [352, 128]
+SubtileY = [340, 128]
+
+[actionpoint46]
+PointNumber = 49
+PointRange = [1, 0]
+SubtileX = [292, 128]
+SubtileY = [325, 128]
+
+[actionpoint47]
+PointNumber = 50
+PointRange = [1, 0]
+SubtileX = [292, 128]
+SubtileY = [295, 128]
+
+[actionpoint48]
+PointNumber = 51
+PointRange = [5, 0]
+SubtileX = [37, 128]
+SubtileY = [181, 128]
+
+[actionpoint49]
+PointNumber = 52
+PointRange = [5, 0]
+SubtileX = [328, 128]
+SubtileY = [166, 128]
+
+[actionpoint50]
+PointNumber = 53
+PointRange = [5, 0]
+SubtileX = [216, 128]
+SubtileY = [25, 128]
+
+[actionpoint51]
+PointNumber = 54
+PointRange = [5, 0]
+SubtileX = [346, 128]
+SubtileY = [211, 128]
+
+[actionpoint52]
+PointNumber = 32
+PointRange = [1, 0]
+SubtileX = [340, 128]
+SubtileY = [265, 128]
+
+[actionpoint53]
+PointNumber = 56
+PointRange = [5, 0]
+SubtileX = [301, 128]
+SubtileY = [148, 128]
+
+[actionpoint54]
+PointNumber = 57
+PointRange = [5, 0]
+SubtileX = [278, 128]
+SubtileY = [121, 128]
+
+[actionpoint55]
+PointNumber = 58
+PointRange = [1, 0]
+SubtileX = [347, 128]
+SubtileY = [140, 128]
+
+[actionpoint56]
+PointNumber = 59
+PointRange = [13, 0]
+SubtileX = [97, 128]
+SubtileY = [178, 128]
+
+[actionpoint57]
+PointNumber = 60
+PointRange = [3, 0]
+SubtileX = [67, 128]
+SubtileY = [162, 128]
+
+[actionpoint58]
+PointNumber = 61
+PointRange = [1, 0]
+SubtileX = [64, 128]
+SubtileY = [178, 128]
+
+[actionpoint59]
+PointNumber = 62
+PointRange = [5, 0]
+SubtileX = [67, 128]
+SubtileY = [169, 128]
+
+[actionpoint60]
+PointNumber = 63
+PointRange = [5, 0]
+SubtileX = [145, 128]
+SubtileY = [52, 128]
+
+[actionpoint61]
+PointNumber = 64
+PointRange = [0, 0]
+SubtileX = [137, 128]
+SubtileY = [10, 128]
+
+[actionpoint62]
+PointNumber = 65
+PointRange = [0, 0]
+SubtileX = [137, 128]
+SubtileY = [31, 128]
+
+[actionpoint63]
+PointNumber = 66
+PointRange = [0, 0]
+SubtileX = [153, 128]
+SubtileY = [34, 128]
+
+[actionpoint64]
+PointNumber = 68
+PointRange = [0, 0]
+SubtileX = [113, 128]
+SubtileY = [35, 128]
+
+[actionpoint65]
+PointNumber = 69
+PointRange = [0, 0]
+SubtileX = [112, 128]
+SubtileY = [50, 128]
+
+[actionpoint66]
+PointNumber = 70
+PointRange = [0, 0]
+SubtileX = [132, 128]
+SubtileY = [42, 128]
+
+[actionpoint67]
+PointNumber = 71
+PointRange = [3, 0]
+SubtileX = [127, 128]
+SubtileY = [37, 128]
+
+[actionpoint68]
+PointNumber = 72
+PointRange = [3, 0]
+SubtileX = [106, 128]
+SubtileY = [43, 128]
+
+[actionpoint69]
+PointNumber = 67
+PointRange = [1, 0]
+SubtileX = [94, 128]
+SubtileY = [40, 128]
+
+[actionpoint70]
+PointNumber = 73
+PointRange = [5, 0]
+SubtileX = [50, 128]
+SubtileY = [61, 128]
+
+[actionpoint71]
+PointNumber = 74
+PointRange = [5, 0]
+SubtileX = [31, 128]
+SubtileY = [61, 128]
+
+[actionpoint72]
+PointNumber = 75
+PointRange = [5, 0]
+SubtileX = [169, 128]
+SubtileY = [58, 128]
